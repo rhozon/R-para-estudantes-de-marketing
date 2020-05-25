@@ -1,0 +1,547 @@
+\documentclass{article}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[utf8]{inputenc}
+\usepackage{lscape}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+\usepackage{amsmath}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{tikz}
+\newcommand{\roundpic}[4][]{
+  \tikz\node [circle, minimum width = #2,
+    path picture = {
+      \node [#1] at (path picture bounding box.center) {
+        \includegraphics[width=#3]{#4}};
+    }] {};}
+    
+\usepackage{indentfirst}
+\usepackage[a4paper,margin={1.2in,1.5in},vmargin={1.2in,1.5in}]{geometry}
+\geometry{paperwidth=210mm,paperheight=297mm,
+textwidth=150mm,textheight=210mm,
+top=23mm,bottom=23mm,
+left=23mm,right=23mm}
+\usepackage[colorlinks,linkcolor=blue,hyperindex]{hyperref}
+\usepackage[brazil]{babel}
+\usepackage{graphicx,color,wrapfig}
+\usepackage{multicol}
+%\usetikzlibrary{mindmap}
+%\pagestyle{empty}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[]{}
+\rhead{\textit{\faRProject para estudantes de marketing}}
+\lhead{\thepage}
+\fancyfoot[]{}
+\renewcommand{\headrulewidth}{0.1pt}
+\usepackage{color,soul}
+\usepackage{color}
+\usepackage{listings}%pacote para literalizar os códigos do R no Latex
+\usepackage{xcolor}
+
+\usepackage[dvipsnames]{xcolor}
+
+\definecolor{mygray}{gray}{0.9}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{mygray},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+%=========fim da instrução do listings
+\usepackage{xcolor}
+\usepackage[fixed]{fontawesome5}
+\usepackage{tcolorbox}
+\usepackage{comment}
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfdefinestyle{MyFrame}{%
+    linecolor=blue,
+    outerlinewidth=1pt,
+    roundcorner=40pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=10pt,
+    innerleftmargin=10pt,
+    backgroundcolor=gray!50!white}
+%============================================================
+%========================================================
+\begin{document}
+
+
+%============================================================
+
+\title{\faRProject~para estudantes de marketing \\\textit{KU Leuven Marketing department}}
+\author{\href{https://rhozon.github.io/}{Traduzido por Rodrigo Hermont Ozon\footnote{Economista e Mestre em Desenvolvimento Econômico pela UFPR.}}}
+\date{Maio, 2020}
+
+\maketitle
+
+
+
+\thispagestyle{empty}
+%===========================================================
+\newpage
+
+\begin{mdframed}[style=MyFrame]
+
+\fbox{%
+\roundpic[xshift=-.00000095cm,yshift=-.0006cm]{3.8cm}{3cm}{me.jpg}%
+}
+
+
+\section*{Sobre o autor desta tradução:}
+
+
+\textit{Rodrigo Hermont Ozon, economista e apaixonado por econometria, pelas aplicações de modelos econômicos a problemas reais e cotidianos vivenciados na sociedade e na realidade do mundo empresarial e corporativo.}
+
+
+\begin{flushleft}
+Seus contatos podem ser acessados em:
+
+\begin{itemize}
+\item \href{https://rhozon.github.io/}{\faGithub} \href{https://rhozon.github.io/}{Github}
+
+\item \href{https://www.linkedin.com/in/rodrigohermontozon/}{\faLinkedin} \href{https://www.linkedin.com/in/rodrigohermontozon/}{Linkedin} %
+\end{itemize}
+\end{flushleft}
+
+
+\end{mdframed}
+
+\vspace{9cm}
+
+
+\begin{abstract}
+  O objetivo de traduzir esse tutorial consiste em facilitar o aprendizado e utilização da linguagem estatística \faRProject para os profissionais de marketing e demais áreas de negócio que precisam se adequar a uma realidade mutante e movida por um fluxo significativo de informações por todos os lados. Trabalhar e interpretar bem os dados é um desafio computacional para muitos profissionais dessa área; e esta tradução visa cobrir (ainda que superficialmente) tal lacuna.
+  Este e-book foi escrito no \href{http://www.overleaf.com}{overleaf} com o pacote knitr \href{https://bookdown.org/content/1340/}{para a página interativa de autoria de KU Leven Marketing Department.}
+\end{abstract}
+
+
+\thispagestyle{empty}
+%==============================================================
+\newpage
+
+.
+
+\vspace{22cm}
+À minha amada esposa, Idiane \textit{"Porque sou eu que conheço os planos que tenho para vocês", diz o Senhor, "planos de fazê-los prosperar e não de lhes causar dano, planos de dar-lhes esperança e um futuro."}
+
+\vspace{.15cm}
+\hspace{13cm}\href{https://www.bibliaonline.com.br/nvi/jr/29/11}{Jeremias 29:11}
+
+\thispagestyle{empty}
+
+%==========================================================
+
+\newpage
+\tableofcontents
+%\lstlistoflistings
+
+
+
+%\hspace{12cm}\includegraphics[widht=1.5cm,height=1.5cm]{erasmussign.png}
+\thispagestyle{headings}
+
+\newpage
+%====================================================
+\section*{Nota do tradutor}
+
+Esse e-book traduzido é oriundo de \fbox{\textit{\href{https://bookdown.org/content/1340/}{\faRProject for marketing students}}.}
+
+\vspace{.25cm}
+\href{https://static1.squarespace.com/static/5757268f7da24f26ca7b21d2/t/5c7587114192021796d7cc84/1551206162093/R_Overleaf_Integration.pdf}{Para que esses scripts funcionem corretamente recomendo que você faça a integração do seu \faRProject Studio com o Overleaf observando esse tutorial aqui.}
+
+\vspace{.25cm}
+\textit{*As traduções aqui são somente as transcrições. Não me preocupei em aperfeiçoá-las para a língua portuguesa com maior nível de clareza nos textos. As figuras e imagens não foram traduzidas.}
+
+
+\section{Sobre esse tutorial}
+
+
+Neste tutorial, exploraremos o \faRProject como uma ferramenta para analisar e visualizar dados.\faRProject é uma linguagem de programação estatística que rapidamente ganhou popularidade em muitos campos científicos. A principal diferença entre o \faRProject e outro software estatístico como o SPSS é que o \faRProject não possui interface gráfica com o usuário. Não há botões para clicar. \faRProject é executado inteiramente digitando comandos em uma interface de texto. Isso pode parecer assustador, mas, esperançosamente, no final deste tutorial, você verá como o \faRProject pode ajudá-lo a fazer uma melhor análise estatística.
+
+Então, por que estamos usando \faRProject e não um dos muitos outros pacotes estatísticos como SPSS, SAS ou Microsoft Excel? Algumas das razões mais importantes:
+
+Ao contrário de outros softwares, o \faRProject é gratuito e de código aberto, e sempre será!
+\faRProject é uma linguagem de programação e não uma interface gráfica como o SPSS. Ele realiza análises ou visualizações executando algumas linhas de código. Essas linhas de código podem ser salvas como scripts para repetição futura das análises ou visualizações. Também facilita o compartilhamento de seu trabalho com outras pessoas, que podem aprender ou corrigi-lo se houver algum erro.
+
+\faRProject tem uma comunidade online muito ativa e útil. Quando você se depara com um problema, muitas vezes basta uma rápida pesquisa no Google para encontrar uma solução de origem coletiva.
+
+
+Todas as principais empresas de pesquisa de marketing indicam que estão experimentando o \faRProject e que o \faRProject é o software do futuro.
+Este tutorial se concentra em análises estatísticas relevantes para estudantes de marketing. Se você quiser uma introdução mais extensa, porém acessível, ao \faRProject, confira o excelente e gratuito livro "\href{http://r4ds.had.co.nz/index.html}{R for Data Science}". Este capítulo introdutório e o próximo são baseados na introdução ao R1, encontrada nos tutoriais do \href{https://ourcodingclub.github.io/}{Coding Club}, que também possui muitos outros ótimos tutoriais de \faRProject.
+
+Este tutorial foi escrito no RMarkdown, com a ajuda do incrível \href{https://bookdown.org/yihui/bookdown/}{pacote bookdown.} Questões? Comentários? Sugestões? Envie-me um e-mail: \href{mailto:samuel.franssens@kuleuven.be}{samuel.franssens@kuleuven.be}
+
+\subsection{Download e instalação do \faRProject e \faRProject Studio}
+
+Para fornecer algumas funcionalidades extras e facilitar um pouco a transição, usaremos um programa chamado \faRProject Studio como um front-end gráfico para \faRProject.
+
+Você pode fazer o download do \faRProject em \href{https://cloud.r-project.org/}{https://cloud.r-project.org/}. Selecione o link apropriado para o seu sistema operacional e instale o \faRProject no seu computador (no Windows, você primeiro precisa clicar em "base").
+
+Em seguida, faça o download do \faRProject Studio em \href{https://www.rstudio.com/products/rstudio/download/}{https://www.rstudio.com/products/rstudio/download/}. Selecione o instalador para a versão gratuita e instale o \faRProject Studio (nota: você precisa ter o \faRProject instalado primeiro).
+
+\subsection{Obtendo familiaridade com o \faRProject Studio}
+\subsubsection{Console vs. script}
+
+\includegraphics[widht=8cm,height=8cm]{rstudio.png}
+
+Ao abrir o \faRProject Studio, você verá uma janela como a acima. Você pode digitar o código diretamente no console (janela inferior esquerda) - basta digitar seu código após o prompt ($>$) e pressionar enter no final da linha para executar o código. Você também pode escrever seu código no arquivo de script (a janela superior esquerda). Se você não ver uma janela com um arquivo de script, abra uma clicando em Arquivo, Novo arquivo, \faRProject Script. Para executar uma linha de código a partir do seu script, pressione Ctrl + R ou Ctrl + Enter no Windows e Cmd + Enter no Mac ou use o botão 'Executar' no canto superior direito da janela do script.
+
+O código digitado diretamente no console não será salvo pelo \faRProject. O código digitado em um arquivo de script pode ser salvo como um registro reproduzível de sua análise. Se você estiver trabalhando no console e quiser editar ou executar novamente uma linha de código anterior, pressione a seta para cima. Se você estiver trabalhando em um script, lembre-se de clicar em Salvar frequentemente (Arquivo, Salvar), para que você realmente salve o seu script!
+
+É melhor trabalhar em arquivos de script. Também é altamente recomendável salvar seu arquivo de script em uma pasta que é automaticamente copiada pelo software de compartilhamento de arquivos que oferece a funcionalidade "versões anteriores" (o \href{https://www.dropbox.com/business/landing-t61fl-v2?_tk=paid_sem_goog_biz_b&_camp=1411326950&_kw=dropbox|e&_ad=389658655593||c&gclid=CjwKCAjwtqj2BRBYEiwAqfzur1JwrYwkXrKtxYHo_nfrnCMIUBe-IpmrIgCZmTt0l3gibHmKgokdvBoChx8QAvD_BwE}{Dropbox} é provavelmente o mais famoso; aqui estão algumas \href{https://medium.com/@Vanina/dropbox-alternatives-top-5best-cloud-storage-services-2017-a703af7d7796}{alternativas}). Isso lhe dará a opção de restaurar versões salvas anteriormente de seus arquivos sempre que você salvar algo por engano. Como qualquer peça escrita, os roteiros se beneficiam de estrutura e clareza - a \href{https://ourcodingclub.github.io/2017/04/25/etiquette.html}{Coding Etiquette do Coding Club} oferece mais conselhos sobre isso.
+
+\subsubsection{Comentários}
+
+Ao escrever um script, é muito importante adicionar comentários para descrever o que você está fazendo e por quê. Você pode fazer isso inserindo um # na frente de uma linha de texto. Comece seu script gravando quem está escrevendo o roteiro, a data e o objetivo principal - no capítulo introdutório, aprenderemos sobre as acomodações do Airbnb na Bélgica. Aqui está um exemplo:
+
+\begin{lstlisting}[language=R]
+# Aprendendo a importar e explorar dados e criar graficos investigando as acomodacoes do Airbnb na Belgica
+# Escrito por Samuel Franssens 28/01/2018
+\end{lstlisting}
+
+\newpage
+\subsubsection{Pacotes}
+
+As próximas linhas de código geralmente carregam os pacotes que você usará em sua análise ou visualização. 
+
+O \faRProject carrega automaticamente várias funções para executar operações básicas, mas os pacotes fornecem funcionalidade extra. Eles geralmente consistem em várias funções que podem lidar com tarefas específicas. Por exemplo, um pacote poderia fornecer funções para fazer análises de cluster ou para fazer biplots. Para instalar um pacote, digite install.packages ("nome do pacote") (e pressione enter ao trabalhar no console ou pressione Ctrl + Enter, Ctrl + R, Cmd + Enter ou o botão 'Executar' ao trabalhar em um script).
+
+Você só precisa instalar pacotes uma vez; depois, basta carregá-los usando a biblioteca (nome do pacote). Aqui, usaremos o popular pacote tidyverse que fornece muitas funções úteis e intuitivas
+
+ (\href{https://www.tidyverse.org/}{https://www.tidyverse.org/}).
+ 
+O pacote tidyverse é na verdade uma coleção de outros pacotes; portanto, durante a instalação ou o carregamento, você verá que vários pacotes são instalados ou carregados. Instale e carregue o pacote tidyverse executando as seguintes linhas de código:
+
+\begin{lstlisting}[language=R]
+install.packages("tidyverse") # instala o pacote tidyverse
+library(tidyverse) # carrega o pacote tidyverse
+\end{lstlisting}
+
+Observe que há aspas ao instalar um pacote, mas não ao carregá-lo.
+
+A instalação de um pacote normalmente produz muita saída no console. Você pode verificar se instalou um pacote com êxito, carregando o pacote. Se você tentar carregar um pacote que não foi instalado com sucesso, você receberá o seguinte erro:
+\begin{lstlisting}[language=R]
+library(marketing) # Estou tentando instalar o pacote inexistente 'marketing'
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+## Error in library(marketing): there is no package called 'marketing'
+\end{lstlisting}
+
+
+Nesse caso, tente reinstalar o pacote.
+
+Quando você tenta usar uma função de um determinado pacote que ainda não foi carregado, você pode receber o seguinte erro:
+
+\begin{lstlisting}[language=R]
+# agnes eh uma funcao do pacote cluster para rodar analise de cluster.
+agnes(dist(data), metric = "euclidean", method = "ward")
+\end{lstlisting}
+\begin{lstlisting}[language=R]
+## Error in agnes(dist(data), metric = "euclidean", method = "ward"): could not find function "agnes"
+\end{lstlisting}
+
+O \faRProject nos dirá que não pode encontrar a função solicitada (neste caso, agnes, uma função do pacote de cluster para análises de cluster). Geralmente, isso ocorre porque você ainda não carregou (ou instalou) o pacote ao qual a função pertence.
+
+Após instalar e carregar o pacote tidyverse, você poderá usar as funções incluídas no pacote tidyverse. Como você usará o pacote tidyverse com tanta frequência, é melhor sempre carregá-lo no início do seu script.
+
+\section{Introdução ao \faRProject}
+
+Neste capítulo introdutório, você aprenderá:
+
+\begin{itemize}
+    \item como importar dados
+    \item como manipular um conjunto de dados com o operador de canal
+    \item como resumir um conjunto de dados
+    \item como fazer gráficos de dispersão e histogramas
+\end{itemize}
+
+\subsection{Importando dados}
+
+Neste capítulo, exploraremos um conjunto de dados publicamente disponível dos dados do Airbnb. Encontramos esses dados \href{http://tomslee.net/airbnb-data-collection-get-the-data}{aqui.} (Estes são dados reais “raspados” do airbnb.com em julho de 2017. Isso significa que o proprietário do site criou um script para coletar automaticamente esses dados no site airbnb.com. Essa é uma das muitas coisas que você também pode fazer no \faRProject. Mas primeiro vamos aprender o básico.) Você pode baixar o conjunto de dados clicando com o botão direito do mouse \href{http://users.telenet.be/samuelfranssens/tutorial_data/tomslee_airbnb_belgium_1454_2017-07-14.csv}{neste link}, selecionando “Salvar link como…” (ou algo semelhante) e salvando o arquivo .csv em um diretório no disco rígido. Como mencionado na \href{https://bookdown.org/content/1340/getting-familiar-with-rstudio.html#console_script}{introdução}, é uma boa ideia salvar seu trabalho em um diretório que é automaticamente copiado pelo software de compartilhamento de arquivos. Mais tarde, salvaremos nosso script no mesmo diretório.
+
+
+\subsubsection{Importando arquivos .csv}
+
+\includegraphics[width=14cm,height=8cm]{rstudio2.png}
+
+
+Para importar dados para o \faRProject, clique em Import Dataset e depois em From text (readr). Uma nova janela será exibida. Clique em Procurar e encontre seu arquivo de dados. Certifique-se de que Primeira linha como nomes esteja selecionada (isso diz ao \faRProject para tratar a primeira linha dos seus dados como os títulos das colunas) e clique em Importar. Após clicar em importar, o \faRProject Studio abre uma guia Visualizador. Isso mostra seus dados em uma planilha.
+
+Alguns computadores salvam arquivos .csv com ponto e vírgula (;) em vez de vírgulas (,) como separadores ou "delimitadores". Isso geralmente acontece quando o inglês não é o primeiro ou o único idioma do seu computador. Se seus arquivos estiverem separados por ponto e vírgula, clique em Importar conjunto de dados e encontre seu arquivo de dados, mas agora escolha Ponto e vírgula no delimitador do menu suspenso.
+
+Nota: se você não salvou o conjunto de dados clicando com o botão direito do mouse no link e selecionando “Salvar link como…”, mas clicou com o botão esquerdo do mouse no link, seu navegador pode ter acabado abrindo o conjunto de dados. Você pode salvar o conjunto de dados pressionando Ctrl + S. Observe, no entanto, que seu navegador pode acabar salvando o conjunto de dados como um arquivo .txt. É importante alterar a extensão do seu arquivo nos argumentos para o comando read\_csv abaixo.
+
+\subsubsection{Ajustando seu diretório de trabalho}
+
+Depois de importar seus dados com Import Dataset, verifique a janela do console. Você verá o comando para abrir o Visualizador (View ()) e, uma linha acima, verá o comando que lê os dados. Copie o comando que lê os dados do console para o seu script. No meu caso, fica assim:
+
+\begin{lstlisting}[language=R]
+tomslee_airbnb_belgium_1454_2017_07_14 <- read_csv("c:/Dropbox/work/teaching/R/data/tomslee_airbnb_belgium_1454_2017-07-14.csv") 
+# Mude .csv para .txt se necessário
+\end{lstlisting}
+
+Esta linha tem a seguinte leitura (da direita para a esquerda): a funcao read\_csv deve ler o arquivo tomslee\_airbnb\_belgium\_1454\_2017-07-14.csv no diretorio c: / Dropbox / work / teaching / R / data / (voce vera um diretorio diferente aqui ) Em seguida, R deve atribuir ($<-$) esses dados a um objeto chamado tomslee\_airbnb\_belgium\_1454\_2017\_07\_14.
+
+Antes de explicar cada um desses conceitos, vamos simplificar esta linha de código:
+\begin{lstlisting}[language=R]
+setwd("c:/Dropbox/work/teaching/R/data/") # Ajusta o diretorio de trabalho para onde o R precisa apontar para o arquivo .csv
+airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv") 
+# read_csv agora não precisa mais de um diretorio e somente precisa de um nome de arquivo
+# Atribuimos os dados a um objeto com um nome mais simples: airbnb em vez de tomslee_airbnb_belgium_1454_2017_07_14
+\end{lstlisting}
+
+O comando setwd informa ao \faRProject onde está o seu diretório de trabalho. Seu diretório de trabalho é uma pasta no seu computador onde o \faRProject procurará dados, onde as plotagens serão salvas etc. Defina seu diretório de trabalho na pasta em que os dados foram armazenados. Agora, o arquivo read\_csv não requer mais um diretório.
+
+Você só precisa definir seu diretório de trabalho uma vez, na parte superior do seu script. Você pode verificar se está definido corretamente executando getwd (). Observe que em um computador com Windows, os caminhos de arquivo possuem barras invertidas que separam as pastas ("C: \ folder \ data"). No entanto, o caminho do arquivo digitado no \faRProject deve usar barras ("C: / folder / data").
+
+Salve este script no diretório de trabalho (no meu caso: c: / Dropbox / trabalho / ensino / R / dados /). No futuro, você pode simplesmente executar essas linhas de código para importar seus dados em vez de clicar em Importar conjunto de dados (a execução de linhas de código é muito mais rápida do que apontar e clicar - uma das vantagens do uso do \faRProject).
+
+Não se esqueça de carregar o pacote tidyverse na parte superior do seu script (mesmo antes de definir o diretório de trabalho) com a biblioteca (tidyverse).
+
+
+\subsubsection{Atribuindo dados a objetos}
+
+Observe a seta $<-$ no meio da linha que importou o arquivo .csv:
+
+\begin{lstlisting}
+airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv")
+\end{lstlisting}
+
+$<-$ é o operador de atribuição. Nesse caso, atribuímos o conjunto de dados (ou seja, os dados que lemos do arquivo .csv) a um objeto chamado airbnb. Um objeto é uma estrutura de dados. Todos os objetos que você criar serão exibidos no painel Ambiente (a janela superior direita). O \faRProject Studio fornece um atalho para escrever $<-$: Alt + - (no Windows). É uma boa ideia aprender esse atalho de cor.
+
+Quando você importa dados para o \faRProject, ele se torna um objeto chamado quadro de dados. Um quadro de dados é como uma tabela ou uma planilha do Excel. Tem duas dimensões: linhas e colunas. Geralmente, as linhas representam suas observações, as colunas representam as diferentes variáveis. Quando seus dados consistem em apenas uma dimensão (por exemplo, uma sequência de números ou palavras), eles são armazenados em um segundo tipo de objeto chamado vetor. Mais tarde, aprenderemos como criar vetores.
+
+\subsubsection{Importando arquivos do Excel}
+
+\faRProject funciona melhor com arquivos .csv (valores separados por vírgula). No entanto, os dados geralmente são armazenados como um arquivo do Excel (você pode baixar o conjunto de dados do Airbnb como um arquivo do Excel aqui). O \faRProject também pode lidar com isso, mas você precisará carregar primeiro um pacote chamado readxl (este pacote faz parte do pacote tidyverse, mas não é carregado com a biblioteca (tidyverse) porque não é um pacote tidyverse principal):
+
+\begin{lstlisting}
+library (readxl) # carrega o pacote
+
+airbnb.excel <- read_excel (path = "tomslee_airbnb_belgium_1454_2017-07-14.xlsx", sheet = "Sheet1")
+# verifique se o arquivo do Excel está salvo no seu diretório de trabalho
+
+# você também pode deixar de fora o path = & sheet =
+# então o comando se torna: read_excel ("tomslee_airbnb_belgium_1454_2017-07-14.xlsx", "Sheet1")
+\end{lstlisting}
+
+
+read\_excel é uma função do pacote readxl. São necessários dois argumentos: o primeiro é o nome do arquivo e o segundo é o nome da planilha do Excel que você deseja ler.
+
+\subsubsection{Lendo os dados do Airbnb}
+
+Nosso conjunto de dados contém informações sobre quartos na Bélgica listados no airbnb.com. Sabemos para cada sala (identificada por room\_id): quem é o host (host\_id), que tipo de sala é (room\_type), onde está localizada (country, city, neighborhood e até a latitude e longitude exata), como muitas críticas que recebeu (reviews), como as pessoas estavam satisfeitas (overall\_satisfaction), preço (price) e características dos quartos (accommodates, bedrooms, bathrooms, minstay).
+
+Uma etapa realmente importante é verificar se seus dados foram importados corretamente. É uma boa prática sempre inspecionar seus dados. Você vê algum valor ausente, os números e os nomes fazem sentido? Se você começar imediatamente com a análise, corre o risco de ter que refazê-la porque os dados não foram lidos corretamente, ou pior, analisando dados errados sem perceber.
+\newpage
+
+\begin{lstlisting}[language=R]
+airbnb # Visualiza o conteudo do conjunto de dados da Airbnb
+
+## # A tibble: 17,651 x 20
+##    room_id survey_id host_id room_type country city  borough neighborhood
+##      <int>     <int>   <int> <chr>     <chr>   <chr> <chr>   <chr>       
+##  1  5.14e6      1454  2.07e7 Shared r~ <NA>    Belg~ Gent    Gent        
+##  2  1.31e7      1454  4.61e7 Shared r~ <NA>    Belg~ Brussel Schaarbeek  
+##  3  8.30e6      1454  3.09e7 Shared r~ <NA>    Belg~ Brussel Elsene      
+##  4  1.38e7      1454  8.14e7 Shared r~ <NA>    Belg~ Oosten~ Middelkerke 
+##  5  1.83e7      1454  1.43e7 Shared r~ <NA>    Belg~ Brussel Anderlecht  
+##  6  1.27e7      1454  6.88e7 Shared r~ <NA>    Belg~ Brussel Koekelberg  
+##  7  1.55e7      1454  9.91e7 Shared r~ <NA>    Belg~ Gent    Gent        
+##  8  3.91e6      1454  3.69e6 Shared r~ <NA>    Belg~ Brussel Elsene      
+##  9  1.49e7      1454  3.06e7 Shared r~ <NA>    Belg~ Vervie~ Baelen      
+## 10  8.50e6      1454  4.05e7 Shared r~ <NA>    Belg~ Brussel Etterbeek   
+## # ... with 17,641 more rows, and 12 more variables: reviews <int>,
+## #   overall_satisfaction <dbl>, accommodates <int>, bedrooms <dbl>,
+## #   bathrooms <chr>, price <dbl>, minstay <chr>, name <chr>,
+## #   last_modified <dttm>, latitude <dbl>, longitude <dbl>, location <chr>
+
+\end{lstlisting}
+
+
+O \faRProject nos diz que estamos lidando com uma tibble (essa é apenas outra palavra para quadro de dados) com 17651 linhas ou observações e 20 colunas ou variáveis. Para cada coluna, é fornecido o tipo da variável: int (inteiro), chr (caractere), dbl (duplo), dttm (data e hora). Variáveis inteiras e duplas armazenam números (inteiro para números redondos, duplicam para números com decimais), variáveis de caracteres armazenam letras, variáveis de data e hora armazenam datas e / ou horas.
+
+O \faRProject imprime apenas os dados das dez primeiras linhas e o número máximo de colunas que cabem na tela. Se, no entanto, você deseja inspecionar todo o conjunto de dados, clique duas vezes no objeto airbnb no painel Ambiente (a janela superior direita) para abrir uma aba Visualizador ou executar a Visualização (airbnb). Observe o V maiúsculo no comando Visualizar. O \faRProject sempre diferencia maiúsculas de minúsculas!
+
+Você também pode usar o comando print para solicitar mais (ou menos) linhas e colunas na janela do console:
+
+\begin{lstlisting}[language=R]
+# Imprima 25 linhas (defina como Inf para imprimir todas as linhas) e defina a largura como 100 para ver mais colunas.
+# Observe que as colunas que nao cabem na primeira tela com 25 linhas
+# sao impressos abaixo das 25 linhas iniciais.
+
+print (airbnb, n = 25, width = 100)
+
+## # A tibble: 17,651 x 20
+##    room_id survey_id host_id room_type country city  borough neighborhood
+##      <int>     <int>   <int> <chr>     <chr>   <chr> <chr>   <chr>       
+##  1  5.14e6      1454  2.07e7 Shared r~ <NA>    Belg~ Gent    Gent        
+##  2  1.31e7      1454  4.61e7 Shared r~ <NA>    Belg~ Brussel Schaarbeek  
+##  3  8.30e6      1454  3.09e7 Shared r~ <NA>    Belg~ Brussel Elsene      
+##  4  1.38e7      1454  8.14e7 Shared r~ <NA>    Belg~ Oosten~ Middelkerke 
+##  5  1.83e7      1454  1.43e7 Shared r~ <NA>    Belg~ Brussel Anderlecht  
+##  6  1.27e7      1454  6.88e7 Shared r~ <NA>    Belg~ Brussel Koekelberg  
+##  7  1.55e7      1454  9.91e7 Shared r~ <NA>    Belg~ Gent    Gent        
+##  8  3.91e6      1454  3.69e6 Shared r~ <NA>    Belg~ Brussel Elsene      
+##  9  1.49e7      1454  3.06e7 Shared r~ <NA>    Belg~ Vervie~ Baelen      
+## 10  8.50e6      1454  4.05e7 Shared r~ <NA>    Belg~ Brussel Etterbeek   
+## 11  1.94e7      1454  1.87e7 Shared r~ <NA>    Belg~ Tournai Brunehaut   
+## 12  1.99e7      1454  1.29e8 Shared r~ <NA>    Belg~ Brussel Etterbeek   
+## 13  6.77e6      1454  3.50e7 Shared r~ <NA>    Belg~ Gent    Gent        
+## 14  1.39e7      1454  8.18e7 Shared r~ <NA>    Belg~ Arlon   Arlon       
+## 15  1.16e7      1454  5.00e7 Shared r~ <NA>    Belg~ Kortri~ Waregem     
+## 16  3.65e6      1454  1.84e7 Shared r~ <NA>    Belg~ Antwer~ Boom        
+## 17  1.20e7      1454  6.37e7 Shared r~ <NA>    Belg~ Vervie~ Büllingen   
+## 18  1.20e7      1454  6.37e7 Shared r~ <NA>    Belg~ Vervie~ Büllingen   
+## 19  4.28e5      1454  1.33e6 Shared r~ <NA>    Belg~ Gent    Gent        
+## 20  1.42e7      1454  8.61e7 Shared r~ <NA>    Belg~ Brussel Sint-Jans-M~
+## 21  1.93e7      1454  1.07e8 Shared r~ <NA>    Belg~ Leuven  Rotselaar   
+## 22  1.21e7      1454  6.21e7 Shared r~ <NA>    Belg~ Brugge  Jabbeke     
+## 23  4.42e6      1454  2.29e7 Shared r~ <NA>    Belg~ Ath     Ath         
+## 24  1.56e7      1454  2.05e7 Shared r~ <NA>    Belg~ Leuven  Leuven      
+## 25  1.33e6      1454  3.51e6 Shared r~ <NA>    Belg~ Tonger~ Voeren      
+##    reviews overall_satisfa~ accommodates bedrooms bathrooms price minstay
+##      <int>            <dbl>        <int>    <dbl> <chr>     <dbl> <chr>  
+##  1       9              4.5            2        1 <NA>         59 <NA>   
+##  2       2              0              2        1 <NA>         53 <NA>   
+##  3      12              4              2        1 <NA>         46 <NA>   
+##  4      19              4.5            4        1 <NA>         56 <NA>   
+##  5       5              5              2        1 <NA>         47 <NA>   
+##  6      28              5              4        1 <NA>         60 <NA>   
+##  7       2              0              2        1 <NA>         41 <NA>   
+##  8      13              4              2        1 <NA>         36 <NA>   
+##  9       2              0              8        1 <NA>         18 <NA>   
+## 10      57              4.5            3        1 <NA>         38 <NA>   
+## 11       1              0              4        1 <NA>         14 <NA>   
+## 12       0              0              2        1 <NA>         37 <NA>   
+## 13     143              5              2        1 <NA>         28 <NA>   
+## 14       0              0              1        1 <NA>        177 <NA>   
+## 15       1              0              4        1 <NA>        147 <NA>   
+## 16       3              4.5            2        1 <NA>        177 <NA>   
+## 17       0              0              2        1 <NA>        129 <NA>   
+## 18       0              0              2        1 <NA>        140 <NA>   
+## 19       9              5              2        1 <NA>        141 <NA>   
+## 20       0              0              5        1 <NA>        136 <NA>   
+## 21       1              0              2        1 <NA>        132 <NA>   
+## 22       0              0              1        1 <NA>        117 <NA>   
+## 23       0              0              6        1 <NA>        106 <NA>   
+## 24       3              5              1        1 <NA>        116 <NA>   
+## 25      13              4.5            2        1 <NA>        106 <NA>   
+## # ... with 1.763e+04 more rows, and 5 more variables: name <chr>,
+## #   last_modified <dttm>, latitude <dbl>, longitude <dbl>, location <chr>
+\end{lstlisting}
+
+\subsection{Manipulando dataframes}
+\subsubsection{Transformando variáveis}
+\subsubsubsection{\textbf{Fatoração}}
+
+Vamos observar nosso dataset novamente:
+
+\begin{lstlisting}[language=R]
+airbnb
+## # A tibble: 17,651 x 20
+##    room_id survey_id host_id room_type country city  borough neighborhood
+##      <int>     <int>   <int> <chr>     <chr>   <chr> <chr>   <chr>       
+##  1  5.14e6      1454  2.07e7 Shared r~ <NA>    Belg~ Gent    Gent        
+##  2  1.31e7      1454  4.61e7 Shared r~ <NA>    Belg~ Brussel Schaarbeek  
+##  3  8.30e6      1454  3.09e7 Shared r~ <NA>    Belg~ Brussel Elsene      
+##  4  1.38e7      1454  8.14e7 Shared r~ <NA>    Belg~ Oosten~ Middelkerke 
+##  5  1.83e7      1454  1.43e7 Shared r~ <NA>    Belg~ Brussel Anderlecht  
+##  6  1.27e7      1454  6.88e7 Shared r~ <NA>    Belg~ Brussel Koekelberg  
+##  7  1.55e7      1454  9.91e7 Shared r~ <NA>    Belg~ Gent    Gent        
+##  8  3.91e6      1454  3.69e6 Shared r~ <NA>    Belg~ Brussel Elsene      
+##  9  1.49e7      1454  3.06e7 Shared r~ <NA>    Belg~ Vervie~ Baelen      
+## 10  8.50e6      1454  4.05e7 Shared r~ <NA>    Belg~ Brussel Etterbeek   
+## # ... with 17,641 more rows, and 12 more variables: reviews <int>,
+## #   overall_satisfaction <dbl>, accommodates <int>, bedrooms <dbl>,
+## #   bathrooms <chr>, price <dbl>, minstay <chr>, name <chr>,
+## #   last_modified <dttm>, latitude <dbl>, longitude <dbl>, location <chr>
+
+\end{lstlisting}
+
+Vimos que room\_id e host\_id são "identificadores" ou rótulos que identificam as observações. São nomes (neste caso, apenas números) para as salas e hosts específicos. No entanto, vemos que o \faRProject os trata como números inteiros, ou seja, como números. Isso significa que poderíamos adicionar os room\_id‘s de duas salas diferentes e obter um novo número. No entanto, isso não faria muito sentido, porque os room\_id são apenas rótulos. Certifique-se de que \faRProject trate os identificadores como rótulos, em vez de números, fatorando-os. Observe o operador \$. Este operador muito importante nos permite selecionar variáveis específicas de um quadro de dados, neste caso room\_id e host\_id.
+
+\begin{lstlisting}[language=R]
+airbnb$room_id_F <- factor(airbnb$room_id)
+airbnb$host_id_F <- factor(airbnb$host_id)
+\end{lstlisting}
+
+Uma variável de fator é semelhante a uma variável de caractere, pois armazena letras. Os fatores são mais úteis para variáveis que podem assumir apenas um número de categorias pré-determinadas. Eles devem, por exemplo, ser usados para variáveis dependentes categóricas - por exemplo, se uma venda foi feita ou não: venda \textit{versus} não venda. Você pode pensar em fatores como variáveis que armazenam rótulos. Os rótulos reais não são tão importantes (não nos importamos se uma venda é chamada de venda ou sucesso ou algo mais), apenas os usamos para fazer uma distinção entre categorias diferentes. É muito importante fatorar variáveis inteiras que representam variáveis independentes ou dependentes categóricas, porque, se não fatorarmos essas variáveis, elas serão tratadas como contínuas em vez de variáveis categóricas nas análises. Por exemplo, uma variável pode representar uma venda como 1 e uma não-venda como 0. Nesse caso, é importante informar ao \faRProject que essa variável deve ser tratada como uma variável categórica em vez de contínua.
+
+As variáveis de caractere são diferentes das variáveis de fator, pois não são apenas rótulos para categorias. Um exemplo de variável de caractere seria uma variável que armazena as respostas dos entrevistados para uma pergunta em aberto. Aqui, o conteúdo real é importante (nós nos importamos se alguém descreve sua estadia no Airbnb como muito boa ou excelente ou outra coisa).
+
+No conjunto de dados do airbnb, os room\_id não são rigorosamente determinados de antemão, mas definitivamente são rótulos e não devem ser tratados como números. Por isso, pedimos para \faRProject convertê-los em fatores. Vamos dar uma olhada no conjunto de dados do airbnb novamente para verificar se o tipo dessas variáveis mudou após fatorar:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%=====================================================
+\newpage
+%=====================================================
+
+\begin{thebibliography}{99}
+\bibitem{rformarketingstudents} \textbf{\faRProject for Marketing Students.} Disponível em: \href{https://bookdown.org/content/1340/}{https://bookdown.org/content/1340/} 
+
+\bibitem{overleaf} \textbf{Overleaf, online \LaTeX~ editor}. Disponível em \href{http://www.overleaf.com}{Overleaf.com} 
+
+\bibitem{xie} Xie, Y. \textbf{Dynamic Documents with \faRProject and knitr} 2nd edition, 2015.
+
+\bibitem{JARick} \textbf{Reproducible Research using \faRMarkdown and Overleaf.} Disponível em \href{https://static1.squarespace.com/static/5757268f7da24f26ca7b21d2/t/5c7587114192021796d7cc84/1551206162093/R_Overleaf_Integration.pdf}{Reproducible Research using RMarkdown and Overleaf}
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+%===================================================
+\end{document}
