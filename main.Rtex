@@ -173,15 +173,18 @@ Ao meu amado paizão e professor pra vida inteira, Ronaldo --  \textit{"Ensina a
 \newpage
 %====================================================
 \section*{Nota do tradutor}
+.
 
+\vspace{5cm}
 Esse e-book traduzido é oriundo de \fbox{\textit{\href{https://bookdown.org/content/1340/}{\faRProject for marketing students}}.}
 
 \vspace{.25cm}
-\href{https://static1.squarespace.com/static/5757268f7da24f26ca7b21d2/t/5c7587114192021796d7cc84/1551206162093/R_Overleaf_Integration.pdf}{Para que esses scripts funcionem corretamente recomendo que você faça a integração do seu \faRProject Studio com o Overleaf observando esse tutorial aqui.}
+\href{https://static1.squarespace.com/static/5757268f7da24f26ca7b21d2/t/5c7587114192021796d7cc84/1551206162093/R_Overleaf_Integration.pdf}{Para que os scripts funcionem corretamente recomendo que você faça a integração do seu \faRProject Studio com o Overleaf observando \fbox{esse tutorial aqui}.}
 
 \vspace{.25cm}
 \textit{*As traduções aqui são somente as transcrições. Não me preocupei em aperfeiçoá-las para a língua portuguesa com maior nível de clareza nos textos. As figuras e imagens não foram traduzidas.}
 
+\newpage
 
 \section{Sobre esse tutorial}
 
@@ -199,7 +202,9 @@ Ao contrário de outros softwares, o \faRProject é gratuito e de código aberto
 Todas as principais empresas de pesquisa de marketing indicam que estão experimentando o \faRProject e que o \faRProject é o software do futuro.
 Este tutorial se concentra em análises estatísticas relevantes para estudantes de marketing. Se você quiser uma introdução mais extensa, porém acessível, ao \faRProject, confira o excelente e gratuito livro "\href{http://r4ds.had.co.nz/index.html}{R for Data Science}". Este capítulo introdutório e o próximo são baseados na introdução ao R1, encontrada nos tutoriais do \href{https://ourcodingclub.github.io/}{Coding Club}, que também possui muitos outros ótimos tutoriais de \faRProject.
 
-Este tutorial foi escrito no RMarkdown, com a ajuda do incrível \href{https://bookdown.org/yihui/bookdown/}{pacote bookdown.} Questões? Comentários? Sugestões? Envie-me um e-mail: \href{mailto:samuel.franssens@kuleuven.be}{samuel.franssens@kuleuven.be}
+Este tutorial foi escrito no RMarkdown, com a ajuda do incrível \href{https://bookdown.org/yihui/bookdown/}{pacote \fbox{bookdown}.}
+
+Questões? Comentários? Sugestões? Envie-me um e-mail: \href{mailto:samuel.franssens@kuleuven.be}{samuel.franssens@kuleuven.be}
 
 \subsection{Download e instalação do \faRProject e \faRProject Studio}
 
@@ -229,7 +234,6 @@ Ao escrever um script, é muito importante adicionar comentários para descrever
 # Escrito por Samuel Franssens 28/01/2018
 \end{lstlisting}
 
-\newpage
 \subsubsection{Pacotes}
 
 As próximas linhas de código geralmente carregam os pacotes que você usará em sua análise ou visualização. 
@@ -304,11 +308,11 @@ Nota: se você não salvou o conjunto de dados clicando com o botão direito do 
 
 \subsubsection{Ajustando seu diretório de trabalho}
 
-Depois de importar seus dados com Import Dataset, verifique a janela do console. Você verá o comando para abrir o Visualizador (View ()) e, uma linha acima, verá o comando que lê os dados. Copie o comando que lê os dados do console para o seu script. No meu caso, fica assim:
+Depois de importar seus dados com Import Dataset, verifique a janela do console. Você verá o comando para abrir o Visualizador (View()) e, uma linha acima, verá o comando que lê os dados. Copie o comando que lê os dados do console para o seu script. No meu caso, fica assim:
 
 \begin{lstlisting}[language=R]
 tomslee_airbnb_belgium_1454_2017_07_14 <- read_csv("c:/Dropbox/work/teaching/R/data/tomslee_airbnb_belgium_1454_2017-07-14.csv") 
-# Mude .csv para .txt se necessário
+# Mude .csv para .txt se necessario
 \end{lstlisting}
 
 Esta linha tem a seguinte leitura (da direita para a esquerda): a funcao read\_csv deve ler o arquivo tomslee\_airbnb\_belgium\_1454\_2017-07-14.csv no diretorio c: / Dropbox / work / teaching / R / data / (voce vera um diretorio diferente aqui ) Em seguida, R deve atribuir ($<-$) esses dados a um objeto chamado tomslee\_airbnb\_belgium\_1454\_2017\_07\_14.
@@ -317,15 +321,17 @@ Antes de explicar cada um desses conceitos, vamos simplificar esta linha de cód
 \begin{lstlisting}[language=R]
 setwd("c:/Dropbox/work/teaching/R/data/") # Ajusta o diretorio de trabalho para onde o R precisa apontar para o arquivo .csv
 airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv") 
-# read_csv agora não precisa mais de um diretorio e somente precisa de um nome de arquivo
+# read_csv agora nao precisa mais de um diretorio e somente precisa de um nome de arquivo
 # Atribuimos os dados a um objeto com um nome mais simples: airbnb em vez de tomslee_airbnb_belgium_1454_2017_07_14
 \end{lstlisting}
 
 O comando setwd informa ao \faRProject onde está o seu diretório de trabalho. Seu diretório de trabalho é uma pasta no seu computador onde o \faRProject procurará dados, onde as plotagens serão salvas etc. Defina seu diretório de trabalho na pasta em que os dados foram armazenados. Agora, o arquivo read\_csv não requer mais um diretório.
 
-Você só precisa definir seu diretório de trabalho uma vez, na parte superior do seu script. Você pode verificar se está definido corretamente executando getwd (). Observe que em um computador com Windows, os caminhos de arquivo possuem barras invertidas que separam as pastas ("C: \ folder \ data"). No entanto, o caminho do arquivo digitado no \faRProject deve usar barras ("C: / folder / data").
+Você só precisa definir seu diretório de trabalho uma vez, na parte superior do seu script. Você pode verificar se está definido corretamente executando getwd(). Observe que em um computador com Windows, os caminhos de arquivo possuem barras invertidas que separam as pastas \begin{verbatim} ("C: \ folder \ data").\end{verbatim} 
 
-Salve este script no diretório de trabalho (no meu caso: c: / Dropbox / trabalho / ensino / R / dados /). No futuro, você pode simplesmente executar essas linhas de código para importar seus dados em vez de clicar em Importar conjunto de dados (a execução de linhas de código é muito mais rápida do que apontar e clicar - uma das vantagens do uso do \faRProject).
+No entanto, o caminho do arquivo digitado no \faRProject deve usar barras ("C: / folder / data").
+
+Salve este script no diretório de trabalho (no meu caso: c: / Dropbox / trabalho / ensino / R / dados /)). No futuro, você pode simplesmente executar essas linhas de código para importar seus dados em vez de clicar em Importar conjunto de dados (a execução de linhas de código é muito mais rápida do que apontar e clicar - uma das vantagens do uso do \faRProject).
 
 Não se esqueça de carregar o pacote tidyverse na parte superior do seu script (mesmo antes de definir o diretório de trabalho) com a biblioteca (tidyverse).
 
@@ -342,9 +348,10 @@ $<-$ é o operador de atribuição. Nesse caso, atribuímos o conjunto de dados 
 
 Quando você importa dados para o \faRProject, ele se torna um objeto chamado quadro de dados. Um quadro de dados é como uma tabela ou uma planilha do Excel. Tem duas dimensões: linhas e colunas. Geralmente, as linhas representam suas observações, as colunas representam as diferentes variáveis. Quando seus dados consistem em apenas uma dimensão (por exemplo, uma sequência de números ou palavras), eles são armazenados em um segundo tipo de objeto chamado vetor. Mais tarde, aprenderemos como criar vetores.
 
+\newpage
 \subsubsection{Importando arquivos do Excel}
 
-\faRProject funciona melhor com arquivos .csv (valores separados por vírgula). No entanto, os dados geralmente são armazenados como um arquivo do Excel (você pode baixar o conjunto de dados do Airbnb como um arquivo do Excel aqui). O \faRProject também pode lidar com isso, mas você precisará carregar primeiro um pacote chamado readxl (este pacote faz parte do pacote tidyverse, mas não é carregado com a biblioteca (tidyverse) porque não é um pacote tidyverse principal):
+\faRProject funciona melhor com arquivos .csv (valores separados por vírgula). No entanto, os dados geralmente são armazenados como um arquivo do Excel (você pode baixar o conjunto de dados do Airbnb como um arquivo do Excel aqui). O \faRProject também pode lidar com isso, mas você precisará carregar primeiro um pacote chamado \fbox{readxl} (este pacote faz parte do pacote \fbox{tidyverse}, mas não é carregado com a biblioteca (\fbox{tidyverse}) porque não é um pacote \fbox{tidyverse} principal):
 
 \begin{lstlisting}
 library (readxl) # carrega o pacote
@@ -357,11 +364,11 @@ airbnb.excel <- read_excel (path = "tomslee_airbnb_belgium_1454_2017-07-14.xlsx"
 \end{lstlisting}
 
 
-read\_excel é uma função do pacote readxl. São necessários dois argumentos: o primeiro é o nome do arquivo e o segundo é o nome da planilha do Excel que você deseja ler.
+\fbox{read\_excel} é uma função do pacote \fbox{readxl}. São necessários dois argumentos: o primeiro é o nome do arquivo e o segundo é o nome da planilha do Excel que você deseja ler.
 
 \subsubsection{Lendo os dados do Airbnb}
 
-Nosso conjunto de dados contém informações sobre quartos na Bélgica listados no airbnb.com. Sabemos para cada sala (identificada por room\_id): quem é o host (host\_id), que tipo de sala é (room\_type), onde está localizada (country, city, neighborhood e até a latitude e longitude exata), como muitas críticas que recebeu (reviews), como as pessoas estavam satisfeitas (overall\_satisfaction), preço (price) e características dos quartos (accommodates, bedrooms, bathrooms, minstay).
+Nosso conjunto de dados contém informações sobre quartos na Bélgica listados no airbnb.com. Sabemos para cada sala (identificada por \fbox{room\_id}): quem é o hóspede (\fbox{host\_id}), que tipo de sala é (\fbox{room\_type}), onde está localizada (\fbox{country}, \fbox{city}, \fbox{neighborhood} e até a \fbox{latitude} e \fbox{longitude} exata), como muitas críticas que recebeu (\fbox{reviews}), como as pessoas estavam satisfeitas (\fbox{overall\_satisfaction}), preço (\fbox{price}) e características dos quartos (\fbox{accommodates}, \fbox{bedrooms}, \fbox{bathrooms}, \fbox{minstay}).
 
 Uma etapa realmente importante é verificar se seus dados foram importados corretamente. É uma boa prática sempre inspecionar seus dados. Você vê algum valor ausente, os números e os nomes fazem sentido? Se você começar imediatamente com a análise, corre o risco de ter que refazê-la porque os dados não foram lidos corretamente, ou pior, analisando dados errados sem perceber.
 \newpage
@@ -386,15 +393,14 @@ airbnb # Visualiza o conteudo do conjunto de dados da Airbnb
 ## #   overall_satisfaction <dbl>, accommodates <int>, bedrooms <dbl>,
 ## #   bathrooms <chr>, price <dbl>, minstay <chr>, name <chr>,
 ## #   last_modified <dttm>, latitude <dbl>, longitude <dbl>, location <chr>
-
 \end{lstlisting}
 
 
-O \faRProject nos diz que estamos lidando com uma tibble (essa é apenas outra palavra para quadro de dados) com 17651 linhas ou observações e 20 colunas ou variáveis. Para cada coluna, é fornecido o tipo da variável: int (inteiro), chr (caractere), dbl (duplo), dttm (data e hora). Variáveis inteiras e duplas armazenam números (inteiro para números redondos, duplicam para números com decimais), variáveis de caracteres armazenam letras, variáveis de data e hora armazenam datas e / ou horas.
+O \faRProject nos diz que estamos lidando com uma \fbox{tibble} (essa é apenas outra palavra para quadro de dados) com 17651 linhas ou observações e 20 colunas ou variáveis. Para cada coluna, é fornecido o tipo da variável: int (inteiro), chr (caractere), dbl (duplo), dttm (data e hora). Variáveis inteiras e duplas armazenam números (inteiro para números redondos, duplicam para números com decimais), variáveis de caracteres armazenam letras, variáveis de data e hora armazenam datas e / ou horas.
 
 O \faRProject imprime apenas os dados das dez primeiras linhas e o número máximo de colunas que cabem na tela. Se, no entanto, você deseja inspecionar todo o conjunto de dados, clique duas vezes no objeto airbnb no painel Ambiente (a janela superior direita) para abrir uma aba Visualizador ou executar a Visualização (airbnb). Observe o V maiúsculo no comando Visualizar. O \faRProject sempre diferencia maiúsculas de minúsculas!
 
-Você também pode usar o comando print para solicitar mais (ou menos) linhas e colunas na janela do console:
+Você também pode usar o comando \fbox{print} para solicitar mais (ou menos) linhas e colunas na janela do console:
 
 \begin{lstlisting}[language=R]
 # Imprima 25 linhas (defina como Inf para imprimir todas as linhas) e defina a largura como 100 para ver mais colunas.
@@ -470,6 +476,7 @@ Vamos observar nosso dataset novamente:
 
 \begin{lstlisting}[language=R]
 airbnb
+
 ## # A tibble: 17,651 x 20
 ##    room_id survey_id host_id room_type country city  borough neighborhood
 ##      <int>     <int>   <int> <chr>     <chr>   <chr> <chr>   <chr>       
@@ -487,10 +494,11 @@ airbnb
 ## #   overall_satisfaction <dbl>, accommodates <int>, bedrooms <dbl>,
 ## #   bathrooms <chr>, price <dbl>, minstay <chr>, name <chr>,
 ## #   last_modified <dttm>, latitude <dbl>, longitude <dbl>, location <chr>
-
 \end{lstlisting}
 
-Vimos que room\_id e host\_id são "identificadores" ou rótulos que identificam as observações. São nomes (neste caso, apenas números) para as salas e hosts específicos. No entanto, vemos que o \faRProject os trata como números inteiros, ou seja, como números. Isso significa que poderíamos adicionar os room\_id‘s de duas salas diferentes e obter um novo número. No entanto, isso não faria muito sentido, porque os room\_id são apenas rótulos. Certifique-se de que \faRProject trate os identificadores como rótulos, em vez de números, fatorando-os. Observe o operador \$. Este operador muito importante nos permite selecionar variáveis específicas de um quadro de dados, neste caso room\_id e host\_id.
+Vimos que \fbox{room\_id} e \fbox{host\_id} são "identificadores" ou rótulos que identificam as observações. São nomes (neste caso, apenas números) para as salas(quartos) e hóspedes específicos. No entanto, vemos que o \faRProject os trata como números inteiros, ou seja, como números. Isso significa que poderíamos adicionar os \fbox{room\_id‘s} de duas salas diferentes e obter um novo número. No entanto, isso não faria muito sentido, porque os \fbox{room\_id} são apenas rótulos.
+
+Certifique-se de que \faRProject trate os identificadores como rótulos, em vez de números, fatorando-os. Observe o operador \$. Este operador muito importante nos permite selecionar variáveis específicas de um quadro de dados, neste caso \fbox{room\_id} e \fbox{host\_id}.
 
 \begin{lstlisting}[language=R]
 airbnb$room_id_F <- factor(airbnb$room_id)
@@ -501,7 +509,7 @@ Uma variável de fator é semelhante a uma variável de caractere, pois armazena
 
 As variáveis de caractere são diferentes das variáveis de fator, pois não são apenas rótulos para categorias. Um exemplo de variável de caractere seria uma variável que armazena as respostas dos entrevistados para uma pergunta em aberto. Aqui, o conteúdo real é importante (nós nos importamos se alguém descreve sua estadia no Airbnb como muito boa ou excelente ou outra coisa).
 
-No conjunto de dados do airbnb, os room\_id não são rigorosamente determinados de antemão, mas definitivamente são rótulos e não devem ser tratados como números. Por isso, pedimos para o \faRProject convertê-los em fatores. Vamos dar uma olhada no conjunto de dados do airbnb novamente para verificar se o tipo dessas variáveis mudou após fatorar:
+No conjunto de dados do airbnb, os \fbox{room\_id} não são rigorosamente determinados de antemão, mas definitivamente são rótulos e não devem ser tratados como números. Por isso, pedimos para o \faRProject convertê-los em fatores. Vamos dar uma olhada no conjunto de dados do airbnb novamente para verificar se o tipo dessas variáveis mudou após fatorar:
 
 \begin{lstlisting}[language=R]
 airbnb
@@ -525,7 +533,7 @@ airbnb
 ## #   room_id_F <fct>, host_id_F <fct>
 \end{lstlisting}
 
-Vemos que o tipo de room\_id e host\_id agora é fct (fator).
+Vemos que o tipo de \fbox{room\_id} e \fbox{host\_id} agora é \fbox{fct} (fator).
 
 \subsubsection{Transformações numéricas}
 
@@ -551,13 +559,12 @@ airbnb$overall_satisfaction_100 <- airbnb$overall_satisfaction * 20
 # e veja se ha uma nova coluna a direita.
 head(airbnb$overall_satisfaction_100) 
 ## [1]  90   0  80  90 100 100
-
 \end{lstlisting}
 
 
 \subsubsection{Transformando variáveis com a função mutate}
 
-Também podemos transformar variáveis com a função mutate:
+Também podemos transformar variáveis com a função \fbox{mutate}:
 
 \begin{lstlisting}[language=R]
 airbnb <- mutate(airbnb, 
@@ -565,11 +572,11 @@ airbnb <- mutate(airbnb,
                  overall_satisfaction_100 = overall_satisfaction * 20)
 \end{lstlisting}
 
-Isso instrui \faRProject a pegar o conjunto de dados do airbnb, criar uma nova variável room\_id\_F que deve ser a fatoração de room\_id, uma nova variável host\_id\_F que deve ser a fatoração de host\_id e uma nova variável overall\_satisfaction\_100 que deve ser a satisfação geral vezes 20. O conjunto de dados com esses mutações (transformações) devem ser atribuídas ao objeto airbnb. Observe que não precisamos usar o operador \$ aqui, porque a função mutate sabe desde seu primeiro argumento (airbnb) onde procurar determinadas variáveis e, portanto, não precisamos especificá-lo posteriormente com airbnb \$. Uma vantagem do uso da função mutate é que ela mantém bem todas as transformações desejadas dentro de um comando. Outra grande vantagem do uso do mutate será discutida na seção sobre o \href{https://bookdown.org/content/1340/pipe.html#pipe}{operador pipe.}
+Isso instrui \faRProject a pegar o conjunto de dados do airbnb, criar uma nova variável \fbox{room\_id\_F} que deve ser a fatoração de \fbox{room\_id}, uma nova variável \fbox{host\_id\_F} que deve ser a fatoração de \fbox{host\_id} e uma nova variável \fbox{overall\_satisfaction\_100} que deve ser a satisfação geral vezes 20. O conjunto de dados com esses mutações (transformações) devem ser atribuídas ao objeto airbnb. Observe que não precisamos usar o operador \$ aqui, porque a função \fbox{mutate} sabe desde seu primeiro argumento (airbnb) onde procurar determinadas variáveis e, portanto, não precisamos especificá-lo posteriormente com airbnb \$. Uma vantagem do uso da função \fbox{mutate} é que ela mantém bem todas as transformações desejadas dentro de um comando. Outra grande vantagem do uso do \fbox{mutate} será discutida na seção sobre o \href{https://bookdown.org/content/1340/pipe.html#pipe}{operador pipe.}
 
 \subsubsection{Incluindo ou excluindo e renomeando variáveis (colunas)}
 
-Se olharmos para os dados, também podemos ver que country é NA, o que significa que não está disponível ou está ausente. cidade é sempre a Bélgica (o que está errado porque a Bélgica é um país, não uma cidade) e o borought contém as informações da cidade. Vamos corrigir esses erros removendo a variável country de nosso conjunto de dados e renomeando city e borought. Também excluiremos o survey\_id porque essa variável é constante nas observações e não a usaremos no restante da análise:
+Se olharmos para os dados, também podemos ver que \fbox{country} é NA, o que significa que não está disponível ou está ausente. \fbox{city} é sempre a Bélgica (o que está errado porque a Bélgica é um país, não uma cidade) e o \fbox{borought} contém as informações da cidade. Vamos corrigir esses erros removendo a variável \fbox{country} de nosso conjunto de dados e renomeando \fbox{city} e \fbox{borought}. Também excluiremos o \fbox{survey\_id} porque essa variável é constante nas observações e não a usaremos no restante da análise:
 
 \begin{lstlisting}[language=R]
 airbnb <- select(airbnb, -country, -survey_id) 
@@ -581,13 +588,12 @@ airbnb <- rename(airbnb, country = city, city = borough)
 # Diga ao R para renomear algumas variáveis do quadro de dados do airbnb e reatribuir esse novo quadro de dados ao objeto do airbnb.
 # Nota: a sintaxe é um pouco contra-intuitiva: novo nome de variável (country) = nome da variável antiga (city)!
 airbnb # country = Bélgica agora e cidade se refere a cidades
-
 \end{lstlisting}
 
 \subsubsection{Incluindo ou excluindo observações (linhas)}
 
 \vspace{.5cm}
-\subsubsubsection{\textbf{Criando um vetor com c( )}}
+\subsubsubsection{\textbf{Criando um vetor com \fbox{c( )}}}
 
 \vspace{.5cm}
 
@@ -603,7 +609,7 @@ topten # Mostra esse vetor.
 ##  [6] "Brugge"    "Namur"     "Leuven"    "Mons"      "Aalst"
 \end{lstlisting}
 
-\href{https://bookdown.org/content/1340/airbnbdata.html#assignment}{Lembre-se} de que um vetor é uma estrutura de dados unidimensional (diferente de um quadro de dados que possui duas dimensões, isto é, colunas e linhas). Usamos o operador c () para criar um vetor que chamamos de topten. c () é uma abreviação de concatenar, que significa juntar as coisas. O vetor topten é um vetor de strings (palavras). Deve haver aspas em torno das strings. Um vetor de números, no entanto, não requer aspas:
+\href{https://bookdown.org/content/1340/airbnbdata.html#assignment}{Lembre-se} de que um vetor é uma estrutura de dados unidimensional (diferente de um quadro de dados que possui duas dimensões, isto é, colunas e linhas). Usamos o operador \fbox{c()} para criar um vetor que chamamos de topten. \fbox{c()} é uma abreviação de concatenar, que significa juntar as coisas. O vetor \fbox{topten} é um vetor de strings (palavras). Deve haver aspas entre as strings. Um vetor de números, no entanto, não requer aspas:
 
 \begin{lstlisting}[language=R]
 number_vector <- c(0,2,4,6)
@@ -617,7 +623,7 @@ Qualquer vetor que você criará aparecerá como um objeto no painel Ambiente (j
 \subsubsubsection{\textbf{Incluindo ou excluindo observações com a função filter}}
 \vspace{.25cm}
 
-Para armazenar apenas os dados das dez maiores cidades, precisamos do operador \%in\% do pacote Hmisc:
+Para armazenar apenas os dados das dez maiores cidades, precisamos do operador \fbox{\%in\%} do pacote \fbox{Hmisc}:
 
 \begin{lstlisting}[language=R]
 install.packages("Hmisc")
@@ -636,14 +642,15 @@ airbnb.topten <- filter(airbnb, cidade% em% topten)
 # porque soh possui dados para as dez maiores cidades.
 \end{lstlisting}
 
-\newpage
+
 \subsection{O operador pipe}
 
 \vspace{.25cm}
 \subsubsection{Uma maneira de escrever o código}
 \vspace{.25cm}
 
-Até agora, aprendemos (entre outras coisas) como ler um arquivo .csv e atribuí-lo a um objeto, como transformar variáveis com a função mutate, como remover variáveis (colunas) do nosso conjunto de dados com a função select, como renomear variáveis com a função rename e como remover observações (linhas) do nosso conjunto de dados com a função de filter:
+Até agora, aprendemos (entre outras coisas) como ler um arquivo .csv e atribuí-lo a um objeto, como transformar variáveis com a função \fbox{mutate}, como remover variáveis (colunas) do nosso conjunto de dados com a função \fbox{select}, como renomear variáveis com a função \fbox{rename} e como remover observações (linhas) do nosso conjunto de dados com a função de \fbox{filter}:
+
 \begin{lstlisting}[language=R]
 airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv")
 airbnb <- mutate(airbnb, room_id_F = factor(room_id), host_id_F = factor(host_id), overall_satisfaction_100 = overall_satisfaction * 20)
@@ -652,7 +659,7 @@ airbnb <- rename(airbnb, country = city, city = borough)
 airbnb <- filter(airbnb, city %in% c("Brussel","Antwerpen","Gent","Charleroi","Liege","Brugge","Namur","Leuven","Mons","Aalst")) 
 \end{lstlisting}
 
-Ao ler este código, vemos que em cada linha substituímos o objeto airbnb. Não há nada de fundamentalmente errado com essa maneira de escrever, mas estamos repetindo elementos do código porque as últimas quatro linhas consistem em uma atribuição (airbnb <-) e em funções (mutate, select, renome, filter) que têm o mesmo primeiro argumento (o objeto airbnb criado na linha anterior).
+Ao ler este código, vemos que em cada linha substituímos o objeto \fbox{airbnb}. Não há nada de fundamentalmente errado com essa maneira de escrever, mas estamos repetindo elementos do código porque as últimas quatro linhas consistem em uma atribuição (\fbox{airbnb $<-$}) e em funções (\fbox{mutate}, \fbox{select}, \fbox{renome}, \fbox{filter}) que têm o mesmo primeiro argumento (o objeto \fbox{airbnb} criado na linha anterior).
 \\
 
 \vspace{.5}
@@ -660,7 +667,7 @@ Ao ler este código, vemos que em cada linha substituímos o objeto airbnb. Não
 \\
 
 \vspace{.25}
-Existe uma maneira mais elegante de escrever código. Envolve um operador chamado pipe. Ele nos permite reescrever nossa sequência usual de operações:
+Existe uma maneira mais elegante de escrever código. Envolve um operador chamado \textit{pipe} (\fbox{$\%>\%$}). Ele nos permite reescrever nossa sequência usual de operações:
 
 \begin{lstlisting}[language=R]
 airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv")
@@ -679,38 +686,42 @@ airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv") %>%
   filter(city %in% c("Brussel","Antwerpen","Gent","Charleroi","Liege","Brugge","Namur","Leuven","Mons","Aalst")) 
 \end{lstlisting}
 
-Isso pode ser lido de maneira natural: “leia o arquivo csv, depois faça a mutação, selecione, renomeie e depois filtre”. Começamos lendo um arquivo .csv. Em vez de armazená-lo em um objeto intermediário, fornecemos como o primeiro argumento para a função mutate usando o \textit{operador pipe}: \%$>$\%. É uma boa idéia aprender o atalho para \%$>$\% de cor: \textbf{Ctrl $+$ Shift $+$ M}. 
+Isso pode ser lido de maneira natural: “leia o arquivo csv, depois faça a mutação, selecione, renomeie e depois filtre”. Começamos lendo um arquivo .csv. Em vez de armazená-lo em um objeto intermediário, fornecemos como o primeiro argumento para a função \fbox{mutate} usando o \textit{operador pipe}: \fbox{\%$>$\%}. É uma boa idéia aprender o atalho para \fbox{\%$>$\%} de cór: \textbf{Ctrl $+$ Shift $+$ M}. 
 
-A função mutate usa os mesmos argumentos acima (crie room\_id\_F, que deve ser uma fatoração de room\_id, etc), mas agora não o fazemos precisamos fornecer o primeiro argumento (em qual conjunto de dados queremos que o mutate funcione). O primeiro argumento seria o quadro de dados resultante da leitura do arquivo .csv na linha anterior, mas isso é automaticamente transmitido como primeiro argumento a ser alterado pelo operador pipe. O operador pipe obtém a saída do que está no lado esquerdo do tubo e fornece isso como o primeiro argumento para o que está no lado direito do pipe (ou seja, a próxima linha de código).
+A função \fbox{mutate} usa os mesmos argumentos acima (crie \fbox{room\_id\_F}, que deve ser uma fatoração de \fbox{room\_id}, etc), mas agora não o fazemos precisamos fornecer o primeiro argumento (em qual conjunto de dados queremos que o \fbox{mutate} funcione). O primeiro argumento seria o quadro de dados resultante da leitura do arquivo .csv na linha anterior, mas isso é automaticamente transmitido como primeiro argumento a ser alterado pelo operador pipe. O operador pipe obtém a saída do que está no lado esquerdo do tubo e fornece isso como o primeiro argumento para o que está no lado direito do pipe (ou seja, a próxima linha de código).
 
-Depois de criar novas variáveis com mutate, descartamos algumas variáveis com select. Novamente, a função select usa os mesmos argumentos acima (soltar país e survey\_id), mas não fornecemos o primeiro argumento (de qual conjunto de dados devemos retirar variáveis), porque ele já é fornecido pelo canal na linha anterior. Continuamos da mesma maneira e renomeamos algumas variáveis com rename e descartamos algumas observações com o filter.
+Depois de criar novas variáveis com \fbox{mutate}, descartamos algumas variáveis com \fbox{select}. Novamente, a função \fbox{select} usa os mesmos argumentos acima (soltar país e \fbox{survey\_id}), mas não fornecemos o primeiro argumento (de qual conjunto de dados devemos retirar variáveis), porque ele já é fornecido pelo pipe na linha anterior. Continuamos da mesma maneira e renomeamos algumas variáveis com \fbox{rename} e descartamos algumas observações com o \fbox{filter}.
 
-A escrita de código com o operador de pipe explora a estrutura semelhante de mutate, select, rename, filter, que são as funções mais importantes para manipulação de dados. O primeiro argumento para todas essas funções é o quadro de dados no qual ela deve operar. Agora, esse primeiro argumento pode ser deixado de fora, porque é fornecido pelo operador pipe. No restante deste tutorial, escreveremos código usando o operador de pipe, pois melhora consideravelmente a legibilidade do nosso código.
+A escrita de código com o operador de pipe explora a estrutura semelhante de \fbox{mutate}, \fbox{select}, \fbox{rename}, \fbox{filter}, que são as funções mais importantes para manipulação de dados. O primeiro argumento para todas essas funções é o quadro de dados no qual ela deve operar. Agora, esse primeiro argumento pode ser deixado de fora, porque é fornecido pelo operador pipe. No restante deste tutorial, escreveremos código usando o operador de pipe, pois melhora consideravelmente a legibilidade do nosso código.
 
 
 \subsection{Agrupando e resumindo}
+
 Vamos trabalhar no conjunto de dados completo novamente. Até agora, seu script deve ficar assim:
+
 \begin{lstlisting}[language=R]
 library(tidyverse)
 setwd("c:/Dropbox/work/teaching/R/data/") # Direciona seu diretorio de trabalho 
 
 airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv") %>% 
-  mutate(room_id = factor(room_id), host_id = factor(host_id)) %>% # We don't create a new variable room_id_F, but instead overwrite room_id with its factorization. Same for host_id. 
+  mutate(room_id = factor(room_id), host_id = factor(host_id)) %>% # Não criamos uma nova variável room_id_F, mas substituímos room_id com sua fatoração. O mesmo para host_id.
+  
   select(-country, -survey_id) %>% # dropa country e survey_id
   rename(country = city, city = borough) # renomeia city & borough
 
-# Deixamos de lado a transformacao da satisfacao geral
-# e deixamos de fora o comando filter para garantir que não retenhamos apenas os dados das dez cidades mais populosa
+# Deixamos de lado a transformacao da overall_satisfaction
+# e deixamos de fora o comando filter para garantir que nao retenhamos apenas os dados das dez cidades mais populosas
 \end{lstlisting}
 
 \subsubsection{Tabelas de frequência}
 
-Cada observação em nosso conjunto de dados é uma sala; portanto, sabemos que nossos dados contêm informações sobre 17651 salas. Digamos que queremos saber quantos quartos existem por cidade:
+Cada observação em nosso conjunto de dados é uma sala ou quarto; portanto, sabemos que nossos dados contêm informações sobre 17651 quartos. Digamos que queremos saber quantos quartos existem por cidade:
 
 \begin{lstlisting}[language=R]
 airbnb%>%
-   group_by(city)%>% # Use a função group_by para agrupar o quadro de dados do airbnb (fornecido pelo pipe na linha anterior) por cidade
-   summarise(nr_per_city = n ()) # Resuma este objeto agrupado (fornecido pelo pipe na linha anterior): peça ao R para criar uma nova variável nr_per_city que possua o número de observações em cada grupo (cidade)
+   group_by(city)%>% # Use a funcao group_by para agrupar o quadro de dados do airbnb (fornecido pelo pipe na linha anterior) por cidade
+   summarise(nr_per_city = n()) # Resuma este objeto agrupado (fornecido pelo pipe na linha anterior): peca ao R para criar uma nova variavel nr_per_city que possua o numero de observacoes em cada grupo (cidade)
+   
    ## # A tibble: 43 x 2
 ##    city        nr_per_city
 ##    <chr>             <int>
@@ -727,14 +738,17 @@ airbnb%>%
 ## # ... with 33 more rows
 \end{lstlisting}
 
-Dizemos ao \faRProject para pegar o objeto airbnb, agrupá-lo por cidade e resumi-lo (summarise). O resumo que queremos é o número de observações por grupo. Nesse caso, as cidades formam os grupos. Os grupos sempre serão a primeira coluna em nossa saída. Obtemos o número de observações por grupo com a função n (). Esses números são armazenados em uma nova coluna denominada nr\_per\_city.
+Dizemos ao \faRProject para pegar o objeto airbnb, agrupá-lo por cidade e resumi-lo (\fbox{summarise}). O resumo que queremos é o número de observações por grupo. Nesse caso, as cidades formam os grupos. Os grupos sempre serão a primeira coluna em nossa saída. Obtemos o número de observações por grupo com a função \fbox{n()}. Esses números são armazenados em uma nova coluna denominada \fbox{nr\_per\_city}.
 
+\newpage
 Como você pode ver, essas frequências são classificadas em ordem alfabética por cidade. Em vez disso, podemos classificá-los pelo número de quartos por cidade:
+
 \begin{lstlisting}[language=R]
 airbnb %>% 
   group_by(city) %>%
   summarise(nr_per_city = n()) %>%
-  arrange(nr_per_city) # Usa a função arrange para classificar em uma coluna selecionada
+  arrange(nr_per_city) # Usa a funcao arrange para classificar em uma coluna selecionada
+  
 ## # A tibble: 43 x 2
 ##    city         nr_per_city
 ##    <chr>              <int>
@@ -751,7 +765,6 @@ airbnb %>%
 ## # ... with 33 more rows  
 \end{lstlisting}
 
-\newpage
 
 Mostra a cidade com o menor número de quartos no topo. Para exibir a cidade com mais quartos no topo, classifique em ordem decrescente:
 
@@ -761,6 +774,7 @@ airbnb %>%
   group_by(city) %>%
   summarise(nr_per_city = n()) %>%
   arrange(desc(nr_per_city)) # Classifica por ordem descendente
+
 ## # A tibble: 43 x 2
 ##    city            nr_per_city
 ##    <chr>                 <int>
@@ -779,11 +793,13 @@ airbnb %>%
 
 Você verá que a capital Bruxelas tem mais quartos em oferta, seguidos por Antwerpen e Gent. Observe que isso é muito parecido com trabalhar com a Tabela Dinâmica no Excel. Você poderia ter feito tudo isso no Excel, mas isso tem várias desvantagens, especialmente ao trabalhar com grandes conjuntos de dados como o nosso: você não tem registro do que clicou, de como classificou os dados e do que pode ter copiado ou excluído. No Excel, é mais fácil cometer erros acidentais sem perceber do que no \faRProject. No \faRProject, você tem seu script, para poder voltar e verificar todas as etapas de sua análise.
 
-Nota: você também pode ter feito isso sem o operador pipe:
+Nota: você também poderia ter feito isso sem o operador pipe:
+
 \begin{lstlisting}[language=R]
 airbnb.grouped <- group_by(airbnb, city)
 airbnb.grouped.summary <- summarize(airbnb.grouped, nr_per_city = n())
 arrange(airbnb.grouped.summary, desc(nr_per_city))
+
 ## # A tibble: 43 x 2
 ##    city            nr_per_city
 ##    <chr>                 <int>
@@ -798,12 +814,11 @@ arrange(airbnb.grouped.summary, desc(nr_per_city))
 ##  9 Halle-Vilvoorde         471
 ## 10 Leuven                  434
 ## # ... with 33 more rows
-
 \end{lstlisting}
 
-Mas espero que você concorde que o código que usa o operador de pipe é mais fácil de ler. Além disso, sem o operador pipe, você acabará criando muitos objetos desnecessários, como airbnb.grouped e airbnb.grouped.summary.
+Mas espero que você concorde que o código que usa o operador de pipe é mais fácil de ler. Além disso, sem o operador pipe, você acabará criando muitos objetos desnecessários, como \fbox{airbnb.grouped} e \fbox{airbnb.grouped.summary}.
 
-\newpage
+
 
 \subsubsection{Estatísticas Descritivas}
 
@@ -813,13 +828,16 @@ Digamos que, além das frequências por cidade, também desejemos o preço médi
 airbnb.summary <- airbnb %>% # Armazena este resumo em um objeto chamado airbnb.summary.
   group_by(city) %>%
   summarise(nr_per_city = n(), average_price = mean(price)) %>% # Aqui informamos ao R para criar outra variavel chamada average_price que nos fornece a media dos precos por grupo (city)
-  arrange(desc(average_price)) # Agora organiza por average_price e mostra o maior preco praticado dentre os demais
+  
+arrange(desc(average_price)) # Agora organiza por average_price e mostra o maior preco praticado dentre os demais
 
 # Veja o painel de Ambiente para visualizar se ha agora um novo objeto chamado airbnb.summary.
 
 # Ao inves de apenas rodar airbnb.summary, 
 # Eu o envolvi em um comando de print e defini n como Inf para ver todas as linhas.
+
 print(airbnb.summary, n = Inf) 
+
 ## # A tibble: 43 x 3
 ##    city              nr_per_city average_price
 ##    <chr>                   <int>         <dbl>
@@ -870,8 +888,8 @@ print(airbnb.summary, n = Inf)
 
 Talvez surpreendentemente, as três principais cidades mais caras são Bastogne, Philippeville e Verviers. Talvez o preço médio dessas cidades seja alto por causa de discrepâncias. 
 
-\newpage
 Vamos calcular algumas estatísticas mais descritivas para ver se nosso palpite está correto:
+
 \begin{lstlisting}[language=R]
 airbnb %>%
   group_by(city) %>%
@@ -903,18 +921,18 @@ Vemos que duas das três cidades com o preço médio mais alto (Verviers e Basto
 \subsection{Exportando (summaries) dos dados}
 
 Às vezes, você pode querer exportar dados ou um resumo dos dados. Vamos salvar nossos dados ou resumo em um arquivo .csv (no Excel, podemos convertê-lo em um arquivo do Excel, se quisermos):
+
 \begin{lstlisting}[language=R]
 # o primeiro argumento eh o objeto que voce deseja armazenar, o segundo eh o nome que voce deseja atribuir ao arquivo (nao esqueca a extensao .csv)
 # use write_csv2 quando voce tiver um computador belga (AZERTY), caso contrário, os números decimais não serão armazenados como números
 
 # armazenamento de dados
-write_excel_csv (airbnb, "airbnb.csv")
-write_excel_csv2 (airbnb, "airbnb.csv")
+write_excel_csv(airbnb, "airbnb.csv")
+write_excel_csv2(airbnb, "airbnb.csv")
 
 # armazenamento de summary
-write_excel_csv (airbnb.summary, "airbnb_summary.csv")
-write_excel_csv2 (airbnb.summary, "airbnb_summary.csv")
-
+write_excel_csv(airbnb.summary, "airbnb_summary.csv")
+write_excel_csv2(airbnb.summary, "airbnb_summary.csv")
 \end{lstlisting}
 
 O arquivo será salvo no seu diretório de trabalho.
@@ -935,6 +953,7 @@ Se você acabou de iniciar uma nova sessão \faRProject, também pode reler o ar
 \subsubsection{Diagrama de dispersão (scatterplot)}
 
 Vamos criar um scatterplot dos preços por cidade:
+
 \begin{lstlisting}[language=R]
 ggplot(data = airbnb.topten, mapping = aes(x = city, y = price)) + 
   geom_point()
@@ -944,13 +963,15 @@ ggplot(data = airbnb.topten, mapping = aes(x = city, y = price)) +
 \includegraphics[width=12cm,height=8cm]{intro_scatterplot-1.png}
 \end{center}
 
-Se tudo correr bem, uma plotagem deve aparecer no canto inferior direito da tela. As figuras são feitas com o comando ggplot. Na primeira linha, você diz ao ggplot quais dados devem ser usados para criar um gráfico e quais variáveis devem aparecer no eixo X e no eixo Y. Dizemos para colocar cidade no eixo X e preço no eixo Y. A especificação do eixo X e do eixo Y sempre deve vir como argumentos para uma função aes, que por sua vez é fornecida como um argumento para a função mapping (mapeamento). Na segunda linha, você diz ao ggplot para desenhar pontos (geom\_point). Ao criar um gráfico, lembre-se de sempre adicionar um $+$ no final de cada linha de código que compõe o gráfico, exceto o último (adicionar o $+$ no início de uma linha não funcionará).
+Se tudo correr bem, uma plotagem deve aparecer no canto inferior direito da tela. As figuras são feitas com o comando \fbox{ggplot}. Na primeira linha, você diz ao \fbox{ggplot} quais dados devem ser usados para criar um gráfico e quais variáveis devem aparecer no eixo X e no eixo Y. Dizemos para colocar cidade no eixo X e preço no eixo Y. A especificação do eixo X e do eixo Y sempre deve vir como argumentos para uma função aes, que por sua vez é fornecida como um argumento para a função \fbox{mapping} (mapeamento). Na segunda linha, você diz ao \fbox{ggplot} para desenhar pontos (\fbox{geom\_point}).
+
+Ao criar um gráfico, lembre-se de sempre adicionar um \fbox{$+$} no final de cada linha de código que compõe o gráfico, exceto o último (adicionar o \fbox{$+$} no início de uma linha não funcionará).
 
 O gráfico não é muito informativo porque muitos pontos são desenhados um sobre o outro.
 
 \subsubsection{Jitter}
 
-Vamos adicionar jitter aos nossos pontos:
+Vamos adicionar \fbox{jitter} aos nossos pontos:
 
 \begin{lstlisting}[language=R]
 ggplot(data = airbnb.topten, mapping = aes(x = city, y = price)) + 
@@ -961,21 +982,25 @@ ggplot(data = airbnb.topten, mapping = aes(x = city, y = price)) +
 \includegraphics[width=12cm,height=8cm]{intro_jitter-1.png}
 \end{center}
 
-Em vez de solicitar pontos com geom\_point(), agora solicitamos pontos com jitter adicionado com geom\_jitter(). Jitter é um valor aleatório que é adicionado a cada coordenada X e Y, de modo que os pontos de dados não sejam desenhados um sobre o outro. Observe que fazemos isso apenas para tornar o gráfico mais informativo (compare-o com o gráfico de dispersão anterior, onde muitos pontos de dados são desenhados um sobre o outro); não altera os valores reais em nosso conjunto de dados.
+Em vez de solicitar pontos com \fbox{geom\_point()}, agora solicitamos pontos com \fbox{jitter} adicionado com \fbox{geom\_jitter()}. Jitter é um valor aleatório que é adicionado a cada coordenada X e Y, de modo que os pontos de dados não sejam desenhados um sobre o outro. Observe que fazemos isso apenas para tornar o gráfico mais informativo (compare-o com o gráfico de dispersão anterior, onde muitos pontos de dados são desenhados um sobre o outro); não altera os valores reais em nosso conjunto de dados.
 
 \subsubsection{Histograma}
 
-Ainda não está claro. Parece que a distribuição do preço está correta. Isso significa que a distribuição do preço não é normal. Uma distribuição normal tem dois recursos principais. Uma primeira característica é que existem mais valores próximos à média do que valores distantes da média.
+Ainda não está claro. Parece que a distribuição do preço está correta. Isso significa que a distribuição do preço não é normal. Uma distribuição normal tem dois recursos principais.
+
+Uma primeira característica é que existem mais valores próximos à média do que valores distantes da média.
 
 Em outras palavras, valores extremos não ocorrem com muita frequência.
 
-Uma segunda característica é que a distribuição é simétrica. Em outras palavras, o número de valores abaixo da média é igual ao número de valores acima da média. Em uma distribuição distorcida, existem valores extremos em apenas um lado da distribuição. No caso de inclinação à direita, isso significa que existem valores extremos no lado direito da distribuição. No nosso caso, isso significa que existem algumas listagens do Airbnb com preços muito altos. Isso aumenta a média da distribuição, de modo que as listagens não sejam mais normalmente distribuídas em torno da média.
+Uma segunda característica é que a distribuição é simétrica. Em outras palavras, o número de valores abaixo da média é igual ao número de valores acima da média. Em uma distribuição distorcida, existem valores extremos em apenas um lado da distribuição. No caso de inclinação à direita, isso significa que existem valores extremos no lado direito da distribuição.
+
+No nosso caso, isso significa que existem algumas listagens do Airbnb com preços muito altos. Isso aumenta a média da distribuição, de modo que as listagens não sejam mais normalmente distribuídas em torno da média.
 
 Vamos desenhar um histograma dos preços:
 
 \begin{lstlisting}[language=R]
-ggplot(data = airbnb.topten, mapping = aes(x = price)) + # Observe que não temos mais uma cidade x =. O preço deve estar no eixo X e as frequências dos preços devem estar no eixo Y
-  geom_histogram() # Eixo Y = frequência dos valores no eixo X
+ggplot(data = airbnb.topten, mapping = aes(x = price)) + # Observe que nao temos mais uma cidade x =. O preco deve estar no eixo X e as frequencias dos precos devem estar no eixo Y
+  geom_histogram() # Eixo Y = frequencia dos valores no eixo X
 \end{lstlisting}
 
 
@@ -983,12 +1008,12 @@ ggplot(data = airbnb.topten, mapping = aes(x = price)) + # Observe que não temo
 \includegraphics[width=12cm,height=8cm]{intro_histogram-1.png}
 \end{center}
 
-De fato, existem alguns preços extremamente altos (em comparação com a maioria dos preços), portanto, os preços estão inclinados à direita. Nota: o stat\_bin() usando compartimentos = 30. Escolha um valor melhor com o aviso de largura de caixa no console que possa ser ignorado com segurança.
+De fato, existem alguns preços extremamente altos (em comparação com a maioria dos preços), portanto, os preços estão inclinados à direita. Nota: o \fbox{stat\_bin()} usando compartimentos = 30. Escolha um valor melhor com o aviso de largura de caixa no console que possa ser ignorado com segurança.
 
 \newpage
 \subsubsection{Transformação logarítmica}
 
-Como a variável price está inclinada à direita, podemos transformá-la em log para torná-la mais normal:
+Como a variável \fbox{price} está inclinada à direita, podemos transformá-la em log para torná-la mais normal:
 
 \begin{lstlisting}[language=R]
 # No eixo y agora temos log(price, base=exp(1)) ao inves de price. log(price, base=exp(1)) = assuma o log natural, i.e., o log com base = exp(1) = e.
@@ -1016,7 +1041,7 @@ ggplot(data = airbnb.topten, mapping = aes(x = city, y = price)) +
 \includegraphics[width=12cm,height=8cm]{intro_median-1.png}
 \end{center}
 
-A linha de código para obter a mediana pode ser lida da seguinte forma: stat\_summary solicitará um resumo estatístico. A estatística que queremos é a mediana em uma cor chamada "tomato3", com tamanho 4. Ela deve ser representada como um "ponto". Vemos que Bruges é a cidade com o preço mediano mais alto. É muito mais fácil ver isso quando transformamos o preço por log:
+A linha de código para obter a mediana pode ser lida da seguinte forma: \fbox{stat\_summary} solicitará um resumo estatístico. A estatística que queremos é a mediana em uma cor chamada \fbox{"tomato3"}, com tamanho 4. Ela deve ser representada como um "ponto". Vemos que Bruges é a cidade com o preço mediano mais alto. É muito mais fácil ver isso quando transformamos o preço por log:
 
 \begin{lstlisting}[language=R]
 ggplot(data = airbnb.topten, mapping = aes(x = city, y = log(price, base = exp(1)))) + 
@@ -1032,6 +1057,7 @@ ggplot(data = airbnb.topten, mapping = aes(x = city, y = log(price, base = exp(1
 \subsubsection{Plota a média}
 
 Vamos adicionar a média também, mas com uma cor e forma diferentes da média:
+
 \begin{lstlisting}[language=R]
 ggplot(data = airbnb.topten, mapping = aes(x = city, y = log(price, base = exp(1)))) + 
   geom_jitter() +
@@ -1043,14 +1069,14 @@ ggplot(data = airbnb.topten, mapping = aes(x = city, y = log(price, base = exp(1
 \includegraphics[width=12cm,height=8cm]{intro_plot_mean-1.png}
 \end{center}
 
-O código para obter a média é muito semelhante ao usado para obter a mediana. Simplesmente alteramos a estatística, a cor e adicionamos a forma = 23 para obter diamantes em vez de círculos e preencher = "green" para preencher os diamantes. Vemos que os meios e medianas são bastante semelhantes.
+O código para obter a média é muito semelhante ao usado para obter a mediana. Simplesmente alteramos a estatística, a cor e adicionamos a forma = 23 para obter diamantes em vez de círculos e preencher = \fbox{"green"} para preencher os diamantes (pontos do gráfico). Vemos que os meios e medianas são bastante semelhantes.
 
 \newpage
 \subsubsection{Salvando imagens}
 
 Podemos salvar esse gráfico em nosso disco rígido. Para fazer isso, clique em Exportar / Salvar como imagem. Se você não alterar o diretório, o arquivo será salvo no seu diretório de trabalho. Você pode redimensionar a plotagem e também fornecer um nome de arquivo significativo - Rplot01.png não será útil quando você tentar encontrar o arquivo posteriormente.
 
-Uma maneira diferente (reproduzível) de salvar seu arquivo é agrupar o código nas funções png () e dev.off ():
+Uma maneira diferente (reproduzível) de salvar seu arquivo é agrupar o código nas funções \fbox{png()} e \fbox{dev.off()}:
 
 \begin{lstlisting}[language=R]
 png("price_per_city.png", width=800, height=600) 
@@ -1061,7 +1087,7 @@ ggplot(data = airbnb.topten, mapping = aes(x = city, log(price, base = exp(1))))
   geom_jitter() +
   stat_summary(fun.y=mean, colour="green", size = 4, geom="point", shape = 23, fill = "green") # Somente mantivemos a media aqui
 
-dev.off() # Isso dirá ao R que terminamos a plotagem e que ela deve salvar a plotagem no disco rígido.
+dev.off() # Isso dira ao R que terminamos a plotagem e que ela deve salvar a plotagem no disco rigido.
 \end{lstlisting}
 
 Embora o \faRProject tenha uma interface não gráfica, ele pode criar gráficos muito bons. Praticamente todos os pequenos detalhes no gráfico podem ser ajustados. Muitos dos gráficos que você vê em "jornalismo de dados" (por exemplo, em \href{https://www.nytimes.com/}{https://www.nytimes.com/} ou em \href{http://fivethirtyeight.com/}{http://fivethirtyeight.com/}) são feitos em \faRProject.
@@ -1073,6 +1099,7 @@ Neste capítulo, analisaremos os dados do Airbnb.com. A introdução tem mais in
 
 \subsection{Dados}
 \subsubsection{Importação}
+
 Você pode baixar o conjunto de dados clicando com o botão direito do mouse \href{http://users.telenet.be/samuelfranssens/tutorial_data/tomslee_airbnb_belgium_1454_2017-07-14.csv}{nesse link}, selecionando “Salvar link como…” (ou algo semelhante) e salvando o arquivo .csv em um diretório no disco rígido. Como mencionado na introdução, é uma boa ideia salvar seu trabalho em um diretório que é automaticamente copiado pelo software de compartilhamento de arquivos. Vamos importar os dados:
 
 
@@ -1082,7 +1109,7 @@ setwd("c:/Dropbox/work/teaching/R/") # Ajusta seu diretorio de trabalho
 
 airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv") %>% 
   mutate(room_id = factor(room_id), host_id = factor(host_id)) %>% 
-  select(-country, -survey_id) %>% # drop country & survey_id, veja a introdução de por que fazemos isso
+  select(-country, -survey_id) %>% # dropa country & survey_id, veja a introdução de por que fazemos isso
   rename(country = city, city = borough) # renomeia city & borough, veja a introdução de por que fazemos isso
 \end{lstlisting}
 
@@ -1090,30 +1117,32 @@ Não se esqueça de salvar seu script no diretório de trabalho.
 
 \subsubsection{Manipulação}
 
-Se você abrir o quadro de dados do airbnb em uma guia do Visualizador, verá que os bathrooms e o minstay são colunas vazias e que o local e last\_modified não são muito informativos. Vamos remover estas variáveis:
+Se você abrir o quadro de dados do airbnb em uma guia do Visualizador, verá que os \fbox{bathrooms} e o \fbox{minstay} são colunas vazias e que o \fbox{local} e \fbox{last\_modified} não são muito informativos. Vamos remover estas variáveis:
+
 \begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
   select (-bathrooms, -minstay, -location, -last_modified)
 \end{lstlisting}
 
-Agora, dê uma olhada na variável overall\_satisfaction:
+Agora, dê uma olhada na variável \fbox{overall\_satisfaction:}
 
 \begin{lstlisting}
 # use head() para imprimir apenas os primeiros valores de um vetor, para evitar uma lista muito longa
-# tail ()imprime apenas os últimos valores de um vetor
+# tail() imprime apenas os últimos valores de um vetor
 head (satisfação geral do airbnb $)
 
 ## [1] 4.5 0.0 4.0 4.5 5.0 5.0
 \end{lstlisting}
 
-A segunda classificação é zero. Provavelmente, isso significa que a classificação está faltando, em vez de ser realmente zero. Vamos substituir os valores zero na satisfação geral por NA:
+A segunda classificação é zero. Provavelmente, isso significa que a classificação está faltando, em vez de ser realmente zero. Vamos substituir os valores zero na \fbox{overall\_satisfaction} por NA:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
   mutate(overall_satisfaction = replace(overall_satisfaction, overall_satisfaction == 0, NA)) 
-# crie uma variavel "nova" satisfacao geral que seja igual a satisfacao geral com valores de NA em que satisfacao geral seja igual a zero.
+  
+# crie uma variavel "nova" overall_satisfaction que seja igual a overall_satisfaction com valores de NA em que overall_satisfaction seja igual a zero.
 
-# Digamos que desejassemos substituir NA por 0, entao o comando se tornaria: substituir (satisfacao geral, is.na (satisfacao geral), 0)
+# Digamos que desejassemos substituir NA por 0, entao o comando se tornaria: substitute(overall_satisfaction, is.na(overall_satisfaction), 0)
 # overall_satisfaction == NA nao funciona
 
 head(airbnb$overall_satisfaction)
@@ -1124,11 +1153,12 @@ head(airbnb$overall_satisfaction)
 \newpage
 \subsubsection{Mesclando datasets}
 
-Posteriormente, testaremos se o preço está relacionado a determinadas características dos tipos de quartos. As características potencialmente interessantes são: room\_type, city, reviews, overall\_satisfaction, etc. Para torná-lo ainda mais interessante, podemos aumentar os dados, por exemplo, com dados disponíveis publicamente nas cidades. Reuni os tamanhos de população das cidades belgas mais populosas \href{https://population.mongabay.com/population/belgium/}{deste site}. Faça o download desses dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/population.xlsx}{aqui} e importe-os para o \faRProject:
+Posteriormente, testaremos se o preço está relacionado a determinadas características dos tipos de quartos. As características potencialmente interessantes são: \fbox{room\_type}, \fbox{city}, \fbox{reviews}, \fbox{overall\_satisfaction}, etc. Para torná-lo ainda mais interessante, podemos aumentar os dados, por exemplo, com dados disponíveis publicamente nas cidades. Reuni os tamanhos de população das cidades belgas mais populosas \href{https://population.mongabay.com/population/belgium/}{deste site}. Faça o download desses dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/population.xlsx}{aqui} e importe-os para o \faRProject:
 
 \begin{lstlisting}[language=R]
 population <- read_excel("population.xlsx","data")
 population
+
 ## # A tibble: 183 x 2
 ##    place     population
 ##    <chr>          <dbl>
@@ -1148,11 +1178,11 @@ population
 
 Agora, queremos vincular esses dados ao nosso quadro de dados do airbnb. Isso é muito fácil no \faRProject (mas é muito difícil, por exemplo, no Excel):
 
-\begin{lstlisting}
+\begin{lstlisting}[language=R]
 airbnb.merged <- left_join(airbnb, population, by = c("city" = "place"))
 # o primeiro argumento eh o conjunto de dados que queremos aumentar
 # o segundo argumento eh onde encontramos os dados para aumentar o primeiro conjunto de dados com
-# o terceiro argumento são as variaveis que usamos para vincular um conjunto de dados ao outro (cidade eh uma variável no airbnb, local eh uma variavel na populacao)   
+# o terceiro argumento sao as variaveis que usamos para vincular um conjunto de dados ao outro (cidade eh uma variavel no airbnb, local eh uma variavel na populacao)   
 \end{lstlisting}
 
 Confira as colunas mais relevantes do quadro de dados airbnb.merged:
@@ -1176,11 +1206,11 @@ airbnb.merged %>% select(room_id, city, price, population)
 ## # ... with 17,641 more rows
 \end{lstlisting}
 
-Vemos que há uma population de colunas em nosso conjunto de dados airbnb.merged. Você também pode ver isso no painel Ambiente: airbnb.merged tem uma variável a mais que airbnb (mas o mesmo número de observações).
+Vemos que há uma \fbox{population} de colunas em nosso conjunto de dados \fbox{airbnb.merged}. Você também pode ver isso no painel Ambiente: \fbox{airbnb.merged} tem uma variável a mais que \fbox{airbnb} (mas o mesmo número de observações).
 
-Faltam dados para Bruxelas, no entanto. Isso ocorre porque Bruxelas está escrito em holandês no conjunto de dados airbnb, mas em inglês no conjunto de dados da population. 
+Faltam dados para Bruxelas, no entanto. Isso ocorre porque Bruxelas está escrito em holandês no conjunto de dados airbnb, mas em inglês no conjunto de dados da \fbox{population}. 
 \newpage
-Vamos substituir Bruxelas por Bruxelas no conjunto de dados da population (e também alterar a ortografia de duas outras cidades) e vincular os dados novamente:
+Vamos substituir Bruxelas por Bruxelas no conjunto de dados da \fbox{population} (e também alterar a ortografia de duas outras cidades) e vincular os dados novamente:
 
 \begin{lstlisting}[language=R]
 population <- population %>% 
@@ -1214,7 +1244,7 @@ Aqui está o que fizemos até agora, em uma sequência ordenada de operações p
 
 \begin{lstlisting}[language=R]
 library(tidyverse)
-setwd("c:/Dropbox/work/teaching/R") # Set your working directory 
+setwd("c:/Dropbox/work/teaching/R") # Configura seu diretorio de trabalho
 
 airbnb <- read_csv("tomslee_airbnb_belgium_1454_2017-07-14.csv") %>% 
   mutate(room_id = factor(room_id), host_id = factor(host_id),
@@ -1230,7 +1260,7 @@ population <- read_excel("population.xlsx","data") %>%
 airbnb <- left_join(airbnb, population, by = c("city" = "place"))
 \end{lstlisting}
 
-\newpage
+
 \subsection{Amostras independentes: teste t}
 
 Digamos que queremos testar se os preços diferem entre cidades grandes e pequenas. Para fazer isso, precisamos de uma variável que indique se um Airbnb está em uma cidade grande ou pequena. Na Bélgica, consideramos cidades com uma população de pelo menos cem mil como grande:
@@ -1259,16 +1289,16 @@ head(airbnb$size)
 ## Levels: small large
 \end{lstlisting}
 
-No script acima, primeiro criamos uma variável lógica (esse é outro tipo de variável; discutimos outras aqui). Chamamos essa variável de grande e é TRUE quando a população é maior que 100000 e FALSE, se não. Depois, criamos um novo tamanho de variável que é a fatoração de grande porte. Observe que adicionamos outro argumento à função factor, ou seja, labels, para fornecer os valores large de nomes mais intuitivos. FALSE vem em primeiro lugar no alfabeto e obtém o primeiro rótulo pequeno, VERDADEIRO fica em segundo lugar no alfabeto e obtém o segundo rótulo grande.
+No script acima, primeiro criamos uma variável lógica (esse é outro tipo de variável; discutimos outras aqui). Chamamos essa variável de grande e é \fbox{TRUE} quando a população é maior que 100000 e \fbox{FALSE}, se não. Depois, criamos um novo tamanho de variável que é a fatoração de grande porte. Observe que adicionamos outro argumento à função \fbox{factor}, ou seja, \fbox{labels}, para fornecer os valores \fbox{large} de nomes mais intuitivos. \fbox{FALSE} vem em primeiro lugar no alfabeto e obtém o primeiro rótulo pequeno, \fbox{TRUE} fica em segundo lugar no alfabeto e obtém o segundo rótulo grande.
 
-Para saber quais cidades são grandes e quais são pequenas, podemos solicitar frequências de combinações de tamanho (grande versus pequeno) e cidade (a própria cidade). Aprendemos como fazer isso no capítulo introdutório (consulte as tabelas de frequência e as estatísticas descritivas):
+Para saber quais cidades são grandes e quais são pequenas, podemos solicitar frequências de combinações de tamanho (grande versus pequeno) e \fbox{city} (a própria cidade). Aprendemos como fazer isso no capítulo introdutório (consulte as tabelas de frequência e as estatísticas descritivas):
 
 \begin{lstlisting}[language=R]
 airbnb %>% 
   group_by(size, city) %>% 
   summarize(count = n(), population = mean(population)) %>% # Cidades formam os grupos. Portanto, a populacao media de um grupo = a media de observacoes com a mesma populacao, porque elas vem da mesma cidade = a populacao da cidade
   arrange(desc(size), desc(population)) %>% # maior cidade no topo
-  print (n = Inf) # mostra a distribuição completa da frequência
+  print (n = Inf) # mostra a distribuicao completa das frequencias
   
   ## # A tibble: 43 x 4
 ## # Groups:   size [3]
@@ -1324,7 +1354,7 @@ Vemos que algumas cidades têm um valor de NA para tamanho. Isso ocorre porque n
 \begin{lstlisting}[language=R]
 airbnb.cities <- airbnb %>% 
   filter(!is.na(population)) 
-# Filtre as observações para as quais não temos a populacao.
+# Filtre as observacoes para as quais nao temos a populacao.
 # O ponto de exclamacao deve ser lido como NAO. Entao, queremos manter as observacoes para as quais a populacao NAO eh NA.
 # Visite https://r4ds.had.co.nz/transform.html#filter-rows-with-filter para conhecer mais sobre operadores logicos (veja secao 5.2.2).
 
@@ -1341,15 +1371,16 @@ airbnb.cities %>%
 ## 2 large       85.4     82.5 11696
 \end{lstlisting}
 
-Vemos que os preços são mais altos nas pequenas e nas grandes cidades, mas queremos saber se essa diferença é significativa. Um teste t de amostras independentes pode fornecer a resposta (as listagens nas grandes cidades e as listagens nas pequenas cidades são as amostras independentes), mas precisamos verificar primeiro uma suposição: as variações das duas amostras independentes são iguais?
+Vemos que os preços são mais altos nas pequenas e nas grandes cidades, mas queremos saber se essa diferença é significativa. Um teste t de amostras independentes pode fornecer a resposta (as listagens nas grandes cidades e as listagens nas pequenas cidades são as amostras independentes), mas precisamos verificar primeiro uma suposição: as variâncias das duas amostras independentes são iguais?
 
 \begin{lstlisting}[language=R]
-install.packages("car") # For the test of equal variances, we need a package called car.
+install.packages("car") # Para o teste de igualdade de variancias precisaremos do pacote car.
 library(car)
 
 # Teste de Levene para variancias iguais 
 # Baixo valor p significa que as variancias nao sao iguais. 
 # Primeiro argumento = variavel dependente continua, segundo argumento = variavel independente categorica.
+
 leveneTest(airbnb.cities$price, airbnb.cities$size) 
 
 ## Levene's Test for Homogeneity of Variance (center = median)
@@ -1367,7 +1398,8 @@ A hipótese nula de variâncias iguais é rejeitada ($p <0,001$), portanto, deve
 \begin{lstlisting}[language=R]
 # Teste se os preços médios das cidades grandes e pequenas são diferentes.
 # Indique se o teste deve assumir variações iguais ou não (defina var.equal = TRUE para um teste que assume variações iguais).
-t.test (airbnb.cities $ price ~ airbnb.cities $ size, var.equal = FALSE)
+
+t.test(airbnb.cities$price ~ airbnb.cities$size, var.equal = FALSE)
 
 ## 
 ##  Welch Two Sample t-test
@@ -1395,9 +1427,9 @@ Por exemplo, digamos que queremos testar se há uma diferença significativa ent
 \begin{lstlisting}[language=R]
 airbnb.summary <- airbnb %>% 
   group_by(room_type) %>% 
-  summarize(count = n(), # obtenha as frequencias dos diferentes tipos de salas 
-            mean_price = mean(price), # o preco medio por tipo de sala
-            sd_price = sd(price)) # e o desvio padrao do preco por tipo de sala 
+  summarize(count = n(), # obtenha as frequencias dos diferentes tipos de quartos 
+            mean_price = mean(price), # o preco medio por tipo de quarto
+            sd_price = sd(price)) # e o desvio padrao do preco por tipo de quarto
 
 airbnb.summary
 
@@ -1412,8 +1444,8 @@ airbnb.summary
 Também podemos traçar esses meios em um gráfico de barras:
 
 \begin{lstlisting}[language=R]
-# Ao criar um gráfico de barras, o conjunto de dados que serve como entrada para o ggplot é o resumo com os meios, não o conjunto de dados completo.
-# (É por isso que salvamos o resumo acima em um objeto airbnb.summary)
+# Ao criar um grafico de barras, o conjunto de dados que serve como entrada para o ggplot eh o resumo com os meios, nao o conjunto de dados completo.
+# (Eh por isso que salvamos o resumo acima em um objeto airbnb.summary)
 
 ggplot(data = airbnb.summary, mapping = aes(x = room_type, y = mean_price)) + 
   geom_bar(stat = "identity", position = "dodge")
@@ -1429,17 +1461,17 @@ Uma ANOVA pode testar se há diferenças significativas nos preços médios por 
 
 \subsubsection{Suposição: normalidade de resíduos}
 
-A primeira suposição é que a variável dependente (preço) é normalmente distribuída em cada nível da variável independente (room\_type). Primeiro, vamos inspecionar visualmente se essa suposição será válida:
+A primeira suposição é que a variável dependente (\fbox{price}) é normalmente distribuída em cada nível da variável independente (\fbox{room\_type}). Primeiro, vamos inspecionar visualmente se essa suposição será válida:
 
 \begin{lstlisting}[language=R]
 
 # Ao criar um histograma, o conjunto de dados que serve como entrada para o ggplot eh o conjunto de dados completo, nao o resumo com os meios
+
 ggplot(data = airbnb, mapping = aes(x = price)) + # Queremos price no eixo x.
   facet_wrap(~ room_type) + # Queremos que isso seja dividido por room_type.
   #facet_wrap garantira que o ggplot crie paineis diferentes no seu gráfico.
   geom_histogram() # geom_histogram garante que as frequencias dos valores no eixo X sejam plotadas.
-  
-  ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+  ## `stat_bin()` using `bins = 30`. Pega o melhor valor com `binwidth`.
 \end{lstlisting}
 
 
@@ -1454,6 +1486,7 @@ airbnb.shared <- airbnb %>%
   filter(room_type == "Shared room") # reter dados apenas das salas compartilhadas
 
 shapiro.test(airbnb.shared$price)
+
 ## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -1468,17 +1501,19 @@ O valor-p deste teste é extremamente pequeno, portanto a hipótese nula de que 
 
 airbnb.private <- airbnb %>% 
   filter(room_type == "Private room") # armazenar dados apenas das salas compartilhadas
+  
 shapiro.test(airbnb.private$price)
 
 ## Error in shapiro.test(airbnb.private$price): sample size must be between 3 and 5000
 \end{lstlisting}
 
-Ocorreu um erro ao dizer que o tamanho da amostra é muito grande. Para contornar esse problema, podemos tentar o teste Anderson-Darling do pacote nortest:
+Ocorreu um erro ao dizer que o tamanho da amostra é muito grande. Para contornar esse problema, podemos tentar o teste Anderson-Darling do pacote \fbox{nortest}:
 
 \begin{lstlisting}[language=R]
 install.packages("nortest")
 library(nortest)
 ad.test(airbnb.private$price)
+
 ## 
 ##  Anderson-Darling normality test
 ## 
@@ -1491,11 +1526,11 @@ Mais uma vez, rejeitamos a hipótese nula de normalidade. Deixo como exercício 
 Agora que sabemos que a suposição de normalidade é violada, o que podemos fazer? Podemos considerar transformar nossa variável dependente com uma transformação de log:
 
 \begin{lstlisting}[language=R]
-ggplot(dados = airbnb, mapeamento = aes (x = log (preço, base = exp (1)))) + # Queremos o preço transformado em log no eixo X.
-   facet_wrap(~ room_type) + # Queremos que isso seja dividido por room_type. Facet_wrap garantirá que o ggplot crie painéis diferentes no seu gráfico.
-   geom_histogram() # geom_histogram garante que as frequências dos valores no eixo X sejam plotadas.
+ggplot(data=airbnb, mapping=aes(x=log(price, base = exp (1)))) + # Queremos o preco transformado em log no eixo X.
+   facet_wrap(~ room_type) + # Queremos que isso seja dividido por room_type. Facet_wrap garantira que o ggplot crie paineis diferentes no seu grafico.
+   geom_histogram() # geom_histogram garante que as frequencias dos valores no eixo X sejam plotadas.
    
-   ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+   ## `stat_bin()` using `bins = 30`. Pega um valor melhor com `binwidth`.
 \end{lstlisting}
 
 \begin{center}
@@ -1507,7 +1542,7 @@ Como você pode ver, uma transformação de log normaliza uma distribuição inc
 
 \subsubsection{Suposição: homogeneidade de variâncias}
 
-Uma segunda suposição que precisamos verificar é se as variações de nosso preço variável dependente são iguais nas categorias de nossa variável independente room\_type. Normalmente, um gráfico de caixa é informativo:
+Uma segunda suposição que precisamos verificar é se as variações de nosso preço variável dependente são iguais nas categorias de nossa variável independente \fbox{room\_type}. Normalmente, um gráfico boxplot é informativo:
 
 \begin{lstlisting}[language=R]
 ggplot(data = airbnb, mapping = aes(x = room_type, y = price)) + 
@@ -1523,9 +1558,9 @@ Mas, neste caso, os intervalos interquartis (as alturas das caixas), que normalm
 \begin{lstlisting}[language=R]
 airbnb %>% 
   group_by(room_type) %>% 
-  summarize(count = n(), # obtenha as frequências dos diferentes tipos de quartos
-            mean_price = mean(price), # o preço médio por tipo de quarto
-            sd_price = sd(price)) # e o desvio padrão do preço por tipo de quarto
+  summarize(count = n(), # obtenha as frequencias dos diferentes tipos de quartos
+            mean_price = mean(price), # o preco medio por tipo de quarto
+            sd_price = sd(price)) # e o desvio padrao do preco por tipo de quarto
             
 ## # A tibble: 3 x 4
 ##   room_type       count mean_price sd_price
@@ -1535,15 +1570,17 @@ airbnb %>%
 ## 3 Shared room       153       49.6     33.9
 \end{lstlisting}
 
-Também podemos realizar um teste formal de homogeneidade de variâncias. Para isso, precisamos da função leveneTest do pacote car:
+Também podemos realizar um teste formal de homogeneidade de variâncias. Para isso, precisamos da função \fbox{leveneTest} do pacote \fbox{car}:
 
 \begin{lstlisting}[language=R]
-install.packages("car") # Para o teste de variancias iguais, precisamos de um pacote chamado carro. Instalamos isso antes, portanto, nao eh necessario reinstala-lo se voce ja o tiver feito.
+install.packages("car") # Para o teste de variancias iguais, precisamos de um pacote chamado car. Instalamos isso antes, portanto, nao eh necessario reinstala-lo se voce ja o tiver feito.
+
 library(car)
 
 #Teste de Levene de variancias iguais.
 # Valor baixo de p significa que as variancias nao sao iguais.
 # Primeiro argumento = variavel dependente continua, segundo argumento = variavel independente categorica.
+
 leveneTest(airbnb$price, airbnb$room_type) 
 
 ## Levene's Test for Homogeneity of Variance (center = median)
@@ -1576,11 +1613,14 @@ Agora podemos prosseguir com a ANOVA verdadeira:
 # Primeiro cria um modelo linear
 # A formula lm() toma os argumentos de dados 
 # A fórmula tem a seguinte sintaxe: variável dependente ~ variável (s) independente
+
 linearmodel <- lm(price ~ room_type, data=airbnb) 
 
 # Em seguida, peça a saída no formato ANOVA. Isso fornece a soma dos quadrados do Tipo III. 
 # Observe que isso é diferente da anova (modelo linear), que fornece a soma dos quadrados do tipo I.
+
 type3anova(linearmodel) 
+
 ## # A tibble: 3 x 6
 ##   term                ss   df1   df2     f     pvalue
 ##   <chr>            <dbl> <dbl> <int> <dbl>      <dbl>
@@ -1589,18 +1629,19 @@ type3anova(linearmodel)
 ## 3 Residuals   167364763. 17648 17648   NA  NA
 \end{lstlisting}
 
-Nesse caso, o valor-p associado ao efeito de room\_type é praticamente 0, o que significa que rejeitamos a hipótese nula de que o preço médio é igual para cada room\_type. Você pode relatar o seguinte: “Houve diferenças significativas entre os preços médios das diferentes tipos de salas ($F (2, 17648) = 533,57, p <0,001$).”
+Nesse caso, o valor-p associado ao efeito de \fbox{room\_type} é praticamente 0, o que significa que rejeitamos a hipótese nula de que o preço médio é igual para cada \fbox{room\_type}. Você pode relatar o seguinte: “Houve diferenças significativas entre os preços médios das diferentes tipos de salas ($F (2, 17648) = 533,57, p <0,001$).”
 
 \subsection{Teste de Tuckey de diferença significativa verdadeira}
 
 Observe que a ANOVA testa a hipótese nula de que as médias em todos os nossos grupos são iguais. A rejeição desta hipótese nula significa que há uma diferença significativa em pelo menos um dos possíveis pares de médias (ou seja, em casa / apartamento inteiro vs. privado e / ou em casa / apartamento inteiro vs. compartilhado e / ou privado) vs. compartilhado). Para ter uma idéia de qual par de médias contém uma diferença significativa, podemos acompanhar o teste de Tukey, que nos dará todas as comparações pareadas.
 
-\newpage
+
 O teste de Tukey corrige os valores de p para cima - portanto, é mais conservador decidir que algo é significativo - porque as comparações são post-hoc ou exploratórias:
 
 \begin{lstlisting}[language=R]
 TukeyHSD(aov(price ~ room_type, data=airbnb), 
-         "room_type") # O primeiro argumento é um objeto "aov", o segundo é a nossa variável independente.
+         "room_type") # O primeiro argumento eh um objeto "aov", o segundo eh a nossa variavel independente.
+         
 ##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -1611,7 +1652,6 @@ TukeyHSD(aov(price ~ room_type, data=airbnb),
 ## Private room-Entire home/apt -49.11516 -52.69593 -45.534395 0.000000
 ## Shared room-Entire home/apt  -63.79178 -82.37217 -45.211381 0.000000
 ## Shared room-Private room     -14.67661 -33.34879   3.995562 0.155939
-
 \end{lstlisting}
 
 Isso nos mostra que não há diferença significativa no preço médio de quartos compartilhados e privados, mas que quartos compartilhados e quartos particulares diferem significativamente de casas e apartamentos inteiros.
@@ -1619,11 +1659,11 @@ Isso nos mostra que não há diferença significativa no preço médio de quarto
 \section{Regressão linear}
 \subsection{Regressão linear simples}
 
-Digamos que desejamos prever o preço com base em várias características do quarto. Vamos começar com um caso simples em que prevemos preço com base em um preditor: satisfação geral. A satisfação geral é a classificação que uma listagem recebe no airbnb.com. Vamos fazer um gráfico de dispersão primeiro:
+Digamos que desejamos prever o preço com base em várias características do quarto. Vamos começar com um caso simples em que prevemos preço com base em um preditor: \fbox{overal\_satisfaction} (satisfação geral). A satisfação geral é a classificação que uma listagem recebe no airbnb.com. Vamos fazer um gráfico de dispersão primeiro:
 
 \begin{lstlisting}[language=R]
 ggplot(data = airbnb, mapping = aes(x = overall_satisfaction, y = price)) +
-  geom_jitter() # jitter em vez de pontos, caso contrário, muitos pontos são desenhados um sobre o outro
+  geom_jitter() # jitter em vez de pontos, caso contrario, muitos pontos sao desenhados um sobre o outro
  
 ## Warning: Removed 7064 rows containing missing values (geom_point).
 \end{lstlisting}
@@ -1632,11 +1672,10 @@ ggplot(data = airbnb, mapping = aes(x = overall_satisfaction, y = price)) +
 \includegraphics[width=12cm,height=8cm]{modelling_linreg_scatterplot-1.png} 
 \end{center}
 
-(Recebemos uma mensagem de erro informando que várias linhas foram removidas. Essas são as linhas com valores ausentes para a overall\_satisfaction, portanto, não há necessidade de se preocupar com essa mensagem de erro. Consulte as \href{https://bookdown.org/content/1340/data.html#modelling_manipulations}{manipulações de dados} para saber por que faltam valores para a overall\_satisfaction.)
+(Recebemos uma mensagem de erro informando que várias linhas foram removidas. Essas são as linhas com valores ausentes para a \fbox{overall\_satisfaction}, portanto, não há necessidade de se preocupar com essa mensagem de erro. Consulte as \href{https://bookdown.org/content/1340/data.html#modelling_manipulations}{manipulações de dados} para saber por que faltam valores para a \fbox{overall\_satisfaction}.)
 
-\newpage
 
-Os outliers de preço reduzem a informatividade do gráfico, portanto, vamos transformar a variável price. Também vamos adicionar alguns meios ao gráfico, como aprendemos \href{https://bookdown.org/content/1340/graphs.html#graphs}{aqui}, e uma linha de regressão:
+Os outliers de preço reduzem a informatividade do gráfico, portanto, vamos transformar a variável \fbox{price}. Também vamos adicionar alguns meios ao gráfico, como aprendemos \href{https://bookdown.org/content/1340/graphs.html#graphs}{aqui}, e uma linha de regressão:
 
 \begin{lstlisting}[language=R]
 ggplot(data = airbnb, mapping = aes(x = overall_satisfaction, y = log(price, base = exp(1)))) +
@@ -1651,10 +1690,11 @@ ggplot(data = airbnb, mapping = aes(x = overall_satisfaction, y = log(price, bas
 
 Vemos que o preço tende a aumentar um pouco com maior satisfação. Para testar se a relação entre preço e satisfação é realmente significativa, podemos realizar uma regressão simples (simples refere-se ao fato de haver apenas um preditor):
 
+\newpage
 \begin{lstlisting}[language=R]
-linearmodel <- lm (price ~ overall_satisfaction, data = airbnb) # criamos um modelo linear. O primeiro argumento eh o modelo que assume a forma de variavel dependente - variavel (s) independente (s). O segundo argumento sao os dados que devemos considerar.
+linearmodel <- lm(price ~ overall_satisfaction, data = airbnb) # criamos um modelo linear. O primeiro argumento eh o modelo que assume a forma de variavel dependente - variavel (s) independente (s). O segundo argumento sao os dados que devemos considerar.
 
-resumo (modelo linear) # solicite um resumo desse modelo linear
+summary(linearmodel) # solicite um resumo dos resultados desse modelo linear
 
 ## 
 ## Call:
@@ -1690,17 +1730,18 @@ A inclinação é positiva e significativa. Você pode relatar o seguinte: “Ha
 
 Na saída, também obtemos informações sobre o modelo geral.
 
-O modelo vem com um valor F de 43,9 com 1 grau de liberdade no numerador e 10585 graus de liberdade no denominador. Essa estatística F nos diz se nosso modelo com um preditor (overall\_satisfaction) prediz a variável dependente (price) melhor do que um modelo sem preditores (o que simplesmente preveria a média do preço para todos os níveis de satisfação geral). Os graus de liberdade nos permitem encontrar o valor $p$ correspondente ($<$0,001) da estatística F (43,9). Os graus de liberdade no numerador são iguais ao número de preditores em nosso modelo. Os graus de liberdade no denominador são iguais ao número de observações menos o número de preditores menos um. Lembre-se de que temos 10587 observações para as quais temos valores para price e overall\_satisfaction. Como o valor $p$ é menor que 0,05, rejeitamos a hipótese nula de que nosso modelo não prediz melhor a variável dependente do que um modelo sem preditores. Observe que, no caso de regressão linear simples, o valor p do modelo corresponde ao valor $p$ do preditor único. Para modelos com mais preditores, não existe essa correspondência.
+O modelo vem com um valor F de 43,9 com 1 grau de liberdade no numerador e 10585 graus de liberdade no denominador. Essa estatística F nos diz se nosso modelo com um preditor (\fbox{overall\_satisfaction}) prediz a variável dependente (\fbox{price}) melhor do que um modelo sem preditores (o que simplesmente preveria a média do preço para todos os níveis de satisfação geral). Os graus de liberdade nos permitem encontrar o valor $p$ correspondente ($<$0,001) da estatística F (43,9). Os graus de liberdade no numerador são iguais ao número de preditores em nosso modelo. Os graus de liberdade no denominador são iguais ao número de observações menos o número de preditores menos um. Lembre-se de que temos 10587 observações para as quais temos valores para \fbox{price} e \fbox{overall\_satisfaction}. Como o valor $p$ é menor que 0,05, rejeitamos a hipótese nula de que nosso modelo não prediz melhor a variável dependente do que um modelo sem preditores. Observe que, no caso de regressão linear simples, o valor p do modelo corresponde ao valor $p$ do preditor único. Para modelos com mais preditores, não existe essa correspondência.
 
-Por fim, observe também a estatística do R quadrado do modelo. Esta estatística é igual a 0,004. Essa estatística nos diz quanto da variação na variável dependente é explicada por nossos preditores. Quanto mais preditores você adicionar a um modelo, maior será o R-quadrado.
+Por fim, observe também a estatística do R quadrado do modelo. Esta estatística é igual a 0,004. Essa estatística nos diz quanto da variação na variável dependente é explicada por nossos preditores. Quanto mais preditores você adicionar a um modelo, maior será o R quadrado.
 
+\newpage
 \subsection{Correlação}
 
 Observe que na regressão linear simples, a inclinação do preditor é uma função da correlação entre o preditor e a variável dependente. Podemos calcular a correlação da seguinte maneira:
 
 \begin{lstlisting}[language=R]
-# Certifique-se de incluir o argumento use, caso contrário, o resultado será NA devido aos valores ausentes na overall_satisfaction.
-# O argumento use instrui R para calcular a correlação com base apenas nas observações para as quais temos dados sobre price e overall_satisfaction.
+# Certifique-se de incluir o argumento use, caso contrario, o resultado sera NA devido aos valores ausentes na overall_satisfaction.
+# O argumento use instrui o R para calcular a correlacao com base apenas nas observacoes para as quais temos dados sobre price e overall_satisfaction.
 
 cor(airbnb$price, airbnb$overall_satisfaction, use = "pairwise.complete.obs")
 
@@ -1711,16 +1752,16 @@ Vemos que a correlação é positiva, mas muito baixa (r = 0,064).
 
 Elevando ao quadrado essa correlação, você obterá o R quadrado de um modelo com apenas esse preditor (0,064 × 0,064 = 0,004).
 
-Ao lidar com múltiplos preditores (como na próxima seção), podemos gerar uma matriz de correlação. Isso é especialmente útil ao verificar a multicolinearidade. Digamos que desejamos que as correlações entre, price, overall\_satisfaction, reviews, accommodates::
+Ao lidar com múltiplos preditores (como na próxima seção), podemos gerar uma matriz de correlação. Isso é especialmente útil ao verificar a multicolinearidade. Digamos que desejamos que as correlações entre, \fbox{price}, \fbox{overall\_satisfaction}, \fbox{reviews}, \fbox{accommodates}:
 
 \begin{lstlisting}[language=R]
 airbnb.corr <- airbnb%>%
-   filter (! is.na (overall_satisfaction))%>% # caso contrário, você verá NAs no resultado
-   select (price, overall_satisfaction, reviews, accommodates)
+   filter(! is.na (overall_satisfaction))%>% # caso contrario, você vera NAs no resultado
+   select(price, overall_satisfaction, reviews, accommodates)
 
-cor(airbnb.corr) # obter a matriz de correlação
+cor(airbnb.corr) # obter a matriz de correlacao
 
-cor(airbnb.corr) # obtenha a matriz de correlação
+cor(airbnb.corr) # obtenha a matriz de correlacao
 
 ##                            price overall_satisfaction     reviews
 ## price                 1.00000000           0.06426892 -0.05827489
@@ -1731,8 +1772,7 @@ cor(airbnb.corr) # obtenha a matriz de correlação
 ## price                  0.63409855
 ## overall_satisfaction  -0.04698709
 ## reviews               -0.03862767
-## accommodates           1.00000000
-
+## accommodates           1.0000000
 \end{lstlisting}
 
 \newpage
@@ -1756,7 +1796,7 @@ As cores das correlações dependem de seus valores absolutos.
 Você também pode obter valores de p para as correlações ($p <0,05$ indica que a correlação difere significativamente de zero):
 
 \begin{lstlisting}[language=R]
-# O comando para os valores-p eh cor.mtest (airbnb.corr)
+# O comando para os valores-p eh cor.mtest(airbnb.corr)
 # Mas queremos apenas os valores-p, portanto $ p
 # E arredondamos para cinco digitos, portanto arredondamos (, 5)
 
@@ -1772,7 +1812,7 @@ round(cor.mtest(airbnb.corr)$p, 5)
 
 \subsubsection{Regressão linear múltipla, com interação}
 
-Frequentemente, estamos interessados em interações entre preditores (por exemplo, overall\_satisfaction e reviews). Uma interação entre preditores nos diz que o efeito de um preditor depende do nível do outro preditor:
+Frequentemente, estamos interessados em interações entre preditores (por exemplo, \fbox{overall\_satisfaction} e \fbox{reviews}). Uma interação entre preditores nos diz que o efeito de um preditor depende do nível do outro preditor:
 
 \begin{lstlisting}[language=R]
 # overall_satisfaction + reviews: a interacao nao eh incluida como preditor
@@ -1817,15 +1857,15 @@ $$
 =[\beta_{0}+\beta_{2}reviews]+(\beta_{1}+\beta_{3}reviews)\times\,\,\mbox{\textit{overall\_satisfaction}}}
 $$
 
-Vemos que tanto a interceptação ($\beta_{0}+\beta_{2}reviews$) e a inclinação ($\beta_{1}+\beta_{3}reviews$) a relação entre overall\_satisfaction e price depende de reviews. No modelo sem interações, apenas a interceptação da relação entre overall\_satisfaction e price dependia de reviews. Como adicionamos ao nosso modelo uma interação entre a overall\_satisfaction e o reviews, a inclinação agora também depende de reviews.
+Vemos que tanto a interceptação ($\beta_{0}+\beta_{2}reviews$) e a inclinação ($\beta_{1}+\beta_{3}reviews$) a relação entre \fbox{overall\_satisfaction} e \fbox{price} depende de \fbox{reviews}. No modelo sem interações, apenas a interceptação da relação entre \fbox{overall\_satisfaction} e \fbox{price} dependia de \fbox{reviews}. Como adicionamos ao nosso modelo uma interação entre a \fbox{overall\_satisfaction} e o \fbox{reviews}, a inclinação agora também depende de \fbox{reviews}.
 
-Da mesma forma, para um determinado nível de overall\_satisfaction, o relacionamento entre reviews e price pode ser reescrito como:
+Da mesma forma, para um determinado nível de \fbox{overall\_satisfaction}, o relacionamento entre \fbox{reviews} e \fbox{price} pode ser reescrito como:
 
 $$
 =[\beta_{0}+\beta_{1}\mbox{\textit{overall\_satisfaction}}]+(\beta_{2}+\beta_{3}\mbox{\textit{overall\_satisfaction}})\times\,\,reviews
 $$
 
-Aqui também vemos que tanto a interceptação quanto a inclinação da relação entre revisões e preço dependem da satisfação geral.
+Aqui também vemos que tanto a interceptação quanto a inclinação da relação entre revisões (\fbox{reviews}) e preço (\fbox{price}) dependem da satisfação geral (\fbox{overall\_satisfaction}).
 
 Como dito, quando o relacionamento entre uma variável independente e uma variável dependente depende do nível de outra variável independente, temos uma interação entre as duas variáveis independentes. Para esses dados, a interação é altamente significativa ($p <0,001$). Vamos visualizar essa interação. Nós nos concentramos na relação entre satisfação geral e preço. Planejaremos isso para um nível de comentários que possa ser considerado baixo, médio e alto:
 
@@ -1835,7 +1875,7 @@ airbnb %>%
   summarize(min = min(reviews),
             Q1 = quantile(reviews, .25), # primeiro quartil
             Q2 = quantile(reviews, .50), # segundo quartil ou mediana
-            Q3 = quantile(reviews, .75), # terceiro quartile
+            Q3 = quantile(reviews, .75), # terceiro quartil
             max = max(reviews),
             mean = mean(reviews))
             
@@ -1863,8 +1903,6 @@ airbnb %>%
 ## 1     8    23   708
 \end{lstlisting}
 
-
-
 e crie grupos com base nesses números:
 
 \begin{lstlisting}[language=R]
@@ -1876,13 +1914,14 @@ airbnb.reviews <- airbnb %>%
          review_group = factor(review_group, levels = c("low","medium","high")))
 \end{lstlisting}
 
-Por isso, pedimos ao \faRProject para criar uma nova variável review\_group que deve ser igual a "low" quando o número de revisões for menor ou igual ao 33º percentil, "medium" quando o número de revisões for menor ou igual ao 66º percentil e "high", caso contrário. Depois, fatoramos a variável review\_group recém-criada e fornecemos um novo argumento, levels, que especifica a ordem dos níveis dos fatores (caso contrário, a ordem seria alfabética: alta, baixa, média). Vamos verificar se o agrupamento foi bem-sucedido:
+Por isso, pedimos ao \faRProject para criar uma nova variável \fbox{review\_group} que deve ser igual a "low" quando o número de revisões for menor ou igual ao 33º percentil, "medium" quando o número de revisões for menor ou igual ao 66º percentil e "high", caso contrário. Depois, fatoramos a variável \fbox{review\_group} recém-criada e fornecemos um novo argumento, \fbox{levels}, que especifica a ordem dos níveis dos fatores (caso contrário, a ordem seria alfabética: alta, baixa, média). Vamos verificar se o agrupamento foi bem-sucedido:
 
 \begin{lstlisting}[language=R]
-# check:
+# checagem:
 airbnb.reviews %>% 
   group_by(review_group) %>% 
   summarize(min = min(reviews), max = max(reviews))
+  
 ## # A tibble: 3 x 3
 ##   review_group   min   max
 ##   <fct>        <dbl> <dbl>
@@ -1891,11 +1930,11 @@ airbnb.reviews %>%
 ## 3 high            24   708
 \end{lstlisting}
 
-De fato, o número máximo de revisões em cada grupo corresponde aos pontos de corte definidos acima. Agora, podemos solicitar a \faRProject um gráfico da relação entre overall\_satisfaction e price para os três níveis de revisão:
+De fato, o número máximo de revisões em cada grupo corresponde aos pontos de corte definidos acima. Agora, podemos solicitar a \faRProject um gráfico da relação entre \fbox{overall\_satisfaction} e \fbox{price} para os três níveis de revisão:
 
 \begin{lstlisting}[language=R]
 ggplot(data = airbnb.reviews, mapping = aes(x = overall_satisfaction, y = log(price, base = exp(1)))) + # transformacao log de preco
-  facet_wrap(~ review_group) + # peça painéis diferentes para cada grupo de revisão
+  facet_wrap(~ review_group) + # peca paineis diferentes para cada grupo de revisao
   geom_jitter() +
   stat_smooth(method = "lm", se = FALSE)
 \end{lstlisting}
@@ -1904,9 +1943,11 @@ ggplot(data = airbnb.reviews, mapping = aes(x = overall_satisfaction, y = log(pr
 \includegraphics[width=12cm,height=8cm]{modelling_multiple_linreg_groups_plot-1.png} 
 \end{center}
 
-Vemos que a relação entre overall\_satisfaction e price é sempre positiva, mas é mais positiva para listagens com muitas críticas do que para listagens com poucas críticas. Pode haver muitas razões para isso. Talvez seja o caso de listagens com críticas positivas aumentarem o preço, mas somente depois de receberem uma certa quantidade de críticas.
+Vemos que a relação entre \fbox{overall\_satisfaction} e \fbox{price} é sempre positiva, mas é mais positiva para listagens com muitas críticas do que para listagens com poucas críticas. Pode haver muitas razões para isso. Talvez seja o caso de listagens com críticas positivas aumentarem o preço, mas somente depois de receberem uma certa quantidade de críticas.
 
-Também vemos que as listagens com muitas avaliações quase nunca têm uma classificação de satisfação menor que 3. Isso faz sentido, porque é difícil continuar atraindo pessoas quando a classificação de uma listagem é baixa. Listas com poucas críticas tendem a ter baixos índices de satisfação geral. Portanto, parece que nossos preditores estão correlacionados: quanto mais avaliações uma listagem tiver, maior será seu índice de satisfação. Isso potencialmente apresenta um problema que discutiremos em uma das próximas seções sobre \href{https://bookdown.org/content/1340/linear-regression.html#multicollinearity}{multicolinearidade.}
+Também vemos que as listagens com muitas avaliações quase nunca têm uma classificação de satisfação menor que 3. Isso faz sentido, porque é difícil continuar atraindo pessoas quando a classificação de uma listagem é baixa. Listas com poucas críticas tendem a ter baixos índices de satisfação geral.
+
+Portanto, parece que nossos preditores estão correlacionados: quanto mais avaliações uma listagem tiver, maior será seu índice de satisfação. Isso potencialmente apresenta um problema que discutiremos em uma das próximas seções sobre \href{https://bookdown.org/content/1340/linear-regression.html#multicollinearity}{multicolinearidade.}
 
 \subsubsection{Premissas}
 
@@ -1963,13 +2004,13 @@ ggplot(data = residuals_predicted, mapping = aes(x = predicted, y = residuals)) 
 
 Essa suposição é violada porque, quanto maiores nossos valores previstos, maior a variação que vemos nos resíduos.
 
-\vspace{.25cm}
+\newpage
 
 \subsubsubsection{\textbf{Multicolinearidade}}
 
 \vspace{.25cm}
 
-A multicolinearidade existe sempre que dois ou mais dos preditores em um modelo de regressão são moderadamente ou altamente correlacionados (portanto, é claro que isso não é um problema no caso de regressão simples). Vamos testar a correlação entre overall\_satisfaction e reviews:
+A multicolinearidade existe sempre que dois ou mais dos preditores em um modelo de regressão são moderadamente ou altamente correlacionados (portanto, é claro que isso não é um problema no caso de regressão simples). Vamos testar a correlação entre \fbox{overall\_satisfaction} e \fbox{reviews}:
 
 \begin{lstlisting}[language=R]
 # Certifique-se de incluir o argumento use, caso contrario, o resultado sera NA devido aos valores ausentes no overall_satisfaction.
@@ -1992,7 +2033,7 @@ cor.test(airbnb$overall_satisfaction,airbnb$reviews, use = "pairwise.complete.ob
 
 Nossos preditores são de fato significativamente correlacionados ($p <$0,001), mas a correlação é realmente baixa (0,03). Ao lidar com mais de dois preditores, é uma boa idéia criar uma matriz de correlação.
 
-O problema da multicolinearidade é que ela infla os erros padrão dos coeficientes de regressão. Como resultado, os testes de significância desses coeficientes terão mais dificuldade em rejeitar a hipótese nula. Podemos facilmente ter uma idéia do grau em que os coeficientes são inflados. Para ilustrar isso, vamos estimar um modelo com preditores correlacionados: acomodações e preço ($r = 0,56$).
+O problema da multicolinearidade é que ela infla os erros padrão dos coeficientes de regressão. Como resultado, os testes de significância desses coeficientes terão mais dificuldade em rejeitar a hipótese nula. Podemos facilmente ter uma idéia do grau em que os coeficientes são inflados. Para ilustrar isso, vamos estimar um modelo com preditores correlacionados: acomodações (\fbox{accommodates}) e preço (\fbox{price}) ($r = 0,56$).
 
 \begin{lstlisting}[language=R]
 linearmodel <- lm(overall_satisfaction ~  accommodates * price, data = airbnb)
@@ -2021,22 +2062,22 @@ summary(linearmodel)
 ## F-statistic: 71.64 on 3 and 10583 DF,  p-value: < 2.2e-16
 \end{lstlisting}
 
-Vemos que todos os preditores são significativos. Vamos dar uma olhada nos fatores de inflação da variação:
+Vemos que todos os preditores são significativos. Vamos dar uma olhada nos fatores de inflação da variância:
 
 \begin{lstlisting}[language=R]
 library(car) # a funcao vif eh do pacote cars
 
 vif(linearmodel)
+
 ##       accommodates              price accommodates:price 
 ##           2.090206           5.359203           6.678312
-
 \end{lstlisting}
 
 Os fatores VIF informam até que ponto os erros padrão são inflados. Uma regra prática é que VIFs de 5 e acima indicam inflação significativa.
 
 \subsection{Teste qui-quadrado}
 
-Suponha que tenhamos interesse em encontrar uma verdadeira jóia de uma lista. Por exemplo, estamos interessados em listagens com uma classificação de 5 em 5 e pelo menos 30 avaliações:
+Suponha que tenhamos interesse em encontrar uma verdadeira jóia (\fbox{gem}) de uma lista. Por exemplo, estamos interessados em listagens com uma classificação de 5 em 5 e pelo menos 30 avaliações:
 
 \begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
@@ -2044,9 +2085,11 @@ airbnb <- airbnb %>%
          gem = factor(gem, labels = c("no gem","gem")))  # dê à variável lógica rótulos mais intuitivos
 \end{lstlisting}
 
-Agora, digamos que estamos interessados em saber se é mais provável encontrar gemas em cidades pequenas ou grandes (criamos a variável de tamanho aqui). O teste do qui-quadrado pode fornecer uma resposta a essa pergunta testando a hipótese nula de não haver relação entre duas variáveis categóricas (tamanho da cidade:  large vs. small & gem: yes vs. no). Ele compara a tabela de frequências observada com a tabela de frequências que você esperaria quando não houvesse relação entre as duas variáveis. Quanto mais as tabelas de frequência observada e esperada divergem, maior a estatística do qui-quadrado, menor o valor de p e menos provável é que as duas variáveis não sejam relacionadas.
+Agora, digamos que estamos interessados em saber se é mais provável encontrar "jóias" (\fbox{gem}) em cidades pequenas ou grandes (criamos a variável de tamanho aqui). O teste do qui-quadrado pode fornecer uma resposta a essa pergunta testando a hipótese nula de não haver relação entre duas variáveis categóricas (tamanho da cidade:  \fbox{large} vs. \fbox{small} & \fbox{gem}: \fbox{yes} vs. \fbox{no}). 
 
-Antes de realizarmos um teste do qui-quadrado, lembre-se de que algumas cidades têm um valor em falta para o tamanho porque têm um valor em falta para a population. Vamos filtrar isso primeiro:
+Ele compara a tabela de frequências observada com a tabela de frequências que você esperaria quando não houvesse relação entre as duas variáveis. Quanto mais as tabelas de frequência observada e esperada divergem, maior a estatística qui-quadrado, menor o valor de p e menos provável é que as duas variáveis não sejam relacionadas.
+
+Antes de realizarmos um teste qui-quadrado, lembre-se de que algumas cidades têm um valor em falta para o tamanho porque têm um valor em falta para a \fbox{population}. Vamos filtrar isso primeiro:
 
 \begin{lstlisting}[language=R]
 airbnb.cities <- airbnb %>% 
@@ -2062,6 +2105,7 @@ Agora, imprima as frequências do tamanho da cidade e combinações de gems:
 airbnb.cities %>% 
   group_by(size, gem) %>% 
   summarize(count = n())
+  
 ## # A tibble: 4 x 3
 ## # Groups:   size [?]
 ##   size  gem    count
@@ -2088,6 +2132,7 @@ Isso é um pouco mais fácil de interpretar. Uma tabela como essa é frequenteme
 
 \begin{lstlisting}[language=R]
 crosstable <- table(airbnb.cities$size, airbnb.cities$gem) #Precisamos salvar a tabela cruzada primeiro.
+
 prop.table(crosstable) # Use a funcao prop.table () para solicitar porcentagens.
 
 ##        
@@ -2106,7 +2151,7 @@ prop.table(crosstable,2) # This gives percentages conditional on columns, i.e., 
 ##   large 0.7242424 0.8431900
 \end{lstlisting}
 
-Com base nessas frequências ou porcentagens, não devemos esperar uma forte relação entre size e gem. Vamos realizar o teste do qui-quadrado para testar nossa intuição:
+Com base nessas frequências ou porcentagens, não devemos esperar uma forte relação entre \fbox{size} e \fbox{gem}. Vamos realizar o teste do qui-quadrado para testar nossa intuição:
 
 \begin{lstlisting}[language=R]
 chisq.test(crosstable)
@@ -2120,11 +2165,11 @@ chisq.test(crosstable)
 
 O valor da estatística qui é 74,35 e o valor p é praticamente 0, por isso rejeitamos a hipótese nula de nenhum relacionamento. Não é o que esperávamos, mas o valor p é baixo porque nossa amostra é bastante grande (15966 observações). 
 
-Você pode relatar o seguinte: “Havia uma relação significativa entre o tamanho da cidade e se uma listagem era ou não uma jóia ($\chi^{2} (1, N = 15966) = 74,35, p <0,001$), de modo que as cidades grandes (8,05\%) tinham uma porcentagem maior de gemas do que as cidades pequenas (4,1\%). 
+Você pode relatar o seguinte: “Havia uma relação significativa entre o tamanho da cidade e se uma listagem era ou não uma jóia ($\chi^{2} (1, N = 15966) = 74,35, p <0,001$), de modo que as cidades grandes (8,05\%) tinham uma porcentagem maior de jóias (raridades) do que as cidades pequenas (4,1\%). 
 
 \subsection{Regressão logística (opcional)}
 
-Às vezes, queremos prever uma variável dependente binária, ou seja, uma variável que pode assumir apenas dois valores, com base em várias variáveis independentes contínuas ou categóricas. Por exemplo, digamos que estamos interessados em testar se uma listagem é ou não uma joia depende do preço e do tipo de quarto da listagem.
+Às vezes, queremos prever uma variável dependente binária, ou seja, uma variável que pode assumir apenas dois valores, com base em várias variáveis independentes contínuas ou categóricas. Por exemplo, digamos que estamos interessados em testar se uma listagem é ou não uma jóia depende do preço e do tipo de quarto da listagem.
 
 Não podemos usar ANOVA ou regressão linear aqui porque a variável dependente é uma variável binária e, portanto, normalmente não é distribuída. Outro problema com a ANOVA ou regressão linear é que ela pode prever valores que não são possíveis (por exemplo, nosso valor previsto pode ser 5, mas apenas 0 e 1 fazem sentido para essa variável dependente). Portanto, usaremos regressão logística. A regressão logística primeiro transforma a variável dependente Y com a transformação do logit. A transformação do logit usa o logaritmo natural das chances de que a variável dependente seja igual a 1:
 \vspace{.25cm}
@@ -2280,7 +2325,7 @@ Você vê o problema? As previsões são logits, ou seja, logaritmos de chances 
 \end{center}
  
 
-Agora vamos calcular, para cada listagem, a probabilidade de a listagem ser uma jóia:
+Agora vamos calcular, para cada listagem, a probabilidade de a listagem ser uma jóia (\fbox{gem}):
 
 \begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
@@ -2295,11 +2340,10 @@ head(airbnb$prediction.probability)
 ## 0.008242034 0.011562542 0.017132489 0.009763496 0.016198950 0.007789092
 \end{lstlisting}
 
-Os primeiros números são probabilidades muito baixas, mas também existem probabilidades mais altas e todas as previsões estão entre 0 e 1, como deveriam. Agora precisamos decidir qual probabilidade é suficiente para prevermos que uma listagem é uma gema ou não. 
+Os primeiros números são probabilidades muito baixas, mas também existem probabilidades mais altas e todas as previsões estão entre 0 e 1, como deveriam. Agora precisamos decidir qual probabilidade é suficiente para prevermos que uma listagem é uma \fbox{gem} ou não. 
 
-\newpage
 
-Uma escolha óbvia é uma probabilidade de 0,5: uma probabilidade maior que 0,5 significa que prevemos que é mais provável que uma listagem seja uma gema do que não. Vamos converter probabilidades em previsões:
+Uma escolha óbvia é uma probabilidade de 0,5: uma probabilidade maior que 0,5 significa que prevemos que é mais provável que uma listagem seja uma \fbox{gem} do que não. Vamos converter probabilidades em previsões:
 
 \begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
@@ -2321,7 +2365,7 @@ table(airbnb$prediction, airbnb$gem)
 ##   no gem  16471  1180
 \end{lstlisting}
 
-Normalmente, vemos uma tabela 2x2, mas vemos uma tabela com um valor previsto nas linhas e dois valores observados nas colunas. Isso ocorre porque todas as probabilidades previstas estão abaixo de 0,50 e, portanto, sempre previmos que não há gemas. Vamos reduzir o limite para prever que uma listagem é uma jóia:
+Normalmente, vemos uma tabela 2x2, mas vemos uma tabela com um valor previsto nas linhas e dois valores observados nas colunas. Isso ocorre porque todas as probabilidades previstas estão abaixo de 0,50 e, portanto, sempre previmos que não há gemas. Vamos reduzir o limite para prever que uma listagem é uma \fbox{gem}:
 
 \begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
@@ -2338,12 +2382,12 @@ table(airbnb$prediction,airbnb$gem)
 
 \end{lstlisting}
 
-Podemos ver que, com esta regra de decisão (prever gemas sempre que a probabilidade prevista de gemas for superior a 7\%), obtivemos 11240 + 326 corretas e 5231 + 854 previsões erradas, que é uma taxa de acerto de (11240 + 326) / (11240 + 326 + 5231 + 854) = 65,5\%.
+Podemos ver que, com esta regra de decisão (prever \fbox{gems} sempre que a probabilidade prevista de \fbox{gems} for superior a 7\%), obtivemos 11240 + 326 corretas e 5231 + 854 previsões erradas, que é uma taxa de acerto de (11240 + 326) / (11240 + 326 + 5231 + 854) = 65,5\%.
 
 \newpage
 \section{Análise básica de dados: experimentos}
 
-Neste capítulo, analisaremos os dados de um experimento que testou se o senso de poder das pessoas afeta sua disposição de pagar (WTP) por produtos relacionados ao status (ou seja, por consumo conspícuo) e se essa relação é diferente quando a WTP desses produtos é visível para os outros versus não.
+Neste capítulo, analisaremos os dados de um experimento que testou se o senso de poder das pessoas afeta sua disposição de pagar (\fbox{WTP}) por produtos relacionados ao status (ou seja, por consumo conspícuo) e se essa relação é diferente quando a \fbox{WTP} desses produtos é visível para os outros versus não.
 
 Os participantes vieram ao nosso laboratório em grupos de oito ou sete. Estavam sentados em frente a um computador em cubículos semi-fechados. Na introdução, os participantes leram que primeiro teriam que preencher um questionário de personalidade e uma pesquisa sobre como eles lidavam com dinheiro. Depois disso, eles teriam que trabalhar juntos em grupos de dois em alguns quebra-cabeças.
 
@@ -2360,8 +2404,8 @@ Em suma, o experimento tem um design 2 (poder: alto vs. baixo) x 2 (público: p�
 As hipóteses neste experimento foram as seguintes:
 
 \begin{itemize}
-\item Na condição de privado, esperávamos que os participantes de baixa potência tivessem uma WTP maior do que os participantes de alta potência para produtos visíveis, mas não para produtos discretos. Esse padrão de resultados replicaria os resultados de Rucker e Galinsky (2008).
-\item Esperávamos que a manipulação pública versus privada reduzisse a WTP para produtos visíveis para participantes de baixa potência, mas não para participantes de alta potência.Não esperávamos um efeito da manipulação pública versus privada na WTP para produtos discretos para participantes de baixa ou alta potência.
+\item Na condição de privado, esperávamos que os participantes de baixa potência tivessem uma \fbox{WTP} maior do que os participantes de alta potência para produtos visíveis, mas não para produtos discretos. Esse padrão de resultados replicaria os resultados de Rucker e Galinsky (2008).
+\item Esperávamos que a manipulação pública versus privada reduzisse a \fbox{WTP} para produtos visíveis para participantes de baixa potência, mas não para participantes de alta potência.Não esperávamos um efeito da manipulação pública versus privada na \fbox{WTP} para produtos discretos para participantes de baixa ou alta potência.
 \end{itemize}
 
 Este experimento é descrito com mais detalhes em minha tese de doutorado (Franssens, 2016)
@@ -2394,7 +2438,7 @@ Este experimento é descrito com mais detalhes em minha tese de doutorado (Frans
 \subsection{Dados}
 \subsubsection{Importação}
 
-Faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/power_conspicuous_consumption.xlsx}{aqui}. Como sempre, salve os dados em um diretório (de preferência um backup automático do software de compartilhamento de arquivos) e inicie seu script carregando o tidyverse e definindo o diretório de trabalho no diretório em que você acabou de salvar seus dados:
+Faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/power_conspicuous_consumption.xlsx}{aqui}. Como sempre, salve os dados em um diretório (de preferência um backup automático do software de compartilhamento de arquivos) e inicie seu script carregando o \fbox{tidyverse} e definindo o diretório de trabalho no diretório em que você acabou de salvar seus dados:
 
 \begin{lstlisting}[language=R]
 library(tidyverse)
@@ -2440,23 +2484,23 @@ powercc # mostra os dados
 Temos 39 colunas ou variáveis em nossos dados:
 
 \begin{itemize}
-\item subject identifica os participantes
-\item start\_date e end\_date indicam o início e o fim da sessão experimental.
-\item duration indica a duração da sessão experimental
-\item finished: os participantes concluíram todo o experimento?
-\item power (alto vs. baixo) e público (privado vs. público) são as condições experimentais
-\item group\_size: em grupos de quantos participantes compareceram ao laboratório?
-\item gender e age do participante
-\item dominance1, dominance2, etc. são as perguntas que mediram a dominância. Um exemplo é "Eu acho que gostaria de ter autoridade sobre outras pessoas". Os participantes responderam com sim (1) ou não (0).
-\item sa1, sa2 etc. são as perguntas que medem as aspirações de status. Um exemplo é: "Gostaria de um trabalho importante, onde as pessoas me admirassem". Os participantes responderam com sim (1) ou não (0).
-\item inconspicuous1, inconspicuous2, etc. contêm a WTP para os produtos inconspicuous. Escala de 1: eu compraria itens muito baratos a 9: eu compraria itens muito caros.
-\item conspicuous1, conspicuous2, etc. contêm a WTP para os produtos conspícuos. Escala de 1: eu compraria itens muito baratos a 9: eu compraria itens muito caros.
-\item agree: uma questão exploratória que mede se as pessoas concordam que elas são mais adequadas ao papel de trabalhador ou gerente. Os participantes responderam em uma escala de 1: muito mais adequado para a função de trabalhador (gerente) a 7: muito mais adequado para a função de gerente (trabalhador). Números mais altos indicam concordância com a atribuição de função no experimento.
+\item \fbox{subject} identifica os participantes
+\item \fbox{start\_date} e \fbox{end\_date} indicam o início e o fim da sessão experimental.
+\item \fbox{duration} indica a duração da sessão experimental
+\item \fbox{finished}: os participantes concluíram todo o experimento?
+\item \fbox{power} (alto vs. baixo) e público (privado vs. público) são as condições experimentais
+\item \fbox{group\_size}: em grupos de quantos participantes compareceram ao laboratório?
+\item \fbox{gender} e \fbox{age} do participante
+\item \fbox{dominance1}, \fbox{dominance2}, etc. são as perguntas que mediram a dominância. Um exemplo é "Eu acho que gostaria de ter autoridade sobre outras pessoas". Os participantes responderam com sim (1) ou não (0).
+\item \fbox{sa1}, \fbox{sa2} etc. são as perguntas que medem as aspirações de status. Um exemplo é: "Gostaria de um trabalho importante, onde as pessoas me admirassem". Os participantes responderam com sim (1) ou não (0).
+\item \fbox{inconspicuous1}, \fbox{inconspicuous2}, etc. contêm a \fbox{WTP} para os produtos \fbox{inconspicuous}. Escala de 1: eu compraria itens muito baratos a 9: eu compraria itens muito caros.
+\item \fbox{conspicuous1}, \fbox{conspicuous2}, etc. contêm a \fbox{WTP} para os produtos conspícuos. Escala de 1: eu compraria itens muito baratos a 9: eu compraria itens muito caros.
+\item \fbox{agree}: uma questão exploratória que mede se as pessoas concordam que elas são mais adequadas ao papel de trabalhador ou gerente. Os participantes responderam em uma escala de 1: muito mais adequado para a função de trabalhador (gerente) a 7: muito mais adequado para a função de gerente (trabalhador). Números mais altos indicam concordância com a atribuição de função no experimento.
 \end{itemize}
 
 \subsubsection{Fatorar algumas variáveis}
 
-Após a inspeção dos dados, vemos que o tipo de sujeito é duplo, o que significa que o sujeito deve ser fatorado para que seus valores não sejam tratados como números. Também fatoraremos nossas condições experimentais:
+Após a inspeção dos dados, vemos que o tipo de \fbox{subject} é duplo, o que significa que o \fbox{subject} deve ser fatorado para que seus valores não sejam tratados como números. Também fatoraremos nossas condições experimentais:
 
 \begin{lstlisting}[language=R]
 powercc <- powercc %>% # nos criamos o objeto powercc anteriormente 
@@ -2465,7 +2509,7 @@ powercc <- powercc %>% # nos criamos o objeto powercc anteriormente
          audience = factor(audience, levels = c("private","public"))) # note os niveis dos argumentos
 \end{lstlisting}
 
-Observe que fornecemos novos levels de argumento ao fatorar poder e público. Este argumento especifica a ordem dos levels de um fator. No contexto desse experimento, é mais natural falar sobre o efeito da alta versus baixa potência no consumo do que falar sobre o efeito da baixa versus alta potência no consumo. Portanto, dizemos ao \faRProject que o baixo nível de energia deve ser considerado como o primeiro nível. Mais adiante, veremos que o resultado das análises pode ser interpretado como efeitos de alta potência (segundo nível) vs. baixa potência (primeiro nível). O mesmo raciocínio se aplica ao fator público, embora não seja necessário fornecer os níveis para esse fator porque o privado vem antes do público em ordem alfabética. Sua escolha do nível para o primeiro ou nível de referência influencia apenas a interpretação, não o resultado real da análise.
+Observe que fornecemos novos \fbox{levels} de argumento ao fatorar poder e público. Este argumento especifica a ordem dos \fbox{levels} de um fator. No contexto desse experimento, é mais natural falar sobre o efeito da alta versus baixa potência no consumo do que falar sobre o efeito da baixa versus alta potência no consumo. Portanto, dizemos ao \faRProject que o baixo nível de energia deve ser considerado como o primeiro nível. Mais adiante, veremos que o resultado das análises pode ser interpretado como efeitos de alta potência (segundo nível) vs. baixa potência (primeiro nível). O mesmo raciocínio se aplica ao fator público, embora não seja necessário fornecer os níveis para esse fator porque o privado vem antes do público em ordem alfabética. Sua escolha do nível para o primeiro ou nível de referência influencia apenas a interpretação, não o resultado real da análise.
 
 Em uma sessão experimental, o alarme de incêndio disparou e tivemos que sair do laboratório. Vamos remover os participantes que não concluíram a experiência:
 
@@ -2479,7 +2523,7 @@ Observe o dobro $==$ ao testar a igualdade. Confira o livro \href{https://r4ds.h
 
 \subsubsection{Calcular a consistência interna e a média de perguntas que medem o mesmo conceito}
 
-Gostaríamos de calcular a média das perguntas que medem a dominância para obter um único número indicando se o participante tem uma personalidade dominante ou não dominante. Antes de fazer isso, devemos ter uma idéia da consistência interna das perguntas que medem o domínio. Isso nos dirá se todas essas perguntas medem o mesmo conceito. Uma medida da consistência interna é o alfa de Cronbach. Para calcular, precisamos de um pacote chamado psych:
+Gostaríamos de calcular a média das perguntas que medem a dominância para obter um único número indicando se o participante tem uma personalidade dominante ou não dominante. Antes de fazer isso, devemos ter uma idéia da consistência interna das perguntas que medem o domínio. Isso nos dirá se todas essas perguntas medem o mesmo conceito. Uma medida da consistência interna é o alfa de Cronbach. Para calcular, precisamos de um pacote chamado \fbox{psych}:
 
 \begin{lstlisting}[language=R]
 install.packages("psych")
@@ -2538,7 +2582,7 @@ alpha(dominance.questions) # calcula o alfa de cronbach para essas variaveis
 # powercc %>% select(starts_with("dominance")) %>% cronbach()
 \end{lstlisting}
 
-Isso produz muita saída. Em raw\_alpha, vemos que o alfa é 0,69, que fica no lado inferior (0,70 é geralmente considerado o mínimo necessário), mas ainda está ok. A tabela abaixo nos diz qual seria o alfa se retirássemos uma pergunta de nossa medida. A queda da dominance6 aumentaria o alfa para 0,7. Comparado ao alfa original de 0,69, esse aumento é pequeno e, portanto, não perdemos a dominance6. Se houvesse uma pergunta com um alto "alfa se descartado", isso indicaria que esta pergunta está medindo algo diferente das outras perguntas. Nesse caso, você pode considerar remover esta pergunta da sua medida.
+Isso produz muita saída. Em \fbox{raw\_alpha}, vemos que o alfa é 0,69, que fica no lado inferior (0,70 é geralmente considerado o mínimo necessário), mas ainda está ok. A tabela abaixo nos diz qual seria o alfa se retirássemos uma pergunta de nossa medida. A queda da \fbox{dominance6} aumentaria o alfa para 0,7. Comparado ao alfa original de 0,69, esse aumento é pequeno e, portanto, não perdemos a \fbox{dominance6}. Se houvesse uma pergunta com um alto "alfa se descartado", isso indicaria que esta pergunta está medindo algo diferente das outras perguntas. Nesse caso, você pode considerar remover esta pergunta da sua medida.
 
 Podemos proceder calculando a média das respostas sobre a questão do domínio:
 
@@ -2623,7 +2667,7 @@ A hipótese nula de variâncias iguais não é rejeitada (p = 0,14), para que po
 
 \begin{lstlisting}[language=R]
 # Teste se os meios de dominancia diferem entre os sexos.
-# Indique se o teste deve assumir variacoes iguais ou nao (defina var.equal = FALSE para um teste que nao assume variacoes iguais).
+# Indique se o teste deve assumir variacoes iguais ou nao (define var.equal = FALSE para um teste que nao assume variacoes iguais).
 
 t.test(powercc$dominance ~ powercc$gender, var.equal = TRUE) 
 
@@ -2705,9 +2749,9 @@ Na verdade, é significativamente maior que 5. Você pode relatar o seguinte: "A
 
 \subsection{ANOVA bivariada}
 
-Quando você lê um artigo acadêmico que relata um experimento, a seção de resultados geralmente começa com uma discussão dos principais efeitos dos fatores experimentais e sua interação, conforme testado por uma Análise de variância ou ANOVA. Vamos nos concentrar primeiro na WTP para produtos que melhoram o status. (Consideramos brevemente a WTP para produtos com status neutro em nossa discussão sobre testes t de amostras dependentes e discutiremos mais detalhadamente na seção ANOVA de medidas repetidas.)
+Quando você lê um artigo acadêmico que relata um experimento, a seção de resultados geralmente começa com uma discussão dos principais efeitos dos fatores experimentais e sua interação, conforme testado por uma Análise de variância ou ANOVA. Vamos nos concentrar primeiro na \fbox{WTP} para produtos que melhoram o status. (Consideramos brevemente a \fbox{WTP} para produtos com status neutro em nossa discussão sobre testes t de amostras dependentes e discutiremos mais detalhadamente na seção ANOVA de medidas repetidas.)
 
-Vamos inspecionar algumas estatísticas descritivas primeiro. Gostaríamos de ver a WTP média para produtos visíveis, o desvio padrão dessa WTP e o número de participantes em cada célula experimental. Já aprendemos como fazer isso no capítulo introdutório (consulte as tabelas de frequência e as estatísticas descritivas):
+Vamos inspecionar algumas estatísticas descritivas primeiro. Gostaríamos de ver a \fbox{WTP} média para produtos visíveis, o desvio padrão dessa \fbox{WTP} e o número de participantes em cada célula experimental. Já aprendemos como fazer isso no capítulo introdutório (consulte as tabelas de frequência e as estatísticas descritivas):
 
 \begin{lstlisting}[language=R]
 powercc.summary <- powercc %>% # estamos atribuindo o resumo a um objeto, porque precisaremos desse resumo para fazer um grafico de barras
@@ -2727,7 +2771,7 @@ powercc.summary
 ## 4 public   high     38  6.07 1.03
 \end{lstlisting}
 
-Vemos que a diferença na WTP entre os participantes de alta e baixa potência é maior na condição privada do que na pública.
+Vemos que a diferença na \fbox{WTP} entre os participantes de alta e baixa potência é maior na condição privada do que na pública.
 
 Vamos resumir esses resultados em um gráfico de caixa:
 
@@ -2741,7 +2785,7 @@ ggplot(data = powercc, mapping = aes(x = audience, y = cc, fill = power)) +
 \includegraphics[width=12cm,height=8cm]{bda_boxplot-1.png}
 \end{center}
 
-Os gráficos boxplot são informativos porque nos dão uma idéia da mediana e da distribuição dos dados. No entanto, em trabalhos acadêmicos, os resultados das experiências são tradicionalmente resumidos em gráficos de barras (mesmo que os gráficos de caixa sejam mais informativos).
+Os gráficos boxplot são informativos porque nos dão uma idéia da mediana e da distribuição dos dados. No entanto, em trabalhos acadêmicos, os resultados das experiências são tradicionalmente resumidos em gráficos de barras (mesmo que os gráficos boxplots sejam mais informativos).
 
 \begin{lstlisting}[language=R]
 # ao criar um grafico de barras, o conjunto de dados que serve como entrada para o ggplot eh o resumo com os meios, nao o conjunto de dados completo
@@ -2754,7 +2798,7 @@ ggplot(data = powercc.summary, mapping = aes(x = audience, y = mean, fill = powe
 \includegraphics[width=12cm,height=8cm]{bda_barplot-1.png}
 \end{center}
 
-Para criar um gráfico de barras, informamos ao ggplot as variáveis que devem estar no eixo X e no eixo Y e também usamos cores diferentes para diferentes níveis de potência com o comando fill. Então pedimos um gráfico de barras com geom\_bar. stat = "identity" e position = "dodge" devem ser incluídos como argumentos para geom\_bar, mas uma discussão sobre esses argumentos está além do escopo deste tutorial.
+Para criar um gráfico de barras, informamos ao \fbox{ggplot} as variáveis que devem estar no eixo X e no eixo Y e também usamos cores diferentes para diferentes níveis de potência com o comando \fbox{fill}. Então pedimos um gráfico de barras com \fbox{geom\_bar. stat = "identity"} e \fbox{position = "dodge"} devem ser incluídos como argumentos para \fbox{geom\_bar}, mas uma discussão sobre esses argumentos está além do escopo deste tutorial.
 
 Antes de prosseguirmos com a ANOVA, devemos verificar se suas premissas são atendidas. Discutimos as suposições da ANOVA anteriormente, mas ignoramos aqui.
 
@@ -2775,7 +2819,7 @@ Agora podemos prosseguir com a ANOVA real:
 \begin{lstlisting}[language=R]
 # Cria um modelo linear primeiramente
 # A funcao lm() toma os dados e os argumentos
-# A formula tem a seguinte sintaxe: variavel dependente  - variavel independente
+# A formula tem a seguinte sintaxe: variavel dependente  ~ variavel independente
 linearmodel <- lm(cc ~ power*audience, data=powercc) 
 # power*audience: interacao eh calculada
 # power+audience: interacao nao eh incluida
@@ -2790,7 +2834,6 @@ type3anova(linearmodel) # Em seguida, peça a saída no formato ANOVA. Isso forn
 ## 3 audience          2.48     1   139    2.30  1.32e-  1
 ## 4 power:audience    1.11     1   139    1.03  3.13e-  1
 ## 5 Residuals       150.     139   139   NA    NA
-
 \end{lstlisting}
 
 Você pode relatar esses resultados da seguinte forma: “Nem o principal efeito do poder (F (1, 139) = 2,45, p = 0,12), nem o principal efeito do público (F (1, 139) = 2,3, p = 0,13), nem a interação entre poder e público (F (1, 139) = 1,03, p = 0,31) foi significativa. ”
@@ -2808,7 +2851,7 @@ powercc.summary <- powercc %>%
             mean = mean(cc),
             sd = sd(cc))
 
-# ao criar um gráfico de barras, o conjunto de dados que serve como entrada para o ggplot é o resumo com os meios, não o conjunto de dados completo
+# ao criar um grafico de barras, o conjunto de dados que serve como entrada para o ggplot eh o resumo com os meios, nao o conjunto de dados completo
 ggplot(data = powercc.summary,mapping = aes(x = audience, y = mean, fill = power)) + 
   geom_bar(stat = "identity", position = "dodge")
 \end{lstlisting}
@@ -2871,13 +2914,13 @@ Temos 4 coeficientes de regressão:
 
 \begin{itemize}
     \item $\beta_{0}$ ou intercepto
-    \item $\beta_{1}$ ou o coeficiente de “powerhigh” ou o alto nível do fator de potência (-0,45)
-    \item $\beta_{2}$ ou o coeficiente para "audiencepublic" ou o nível público do fator público (0,09)
-    \item $\beta_{3}$ ou coeficiente para: “powerhigh:audiencepublic” (0.35)
+    \item $\beta_{1}$ ou o coeficiente de \fbox{“powerhigh”} ou o alto nível do fator de potência (-0,45)
+    \item $\beta_{2}$ ou o coeficiente para \fbox{"audiencepublic"} ou o nível público do fator público (0,09)
+    \item $\beta_{3}$ ou coeficiente para: \fbox{“powerhigh:audiencepublic”} (0.35)
 \end{itemize}
 
 
-Vemos que a estimativa para a interceptação corresponde à média observada na célula privada de baixa potência. Adicione a isso a estimativa de “powerhigh” e obteremos a média observada na célula privada de alta potência. Adicione à estimativa para a interceptação, a estimativa de "audiencepublic" e obtenha a média observada na célula pública de baixa potência. Adicione à estimativa para a interceptação, a estimativa de “powerhigh”, “audiencepublic” e “powerhigh:audiencepublic” e obteremos a média observada na célula pública de alto poder. Geralmente visualizo isso em uma tabela (e salvo no meu script) para facilitar a especificação do contraste que quero testar:
+Vemos que a estimativa para a interceptação corresponde à média observada na célula privada de baixa potência. Adicione a isso a estimativa de \fbox{“powerhigh”} e obteremos a média observada na célula privada de alta potência. Adicione à estimativa para a interceptação, a estimativa de \fbox{"audiencepublic"} e obtenha a média observada na célula pública de baixa potência. Adicione à estimativa para a interceptação, a estimativa de \fbox{“powerhigh”}, \fbox{“audiencepublic”} e \fbox{“powerhigh:audiencepublic”} e obteremos a média observada na célula pública de alto poder. Geralmente visualizo isso em uma tabela (e salvo no meu script) para facilitar a especificação do contraste que quero testar:
 
 \begin{lstlisting}[language=R]
 #                   private             public
@@ -2891,7 +2934,7 @@ Digamos que estamos contrastando energia alta versus baixa na condição privada
 contrast_specification <- c(0, 1, 0, 0) 
 
 # os quatro numeros correspondentes a b0, b1, b2, b3. 
-# queremos testar se b1 é significativo, então colocamos 1 em 2º lugar (o 1º lugar é para b0)
+# queremos testar se b1 eh significativo, entao colocamos 1 em 2º lugar (o 1º lugar é para b0)
 
 contrast(linearmodel, contrast_specification)
 
@@ -2908,7 +2951,7 @@ contrast(linearmodel, contrast_specification)
 ## (Adjusted p values reported -- single-step method)
 \end{lstlisting}
 
-A saída nos diz que a estimativa do contraste é -0,45, que é realmente a diferença entre as médias observadas na condição privada (alta potência: 5,63 vs. baixa potência: 6,08). Você pode relatar esse resultado da seguinte forma: “O efeito de alta (M = 5,63, DP = 0,89) vs. baixa potência (M = 6,08, DP = 1,04) na condição privada foi marginalmente significativo (t (139) = -1,745 , p = 0,083). " Para obter os graus de liberdade, faça um contraste (linearmodel, contrast\_specification)\$df
+A saída nos diz que a estimativa do contraste é -0,45, que é realmente a diferença entre as médias observadas na condição privada (alta potência: 5,63 vs. baixa potência: 6,08). Você pode relatar esse resultado da seguinte forma: “O efeito de alta (M = 5,63, DP = 0,89) vs. baixa potência (M = 6,08, DP = 1,04) na condição privada foi marginalmente significativo (t (139) = -1,745 , p = 0,083). " Para obter os graus de liberdade, faça um contraste (\fbox{linearmodel}, \fbox{contrast\_specification)\$df}
 
 Digamos que queremos testar um contraste mais complicado, ou seja, se a média na célula privada de alta potência é diferente da média das médias nas outras células. Estamos testando:
 
@@ -3035,13 +3078,13 @@ summary(linearmodel)
 Temos oito termos em nosso modelo:
 \begin{itemize}
     \item $\beta_0$ ou intercepto;
-    \item $\beta_1$ ou o coeficiente para “powerhigh”
-    \item $\beta_2$ ou o coeficiente para “audiencepublic”
-      \item $\beta_3$ ou o coeficiente para “dominance”
-        \item $\beta_4$ ou o coeficiente para “powerhigh:audiencepublic”
-          \item $\beta_5$ ou o coeficiente para “powerhigh:dominance”
-            \item $\beta_6$ ou o coeficiente para “audiencepublic:dominance”
-              \item $\beta_7$ ou o coeficiente para “powerhigh:audiencepublic:dominance”
+    \item $\beta_1$ ou o coeficiente para \fbox{“powerhigh”}
+    \item $\beta_2$ ou o coeficiente para \fbox{“audiencepublic”}
+      \item $\beta_3$ ou o coeficiente para \fbox{“dominance”}
+        \item $\beta_4$ ou o coeficiente para \fbox{“powerhigh:audiencepublic”}
+          \item $\beta_5$ ou o coeficiente para \fbox{“powerhigh:dominance”}
+            \item $\beta_6$ ou o coeficiente para \fbox{“audiencepublic:dominance”}
+              \item $\beta_7$ ou o coeficiente para \fbox{“powerhigh:audiencepublic:dominance”}
 \end{itemize}
 
 Resultando nessa tabela de coeficientes:
@@ -3057,13 +3100,13 @@ Como conseguimos essa tabela? Com o modelo linear especificado acima, cada valor
 
 \begin{itemize}
     \item $\beta_0$ ou intercepto x 1;
-    \item $\beta_1$ “powerhigh” (porque o participante não está na condição de alta potência)
-    \item $\beta_2$ “audiencepublic” × 1 (na condição pública)
-      \item $\beta_3$ “dominance” ×  0.5 (dominance = 0.5)
-        \item $\beta_4$ “powerhigh:audiencepublic” × 0 (não no poder superior e na condição pública)
-          \item $\beta_5$ “powerhigh:dominance” × 0 (não na condição de alta potência)
-            \item $\beta_6$ “audiencepublic:dominance” × 1 x 0,5 (na condição pública e dominância = 0,5)
-              \item $\beta_7$ “powerhigh:audiencepublic:dominance” × 0 (não no poder superior e na condição pública)
+    \item $\beta_1$ \fbox{“powerhigh”} (porque o participante não está na condição de alta potência)
+    \item $\beta_2$ \fbox{“audiencepublic”} × 1 (na condição pública)
+      \item $\beta_3$ \fbox{“dominance”} ×  0.5 (dominance = 0.5)
+        \item $\beta_4$ \fbox{“powerhigh:audiencepublic”} × 0 (não no poder superior e na condição pública)
+          \item $\beta_5$ \fbox{“powerhigh:dominance”} × 0 (não na condição de alta potência)
+            \item $\beta_6$ \fbox{“audiencepublic:dominance”} × 1 x 0,5 (na condição pública e dominância = 0,5)
+              \item $\beta_7$ \fbox{“powerhigh:audiencepublic:dominance”} × 0 (não no poder superior e na condição pública)
 \end{itemize}
 
 ou
@@ -3139,7 +3182,7 @@ type3anova(linearmodel1)
 
 \end{lstlisting}
 
-Por um lado, isso pode significar que simplesmente não há efeitos das condições experimentais no consumo conspícuo. Por outro lado, isso poderia significar que as manipulações experimentais não são fortes o suficiente ou que há muita variação inexplicada em nossa variável dependente (ou ambas). Podemos reduzir a variação inexplicável em nossa variável dependente, no entanto, incluindo uma variável em nosso modelo que suspeitamos estar relacionada à variável dependente. No nosso caso, suspeitamos que a disposição de gastar em consumo discreto (icc) esteja relacionada à disposição de gastar em consumo conspícuo. Embora icc seja uma variável contínua, podemos incluí-la como uma variável independente em nossa ANOVA e isso nos permitirá reduzir a variação inexplicável em nossa variável dependente:
+Por um lado, isso pode significar que simplesmente não há efeitos das condições experimentais no consumo conspícuo. Por outro lado, isso poderia significar que as manipulações experimentais não são fortes o suficiente ou que há muita variação inexplicada em nossa variável dependente (ou ambas). Podemos reduzir a variação inexplicável em nossa variável dependente, no entanto, incluindo uma variável em nosso modelo que suspeitamos estar relacionada à variável dependente. No nosso caso, suspeitamos que a disposição de gastar em consumo discreto (\fbox{icc}) esteja relacionada à disposição de gastar em consumo conspícuo. Embora \fbox{icc} seja uma variável contínua, podemos incluí-la como uma variável independente em nossa ANOVA e isso nos permitirá reduzir a variação inexplicável em nossa variável dependente:
 
 \begin{lstlisting}[language=R]
 linearmodel2 <- lm(cc ~ power*audience + icc, data = powercc)
@@ -3157,7 +3200,7 @@ type3anova(linearmodel2)
 
 \end{lstlisting}
 
-Vemos que icc está relacionado à variável dependente e, portanto, que a soma dos quadrados dos resíduos desse modelo, ou seja, a variação inexplicada em nossa variável dependente, é menor (130,32) do que a do modelo sem icc (149,93). Os valores p dos fatores experimentais não diminuem, no entanto. Você pode relatar o seguinte: “Controlando a disposição de gastar em consumo discreto, nem o principal efeito do poder (F (1, 138) = 1,99, p = 0,16), nem o principal efeito do público (F (1, 138 ) = 1,21, p = 0,27), nem a interação entre poder e público (F (1, 138) = 2,08, p = 0,15) foi significativa. ”
+Vemos que \fbox{icc} está relacionado à variável dependente e, portanto, que a soma dos quadrados dos resíduos desse modelo, ou seja, a variação inexplicada em nossa variável dependente, é menor (130,32) do que a do modelo sem icc (149,93). Os valores p dos fatores experimentais não diminuem, no entanto. Você pode relatar o seguinte: “Controlando a disposição de gastar em consumo discreto, nem o principal efeito do poder (F (1, 138) = 1,99, p = 0,16), nem o principal efeito do público (F (1, 138 ) = 1,21, p = 0,27), nem a interação entre poder e público (F (1, 138) = 2,08, p = 0,15) foi significativa. ”
 
 Chamamos essa análise de ANCOVA porque icc é uma covariável (abrange ou está relacionada à nossa variável dependente).
 
@@ -3230,7 +3273,7 @@ powercc %>%
 
 Temos uma linha por assunto e duas colunas, uma para cada tipo de produto.
 
-Agora podemos realizar uma medida repetida ANOVA. Para isso, precisamos do pacote ez.
+Agora podemos realizar uma medida repetida ANOVA. Para isso, precisamos do pacote \fbox{ez}.
 
 \begin{lstlisting}[language=R]
 install.packages("ez") # Precisamos do pacote ez para RM ANOVA
@@ -3313,7 +3356,7 @@ office <- read_excel("perceptual_map_office.xlsx","attributes") # nao esqueca de
 office # visualiza os dados
 \end{lstlisting}
 
-O conjunto de dados consiste em um identificador, a marca do equipamento de escritório (brand) e a classificação média (entre os entrevistados) de cada marca em seis atributos: escolha grande (large\_choice), preços baixos (low\_prices), qualidade do serviço (service\_quality), qualidade do produto (product\_quality), conveniência (convenience) e pontuação da preferência (preference\_score). Vamos fatorar o identificador:
+O conjunto de dados consiste em um identificador, a marca do equipamento de escritório (\fbox{brand}) e a classificação média (entre os entrevistados) de cada marca em seis atributos: escolha grande (\fbox{large\_choice}), preços baixos (\fbox{low\_prices}), qualidade do serviço (\fbox{service\_quality}), qualidade do produto (\fbox{product\_quality}), conveniência (\fbox{convenience}) e pontuação da preferência (\fbox{preference\_score}). Vamos fatorar o identificador:
 
 
 \begin{lstlisting}[language=R]
@@ -3324,7 +3367,7 @@ office <- office %>%
 
 \subsubsection{Recapitulação: importação e manipulação}
 
-Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o download dos dados aqui):
+Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas/pipe (faça o download dos dados aqui):
 
 \begin{lstlisting}[language=R]
 library(tidyverse)
@@ -3334,11 +3377,11 @@ office <- read_excel("perceptual_map_office.xlsx","attributes") %>% #
   mutate(brand = factor(brand))
 \end{lstlisting}
 
-\newpage
+
 
 \subsection{Quantos fatores devemos considerar ?}
 
-O objetivo da análise de componentes principais é reduzir o número de dimensões que descrevem nossos dados, sem perder muitas informações. O primeiro passo na análise de componentes principais é decidir o número de componentes ou fatores principais que queremos manter. Para nos ajudar a decidir, usaremos a função PCA do pacote FactoMineR:
+O objetivo da análise de componentes principais é reduzir o número de dimensões que descrevem nossos dados, sem perder muitas informações. O primeiro passo na análise de componentes principais é decidir o número de componentes ou fatores principais que queremos manter. Para nos ajudar a decidir, usaremos a função PCA do \fbox{pacote FactoMineR}:
 
 \begin{lstlisting}[language=R]
 install.packages("FactoMineR")
@@ -3347,7 +3390,7 @@ library(FactoMineR)
 
 \newpage
 
-Para poder usar a função PCA, precisamos primeiro transformar o quadro de dados:
+Para poder usar a \fbox{função PCA}, precisamos primeiro transformar o quadro de dados:
 
 \begin{lstlisting}[language=R]
 office.df <- office %>% 
@@ -3356,6 +3399,7 @@ office.df <- office %>%
 
 rownames(office.df) <- office$brand # Defina os nomes das linhas do data.frame para as marcas (isso eh importante mais tarde ao fazer um biplot)
 \end{lstlisting}
+
 Agora podemos prosseguir com a análise de componentes principais:
 
 \begin{lstlisting}[language=R]
@@ -3370,7 +3414,7 @@ office.pca$eig # e veja a tabela com informacoes sobre variancia explicada
 \end{lstlisting}
 
 
-Se olharmos para esta tabela, veremos que dois componentes explicam 98,1\% da variância nas classificações. Isso já é bastante e sugere que podemos fazer com segurança duas dimensões para descrever nossos dados. Uma regra prática aqui é que a variação cumulativa explicada pelos componentes deve ser de pelo menos 70\%.
+Se olharmos para esta tabela, veremos que dois componentes explicam 98,1\% da variância nas classificações. Isso já é bastante e sugere que podemos fazer com segurança duas dimensões para descrever nossos dados. Uma regra prática aqui é que a variância cumulativa explicada pelos componentes deve ser de pelo menos 70\%.
 
 \subsection{Análise de Componentes Principais}
 
@@ -3411,7 +3455,7 @@ office.pca.two$var$cor %>% #tabela com cargas fatoriais varimax
 \end{lstlisting}
 
 
-Essas cargas são as correlações entre as dimensões originais  (large\_choice, low\_prices, etc.) e dois fatores são extraídos (Dim.1 and Dim.2). Nós vemos que low\_prices, service\_quality, e product\_quality pontuação alta no primeiro fator, enquanto large\_choice, convenience, e preference\_score pontuação alta no segundo fator. Poderíamos, portanto, dizer que o primeiro fator descreve o preço e a qualidade da marca e que o segundo fator descreve a conveniência das lojas da marca.
+Essas cargas são as correlações entre as dimensões originais  (\fbox{large\_choice}, \fbox{low\_prices}, etc.) e dois fatores são extraídos (\fbox{Dim.1 and Dim.2}). Nós vemos que \fbox{low\_prices}, \fbox{service\_quality}, e \fbox{product\_quality} pontuação alta no primeiro fator, enquanto \fbox{large\_choice}, \fbox{convenience}, e \fbox{preference\_score} pontuação alta no segundo fator. Poderíamos, portanto, dizer que o primeiro fator descreve o preço e a qualidade da marca e que o segundo fator descreve a conveniência das lojas da marca.
 
 Também queremos saber quanto cada uma das seis dimensões é explicada pelos fatores extraídos. Para isso, precisamos calcular a comunalidade e / ou seu complemento, a singularidade das dimensões:
 
@@ -3438,7 +3482,7 @@ A comunalidade de uma variável é a porcentagem da variação dessa variável q
 
 \subsubsection{Plotando as cargas fatoriais}
 
-Também podemos plotar as cargas. Para isso, precisamos de outro pacote chamado factoextra:
+Também podemos plotar as cargas. Para isso, precisamos de outro \fbox{pacote chamado factoextra}:
 
 \begin{lstlisting}[language=R]
 install.packages("factoextra")
@@ -3451,7 +3495,7 @@ fviz_pca_var(office.pca.two, repel = TRUE) # o argumento repel = TRUE garante qu
 \includegraphics[width=12cm,height=8cm]{perceptual_loading_plot-1.png}
 \end{center}
 
-Nós vimos que large\_choice, service\_quality, product\_quality e preference\_score têm pontuações altas no primeiro fator (o Dim1 do eixo X) e essa conveniência tem uma pontuação alta no segundo fator (o Dim2 do eixo Y). Também podemos adicionar as observações (as diferentes marcas) a esse gráfico:
+Nós vimos que \fbox{large\_choice}, \fbox{service\_quality}, \fbox{product\_quality} e \fbox{preference\_score} têm pontuações altas no primeiro fator (o Dim1 do eixo X) e essa conveniência tem uma pontuação alta no segundo fator (o Dim2 do eixo Y). Também podemos adicionar as observações (as diferentes marcas) a esse gráfico:
 
 \newpage
 
@@ -3465,7 +3509,7 @@ fviz_pca_biplot(office.pca.two, repel = TRUE) # tracar as cargas e as marcas jun
 \includegraphics[width=12cm,height=8cm]{perceptual_biplot-1.png}
 \end{center}
 
-Isso também é chamado de biplot. Podemos ver, por exemplo, que o OfficeStar tem uma pontuação alta no primeiro fator.
+Isso também é chamado de biplot. Podemos ver, por exemplo, que o \fbox{OfficeStar} tem uma pontuação alta no primeiro fator.
 
 \newpage
 \section{Análise de componentes principais para mapas perceptivos (toothpaste dataset)}
@@ -3477,7 +3521,7 @@ Digamos que tenhamos um conjunto de observações que diferem entre si em vária
 \subsection{Dados}
 \subsubsection{Importação}
 
-Analisaremos os dados de uma pesquisa na qual 60 consumidores foram convidados a responder a seis perguntas sobre pasta de dente. Esses dados foram coletados pelos criadores do Radiant, que é um pacote do \faRProject para análise de negócios que usaremos posteriormente. Faça o download dos dados aqui e importe-os para o \faRProject:
+Analisaremos os dados de uma pesquisa na qual 60 consumidores foram convidados a responder a seis perguntas sobre pasta de dente. Esses dados foram coletados pelos criadores do \fbox{Radiant}, que é um pacote do \faRProject para análise de negócios que usaremos posteriormente. Faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/toothpaste.xlsx}{aqui} e importe-os para o \faRProject:
 
 \begin{lstlisting}[language=R]
 library(tidyverse)
@@ -3493,9 +3537,9 @@ toothpaste <- read_excel("toothpaste.xlsx")
 toothpaste # Visualiza os dados
 \end{lstlisting}
 
-O conjunto de dados consiste em um identificador, consumer, e as classificações do entrevistado sobre a importância de seis atributos de pasta de dente: prevents\_cavities, shiny\_teeth, strengthens\_gums, freshens\_breath, decay\_prevention\_unimportant, and attractive\_teeth. Nos também temos os respondentes age e gender.
+O conjunto de dados consiste em um identificador, \fbox{consumer}, e as classificações do entrevistado sobre a importância de seis atributos de pasta de dente: \fbox{prevents\_cavities}, \fbox{shiny\_teeth}, \fbox{strengthens\_gums}, \fbox{freshens\_breath}, \fbox{decay\_prevention\_unimportant}, and \fbox{attractive\_teeth}. Nos também temos os respondentes \fbox{age} e \fbox{gender}.
 
-Vamos fatorar o identificador e o gender:
+Vamos fatorar o identificador e o \fbox{gender}:
 \begin{lstlisting}[language=R]
 toothpaste <- toothpaste %>% 
   mutate(consumer = factor(consumer),
@@ -3518,7 +3562,7 @@ toothpaste <- read_excel("toothpaste.xlsx")
 
 \subsection{Quantos fatores devemos considerar ?}
 
-O objetivo da análise de componentes principais é reduzir o número de dimensões que descrevem nossos dados, sem perder muitas informações. O primeiro passo na análise de componentes principais é decidir o número de componentes ou fatores principais que queremos manter. Para nos ajudar a decidir, usaremos a função pre\_factor do pacote radiant:
+O objetivo da análise de componentes principais é reduzir o número de dimensões que descrevem nossos dados, sem perder muitas informações. O primeiro passo na análise de componentes principais é decidir o número de componentes ou fatores principais que queremos manter. Para nos ajudar a decidir, usaremos a função \fbox{pre\_factor} do \fbox{pacote radiant}:
 
 \begin{lstlisting}[language=R]
 install.packages("radiant")
@@ -3563,11 +3607,10 @@ summary(pre_factor(toothpaste, vars = dimensions))
 ##  PC4        0.34       0.06         0.96
 ##  PC5        0.18       0.03         0.99
 ##  PC6        0.09       0.01         1.00
-
 \end{lstlisting}
 
 
-Nas Fit measures, vemos que dois componentes explicam 82\% da variação nas classificações. Isso já é bastante e sugere que podemos reduzir com segurança o número de dimensões para dois componentes. Uma regra prática aqui é que a variação cumulativa explicada pelos componentes deve ser de pelo menos 70\%.
+Nas \fbox{Fit measures}, vemos que dois componentes explicam 82\% da variação nas classificações. Isso já é bastante e sugere que podemos reduzir com segurança o número de dimensões para dois componentes. Uma regra prática aqui é que a variação cumulativa explicada pelos componentes deve ser de pelo menos 70\%.
 
 \newpage
 \subsection{Análise de Componentes Principais}
@@ -3626,9 +3669,9 @@ summary(full_factor(toothpaste, dimensions, nr_fact = 2))
 \newpage 
 \subsubsection{Cargas fatoriais}
 
-Veja a tabela abaixo do Factor loadings. Essas cargas são as correlações entre as dimensões originais (prevents\_cavities, shiny\_teeth, etc.) e os dois fatores que são retidos (RC1 e RC2). Nós vemos que prevents\_cavities, strengthens\_gums, e decay\_prevention\_unimportant pontuação alta no primeiro fator, enquanto shiny\_teeth, strengthens\_gums, e freshens\_breath pontuação alta no segundo fator. Poderíamos, portanto, dizer que o primeiro fator descreve preocupações relacionadas à saúde e que o segundo fator descreve preocupações relacionadas à aparência.
+Veja a tabela abaixo do Factor loadings. Essas cargas são as correlações entre as dimensões originais (\fbox{prevents\_cavities}, \fbox{shiny\_teeth}, etc.) e os dois fatores que são retidos (RC1 e RC2). Nós vemos que \fbox{prevents\_cavities}, \fbox{strengthens\_gums}, e \fbox{decay\_prevention\_unimportant} pontuação alta no primeiro fator, enquanto \fbox{shiny\_teeth}, \fbox{strengthens\_gums}, e \fbox{freshens\_breath} pontuação alta no segundo fator. Poderíamos, portanto, dizer que o primeiro fator descreve preocupações relacionadas à saúde e que o segundo fator descreve preocupações relacionadas à aparência.
 
-Também queremos saber quanto cada uma das seis dimensões é explicada pelos fatores extraídos. Para isso, podemos observar a comunalidade das dimensões (cabeçalho: Attribute communalities). A comunalidade de uma variável é a porcentagem da variação dessa variável que é explicada pelos fatores. Seu complemento é chamado de exclusividade (= 1-comunalidade). A exclusividade pode ser puro erro de medição ou pode representar algo que é medido de forma confiável por essa variável específica, mas não por nenhuma das outras variáveis. Quanto maior a exclusividade, maior a probabilidade de que seja mais do que apenas erro de medição. Uma exclusividade superior a 0,6 é geralmente considerada alta. Se a exclusividade for alta, a variável não será bem explicada pelos fatores. Vemos que, para todas as dimensões, a comunalidade é alta e, portanto, a singularidade é baixa; portanto, todas as dimensões são bem capturadas pelos fatores extraídos.
+Também queremos saber quanto cada uma das seis dimensões é explicada pelos fatores extraídos. Para isso, podemos observar a comunalidade das dimensões (cabeçalho: \fbox{Attribute communalities}). A comunalidade de uma variável é a porcentagem da variação dessa variável que é explicada pelos fatores. Seu complemento é chamado de exclusividade (= 1-comunalidade). A exclusividade pode ser puro erro de medição ou pode representar algo que é medido de forma confiável por essa variável específica, mas não por nenhuma das outras variáveis. Quanto maior a exclusividade, maior a probabilidade de que seja mais do que apenas erro de medição. Uma exclusividade superior a 0,6 é geralmente considerada alta. Se a exclusividade for alta, a variável não será bem explicada pelos fatores. Vemos que, para todas as dimensões, a comunalidade é alta e, portanto, a singularidade é baixa; portanto, todas as dimensões são bem capturadas pelos fatores extraídos.
 
 \subsubsection{Gráfico das cargas fatoriais}
 
@@ -3655,7 +3698,7 @@ toothpaste %>% # take dataset
 \end{center}
 
 
-Vemos que attractive\_teeth, shiny\_teeth, freshens\_breath, têm pontuações altas no segundo fator (o Dim2 do eixo X). prevents\_cavities e strengthens\_gums têm pontuações altas no segundo fator (o eixo Y Dim2) e decay\_prevention\_unimportant tem uma pontuação baixa nesse fator (essa variável mede a importância da prevenção da cárie).
+Vemos que \fbox{attractive\_teeth}, \fbox{shiny\_teeth}, \fbox{freshens\_breath}, têm pontuações altas no segundo fator (o Dim2 do eixo X). \fbox{prevents\_cavities} e \fbox{strengthens\_gums} têm pontuações altas no segundo fator (o eixo Y Dim2) e \fbox{decay\_prevention\_unimportant} tem uma pontuação baixa nesse fator (essa variável mede a importância da prevenção da cárie).
 
 \newpage
 
@@ -3727,14 +3770,14 @@ equipment
 
 Temos 10 colunas ou variáveis em nossos dados:
 \begin{itemize}
-    \item respondent\_id é um identificador para nossas observações
-    \item Os entrevistados classificaram a importância de cada um dos seguintes atributos em uma escala de 1 a 10: variety\_of\_choice, electronics, furniture, quality\_of\_service, low\_prices, return\_policy.
-    \item professional: 1 para profissionais, 0 para não profissionais
-    \item income: expresso em milhares de dólares
-    \item age
+    \item \fbox{respondent\_id} é um identificador para nossas observações
+    \item Os entrevistados classificaram a importância de cada um dos seguintes atributos em uma escala de 1 a 10: \fbox{variety\_of\_choice}, \fbox{electronics}, \fbox{furniture}, \fbox{quality\_of\_service}, \fbox{low\_prices}, \fbox{return\_policy}.
+    \item \fbox{professional}: 1 para profissionais, 0 para não profissionais
+    \item \fbox{income}: expresso em milhares de dólares
+    \item \fbox{age}
 \end{itemize}
 
-A análise de cluster tentará identificar clusters com padrões semelhantes de classificações. A análise discriminante linear preverá a associação do cluster com base nas variáveis de segmentação (professional, income, and age).
+A análise de cluster tentará identificar clusters com padrões semelhantes de classificações. A análise discriminante linear preverá a associação do cluster com base nas variáveis de segmentação (\fbox{professional}, \fbox{income}, e \fbox{age}).
 
 Como sempre, vamos fatorar as variáveis que devem ser tratadas como categóricas:
 
@@ -3746,7 +3789,7 @@ equipment <- equipment %>%
 
 \subsubsection{Recapitulação: importação e manipulação}
 
-Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/segmentation_office.xlsx}{aqui}):
+Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas/pipe (faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/segmentation_office.xlsx}{aqui}):
 
 \begin{lstlisting}[language=R]
 library(tidyverse) 
@@ -3763,9 +3806,10 @@ equipment <- read_excel("segmentation_office.xlsx","SegmentationData") %>%
 Primeiro, realizaremos uma análise hierárquica de cluster para encontrar o número ideal de clusters. Depois disso, realizaremos uma análise de cluster não hierárquica e solicitaremos o número de clusters considerados ideais pela análise de cluster hierárquica. As variáveis que servirão de entrada para a análise de cluster são as classificações de importância dos atributos da loja.
 
 \subsubsection{Padronizar ou não ?}
+
 A primeira etapa de uma análise de cluster é decidir se padronizará as variáveis de entrada. A padronização não é necessária quando as variáveis de entrada são medidas na mesma escala ou quando as variáveis de entrada são os coeficientes obtidos por uma análise conjunta. Em outros casos, a padronização é necessária.
 
-No nosso exemplo, todas as variáveis de entrada são medidas na mesma escala e, portanto, a padronização não é necessária. Se necessário, isso pode ser feito facilmente com mutate(newvar = scale(oldvar))).
+No nosso exemplo, todas as variáveis de entrada são medidas na mesma escala e, portanto, a padronização não é necessária. Se necessário, isso pode ser feito facilmente com \fbox{mutate(newvar = scale(oldvar)))}.
 
 
 
@@ -3786,7 +3830,7 @@ hierarchical.clustering <- hclust(dist(cluster.data), method = "ward.D")
 \end{lstlisting}
 \newpage
 
-A análise de cluster é armazenada no objeto hierarchical.clustering e pode ser facilmente visualizada por um dendograma:
+A análise de cluster é armazenada no \fbox{objeto hierarchical.clustering} e pode ser facilmente visualizada por um dendograma:
 
 \begin{lstlisting}[language=R]
 plot(hierarchical.clustering)
@@ -3798,7 +3842,7 @@ plot(hierarchical.clustering)
 \includegraphics[width=12cm,height=8cm]{segmentation_hclust_plot-1.png}
 \end{center}
 
-A partir desse dendograma, parece que podemos dividir as observações em dois, três ou seis grupos de observações. Vamos realizar um teste formal, a regra de parada de Duda-Hart, para ver quantos clusters devemos reter. Para isso, precisamos (instalar e) carregar o pacote NbClust:
+A partir desse dendograma, parece que podemos dividir as observações em dois, três ou seis grupos de observações. Vamos realizar um teste formal, a regra de parada de Duda-Hart, para ver quantos clusters devemos reter. Para isso, precisamos (instalar e) carregar o \fbox{pacote NbClust}:
 
 \begin{lstlisting}[language=R]
 install.packages("NbClust")
@@ -3847,7 +3891,7 @@ set.seed (1)
 kmeans.clustering <- kmeans(cluster.data, 3, nstart = 25)
 \end{lstlisting}
 
-Adicione ao conjunto de dados equipament uma variável que indique a qual cluster uma observação pertence:
+Adicione ao conjunto de \fbox{dados equipament} uma variável que indique a qual cluster uma observação pertence:
 
 \begin{lstlisting}[language=R]
 equipment <- equipment %>% 
@@ -3954,7 +3998,9 @@ new_data
 \end{lstlisting}
 
 \newpage
+
 \section{Análise Conjunta}
+
 Neste capítulo, você aprenderá como realizar uma análise conjunta. A análise conjunta começa a partir de uma pesquisa na qual as pessoas avaliam ou escolhem entre produtos (por exemplo, carros) que diferem em vários atributos (por exemplo, segurança, eficiência de combustível, conforto etc.). A partir dessas classificações ou escolhas, a análise determina o valor que as pessoas atribuem aos diferentes atributos do produto (por exemplo, quanto peso as pessoas atribuem à segurança ao escolher entre carros). Essas informações podem ser usadas no desenvolvimento de produtos.
 
 
@@ -4003,7 +4049,7 @@ Quando inspecionamos os dados, vemos que temos uma coluna para cada entrevistado
 
 \begin{lstlisting}[language=R]
 icecream <- icecream %>% 
-  gather(respondent, rating, starts_with("Individual")) %>% # o entrevistado acompanha o respondente, a classificação armazena as classificações do entrevistado e queremos empilhar todas as variáveis que começam com Individual
+  gather(respondent, rating, starts_with("Individual")) %>% # o entrevistado acompanha o respondente, a classificacao armazena as classificacoes do entrevistado e queremos empilhar todas as variaveis que comecam com Individual
   rename("profile" = "Observations") %>% # renomeia Observations para profile
   mutate(profile = factor(profile), respondent = factor(respondent),  # fatorar identificadores
          Flavor = factor(Flavor), Packaging = factor(Packaging), Light = factor(Light), Organic = factor(Organic)) # fatorar os atributos do sorvete
@@ -4036,13 +4082,13 @@ icecream
 ## # ... with 140 more rows
 \end{lstlisting}
 
-É melhor usar o Visualizador aqui (clique duas vezes no icecream objeto no painel Ambiente ou digite View(icecream)) para ver que existem dez linhas (10 perfis) por respondente agora.
+É melhor usar o Visualizador aqui (clique duas vezes no \fbox{icecream} objeto no painel Ambiente ou digite \fbox{View(icecream))} para ver que existem dez linhas (10 perfis) por respondente agora.
 
 As demais variáveis são:
 
 \begin{itemize}
-    \item profile é um identificador para os diferentes sorvetes
-    \item Flavor, Packaging, Light, Organic são os quatro atributos que compõem o perfil de um sorvete
+    \item \fbox{profile} é um identificador para os diferentes sorvetes
+    \item \fbox{Flavor}, \fbox{Packaging}, \fbox{Light}, \fbox{Organic} são os quatro atributos que compõem o perfil de um sorvete
 \end{itemize}
 
 \subsubsection{Recapitulando: importação e manipulação}
@@ -4062,13 +4108,15 @@ icecream <- read_excel("icecream.xlsx") %>%
 
 \subsection{Design de experimentos}
 
-Quando inspecionamos nosso conjunto de dados, vemos que o flavor possui 5 níveis (framboesa, chocolate, morango, manga, baunilha), packaging possui 3 níveis (waffle caseiro, cone, cerveja), a Light possui 2 níveis (baixo teor de gordura versus não), e Organic tem 2 níveis (orgânico vs. não). O objetivo de uma análise conjunta é estimar até que ponto cada nível de atributo afeta a classificação do sorvete. Para fazer isso, o fabricante de sorvete poderia criar 5×3×2x2 = 60 sorvetes diferentes e peça às pessoas para avaliarem tudo isso. Isso fornecerá ao fabricante uma boa estimativa da importância de cada atributo e de todas as possíveis interações. No entanto, classificar 60 sorvetes é difícil para os participantes e um estudo tão grande seria caro para o fabricante financiar. Na prática, os pesquisadores nessa situação solicitarão que as pessoas classifiquem um subconjunto desses 60 sorvetes. Nesta seção, discutiremos como selecionar um subconjunto (por exemplo, 10 sorvetes) de todas as combinações possíveis de nível de atributo (ou seja, 60 sorvetes) que ainda nos permitirão obter boas estimativas dos efeitos mais importantes.
+Quando inspecionamos nosso conjunto de dados, vemos que o \fbox{flavor} possui 5 níveis (framboesa, chocolate, morango, manga, baunilha), \fbox{packaging} possui 3 níveis (waffle caseiro, cone, cerveja), a \fbox{Light} possui 2 níveis (baixo teor de gordura versus não), e \fbox{Organic} tem 2 níveis (orgânico vs. não). O objetivo de uma análise conjunta é estimar até que ponto cada nível de atributo afeta a classificação do sorvete.
+
+Para fazer isso, o fabricante de sorvete poderia criar 5×3×2x2 = 60 sorvetes diferentes e peça às pessoas para avaliarem tudo isso. Isso fornecerá ao fabricante uma boa estimativa da importância de cada atributo e de todas as possíveis interações. No entanto, classificar 60 sorvetes é difícil para os participantes e um estudo tão grande seria caro para o fabricante financiar. Na prática, os pesquisadores nessa situação solicitarão que as pessoas classifiquem um subconjunto desses 60 sorvetes. Nesta seção, discutiremos como selecionar um subconjunto (por exemplo, 10 sorvetes) de todas as combinações possíveis de nível de atributo (ou seja, 60 sorvetes) que ainda nos permitirão obter boas estimativas dos efeitos mais importantes.
 
 No conjunto de dados, já temos as classificações para dez perfis, portanto a decisão de quais sorvetes para teste já foi tomada. No entanto, vamos desconsiderar o fato de já termos os dados e considerar as decisões que precisam ser tomadas antes da coleta de dados. Em outras palavras, vamos discutir como passamos de um \textit{fatorial completo} (todas as 60 combinações) para um design \textit{fracionário} (menos de 60 combinações).
 
-A função doe (projeto de experimentos) do pacote radiant nos ajudará a decidir sobre os projetos de estudo. Radiant é um \href{https://radiant-rstats.github.io/docs/index.html}{pacote do \faRProject para business analytics.}
+A função doe (projeto de experimentos) do \fbox{pacote radiant} nos ajudará a decidir sobre os projetos de estudo. \fbox{Radiant} é um \href{https://radiant-rstats.github.io/docs/index.html}{pacote do \faRProject para business analytics.}
 
-A discussão a seguir da função doe é baseada na discussão da Radiant sobre essa função.
+A discussão a seguir da função doe é baseada na discussão da \fbox{Radiant} sobre essa função.
 
 \begin{lstlisting}[language=R]
 install.packages("radiant")
@@ -4294,7 +4342,7 @@ summary(doe(attributes, seed = 123)) # Seed: fixa o gerador de numeros aleatorio
 ##     60    Vanilla            Pint No_low_fat Not_organic
 \end{lstlisting}
 
-Observe a saída no cabeçalho Design efficiency. Mostra 52 linhas. As linhas representam projetos experimentais com diferentes números de Trials ou diferentes números de sorvetes (ou seja, combinações de nível de atributo) que seriam testados. Uma palavra melhor para julgamento é perfil. Para cada projeto experimental, ele mostra a D-efficiency do projeto - uma medida de como poderemos estimar com clareza os efeitos do interesse após a execução do experimento (pontuações mais altas são melhores) - e se o projeto está ou não equilibrado - se cada nível está incluído no mesmo número de tentativas ou perfis. Idealmente, procuramos projetos balanceados com alta D-efficiency (acima de 0,80 é considerado razoável). Temos dois candidatos, um delineamento experimental com 60 perfis, que é apenas o delineamento fatorial completo ou um delineamento com 30 perfis. Vamos dar uma olhada no design com 30 perfis:
+Observe a saída no cabeçalho \fbox{Design efficiency}. Mostra 52 linhas. As linhas representam projetos experimentais com diferentes números de \fbox{Trials} ou diferentes números de sorvetes (ou seja, combinações de nível de atributo) que seriam testados. Uma palavra melhor para julgamento é perfil. Para cada projeto experimental, ele mostra a \fbox{D-efficiency} do projeto - uma medida de como poderemos estimar com clareza os efeitos do interesse após a execução do experimento (pontuações mais altas são melhores) - e se o projeto está ou não equilibrado - se cada nível está incluído no mesmo número de tentativas ou perfis. Idealmente, procuramos projetos balanceados com alta \fbox{D-efficiency} (acima de 0,80 é considerado razoável). Temos dois candidatos, um delineamento experimental com 60 perfis, que é apenas o delineamento fatorial completo ou um delineamento com 30 perfis. Vamos dar uma olhada no design com 30 perfis:
 
 \begin{lstlisting}[language=R]
 summary(doe(attributes, seed = 123, trials = 30))
@@ -4419,7 +4467,7 @@ summary(doe(attributes, seed = 123, trials = 30))
 \end{lstlisting}
 
 
-Em Projeto fatorial parcial (ou projeto fatorial fracionário), encontramos os perfis que poderíamos executar em um experimento com 30 em vez de 60 perfis. Sob correlações parciais do projeto fatorial, vemos que dois atributos estão correlacionados, a saber, Light e Organic ($r = -0,105$). Esse sempre será o caso em projetos fatoriais fracionários. Isso significa que algumas combinações de níveis de atributo serão mais prevalentes que outras. Somente em um planejamento fatorial completo todos os atributos serão não correlacionados ou ortogonais.
+Em Projeto fatorial parcial (ou projeto fatorial fracionário), encontramos os perfis que poderíamos executar em um experimento com 30 em vez de 60 perfis. Sob correlações parciais do projeto fatorial, vemos que dois atributos estão correlacionados, a saber, \fbox{Light} e \fbox{Organic} ($r = -0,105$). Esse sempre será o caso em projetos fatoriais fracionários. Isso significa que algumas combinações de níveis de atributo serão mais prevalentes que outras. Somente em um planejamento fatorial completo todos os atributos serão não correlacionados ou ortogonais.
 
 Um design possível com apenas 10 perfis seria desequilibrado e teria a seguinte aparência:
 
@@ -4528,14 +4576,15 @@ summary(doe(attributes, seed = 123, trials = 10))
 
 Comparado ao design com 30 perfis, agora existem mais e mais fortes correlações entre os atributos.
 
-Observe que os perfis não são exatamente iguais aos da experiência usada para coletar os dados do sorvete. Isso ocorre porque, para projetos desequilibrados, existe alguma aleatoriedade na definição das combinações reais de nível de atributo. É também por isso que definimos seed = 123. seed é usado para consertar o gerador de números aleatórios do \faRProject. Configurá-lo para um número fixo (123 ou 456 ou qualquer outra coisa) garantirá que o \faRProject gere sempre a mesma saída. Sem definir a seed, doe com trials = 10 não daria o mesmo design fracionário toda vez que você a executar.
+Observe que os perfis não são exatamente iguais aos da experiência usada para coletar os dados do sorvete. Isso ocorre porque, para projetos desequilibrados, existe alguma aleatoriedade na definição das combinações reais de nível de atributo. É também por isso que definimos \fbox{seed = 123}. \fbox{seed} é usado para consertar o gerador de números aleatórios do \faRProject. Configurá-lo para um número fixo (123 ou 456 ou qualquer outra coisa) garantirá que o \faRProject gere sempre a mesma saída. Sem definir a \fbox{seed}, doe com \fbox{trials = 10} não daria o mesmo design fracionário toda vez que você a executar.
 
-Observe também que o pacote radiant instala um suplemento que você pode acessar por meio de suplementos (encontre este botão à direita da linha abaixo de "Arquivo" etc.) -> Iniciar radiante (navegador). Isso abrirá um aplicativo no seu navegador que permitirá executar as etapas acima em uma interface visual intuitiva. Para obter ajuda, confira a discussão da Radiant sobre o módulo Design de experiências \href{https://radiant-rstats.github.io/docs/design/doe.html}{aqui}.
+Observe também que o \fbox{pacote radiant} instala um suplemento que você pode acessar por meio de suplementos (encontre este botão à direita da linha abaixo de "Arquivo" etc.) -> Iniciar radiant (navegador). Isso abrirá um aplicativo no seu navegador que permitirá executar as etapas acima em uma interface visual intuitiva. Para obter ajuda, confira a discussão da \fbox{Radiant} sobre o módulo Design de experiências \href{https://radiant-rstats.github.io/docs/design/doe.html}{aqui}.
 
 
 \subsection{Um respondente}
 \subsubsection{Estimar valores de peça e pesos de importância}
-Embora alguns softwares exijam que você primeiro crie variáveis fictícias representando os níveis de atributo e execute uma regressão, o Radiant não exige que você faça isso. Você pode simplesmente usar os atributos (cada um com vários níveis) como variáveis. Primeiro, faremos uma análise conjunta dos dados de um respondente (indivíduo 1):
+
+Embora alguns softwares exijam que você primeiro crie variáveis fictícias representando os níveis de atributo e execute uma regressão, o \fbox{Radiant} não exige que você faça isso. Você pode simplesmente usar os atributos (cada um com vários níveis) como variáveis. Primeiro, faremos uma análise conjunta dos dados de um respondente (indivíduo 1):
 
 \begin{lstlisting}[language=R]
 respondent1 <- icecream %>% filter(respondent == "Individual 1")
@@ -4607,6 +4656,7 @@ Observe que os resultados da regressão conjunta são simplesmente os resultados
 # Execute essa regressao se estiver interessado em aprender qual preditor eh significativo ou qual eh o R quadrado do modelo geral.
 
 summary(lm(rating ~ Flavor + Packaging + Light + Organic, data = respondent1))
+
 ## 
 ## Call:
 ## lm(formula = rating ~ Flavor + Packaging + Light + Organic, data = respondent1)
@@ -4632,7 +4682,7 @@ summary(lm(rating ~ Flavor + Packaging + Light + Organic, data = respondent1))
 ## F-statistic: 17.06 on 8 and 1 DF,  p-value: 0.1852
 \end{lstlisting}
 
-Finalmente, os pesos de importância nos dizem com que intensidade cada atributo determina a classificação de um sorvete. Para esse respondente, sabor é o atributo mais importante e luz é o atributo menos importante. A classificação deste respondente é determinada em 59,6\% por sabor e em 9,2\% por luz
+Finalmente, os pesos de importância nos dizem com que intensidade cada atributo determina a classificação de um sorvete. Para esse respondente, sabor é o atributo mais importante e luz é o atributo menos importante. A classificação deste respondente é determinada em 59,6\% por sabor e em 9,2\% por luz.
 
 \subsubsection{Profiles: utilitários previstos}
 
@@ -4659,7 +4709,7 @@ profiles
 ## 10 Vanilla    Homemade waffle No low fat Organic
 \end{lstlisting}
 
-Em seguida, pedimos à função predict para prever as classificações dos perfis com base na função de regressão:
+Em seguida, pedimos à função \fbox{predict} para prever as classificações dos perfis com base na função de regressão:
 
 \begin{lstlisting}[language=R]
 predict(conjoint_respondent1, profiles) # prever as classificacoes para os perfis com base na analise conjunta
@@ -4683,7 +4733,7 @@ predict(conjoint_respondent1, profiles) # prever as classificacoes para os perfi
 ##     Vanilla Homemade waffle No low fat     Organic      7.700
 \end{lstlisting}
 
-A classificação prevista é mais alta para sorvetes orgânicos com pouca gordura e manga em um waffle caseiro. Mas essas são previsões para sorvetes que o entrevistado realmente classificou. Se quiséssemos saber qual sorvete o entrevistado mais gostava, poderíamos apenas olhar para as classificações observadas (em vez das previstas). É mais interessante obter previsões para sorvetes que o entrevistado não avaliou. Para isso, precisamos dos perfis para todos os sorvetes possíveis. Podemos criar esses perfis com a função expand.grid. A função expand.grid usa dois ou mais vetores e cria todas as combinações possíveis de elementos desses vetores:
+A classificação prevista é mais alta para sorvetes orgânicos com pouca gordura e manga em um waffle caseiro. Mas essas são previsões para sorvetes que o entrevistado realmente classificou. Se quiséssemos saber qual sorvete o entrevistado mais gostava, poderíamos apenas olhar para as classificações observadas (em vez das previstas). É mais interessante obter previsões para sorvetes que o entrevistado não avaliou. Para isso, precisamos dos perfis para todos os sorvetes possíveis. Podemos criar esses perfis com a \fbox{função expand.grid}. A \fbox{função expand.grid} usa dois ou mais vetores e cria todas as combinações possíveis de elementos desses vetores:
 
 \begin{lstlisting}[language=R]
 Flavor <- c("Raspberry","Chocolate","Mango","Strawberry","Vanilla")
@@ -4789,6 +4839,7 @@ predict(conjoint_respondent1, profiles.all) %>%
 Mesma conclusão que a da seção anterior: essa pessoa desfrutaria de um sorvete com baixo teor de gordura, orgânico, manga ou morango em um cone ou um waffle caseiro.
 
 \subsection{Muitos respondentes}
+
 \subsubsection{Estimar valores de peça e pesos de importância}
 
 Agora, vamos realizar a análise conjunta no conjunto de dados completo para ter uma idéia de quais sorvetes os 15 entrevistados, em média, gostaram mais e qual a importância de cada atributo:
@@ -4927,7 +4978,6 @@ predict(conjoint_allrespondents, profiles.all) %>% # verifique as secoes anterio
 \end{lstlisting}
 
 
-
 Mesmas conclusões de antes: prevemos que, em média, as pessoas mais gostariam de um sorvete de manga orgânico, sem pouca gordura, em um cone.
 
 \subsection{Simulação de Mercado}
@@ -4947,6 +4997,7 @@ market_profiles
 ## 2  Chocolate            Cone No low fat Not organic
 ## 3  Raspberry Homemade waffle No low fat Not organic
 ## 4  Raspberry Homemade waffle    Low fat     Organic
+
 #Já sabemos como estimar qual sorvete será mais apreciado:
 
 conjoint_allrespondents <- conjoint(icecream, rvar = "rating", evar = c("Flavor","Packaging","Light","Organic"))
@@ -5173,10 +5224,6 @@ market_share
 
 
 Vimos que o sorvete de morango, cone, baixo teor de gordura e não orgânico é preferido por 7 em cada 15 participantes, o framboesa, waffle caseiro, sem baixo teor de gordura e sorvete não orgânico é favorecido por 4 em cada 15 participantes e assim por diante .
-
-
-
-
 
 
 
