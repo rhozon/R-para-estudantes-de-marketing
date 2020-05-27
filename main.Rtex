@@ -585,7 +585,11 @@ airbnb # country = Bélgica agora e cidade se refere a cidades
 \end{lstlisting}
 
 \subsubsection{Incluindo ou excluindo observações (linhas)}
+
+\vspace{.5cm}
 \subsubsubsection{\textbf{Criando um vetor com c( )}}
+
+\vspace{.5cm}
 
 \href{https://bookdown.org/content/1340/graphs.html#graphs}{Mais adiante}, faremos um gráfico dos preços do Airbnb nas dez maiores cidades da Bélgica (em termos de população): Bruxelas, Antuérpia, Gent, Charleroi, Liège, Bruges, Namur, Lovaina, Mons e Aalst.
 
@@ -747,6 +751,7 @@ airbnb %>%
 ## # ... with 33 more rows  
 \end{lstlisting}
 
+\newpage
 
 Mostra a cidade com o menor número de quartos no topo. Para exibir a cidade com mais quartos no topo, classifique em ordem decrescente:
 
@@ -797,6 +802,8 @@ arrange(airbnb.grouped.summary, desc(nr_per_city))
 \end{lstlisting}
 
 Mas espero que você concorde que o código que usa o operador de pipe é mais fácil de ler. Além disso, sem o operador pipe, você acabará criando muitos objetos desnecessários, como airbnb.grouped e airbnb.grouped.summary.
+
+\newpage
 
 \subsubsection{Estatísticas Descritivas}
 
@@ -861,7 +868,10 @@ print(airbnb.summary, n = Inf)
 ## 43 Roeselare                  41          74.9
 \end{lstlisting}
 
-Talvez surpreendentemente, as três principais cidades mais caras são Bastogne, Philippeville e Verviers. Talvez o preço médio dessas cidades seja alto por causa de discrepâncias. Vamos calcular algumas estatísticas mais descritivas para ver se nosso palpite está correto:
+Talvez surpreendentemente, as três principais cidades mais caras são Bastogne, Philippeville e Verviers. Talvez o preço médio dessas cidades seja alto por causa de discrepâncias. 
+
+\newpage
+Vamos calcular algumas estatísticas mais descritivas para ver se nosso palpite está correto:
 \begin{lstlisting}[language=R]
 airbnb %>%
   group_by(city) %>%
@@ -920,6 +930,8 @@ airbnb.topten <- airbnb %>%
 
 Se você acabou de iniciar uma nova sessão \faRProject, também pode reler o arquivo .csv executando o código na seção da seção anterior.
 
+\newpage
+
 \subsubsection{Diagrama de dispersão (scatterplot)}
 
 Vamos criar um scatterplot dos preços por cidade:
@@ -959,7 +971,6 @@ Em outras palavras, valores extremos não ocorrem com muita frequência.
 
 Uma segunda característica é que a distribuição é simétrica. Em outras palavras, o número de valores abaixo da média é igual ao número de valores acima da média. Em uma distribuição distorcida, existem valores extremos em apenas um lado da distribuição. No caso de inclinação à direita, isso significa que existem valores extremos no lado direito da distribuição. No nosso caso, isso significa que existem algumas listagens do Airbnb com preços muito altos. Isso aumenta a média da distribuição, de modo que as listagens não sejam mais normalmente distribuídas em torno da média.
 
-\newpage
 Vamos desenhar um histograma dos preços:
 
 \begin{lstlisting}[language=R]
@@ -974,6 +985,7 @@ ggplot(data = airbnb.topten, mapping = aes(x = price)) + # Observe que não temo
 
 De fato, existem alguns preços extremamente altos (em comparação com a maioria dos preços), portanto, os preços estão inclinados à direita. Nota: o stat\_bin() usando compartimentos = 30. Escolha um valor melhor com o aviso de largura de caixa no console que possa ser ignorado com segurança.
 
+\newpage
 \subsubsection{Transformação logarítmica}
 
 Como a variável price está inclinada à direita, podemos transformá-la em log para torná-la mais normal:
@@ -1017,7 +1029,6 @@ ggplot(data = airbnb.topten, mapping = aes(x = city, y = log(price, base = exp(1
 \includegraphics[width=12cm,height=8cm]{intro_plot_log_mean-1.png}
 \end{center}
 
-\newpage
 \subsubsection{Plota a média}
 
 Vamos adicionar a média também, mas com uma cor e forma diferentes da média:
@@ -1034,6 +1045,7 @@ ggplot(data = airbnb.topten, mapping = aes(x = city, y = log(price, base = exp(1
 
 O código para obter a média é muito semelhante ao usado para obter a mediana. Simplesmente alteramos a estatística, a cor e adicionamos a forma = 23 para obter diamantes em vez de círculos e preencher = "green" para preencher os diamantes. Vemos que os meios e medianas são bastante semelhantes.
 
+\newpage
 \subsubsection{Salvando imagens}
 
 Podemos salvar esse gráfico em nosso disco rígido. Para fazer isso, clique em Exportar / Salvar como imagem. Se você não alterar o diretório, o arquivo será salvo no seu diretório de trabalho. Você pode redimensionar a plotagem e também fornecer um nome de arquivo significativo - Rplot01.png não será útil quando você tentar encontrar o arquivo posteriormente.
@@ -1109,6 +1121,7 @@ head(airbnb$overall_satisfaction)
 ## [1] 4.5  NA 4.0 4.5 5.0 5.0
 \end{lstlisting}
 
+\newpage
 \subsubsection{Mesclando datasets}
 
 Posteriormente, testaremos se o preço está relacionado a determinadas características dos tipos de quartos. As características potencialmente interessantes são: room\_type, city, reviews, overall\_satisfaction, etc. Para torná-lo ainda mais interessante, podemos aumentar os dados, por exemplo, com dados disponíveis publicamente nas cidades. Reuni os tamanhos de população das cidades belgas mais populosas \href{https://population.mongabay.com/population/belgium/}{deste site}. Faça o download desses dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/population.xlsx}{aqui} e importe-os para o \faRProject:
@@ -1165,7 +1178,9 @@ airbnb.merged %>% select(room_id, city, price, population)
 
 Vemos que há uma population de colunas em nosso conjunto de dados airbnb.merged. Você também pode ver isso no painel Ambiente: airbnb.merged tem uma variável a mais que airbnb (mas o mesmo número de observações).
 
-Faltam dados para Bruxelas, no entanto. Isso ocorre porque Bruxelas está escrito em holandês no conjunto de dados airbnb, mas em inglês no conjunto de dados da population. Vamos substituir Bruxelas por Bruxelas no conjunto de dados da population (e também alterar a ortografia de duas outras cidades) e vincular os dados novamente:
+Faltam dados para Bruxelas, no entanto. Isso ocorre porque Bruxelas está escrito em holandês no conjunto de dados airbnb, mas em inglês no conjunto de dados da population. 
+\newpage
+Vamos substituir Bruxelas por Bruxelas no conjunto de dados da population (e também alterar a ortografia de duas outras cidades) e vincular os dados novamente:
 
 \begin{lstlisting}[language=R]
 population <- population %>% 
@@ -1193,7 +1208,7 @@ airbnb.merged %>% select(room_id, city, price, population)
 ## # ... with 17,641 more rows
 \end{lstlisting}
 
-\subsubsection{Recapitulação: importação e manipulação}
+\subsubsection{Recapitulando: importação e manipulação}
 
 Aqui está o que fizemos até agora, em uma sequência ordenada de operações pipe (faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/tomslee_airbnb_belgium_1454_2017-07-14.csv}{aqui} e \href{http://users.telenet.be/samuelfranssens/tutorial_data/population.xlsx}{aqui}):
 
@@ -1215,6 +1230,7 @@ population <- read_excel("population.xlsx","data") %>%
 airbnb <- left_join(airbnb, population, by = c("city" = "place"))
 \end{lstlisting}
 
+\newpage
 \subsection{Amostras independentes: teste t}
 
 Digamos que queremos testar se os preços diferem entre cidades grandes e pequenas. Para fazer isso, precisamos de uma variável que indique se um Airbnb está em uma cidade grande ou pequena. Na Bélgica, consideramos cidades com uma população de pelo menos cem mil como grande:
@@ -1344,6 +1360,7 @@ leveneTest(airbnb.cities$price, airbnb.cities$size)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{lstlisting}
 
+\newpage
 
 A hipótese nula de variâncias iguais é rejeitada ($p <0,001$), portanto, devemos continuar com um teste $t$ que pressupõe variâncias desiguais:
 
@@ -1524,7 +1541,7 @@ Também podemos realizar um teste formal de homogeneidade de variâncias. Para i
 install.packages("car") # Para o teste de variancias iguais, precisamos de um pacote chamado carro. Instalamos isso antes, portanto, nao eh necessario reinstala-lo se voce ja o tiver feito.
 library(car)
 
-Teste de Levene de variancias iguais.
+#Teste de Levene de variancias iguais.
 # Valor baixo de p significa que as variancias nao sao iguais.
 # Primeiro argumento = variavel dependente continua, segundo argumento = variavel independente categorica.
 leveneTest(airbnb$price, airbnb$room_type) 
@@ -1551,7 +1568,6 @@ library(remotes)
 install_github('samuelfranssens/type3anova') # Instala o pacote type3anova. Esta e as etapas anteriores precisam ser executadas apenas uma vez.
 
 library(type3anova) # Carregue o pacote type3anova.
-
 \end{lstlisting}
 
 Agora podemos prosseguir com a ANOVA verdadeira:
@@ -1577,7 +1593,10 @@ Nesse caso, o valor-p associado ao efeito de room\_type é praticamente 0, o que
 
 \subsection{Teste de Tuckey de diferença significativa verdadeira}
 
-Observe que a ANOVA testa a hipótese nula de que as médias em todos os nossos grupos são iguais. A rejeição desta hipótese nula significa que há uma diferença significativa em pelo menos um dos possíveis pares de médias (ou seja, em casa / apartamento inteiro vs. privado e / ou em casa / apartamento inteiro vs. compartilhado e / ou privado) vs. compartilhado). Para ter uma idéia de qual par de médias contém uma diferença significativa, podemos acompanhar o teste de Tukey, que nos dará todas as comparações pareadas. O teste de Tukey corrige os valores de p para cima - portanto, é mais conservador decidir que algo é significativo - porque as comparações são post-hoc ou exploratórias:
+Observe que a ANOVA testa a hipótese nula de que as médias em todos os nossos grupos são iguais. A rejeição desta hipótese nula significa que há uma diferença significativa em pelo menos um dos possíveis pares de médias (ou seja, em casa / apartamento inteiro vs. privado e / ou em casa / apartamento inteiro vs. compartilhado e / ou privado) vs. compartilhado). Para ter uma idéia de qual par de médias contém uma diferença significativa, podemos acompanhar o teste de Tukey, que nos dará todas as comparações pareadas.
+
+\newpage
+O teste de Tukey corrige os valores de p para cima - portanto, é mais conservador decidir que algo é significativo - porque as comparações são post-hoc ou exploratórias:
 
 \begin{lstlisting}[language=R]
 TukeyHSD(aov(price ~ room_type, data=airbnb), 
@@ -1614,6 +1633,8 @@ ggplot(data = airbnb, mapping = aes(x = overall_satisfaction, y = price)) +
 \end{center}
 
 (Recebemos uma mensagem de erro informando que várias linhas foram removidas. Essas são as linhas com valores ausentes para a overall\_satisfaction, portanto, não há necessidade de se preocupar com essa mensagem de erro. Consulte as \href{https://bookdown.org/content/1340/data.html#modelling_manipulations}{manipulações de dados} para saber por que faltam valores para a overall\_satisfaction.)
+
+\newpage
 
 Os outliers de preço reduzem a informatividade do gráfico, portanto, vamos transformar a variável price. Também vamos adicionar alguns meios ao gráfico, como aprendemos \href{https://bookdown.org/content/1340/graphs.html#graphs}{aqui}, e uma linha de regressão:
 
@@ -1692,12 +1713,12 @@ Elevando ao quadrado essa correlação, você obterá o R quadrado de um modelo 
 
 Ao lidar com múltiplos preditores (como na próxima seção), podemos gerar uma matriz de correlação. Isso é especialmente útil ao verificar a multicolinearidade. Digamos que desejamos que as correlações entre, price, overall\_satisfaction, reviews, accommodates::
 
-\begin{lstlisting}
+\begin{lstlisting}[language=R]
 airbnb.corr <- airbnb%>%
    filter (! is.na (overall_satisfaction))%>% # caso contrário, você verá NAs no resultado
    select (price, overall_satisfaction, reviews, accommodates)
 
-cor (airbnb.corr) # obter a matriz de correlação
+cor(airbnb.corr) # obter a matriz de correlação
 
 cor(airbnb.corr) # obtenha a matriz de correlação
 
@@ -1713,6 +1734,8 @@ cor(airbnb.corr) # obtenha a matriz de correlação
 ## accommodates           1.00000000
 
 \end{lstlisting}
+
+\newpage
 
 Você pode visualizar facilmente essa matriz de correlação:
 
@@ -1745,13 +1768,15 @@ round(cor.mtest(airbnb.corr)$p, 5)
 ## [4,]    0 0.00000 0.00007 0e+00
 \end{lstlisting}
 
+\newpage
+
 \subsubsection{Regressão linear múltipla, com interação}
 
 Frequentemente, estamos interessados em interações entre preditores (por exemplo, overall\_satisfaction e reviews). Uma interação entre preditores nos diz que o efeito de um preditor depende do nível do outro preditor:
 
 \begin{lstlisting}[language=R]
-# overall_satisfaction + reviews: a interação não é incluída como preditor
-# overall_satisfaction * reviews: a interação entre os dois preditores é incluída como preditora
+# overall_satisfaction + reviews: a interacao nao eh incluida como preditor
+# overall_satisfaction * reviews: a interacao entre os dois preditores eh incluida como preditora
 
 ## 
 ## Call:
@@ -1777,7 +1802,7 @@ Frequentemente, estamos interessados em interações entre preditores (por exemp
 
 \end{lstlisting}
 
-Com esse modelo, preço estimado = $\beta_{0} + \beta_{1}\mbox{overall\_satisfaction} + \beta_{2}reviews + \beta_{3}\mbox{overall\_satisfaction} × reviews$, em que:
+Com esse modelo, preço estimado = $\beta_{0} + \beta_{1}\mbox{\textit{overall\_satisfaction}} + \beta_{2}reviews + \beta_{3}\mbox{\textit{overall\_satisfaction}} × reviews$, em que:
 
 \begin{itemize}
     \item $\beta_{0}$ é o intercepto (48.77)
@@ -1789,7 +1814,7 @@ Com esse modelo, preço estimado = $\beta_{0} + \beta_{1}\mbox{overall\_satisfac
 Para um determinado nível de reviews, o relacionamento entre overall\_satisfaction e price pode ser reescrito como:
 
 $$
-=[\beta_{0}+\beta_{2}reviews]+(\beta_{1}+\beta_{3}reviews)\times\,\,\mbox{overallsatisfaction}}
+=[\beta_{0}+\beta_{2}reviews]+(\beta_{1}+\beta_{3}reviews)\times\,\,\mbox{\textit{overall\_satisfaction}}}
 $$
 
 Vemos que tanto a interceptação ($\beta_{0}+\beta_{2}reviews$) e a inclinação ($\beta_{1}+\beta_{3}reviews$) a relação entre overall\_satisfaction e price depende de reviews. No modelo sem interações, apenas a interceptação da relação entre overall\_satisfaction e price dependia de reviews. Como adicionamos ao nosso modelo uma interação entre a overall\_satisfaction e o reviews, a inclinação agora também depende de reviews.
@@ -1797,22 +1822,23 @@ Vemos que tanto a interceptação ($\beta_{0}+\beta_{2}reviews$) e a inclinaçã
 Da mesma forma, para um determinado nível de overall\_satisfaction, o relacionamento entre reviews e price pode ser reescrito como:
 
 $$
-=[\beta_{0}+\beta_{1}\mbox{overall\_satisfaction}]+(\beta_{2}+\beta_{3}\mbox{overall\_satisfaction})\times\,\,reviews
+=[\beta_{0}+\beta_{1}\mbox{\textit{overall\_satisfaction}}]+(\beta_{2}+\beta_{3}\mbox{\textit{overall\_satisfaction}})\times\,\,reviews
 $$
 
 Aqui também vemos que tanto a interceptação quanto a inclinação da relação entre revisões e preço dependem da satisfação geral.
 
-Como dito, quando o relacionamento entre uma variável independente e uma variável dependente depende do nível de outra variável independente, temos uma interação entre as duas variáveis independentes. Para esses dados, a interação é altamente significativa (p <0,001). Vamos visualizar essa interação. Nós nos concentramos na relação entre satisfação geral e preço. Planejaremos isso para um nível de comentários que possa ser considerado baixo, médio e alto:
+Como dito, quando o relacionamento entre uma variável independente e uma variável dependente depende do nível de outra variável independente, temos uma interação entre as duas variáveis independentes. Para esses dados, a interação é altamente significativa ($p <0,001$). Vamos visualizar essa interação. Nós nos concentramos na relação entre satisfação geral e preço. Planejaremos isso para um nível de comentários que possa ser considerado baixo, médio e alto:
 
 \begin{lstlisting}[language=R]
 airbnb %>% 
   filter(!is.na(overall_satisfaction)) %>% 
   summarize(min = min(reviews),
-            Q1 = quantile(reviews, .25), # first quartile
-            Q2 = quantile(reviews, .50), # second quartile or median
-            Q3 = quantile(reviews, .75), # third quartile
+            Q1 = quantile(reviews, .25), # primeiro quartil
+            Q2 = quantile(reviews, .50), # segundo quartil ou mediana
+            Q3 = quantile(reviews, .75), # terceiro quartile
             max = max(reviews),
             mean = mean(reviews))
+            
 ## # A tibble: 1 x 6
 ##     min    Q1    Q2    Q3   max  mean
 ##   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
@@ -1827,9 +1853,10 @@ Queremos três grupos, no entanto, para que possamos pedir quantis diferentes:
 \begin{lstlisting}[language=R]
 airbnb %>% 
   filter(!is.na(overall_satisfaction)) %>% 
-  summarize(Q1 = quantile(reviews, .33), # low
-            Q2 = quantile(reviews, .66), # medium
-            max = max(reviews))          # high
+  summarize(Q1 = quantile(reviews, .33), # baixo
+            Q2 = quantile(reviews, .66), # medio
+            max = max(reviews))          # alto
+            
 ## # A tibble: 1 x 3
 ##      Q1    Q2   max
 ##   <dbl> <dbl> <dbl>
@@ -1893,8 +1920,8 @@ Os resíduos (a diferença entre os valores observados e os estimados) devem ser
 linearmodel <- lm(price ~ overall_satisfaction * reviews, data = airbnb)
 residuals <- as_tibble(resid(linearmodel))  
 
-## Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.
-## This warning is displayed once per session.
+Atenção: Chamar `as_tibble ()` em um vetor é desencorajado, porque é provável que o comportamento mude no futuro. Use `enframe (name = NULL)` em seu lugar.
+## Este aviso é exibido uma vez por sessão.
 
 # veja os residuos do modelo linear com resid(linearmodel) 
 # e mude isso em seu dataframe com as_tibble()
@@ -1902,7 +1929,7 @@ residuals <- as_tibble(resid(linearmodel))
 ggplot(data = residuals, mapping = aes(x = value)) + 
   geom_histogram()
   
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` usando `bins = 30`. Obtenha um valor melhor com `binwidth`.
 \end{lstlisting}
 
 
@@ -1911,7 +1938,11 @@ ggplot(data = residuals, mapping = aes(x = value)) +
 \includegraphics[width=12cm,height=8cm]{modelling_normality-1.png} 
 \end{center}
 
-\subsubsubsection{Homocedasticidade dos resíduos}
+\vspace{.25cm}
+
+\subsubsubsection{\textbf{Homocedasticidade dos resíduos}}
+
+\vspace{.25cm}
 
 Os resíduos (a diferença entre os valores observados e os estimados) devem ter uma variação constante. Podemos verificar isso plotando os resíduos versus os valores previstos:
 
@@ -1919,8 +1950,8 @@ Os resíduos (a diferença entre os valores observados e os estimados) devem ter
 linearmodel <- lm(price ~ overall_satisfaction * reviews, data = airbnb)
 
  # cria um dataframe (a tibble)
-residuals_predicted <- tibble(residuals = resid(linearmodel), # a primeira variável são resíduos, que são os resíduos do nosso modelo linear
-                              predicted = predict(linearmodel)) # a segunda variável é prevista, quais são os valores previstos do nosso modelo linear
+residuals_predicted <- tibble(residuals = resid(linearmodel), # a primeira variavel são residuos, que sao os residuos do nosso modelo linear
+                              predicted = predict(linearmodel)) # a segunda variavel eh prevista, quais sao os valores previstos do nosso modelo linear
 
 ggplot(data = residuals_predicted, mapping = aes(x = predicted, y = residuals)) + 
   geom_point()
@@ -1932,13 +1963,17 @@ ggplot(data = residuals_predicted, mapping = aes(x = predicted, y = residuals)) 
 
 Essa suposição é violada porque, quanto maiores nossos valores previstos, maior a variação que vemos nos resíduos.
 
-\subsubsubsection{Multicolinearidade}
+\vspace{.25cm}
+
+\subsubsubsection{\textbf{Multicolinearidade}}
+
+\vspace{.25cm}
 
 A multicolinearidade existe sempre que dois ou mais dos preditores em um modelo de regressão são moderadamente ou altamente correlacionados (portanto, é claro que isso não é um problema no caso de regressão simples). Vamos testar a correlação entre overall\_satisfaction e reviews:
 
 \begin{lstlisting}[language=R]
 # Certifique-se de incluir o argumento use, caso contrario, o resultado sera NA devido aos valores ausentes no overall_satisfaction.
-# O argumento use instrui o R para calcular a correlação com base apenas nas observações para as quais temos dados sobre price e overall_satisfaction.
+# O argumento use instrui o R para calcular a correlacao com base apenas nas observacoes para as quais temos dados sobre price e overall_satisfaction.
 
 cor.test(airbnb$overall_satisfaction,airbnb$reviews, use = "pairwise.complete.obs") # teste para correlacao
 
@@ -2005,7 +2040,7 @@ Suponha que tenhamos interesse em encontrar uma verdadeira jóia de uma lista. P
 
 \begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
-  mutate(gem = (overall_satisfaction == 5 & reviews>=30), # duas condições devem ser atendidas antes de dizer que uma listagem é uma jóia
+  mutate(gem = (overall_satisfaction == 5 & reviews>=30), # duas condicoes devem ser atendidas antes de dizer que uma listagem eh uma joia
          gem = factor(gem, labels = c("no gem","gem")))  # dê à variável lógica rótulos mais intuitivos
 \end{lstlisting}
 
@@ -2017,7 +2052,7 @@ Antes de realizarmos um teste do qui-quadrado, lembre-se de que algumas cidades 
 airbnb.cities <- airbnb %>% 
   filter(!is.na(size)) 
 
-# queremos apenas aquelas observações em que tamanho não é NA. ! significa 'não'
+# queremos apenas aquelas observacoes em que tamanho nao eh NA. ! significa 'nao'
 # veja https://r4ds.had.co.nz/transform.html#filter-rows-with-filter para mais funcoes logicas (desca ate a secao 5.2.2)
 \end{lstlisting}
 
@@ -2041,6 +2076,7 @@ Esta informação está correta, mas o formato em que a tabela é apresentada é
 
 \begin{lstlisting}[language=R]
 table(airbnb.cities$size, airbnb.cities$gem)
+
 ##        
 ##         no gem   gem
 ##   small   4095   175
@@ -2052,7 +2088,8 @@ Isso é um pouco mais fácil de interpretar. Uma tabela como essa é frequenteme
 
 \begin{lstlisting}[language=R]
 crosstable <- table(airbnb.cities$size, airbnb.cities$gem) #Precisamos salvar a tabela cruzada primeiro.
-prop.table(crosstable) # Use a função prop.table () para solicitar porcentagens.
+prop.table(crosstable) # Use a funcao prop.table () para solicitar porcentagens.
+
 ##        
 ##             no gem        gem
 ##   small 0.25648253 0.01096079
@@ -2073,6 +2110,7 @@ Com base nessas frequências ou porcentagens, não devemos esperar uma forte rel
 
 \begin{lstlisting}[language=R]
 chisq.test(crosstable)
+
 ## 
 ##  Pearson's Chi-squared test with Yates' continuity correction
 ## 
@@ -2083,25 +2121,30 @@ chisq.test(crosstable)
 O valor da estatística qui é 74,35 e o valor p é praticamente 0, por isso rejeitamos a hipótese nula de nenhum relacionamento. Não é o que esperávamos, mas o valor p é baixo porque nossa amostra é bastante grande (15966 observações). 
 
 Você pode relatar o seguinte: “Havia uma relação significativa entre o tamanho da cidade e se uma listagem era ou não uma jóia ($\chi^{2} (1, N = 15966) = 74,35, p <0,001$), de modo que as cidades grandes (8,05\%) tinham uma porcentagem maior de gemas do que as cidades pequenas (4,1\%). 
+
 \subsection{Regressão logística (opcional)}
 
 Às vezes, queremos prever uma variável dependente binária, ou seja, uma variável que pode assumir apenas dois valores, com base em várias variáveis independentes contínuas ou categóricas. Por exemplo, digamos que estamos interessados em testar se uma listagem é ou não uma joia depende do preço e do tipo de quarto da listagem.
 
 Não podemos usar ANOVA ou regressão linear aqui porque a variável dependente é uma variável binária e, portanto, normalmente não é distribuída. Outro problema com a ANOVA ou regressão linear é que ela pode prever valores que não são possíveis (por exemplo, nosso valor previsto pode ser 5, mas apenas 0 e 1 fazem sentido para essa variável dependente). Portanto, usaremos regressão logística. A regressão logística primeiro transforma a variável dependente Y com a transformação do logit. A transformação do logit usa o logaritmo natural das chances de que a variável dependente seja igual a 1:
+\vspace{.25cm}
 
 $$
 odds=\displaystyle\frac{P(Y=1)}{P(Y=0}=\displaystyle\frac{P(Y=1)}{1-P(Y=1)}
 $$
 
+\vspace{.25cm}
 \hspace{5cm}então o logit $P(Y=1))=\ln\displaystyle\frac{P(Y-1)}{1-P(Y=1)}$
+\vspace{.25cm}
 
 Isso garante que nossa variável dependente seja normalmente distribuída e não seja restrita a ser 0 ou 1.
 
 Vamos realizar a regressão logística:
 
 \begin{lstlisting}[language=R]
-logistic.model <- glm(gem ~ price * room_type, data=airbnb, family="binomial") # o argumento family = "binomial" diz R para tratar a variável dependente como uma variável 0/1
-summary(logistic.model) # saída da regressão
+logistic.model <- glm(gem ~ price * room_type, data=airbnb, family="binomial") # o argumento family = "binomial" diz R para tratar a variavel dependente como uma variavel 0/1
+summary(logistic.model) # saida da regressao
+
 ## 
 ## Call:
 ## glm(formula = gem ~ price * room_type, family = "binomial", data = airbnb)
@@ -2171,11 +2214,26 @@ O coeficiente de regressão do preço é -0.0007185. Isso significa que um aumen
 
 \begin{align}
     
-\textrm{logit}(P(Y &= 1 | \textrm{price} = 60 )) = \textrm{logit}(P(Y = 1 | \textrm{price} = 59 )) - 0.0007185)\\
-\Leftrightarrow \textrm{logit}(P(Y = 1 | \textrm{price} = 60 )) - \textrm{logit}(P(Y &= 1 | \textrm{price} = 59 )) = -0.0007185)\\
-\Leftrightarrow \textrm{ln(odds}(P(Y = 1 | \textrm{price} = 60 )) - \textrm{ln(odds}(P(Y &= 1 | \textrm{price} = 59 )) = -0.0007185)\\
-\Leftrightarrow \textrm{ln}(\dfrac{ \textrm{odds}(P(Y = 1 | \textrm{price} &= 60 )}{\textrm{odds}(P(Y = 1 | \textrm{price} = 59 )}) = -0.0007185\
-\Leftrightarrow \dfrac{ \textrm{odds}(P(Y = 1 | \textrm{price} = 60 )}{\textrm{odds}(P(Y &= 1 | \textrm{price} = 59 )} = e^{-0.0007185})\\
+\textrm{logit}(P(Y &= 1 | \textrm{price} = 60 )) = \textrm{logit}(P(Y = 1 | \textrm{price} = 59 )) - 0.0007185\\
+
+\vspace{.25cm}
+
+\Leftrightarrow \textrm{logit}(P(Y = 1 | \textrm{price} = 60 )) - \textrm{logit}(P(Y &= 1 | \textrm{price} = 59 )) = -0.0007185\\
+
+\vspace{.25cm}
+
+\Leftrightarrow \textrm{ln(odds}(P(Y = 1 | \textrm{price} = 60 )) - \textrm{ln(odds}(P(Y &= 1 | \textrm{price} = 59 )) = -0.0007185\\
+
+\vspace{.25cm}
+
+\Leftrightarrow \textrm{ln}(\dfrac{ \textrm{odds}(P(Y = 1 | \textrm{price} &= 60 )}{\textrm{odds}(P(Y = 1 | \textrm{price} = 59 )}) = -0.0007185\\
+
+\vspace{.25cm}
+
+\Leftrightarrow \dfrac{ \textrm{odds}(P(Y = 1 | \textrm{price} = 60 )}{\textrm{odds}(P(Y &= 1 | \textrm{price} = 59 )} = e^{-0.0007185}\\
+
+\vspace{.25cm}
+
 \Leftrightarrow \textrm{odds}(P(Y &= 1 | \textrm{price} = 60 ) = e^{-0.0007185} * \textrm{odds}(P(Y &= 1 | \textrm{price} = 59 ))
 \end{align}
 
@@ -2189,13 +2247,13 @@ Nosso modelo usa o preço e o tipo de quarto da listagem para prever se a listag
 \begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
   mutate(prediction = predict(logistic.model, airbnb))
-# Crie uma nova coluna chamada previsão no quadro de dados do airbnb e armazene nela a previsão,
+# Crie uma nova coluna chamada previsao no quadro de dados do airbnb e armazene nela a previsao,
 # baseado em logistic.model, para os dados do airbnb
-# Dê uma olhada nessas previsões:
+# De uma olhada nessas previsoes:
 head (previsão de airbnb $)
 ## 1 2 3 4 5 6
 ## -4.790232 -4.448355 -4.049498 -4.619293 -4.106477 -4.847211
-# Compare com as observações:
+# Compare com as observacoes:
 head(airbnb$gem)
 ## [1] no gem no gem no gem no gem no gem no gem
 ## Levels: no gem gem
@@ -2221,7 +2279,7 @@ Você vê o problema? As previsões são logits, ou seja, logaritmos de chances 
     $\Leftrightarrow \dfrac{odds}{1 + odds} = P(Y = 1))$
 \end{center}
  
-\newpage 
+
 Agora vamos calcular, para cada listagem, a probabilidade de a listagem ser uma jóia:
 
 \begin{lstlisting}[language=R]
@@ -2237,7 +2295,11 @@ head(airbnb$prediction.probability)
 ## 0.008242034 0.011562542 0.017132489 0.009763496 0.016198950 0.007789092
 \end{lstlisting}
 
-Os primeiros números são probabilidades muito baixas, mas também existem probabilidades mais altas e todas as previsões estão entre 0 e 1, como deveriam. Agora precisamos decidir qual probabilidade é suficiente para prevermos que uma listagem é uma gema ou não. Uma escolha óbvia é uma probabilidade de 0,5: uma probabilidade maior que 0,5 significa que prevemos que é mais provável que uma listagem seja uma gema do que não. Vamos converter probabilidades em previsões:
+Os primeiros números são probabilidades muito baixas, mas também existem probabilidades mais altas e todas as previsões estão entre 0 e 1, como deveriam. Agora precisamos decidir qual probabilidade é suficiente para prevermos que uma listagem é uma gema ou não. 
+
+\newpage
+
+Uma escolha óbvia é uma probabilidade de 0,5: uma probabilidade maior que 0,5 significa que prevemos que é mais provável que uma listagem seja uma gema do que não. Vamos converter probabilidades em previsões:
 
 \begin{lstlisting}[language=R]
 airbnb <- airbnb %>% 
@@ -2265,7 +2327,7 @@ Normalmente, vemos uma tabela 2x2, mas vemos uma tabela com um valor previsto na
 airbnb <- airbnb %>% 
   mutate(prediction = case_when(prediction.probability<=.07 ~ "no gem",
                                 prediction.probability> .07 ~ "gem"),
-         prediction = factor(prediction, levels = c("no gem","gem"))) # make sure no gem is the first level of our factor
+         prediction = factor(prediction, levels = c("no gem","gem")))# verifique se nenhuma joia eh o primeiro nivel do nosso fator
 
 # Observando a tabela
 table(airbnb$prediction,airbnb$gem)
@@ -2298,8 +2360,8 @@ Em suma, o experimento tem um design 2 (poder: alto vs. baixo) x 2 (público: p�
 As hipóteses neste experimento foram as seguintes:
 
 \begin{itemize}
-    \item Na condição de privado, esperávamos que os participantes de baixa potência tivessem uma WTP maior do que os participantes de alta potência para produtos visíveis, mas não para produtos discretos. Esse padrão de resultados replicaria os resultados de Rucker e Galinsky (2008).
- \item Esperávamos que a manipulação pública versus privada reduzisse a WTP para produtos visíveis para participantes de baixa potência, mas não para participantes de alta potência.Não esperávamos um efeito da manipulação pública versus privada na WTP para produtos discretos para participantes de baixa ou alta potência.
+\item Na condição de privado, esperávamos que os participantes de baixa potência tivessem uma WTP maior do que os participantes de alta potência para produtos visíveis, mas não para produtos discretos. Esse padrão de resultados replicaria os resultados de Rucker e Galinsky (2008).
+\item Esperávamos que a manipulação pública versus privada reduzisse a WTP para produtos visíveis para participantes de baixa potência, mas não para participantes de alta potência.Não esperávamos um efeito da manipulação pública versus privada na WTP para produtos discretos para participantes de baixa ou alta potência.
 \end{itemize}
 
 Este experimento é descrito com mais detalhes em minha tese de doutorado (Franssens, 2016)
@@ -2307,25 +2369,25 @@ Este experimento é descrito com mais detalhes em minha tese de doutorado (Frans
 \newpage
 
 \vspace{.25cm}
-\textit{Referências}
+\textbf{\textit{Referências}}
 \vspace{.5cm}
 
-Cassidy, T., & Lynn, R. (1989). A multifactorial approach to achievement motivation: The development of a comprehensive measure. Journal of Occupational Psychology, 62(4), 301-312.
+\hspace{-.5cm}Cassidy, T., & Lynn, R. (1989). \textit{A multifactorial approach to achievement motivation: The development of a comprehensive measure}. Journal of Occupational Psychology, 62(4), 301-312.
 
 \vspace{.25cm}
-Franssens, S. (2016). Essays in consumer behavior (Doctoral dissertation). KU Leuven, Leuven, Belgium.
+\hspace{-.5cm}Franssens, S. (2016). \textit{Essays in consumer behavior (Doctoral dissertation)}. KU Leuven, Leuven, Belgium.
 
 \vspace{.25cm}
-Galinsky, A. D., Gruenfeld, D. H., & Magee, J. C. (2003). From Power to action. Journal of Personality and Social Psychology, 85(3), 453-466. https://doi.org/10.1037/0022-3514.85.3.453
+\hspace{-.5cm}Galinsky, A. D., Gruenfeld, D. H., & Magee, J. C. (2003). \textit{From Power to action.} Journal of Personality and Social Psychology, 85(3), 453-466. https://doi.org/10.1037/0022-3514.85.3.453
 
 \vspace{.25cm}
-Griskevicius, V., Tybur, J. M., Sundie, J. M., Cialdini, R. B., Miller, G. F., & Kenrick, D. T. (2007). Blatant benevolence and conspicuous consumption: When romantic motives elicit strategic costly signals. Journal of Personality and Social Psychology, 93(1), 85-102. https://doi.org/10.1037/0022-3514.93.1.85
+\hspace{-.5cm}Griskevicius, V., Tybur, J. M., Sundie, J. M., Cialdini, R. B., Miller, G. F., & Kenrick, D. T. (2007). \textit{Blatant benevolence and conspicuous consumption: When romantic motives elicit strategic costly signals.} Journal of Personality and Social Psychology, 93(1), 85-102. https://doi.org/10.1037/0022-3514.93.1.85
 
 \vspace{.25cm}
-Mead, N. L., & Maner, J. K. (2012). On keeping your enemies close: Powerful leaders seek proximity to ingroup power threats. Journal of Personality and Social Psychology, 102(3), 576-591. https://doi.org/10.1037/a0025755
+\hspace{-.5cm}Mead, N. L., & Maner, J. K. (2012). \textit{On keeping your enemies close: Powerful leaders seek proximity to ingroup power threats.} Journal of Personality and Social Psychology, 102(3), 576-591. https://doi.org/10.1037/a0025755
 
 \vspace{.25cm}
-Rucker, D. D., & Galinsky, A. D. (2008). Desire to acquire: Powerlessness and compensatory consumption. Journal of Consumer Research, 35(2), 257-267. https://doi.org/10.1086/588569
+\hspace{-.5cm}Rucker, D. D., & Galinsky, A. D. (2008). \textit{Desire to acquire: Powerlessness and compensatory consumption.} Journal of Consumer Research, 35(2), 257-267. https://doi.org/10.1086/588569
 
 \newpage
 
@@ -2378,9 +2440,9 @@ powercc # mostra os dados
 Temos 39 colunas ou variáveis em nossos dados:
 
 \begin{itemize}
-    \item subject identifica os participantes
-    \item start\_date e end\_date indicam o início e o fim da sessão experimental.
-    \item  duration indica a duração da sessão experimental
+\item subject identifica os participantes
+\item start\_date e end\_date indicam o início e o fim da sessão experimental.
+\item duration indica a duração da sessão experimental
 \item finished: os participantes concluíram todo o experimento?
 \item power (alto vs. baixo) e público (privado vs. público) são as condições experimentais
 \item group\_size: em grupos de quantos participantes compareceram ao laboratório?
@@ -2410,12 +2472,2707 @@ Em uma sessão experimental, o alarme de incêndio disparou e tivemos que sair d
 \begin{lstlisting}[language=R]
 powercc <- powercc %>% # nos ja criamos o objeto powercc anteriormente
   filter(finished == 1) # somente mantenha as observacoes que sao terminadas ou iguais a 1
-
 \end{lstlisting}
 
 Observe o dobro $==$ ao testar a igualdade. Confira o livro \href{https://r4ds.had.co.nz/transform.html#filter-rows-with-filter}{R4 Data Science para outros operadores lógicos (role para baixo para chegar à Seção 5.2.2)}.
 
 
+\subsubsection{Calcular a consistência interna e a média de perguntas que medem o mesmo conceito}
+
+Gostaríamos de calcular a média das perguntas que medem a dominância para obter um único número indicando se o participante tem uma personalidade dominante ou não dominante. Antes de fazer isso, devemos ter uma idéia da consistência interna das perguntas que medem o domínio. Isso nos dirá se todas essas perguntas medem o mesmo conceito. Uma medida da consistência interna é o alfa de Cronbach. Para calcular, precisamos de um pacote chamado psych:
+
+\begin{lstlisting}[language=R]
+install.packages("psych")
+library(psych)
+\end{lstlisting}
+
+Depois que o pacote for carregado, podemos usar a função alfa para calcular o alfa de Cronbach para um conjunto de perguntas:
+
+\begin{lstlisting}[language=R]
+dominance.questions <- powercc %>% 
+  select(starts_with("dominance")) # pegue o dataframe powercc e selecione todas as viariaveis com o nome que se inicia com dominancia
+
+alpha(dominance.questions) # calcula o alfa de cronbach para essas variaveis
+
+## 
+## Reliability analysis   
+## Call: alpha(x = dominance.questions)
+## 
+##   raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+##       0.69      0.67    0.67      0.23 2.1 0.038 0.63 0.27     0.21
+## 
+##  lower alpha upper     95% confidence boundaries
+## 0.61 0.69 0.76 
+## 
+##  Reliability if an item is dropped:
+##            raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+## dominance1      0.68      0.67    0.66      0.25 2.0    0.039 0.016  0.22
+## dominance2      0.65      0.63    0.62      0.22 1.7    0.043 0.018  0.21
+## dominance3      0.59      0.58    0.56      0.19 1.4    0.050 0.014  0.20
+## dominance4      0.62      0.60    0.59      0.20 1.5    0.047 0.018  0.21
+## dominance5      0.65      0.64    0.63      0.23 1.7    0.043 0.021  0.21
+## dominance6      0.70      0.70    0.68      0.28 2.4    0.038 0.009  0.25
+## dominance7      0.65      0.64    0.62      0.23 1.8    0.043 0.017  0.20
+## 
+##  Item statistics 
+##              n raw.r std.r r.cor r.drop mean   sd
+## dominance1 143  0.52  0.49  0.33   0.29 0.53 0.50
+## dominance2 143  0.59  0.61  0.52   0.42 0.80 0.40
+## dominance3 143  0.75  0.74  0.71   0.59 0.52 0.50
+## dominance4 143  0.68  0.68  0.61   0.50 0.58 0.50
+## dominance5 143  0.61  0.59  0.48   0.40 0.55 0.50
+## dominance6 143  0.29  0.38  0.19   0.14 0.91 0.29
+## dominance7 143  0.62  0.59  0.48   0.41 0.53 0.50
+## 
+## Non missing response frequency for each item
+##               0    1 miss
+## dominance1 0.47 0.53    0
+## dominance2 0.20 0.80    0
+## dominance3 0.48 0.52    0
+## dominance4 0.42 0.58    0
+## dominance5 0.45 0.55    0
+## dominance6 0.09 0.91    0
+## dominance7 0.47 0.53    0
+
+# Observe que também poderíamos ter escrito isso da seguinte maneira:
+# powercc %>% select(starts_with("dominance")) %>% cronbach()
+\end{lstlisting}
+
+Isso produz muita saída. Em raw\_alpha, vemos que o alfa é 0,69, que fica no lado inferior (0,70 é geralmente considerado o mínimo necessário), mas ainda está ok. A tabela abaixo nos diz qual seria o alfa se retirássemos uma pergunta de nossa medida. A queda da dominance6 aumentaria o alfa para 0,7. Comparado ao alfa original de 0,69, esse aumento é pequeno e, portanto, não perdemos a dominance6. Se houvesse uma pergunta com um alto "alfa se descartado", isso indicaria que esta pergunta está medindo algo diferente das outras perguntas. Nesse caso, você pode considerar remover esta pergunta da sua medida.
+
+Podemos proceder calculando a média das respostas sobre a questão do domínio:
+
+\begin{lstlisting}[language=R]
+powercc <- powercc %>% 
+  mutate(dominance = (dominance1+dominance2+dominance3+dominance4+dominance5+dominance6+dominance7)/7,
+         cc = (conspicuous1+conspicuous2+conspicuous3+conspicuous4+conspicuous5)/5,
+         icc = (inconspicuous1+inconspicuous2+inconspicuous3+inconspicuous4+inconspicuous5)/5) %>% 
+  select(-starts_with("sa"))
+\end{lstlisting}
+
+Também calculei a média das perguntas sobre consumo conspícuo e consumo discreto, mas não sobre as aspirações de status porque o alfa de Cronbach era muito baixo. Excluí as perguntas sobre aspirações de status do conjunto de dados. Deixo como um exercício verificar os alfa de Cronbach de cada um desses conceitos (faça isso antes de excluir as perguntas sobre as aspirações de status, é claro).
+
+\subsubsection{Recapitulando: importando e manipulando}
+
+Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o \href{http://users.telenet.be/samuelfranssens/tutorial_data/power_conspicuous_consumption.xlsx}{download dos dados aqui}):
+
+\begin{lstlisting}[language=R]
+library(tidyverse)
+library(readxl)
+setwd("c:/dropbox/work/teaching/R/") # mudando para seu proprio diretorio
+
+powercc <- read_excel("power_conspicuous_consumption.xlsx","data")  %>%
+  filter(finished == 1) %>% 
+  mutate(subject = factor(subject),
+         power = factor(power, levels = c("low","high")),
+         audience = factor(audience, levels = c("private","public")),
+         dominance = (dominance1+dominance2+dominance3+dominance4+dominance5+dominance6+dominance7)/7,
+         cc = (conspicuous1+conspicuous2+conspicuous3+conspicuous4+conspicuous5)/5,
+         icc = (inconspicuous1+inconspicuous2+inconspicuous3+inconspicuous4+inconspicuous5)/5) %>% 
+  select(-starts_with("sa"))
+\end{lstlisting}
+
+\subsection{Teste $t$}
+\subsubsection{Teste $t$ para amostras independentes}
+
+Digamos que queremos testar se homens e mulheres diferem no grau em que são dominantes. Vamos criar um boxplot primeiro e depois verificar as médias e os desvios padrão:
+
+\begin{lstlisting}[language=R]
+ggplot(data = powercc, mapping = aes(x = gender, y = dominance)) + 
+  geom_boxplot()
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{bda_independent_ttest_boxplot-1.png}
+\end{center}
+
+\begin{lstlisting}[language=R]
+powercc %>% 
+  group_by(gender) %>% 
+  summarize(mean_dominance = mean(dominance),
+            sd_dominance = sd(dominance))
+            
+## # A tibble: 2 x 3
+##   gender mean_dominance sd_dominance
+##   <chr>           <dbl>        <dbl>
+## 1 female          0.614        0.247
+## 2 male            0.646        0.296
+\end{lstlisting}
+
+Os homens pontuam um pouco mais alto que as mulheres, mas queremos saber se essa diferença é significativa. Um teste $t$ de amostras independentes pode fornecer a resposta (os homens e as mulheres em nosso experimento são amostras independentes), mas precisamos verificar primeiro uma suposição: as variações das duas amostras independentes são iguais?
+
+\begin{lstlisting}[language=R]
+install.packages("car") # para o teste de variancias iguais, precisamos de um pacote chamado car
+library(car)
+
+# Teste Levene para igualdade de variancias.
+# Baixo valor-p indica que as variancias nao sejam iguais.
+# Primeiro argumento = variavel dependente continua, segundo argumento = variavel independente categorica
+
+leveneTest(powercc$dominance, powercc$gender) 
+
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(>F)
+## group   1  2.1915  0.141
+##       141
+
+\end{lstlisting}
+
+\newpage
+A hipótese nula de variâncias iguais não é rejeitada (p = 0,14), para que possamos continuar com um teste t que assume variâncias iguais:
+
+\begin{lstlisting}[language=R]
+# Teste se os meios de dominancia diferem entre os sexos.
+# Indique se o teste deve assumir variacoes iguais ou nao (defina var.equal = FALSE para um teste que nao assume variacoes iguais).
+
+t.test(powercc$dominance ~ powercc$gender, var.equal = TRUE) 
+
+## 
+##  Two Sample t-test
+## 
+## data:  powercc$dominance by powercc$gender
+## t = -0.6899, df = 141, p-value = 0.4914
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.12179092  0.05877722
+## sample estimates:
+## mean in group female   mean in group male 
+##            0.6142857            0.6457926
+
+\end{lstlisting}
+
+
+Você pode relatar o seguinte: “Homens (M = 0,65, DP = 0,3) e mulheres (M = 0,61, DP = 0,25) não diferiram no grau em que se classificaram como dominantes (t (141) = -0,69 , p = 0,49). "
+
+\subsubsection{Teste t para amostras dependentes}
+
+Digamos que queremos testar se as pessoas estão mais dispostas a gastar em itens conspícuos do que em itens discretos. Vamos verificar os meios e os desvios padrão primeiro:
+
+\begin{lstlisting}[language=R]
+powercc %>% # nao ha necessidade de agrupar! nao estamos dividindo nossa amostra em subgrupos
+  summarize(mean_cc = mean(cc), sd_cc = sd(cc),
+            mean_icc = mean(icc), sd_icc = sd(icc))
+            
+## # A tibble: 1 x 4
+##   mean_cc sd_cc mean_icc sd_icc
+##     <dbl> <dbl>    <dbl>  <dbl>
+## 1    6.01  1.05     3.60  0.988
+\end{lstlisting}
+
+As médias são mais altas para produtos conspícuos do que para produtos discretos, mas queremos saber se essa diferença é significativa e, portanto, realizar um teste t de amostras dependentes (cada participante classifica produtos conspícuos e discretos, portanto, essas classificações são dependentes):
+
+\begin{lstlisting}[language=R]
+t.test(powercc$cc, powercc$icc, paired = TRUE) # Teste se as medias de cc e icc sao diferentes. Indique que este eh um teste t de amostras dependentes com emparelhado = TRUE.
+
+## 
+##  Paired t-test
+## 
+## data:  powercc$cc and powercc$icc
+## t = 25.064, df = 142, p-value < 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  2.214575 2.593816
+## sample estimates:
+## mean of the differences 
+##                2.404196
+
+\end{lstlisting}
+
+Você pode relatar o seguinte: “As pessoas indicaram que estavam dispostas a pagar mais (t (142) = 25.064, $p <0,001$) por produtos conspícuos (M = 6,01, DP = 1,05) do que por produtos discretos (M = 3,6, DP = 0,99). ”
+
+\newpage
+
+\subsubsection{Teste t para amostra única}
+Digamos que queremos testar se a disposição média de pagar pelos itens visíveis foi significativamente maior que 5 (o ponto médio da escala):
+
+\begin{lstlisting}[language=R]
+t.test(powercc$cc, mu = 5) # Indique a variavel cuja media queremos comparar com um valor especifico (5).
+
+## 
+##  One Sample t-test
+## 
+## data:  powercc$cc
+## t = 11.499, df = 142, p-value < 2.2e-16
+## alternative hypothesis: true mean is not equal to 5
+## 95 percent confidence interval:
+##  5.833886 6.180100
+## sample estimates:
+## mean of x 
+##  6.006993
+\end{lstlisting}
+
+Na verdade, é significativamente maior que 5. Você pode relatar o seguinte: "A WTP média para produtos conspícuos (M = 6,01, DP = 1,05) estava significativamente acima de 5 (t (142) = 11,499, $p <0,001$)."
+
+\subsection{ANOVA bivariada}
+
+Quando você lê um artigo acadêmico que relata um experimento, a seção de resultados geralmente começa com uma discussão dos principais efeitos dos fatores experimentais e sua interação, conforme testado por uma Análise de variância ou ANOVA. Vamos nos concentrar primeiro na WTP para produtos que melhoram o status. (Consideramos brevemente a WTP para produtos com status neutro em nossa discussão sobre testes t de amostras dependentes e discutiremos mais detalhadamente na seção ANOVA de medidas repetidas.)
+
+Vamos inspecionar algumas estatísticas descritivas primeiro. Gostaríamos de ver a WTP média para produtos visíveis, o desvio padrão dessa WTP e o número de participantes em cada célula experimental. Já aprendemos como fazer isso no capítulo introdutório (consulte as tabelas de frequência e as estatísticas descritivas):
+
+\begin{lstlisting}[language=R]
+powercc.summary <- powercc %>% # estamos atribuindo o resumo a um objeto, porque precisaremos desse resumo para fazer um grafico de barras
+  group_by(audience, power) %>% # agora agrupamos por duas variaveis
+  summarize(count = n(),
+            mean = mean(cc),
+            sd = sd(cc))
+
+powercc.summary
+## # A tibble: 4 x 5
+## # Groups:   audience [?]
+##   audience power count  mean    sd
+##   <fct>    <fct> <int> <dbl> <dbl>
+## 1 private  low      34  6.08 1.04 
+## 2 private  high     31  5.63 0.893
+## 3 public   low      40  6.17 1.15 
+## 4 public   high     38  6.07 1.03
+\end{lstlisting}
+
+Vemos que a diferença na WTP entre os participantes de alta e baixa potência é maior na condição privada do que na pública.
+
+Vamos resumir esses resultados em um gráfico de caixa:
+
+\begin{lstlisting}[language=R]
+# ao criar um grafico de caixa, o conjunto de dados que serve como entrada para o ggplot eh o conjunto de dados completo, nao o resumo com os meios
+ggplot(data = powercc, mapping = aes(x = audience, y = cc, fill = power)) + 
+  geom_boxplot() # argumentos sao os mesmos que para geom_bar, mas agora fornecemos a geom_boxplot
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{bda_boxplot-1.png}
+\end{center}
+
+Os gráficos boxplot são informativos porque nos dão uma idéia da mediana e da distribuição dos dados. No entanto, em trabalhos acadêmicos, os resultados das experiências são tradicionalmente resumidos em gráficos de barras (mesmo que os gráficos de caixa sejam mais informativos).
+
+\begin{lstlisting}[language=R]
+# ao criar um grafico de barras, o conjunto de dados que serve como entrada para o ggplot eh o resumo com os meios, nao o conjunto de dados completo
+ggplot(data = powercc.summary, mapping = aes(x = audience, y = mean, fill = power)) +
+  geom_bar(stat = "identity", position = "dodge")
+\end{lstlisting}
+
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{bda_barplot-1.png}
+\end{center}
+
+Para criar um gráfico de barras, informamos ao ggplot as variáveis que devem estar no eixo X e no eixo Y e também usamos cores diferentes para diferentes níveis de potência com o comando fill. Então pedimos um gráfico de barras com geom\_bar. stat = "identity" e position = "dodge" devem ser incluídos como argumentos para geom\_bar, mas uma discussão sobre esses argumentos está além do escopo deste tutorial.
+
+Antes de prosseguirmos com a ANOVA, devemos verificar se suas premissas são atendidas. Discutimos as suposições da ANOVA anteriormente, mas ignoramos aqui.
+
+Para realizar uma ANOVA, precisamos instalar alguns pacotes:
+
+\begin{lstlisting}[language=R]
+install.packages("remotes") # O pacote de controles remotos nos permite instalar pacotes armazenados no GitHub, um site para desenvolvedores de pacotes.
+install.packages("car") # Tambem precisaremos do pacote do carro para executar a ANOVA (não é necessário reinstala-lo se você já tiver feito isso).
+
+library(remotes)
+install_github('samuelfranssens/type3anova') # Instale o pacote type3anova. Esta e as etapas anteriores precisam ser executadas apenas uma vez.
+
+library(type3anova) # Carrega o pacote type3anova 
+\end{lstlisting}
+
+Agora podemos prosseguir com a ANOVA real:
+
+\begin{lstlisting}[language=R]
+# Cria um modelo linear primeiramente
+# A funcao lm() toma os dados e os argumentos
+# A formula tem a seguinte sintaxe: variavel dependente  - variavel independente
+linearmodel <- lm(cc ~ power*audience, data=powercc) 
+# power*audience: interacao eh calculada
+# power+audience: interacao nao eh incluida
+
+type3anova(linearmodel) # Em seguida, peça a saída no formato ANOVA. Isso fornece a soma dos quadrados do Tipo III. Observe que isso é diferente da anova (modelo linear), que fornece a soma dos quadrados do tipo I.
+
+## # A tibble: 5 x 6
+##   term                ss   df1   df2       f     pvalue
+##   <chr>            <dbl> <dbl> <int>   <dbl>      <dbl>
+## 1 (Intercept)    5080.       1   139 4710.    4.21e-109
+## 2 power             2.64     1   139    2.45  1.20e-  1
+## 3 audience          2.48     1   139    2.30  1.32e-  1
+## 4 power:audience    1.11     1   139    1.03  3.13e-  1
+## 5 Residuals       150.     139   139   NA    NA
+
+\end{lstlisting}
+
+Você pode relatar esses resultados da seguinte forma: “Nem o principal efeito do poder (F (1, 139) = 2,45, p = 0,12), nem o principal efeito do público (F (1, 139) = 2,3, p = 0,13), nem a interação entre poder e público (F (1, 139) = 1,03, p = 0,31) foi significativa. ”
+
+\subsubsection{Seguindo com contrastes}
+
+Ao realizar um experimento 2 x 2, geralmente fazemos a hipótese de uma interação. Uma interação significa que o efeito de uma variável independente é diferente dependendo dos níveis da outra variável independente. Na seção anterior, a ANOVA nos disse que a interação entre poder e público não era significativa. Isso significa que o efeito de alta versus baixa potência foi o mesmo na condição privada e pública e que o efeito de público versus privado foi o mesmo na condição de alta e baixa potência. Normalmente, a análise para com a não significância da interação. No entanto, faremos os testes de acompanhamento que um faria se a interação fosse significativa.
+
+Vamos considerar o significado da célula novamente:
+
+\begin{lstlisting}[language=R]
+powercc.summary <- powercc %>% 
+  group_by(audience, power) %>% 
+  summarize(count = n(),
+            mean = mean(cc),
+            sd = sd(cc))
+
+# ao criar um gráfico de barras, o conjunto de dados que serve como entrada para o ggplot é o resumo com os meios, não o conjunto de dados completo
+ggplot(data = powercc.summary,mapping = aes(x = audience, y = mean, fill = power)) + 
+  geom_bar(stat = "identity", position = "dodge")
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{bda_contrasts0-1.png}
+\end{center}
+
+
+\begin{lstlisting}[language=R]
+powercc.summary
+
+## # A tibble: 4 x 5
+## # Groups:   audience [2]
+##   audience power count  mean    sd
+##   <fct>    <fct> <int> <dbl> <dbl>
+## 1 private  low      34  6.08 1.04 
+## 2 private  high     31  5.63 0.893
+## 3 public   low      40  6.17 1.15 
+## 4 public   high     38  6.07 1.03
+\end{lstlisting}
+
+Queremos testar se a diferença entre alta e baixa potência na condição privada é significativa (baixa: 6,08 vs. alta: 5,63) e se a diferença entre alta e baixa potência na condição pública é significativa (baixa: 6,17 vs. alta : 6,07). Para fazer isso, podemos usar a função de contraste da biblioteca type3anova que instalamos anteriormente. A função de contraste usa dois argumentos: um modelo linear e uma especificação de contraste. O modelo linear é o mesmo de antes:
+
+\begin{lstlisting}[language]
+linearmodel <- lm(cc ~ power*audience, data=powercc)
+\end{lstlisting}
+
+Mas, para saber como devemos especificar nosso contraste, precisamos dar uma olhada nos coeficientes de regressão em nosso modelo linear:
+
+\begin{lstlisting}[language=R]
+summary(linearmodel)
+
+## 
+## Call:
+## lm(formula = cc ~ power * audience, data = powercc)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.7700 -0.6737  0.1177  0.7177  2.3263 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)               6.08235    0.17812  34.148   <2e-16 ***
+## powerhigh                -0.45009    0.25792  -1.745   0.0832 .  
+## audiencepublic            0.08765    0.24226   0.362   0.7181    
+## powerhigh:audiencepublic  0.35378    0.34910   1.013   0.3126    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.039 on 139 degrees of freedom
+## Multiple R-squared:  0.03711,    Adjusted R-squared:  0.01633 
+## F-statistic: 1.786 on 3 and 139 DF,  p-value: 0.1527
+
+\end{lstlisting}
+
+\newpage
+
+Temos 4 coeficientes de regressão:
+
+\begin{itemize}
+    \item $\beta_{0}$ ou intercepto
+    \item $\beta_{1}$ ou o coeficiente de “powerhigh” ou o alto nível do fator de potência (-0,45)
+    \item $\beta_{2}$ ou o coeficiente para "audiencepublic" ou o nível público do fator público (0,09)
+    \item $\beta_{3}$ ou coeficiente para: “powerhigh:audiencepublic” (0.35)
+\end{itemize}
+
+
+Vemos que a estimativa para a interceptação corresponde à média observada na célula privada de baixa potência. Adicione a isso a estimativa de “powerhigh” e obteremos a média observada na célula privada de alta potência. Adicione à estimativa para a interceptação, a estimativa de "audiencepublic" e obtenha a média observada na célula pública de baixa potência. Adicione à estimativa para a interceptação, a estimativa de “powerhigh”, “audiencepublic” e “powerhigh:audiencepublic” e obteremos a média observada na célula pública de alto poder. Geralmente visualizo isso em uma tabela (e salvo no meu script) para facilitar a especificação do contraste que quero testar:
+
+\begin{lstlisting}[language=R]
+#                   private             public
+# low power         b0                  b0+b2
+# high power        b0+b1               b0+b1+b2+b3
+\end{lstlisting}
+
+Digamos que estamos contrastando energia alta versus baixa na condição privada e testamos se ($\beta_{0}+\beta_{1}$ e $\beta_{0}$ diferem significativamente ou se ($\beta_{0}+\beta_{1})-\beta_{0}=\beta_{1}$ é significativamente diferente de zero. Nós especificamos isso da seguinte maneira:
+
+\begin{lstlisting}[language=R]
+contrast_specification <- c(0, 1, 0, 0) 
+
+# os quatro numeros correspondentes a b0, b1, b2, b3. 
+# queremos testar se b1 é significativo, então colocamos 1 em 2º lugar (o 1º lugar é para b0)
+
+contrast(linearmodel, contrast_specification)
+
+## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Fit: aov(formula = linearmodel)
+## 
+## Linear Hypotheses:
+##        Estimate Std. Error t value Pr(>|t|)  
+## 1 == 0  -0.4501     0.2579  -1.745   0.0832 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## (Adjusted p values reported -- single-step method)
+\end{lstlisting}
+
+A saída nos diz que a estimativa do contraste é -0,45, que é realmente a diferença entre as médias observadas na condição privada (alta potência: 5,63 vs. baixa potência: 6,08). Você pode relatar esse resultado da seguinte forma: “O efeito de alta (M = 5,63, DP = 0,89) vs. baixa potência (M = 6,08, DP = 1,04) na condição privada foi marginalmente significativo (t (139) = -1,745 , p = 0,083). " Para obter os graus de liberdade, faça um contraste (linearmodel, contrast\_specification)\$df
+
+Digamos que queremos testar um contraste mais complicado, ou seja, se a média na célula privada de alta potência é diferente da média das médias nas outras células. Estamos testando:
+
+\begin{center}
+$(\beta_0 + \beta_1)-1/3*[(\beta_0)+(\beta_0 +\beta_2)+(\beta_0+\beta_1+\beta_2+\beta_3)]$
+
+\vspace{.25cm}
+
+$=\beta_1-1/3*(\beta_1+2\beta_2+\beta_3)$
+
+\vspace{.25cm}
+
+$=2/3 * \beta_1-2/3 * \beta_2-1/3 * \beta_3$
+\end{center}
+
+\newpage
+A especificação de contraste é a seguinte:
+
+\begin{lstlisting}[language=R]
+contrast_specification <- c(0, 2/3, -2/3, -1/3) 
+contrast(linearmodel, contrast_specification)
+
+## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Fit: aov(formula = linearmodel)
+## 
+## Linear Hypotheses:
+##        Estimate Std. Error t value Pr(>|t|)  
+## 1 == 0  -0.4764     0.2109  -2.259   0.0254 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## (Adjusted p values reported -- single-step method)
+\end{lstlisting}
+
+Verifique se a estimativa realmente corresponde à diferença entre a média de alta potência, privada e a média das médias nas outras células. Você pode relatar o seguinte: “A célula privada de alta potência tinha uma WTP significativamente menor do que as outras células experimentais em nosso projeto (est = -0,476, t (139) = -2,259, p = 0,025)”.
+
+
+\subsection{Análise de moderação: interação entre variáveis independentes contínuas e categóricas}
+
+Digamos que queremos testar se os resultados do experimento dependem do nível de domínio das pessoas. Em outras palavras, os efeitos do poder e da audiência são diferentes para participantes dominantes versus participantes não dominantes? Ainda em outras palavras, existe uma interação de três vias entre poder, audiência e domínio?
+
+Vamos criar um gráfico primeiro:
+
+\begin{lstlisting}[language=R]
+# Nossa variavel dependente eh o consumo conspicuo, nossa variavel independente (no eixo X) eh a dominancia.
+# Entao, estamos tracando a relacao entre dominancia e consumo conspicuo.
+# O argumento da cor diz a R que queremos um relacionamento para cada nivel de poder.
+
+ggplot(data = powercc, mapping = aes(x = dominance, y = cc, color = power)) + 
+  facet_wrap(~ audience) + # Diga a R que tambem queremos dividir por audiencia.
+  geom_jitter() + # Use geom_jitter em vez de geom_point, caso contrario, os pontos serao desenhados um sobre o outro
+  geom_smooth(method='lm', se=FALSE) # Desenhe uma linha de regressao linear atraves dos pontos.
+\end{lstlisting}
+
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{bda_interaction_graph-1.png}
+\end{center}
+
+Este gráfico é informativo. Isso nos mostra que, na condição privada, o efeito da alta versus baixa potência no consumo conspícuo é mais negativo para participantes menos dominantes do que para participantes mais dominantes. Na condição pública, o efeito da alta versus baixa potência no consumo conspícuo não difere entre os participantes menos versus os mais dominantes. Também vemos que, tanto na condição privada quanto na pública, os participantes mais vs. menos dominantes estão mais dispostos a gastar em consumo conspícuo.
+
+Vamos verificar se a interação de três vias é significativa:
+
+\begin{lstlisting}[language=R]
+linearmodel <- lm(cc ~ power * audience * dominance, data = powercc)
+type3anova(linearmodel)
+
+## # A tibble: 9 x 6
+##   term                          ss   df1   df2       f    pvalue
+##   <chr>                      <dbl> <dbl> <int>   <dbl>     <dbl>
+## 1 (Intercept)              525.        1   135 519.     4.35e-48
+## 2 power                      2.21      1   135   2.18   1.42e- 1
+## 3 audience                   0.715     1   135   0.706  4.02e- 1
+## 4 dominance                 10.5       1   135  10.3    1.63e- 3
+## 5 power:audience             1.44      1   135   1.42   2.35e- 1
+## 6 power:dominance            1.18      1   135   1.17   2.82e- 1
+## 7 audience:dominance         0.113     1   135   0.111  7.39e- 1
+## 8 power:audience:dominance   1.30      1   135   1.29   2.58e- 1
+## 9 Residuals                137.      135   135  NA     NA
+
+\end{lstlisting}
+
+Somente o efeito da dominância é significativa. Se a interação de três vias fosse significativa, poderíamos acompanhar com mais testes. Por exemplo, poderíamos testar se a interação bidirecional entre dominância e poder é significativa na condição privada, como sugere o gráfico. Para fazer isso, vamos primeiro examinar os coeficientes de regressão do nosso modelo linear:
+
+\begin{lstlisting}[language=R]
+summary(linearmodel)
+
+## 
+## Call:
+## lm(formula = cc ~ power * audience * dominance, data = powercc)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.58617 -0.63357  0.09751  0.68310  2.24067 
+## 
+## Coefficients:
+##                                    Estimate Std. Error t value Pr(>|t|)
+## (Intercept)                          5.7553     0.6019   9.561   <2e-16
+## powerhigh                           -1.2490     0.7703  -1.621    0.107
+## audiencepublic                      -0.1651     0.6918  -0.239    0.812
+## dominance                            0.4526     0.7980   0.567    0.572
+## powerhigh:audiencepublic             1.1162     0.9355   1.193    0.235
+## powerhigh:dominance                  1.5021     1.1111   1.352    0.179
+## audiencepublic:dominance             0.5434     0.9514   0.571    0.569
+## powerhigh:audiencepublic:dominance  -1.5394     1.3561  -1.135    0.258
+##                                       
+## (Intercept)                        ***
+## powerhigh                             
+## audiencepublic                        
+## dominance                             
+## powerhigh:audiencepublic              
+## powerhigh:dominance                   
+## audiencepublic:dominance              
+## powerhigh:audiencepublic:dominance    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.006 on 135 degrees of freedom
+## Multiple R-squared:  0.1225, Adjusted R-squared:  0.07703 
+## F-statistic: 2.693 on 7 and 135 DF,  p-value: 0.01211
+\end{lstlisting}
+
+Temos oito termos em nosso modelo:
+\begin{itemize}
+    \item $\beta_0$ ou intercepto;
+    \item $\beta_1$ ou o coeficiente para “powerhigh”
+    \item $\beta_2$ ou o coeficiente para “audiencepublic”
+      \item $\beta_3$ ou o coeficiente para “dominance”
+        \item $\beta_4$ ou o coeficiente para “powerhigh:audiencepublic”
+          \item $\beta_5$ ou o coeficiente para “powerhigh:dominance”
+            \item $\beta_6$ ou o coeficiente para “audiencepublic:dominance”
+              \item $\beta_7$ ou o coeficiente para “powerhigh:audiencepublic:dominance”
+\end{itemize}
+
+Resultando nessa tabela de coeficientes:
+
+\begin{lstlisting}[language=R]
+#                     private                         public
+# low power          [b0] + (b3)                     [b0+b2] + (b3+b6)
+# high power         [b0+b1] + (b3+b5)               [b0+b1+b2+b4] + (b3+b5+b6+b7)
+\end{lstlisting}
+
+Como conseguimos essa tabela? Com o modelo linear especificado acima, cada valor estimado de consumo conspícuo (a variável dependente) é uma função da condição experimental do participante e do nível de dominância do participante. Digamos que tenhamos um participante na condição pública de baixa potência com um nível de dominância de 0,5. O valor estimado do consumo conspícuo para esse participante é:
+
+
+\begin{itemize}
+    \item $\beta_0$ ou intercepto x 1;
+    \item $\beta_1$ “powerhigh” (porque o participante não está na condição de alta potência)
+    \item $\beta_2$ “audiencepublic” × 1 (na condição pública)
+      \item $\beta_3$ “dominance” ×  0.5 (dominance = 0.5)
+        \item $\beta_4$ “powerhigh:audiencepublic” × 0 (não no poder superior e na condição pública)
+          \item $\beta_5$ “powerhigh:dominance” × 0 (não na condição de alta potência)
+            \item $\beta_6$ “audiencepublic:dominance” × 1 x 0,5 (na condição pública e dominância = 0,5)
+              \item $\beta_7$ “powerhigh:audiencepublic:dominance” × 0 (não no poder superior e na condição pública)
+\end{itemize}
+
+ou
+
+\begin{center}
+$$\beta_0 \times 1 + \beta_1 \times 0 + \beta_2 \times 1 + \beta_3 \times 0.5 + \beta_4 \times 0 + \beta_5 \times 0 + \beta_6 \times 0.5 + \beta_7 \times 0$
+
+$= [\beta_0 + \beta_2] + (\beta_3 + \beta_6) \times 0.5$
+
+\vspace{.25cm}
+
+$= [5.76 + -0.17] + (0.45 + 0.54) * 0.5 = 6.09$
+\end{center}
+
+
+Verifique o gráfico para ver se isso realmente corresponde ao consumo conspícuo estimado de um participante com dominância = 0,5 na célula pública de baixa potência.
+
+A fórmula geral para a célula pública de baixa potência é a seguinte:
+
+$$
+[\beta_0 + \beta_2] + (\beta_3 + \beta_6)\times\mbox{dominance}
+$$
+
+e podemos obter as fórmulas para as diferentes células de maneira semelhante. Vemos que em cada célula, o coeficiente entre colchetes é o valor estimado na medida de consumo conspícuo para um participante que pontua 0 em dominância. O coeficiente entre parênteses arredondados é o aumento estimado na medida de consumo conspícuo para cada aumento de uma unidade no domínio. Em outras palavras, os coeficientes entre colchetes representam a interceptação e os coeficientes entre colchetes representam a inclinação da linha que representa a regressão do consumo conspícuo (Y) na dominância (X) dentro de cada célula experimental (ou seja, cada potência e público-alvo) combinação).
+
+Um teste da interação entre poder e dominância dentro da condição privada se resumiria a testar se as linhas azul e vermelha no painel esquerdo da figura acima devem ser consideradas paralelas ou não. Se eles são paralelos, o efeito da dominância no consumo conspícuo é o mesmo nas condições de baixa e alta potência. Se eles não são paralelos, o efeito da dominância é diferente nas condições de baixa e alta potência. Em outras palavras, devemos testar se os coeficientes de regressão são iguais dentro de baixa potência, privado e dentro de alta potência, privado. Em outras palavras, testamos se $(\beta_3+\beta_5)-\beta_3=\beta_5$ é igual a zero:
+
+\begin{lstlisting}[language=R]
+# agora temos oito numeros correspondentes aos oito coeficientes de regressao
+# queremos testar se b5 eh significativo, entao colocamos 1 em 6º lugar (o 1º lugar é para b0)
+
+contrast_specification <- c(0, 0, 0, 0, 0, 1, 0, 0)
+
+contrast(linearmodel, contrast_specification)
+
+## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Fit: aov(formula = linearmodel)
+## 
+## Linear Hypotheses:
+##        Estimate Std. Error t value Pr(>|t|)
+## 1 == 0    1.502      1.111   1.352    0.179
+## (Adjusted p values reported -- single-step method)
+
+\end{lstlisting}
+
+A interação não é significativa, no entanto. Você pode relatar o seguinte: “Dentro da condição privada, não houve interação entre poder e dominância (t (135) = 1,352, p = 0,18).”
+
+\vspace{.25cm}
+\subsubsubsection{\textbf{Análise spotlight}}
+\vspace{.25cm}
+
+
+Em breve.
+
+\subsection{ANCOVA}
+
+Descobrimos que nossas condições experimentais não afetam significativamente o consumo conspícuo:
+
+\begin{lstlisting}[language=R]
+linearmodel1 <- lm(cc ~ power*audience, data = powercc)
+type3anova(linearmodel1)
+
+## # A tibble: 5 x 6
+##   term                ss   df1   df2       f     pvalue
+##   <chr>            <dbl> <dbl> <int>   <dbl>      <dbl>
+## 1 (Intercept)    5080.       1   139 4710.    4.21e-109
+## 2 power             2.64     1   139    2.45  1.20e-  1
+## 3 audience          2.48     1   139    2.30  1.32e-  1
+## 4 power:audience    1.11     1   139    1.03  3.13e-  1
+## 5 Residuals       150.     139   139   NA    NA
+
+\end{lstlisting}
+
+Por um lado, isso pode significar que simplesmente não há efeitos das condições experimentais no consumo conspícuo. Por outro lado, isso poderia significar que as manipulações experimentais não são fortes o suficiente ou que há muita variação inexplicada em nossa variável dependente (ou ambas). Podemos reduzir a variação inexplicável em nossa variável dependente, no entanto, incluindo uma variável em nosso modelo que suspeitamos estar relacionada à variável dependente. No nosso caso, suspeitamos que a disposição de gastar em consumo discreto (icc) esteja relacionada à disposição de gastar em consumo conspícuo. Embora icc seja uma variável contínua, podemos incluí-la como uma variável independente em nossa ANOVA e isso nos permitirá reduzir a variação inexplicável em nossa variável dependente:
+
+\begin{lstlisting}[language=R]
+linearmodel2 <- lm(cc ~ power*audience + icc, data = powercc)
+type3anova(linearmodel2)
+
+## # A tibble: 6 x 6
+##   term               ss   df1   df2      f    pvalue
+##   <chr>           <dbl> <dbl> <int>  <dbl>     <dbl>
+## 1 (Intercept)    209.       1   138 221.    1.85e-30
+## 2 power            1.88     1   138   1.99  1.60e- 1
+## 3 audience         1.14     1   138   1.21  2.74e- 1
+## 4 icc             19.6      1   138  20.8   1.13e- 5
+## 5 power:audience   1.96     1   138   2.08  1.52e- 1
+## 6 Residuals      130.     138   138  NA    NA
+
+\end{lstlisting}
+
+Vemos que icc está relacionado à variável dependente e, portanto, que a soma dos quadrados dos resíduos desse modelo, ou seja, a variação inexplicada em nossa variável dependente, é menor (130,32) do que a do modelo sem icc (149,93). Os valores p dos fatores experimentais não diminuem, no entanto. Você pode relatar o seguinte: “Controlando a disposição de gastar em consumo discreto, nem o principal efeito do poder (F (1, 138) = 1,99, p = 0,16), nem o principal efeito do público (F (1, 138 ) = 1,21, p = 0,27), nem a interação entre poder e público (F (1, 138) = 2,08, p = 0,15) foi significativa. ”
+
+Chamamos essa análise de ANCOVA porque icc é uma covariável (abrange ou está relacionada à nossa variável dependente).
+
+
+\subsection{Medidas repetidas ANOVA}
+
+Neste experimento, temos mais de uma medida por unidade de observação, ou seja, disposição para gastar em produtos conspícuos e disposição para gastar em produtos discretos. Uma ANOVA de medidas repetidas pode ser usada para testar se os efeitos das condições experimentais são diferentes para produtos conspícuos versus inconspícuos.
+
+Para executar uma ANOVA de medidas repetidas, precisamos reestruturar nosso quadro de dados de amplo a longo. Um amplo quadro de dados possui uma linha por unidade de observação (em nosso experimento: uma linha por participante) e uma coluna por observação (em nosso experimento: uma coluna para os produtos conspícuos e uma coluna para os produtos inconspícuos). Um quadro de dados longo possui uma linha por observação (em nosso experimento: duas linhas por participante, uma linha para o produto conspícuo e uma linha para o produto inconspícuo) e uma coluna extra que indica com que tipo de observação estamos lidando (conspícua ou imperceptível). Vamos converter o quadro de dados e ver como os quadros de dados amplos e longos diferem um do outro.
+
+\begin{lstlisting}[language=R]
+powercc.long <- powercc %>% 
+  gather(consumption_type, wtp, cc, icc)
+
+# Converter de grande para longo significa que estamos empilhando varias colunas umas sobre as outras. Para isso, precisamos de uma variavel extra para acompanhar qual coluna estamos lidando.
+# A funcao de coleta converte conjuntos de dados de amplos para longos.
+# O primeiro argumento (consumer_type) nos dira com qual coluna estamos lidando. Essa eh a variavel que armazenara os nomes das colunas que estamos empilhando.
+# O segundo argumento (wtp) armazenara as colunas reais empilhadas umas sobre as outras.
+# Os argumentos a seguir sao as colunas que queremos empilhar.
+
+# Entao, dizemos ao gather para criar duas novas variaveis: tipo_de_consumo e vontade de pagar, para representar o empilhamento de um determinado numero de colunas.
+
+# Vamos dizer ao R para nos mostrar apenas as colunas relevantes (isto eh apenas para fins de apresentacao):
+
+powercc.long %>%
+  select(subject, power, audience, consumption_type, wtp) %>% 
+  arrange(subject)
+  
+## # A tibble: 286 x 5
+##    subject power audience consumption_type   wtp
+##    <fct>   <fct> <fct>    <chr>            <dbl>
+##  1 1       high  public   cc                 5  
+##  2 1       high  public   icc                2.6
+##  3 2       low   public   cc                 7.6
+##  4 2       low   public   icc                4  
+##  5 3       low   public   cc                 5.4
+##  6 3       low   public   icc                3.4
+##  7 4       low   public   cc                 8.4
+##  8 4       low   public   icc                5.2
+##  9 5       high  public   cc                 7.8
+## 10 5       high  public   icc                3  
+## # ... with 276 more rows
+
+\end{lstlisting}
+
+Temos duas linhas por assunto, uma coluna de disposição para pagar e outra coluna (tipo de consumo) que indica se está disposta a pagar por produtos visíveis ou imperceptíveis. Compare isso com o amplo conjunto de dados:
+
+\begin{lstlisting}[language=R]
+powercc %>% 
+  select(subject, power, audience, cc, icc) %>% 
+  arrange(subject) # Mostre somente as colunas relevantes
+  
+## # A tibble: 143 x 5
+##    subject power audience    cc   icc
+##    <fct>   <fct> <fct>    <dbl> <dbl>
+##  1 1       high  public     5     2.6
+##  2 2       low   public     7.6   4  
+##  3 3       low   public     5.4   3.4
+##  4 4       low   public     8.4   5.2
+##  5 5       high  public     7.8   3  
+##  6 6       high  public     7.2   5  
+##  7 7       low   public     4.8   4  
+##  8 8       high  public     6.6   4.4
+##  9 9       low   public     5.8   4.2
+## 10 10      high  public     6.8   3.4
+## # ... with 133 more rows
+
+\end{lstlisting}
+
+
+Temos uma linha por assunto e duas colunas, uma para cada tipo de produto.
+
+Agora podemos realizar uma medida repetida ANOVA. Para isso, precisamos do pacote ez.
+
+\begin{lstlisting}[language=R]
+install.packages("ez") # Precisamos do pacote ez para RM ANOVA
+library(ez)
+
+\end{lstlisting}
+
+Queremos testar se a interação entre poder e público é diferente para produtos conspícuos e inconspícuos. Vamos dar uma olhada em um gráfico primeiro:
+
+\begin{lstlisting}[language=R]
+powercc.long.summary <- powercc.long %>% # para um grafico de barras precisamos de summary primeiro
+  group_by(power, audience, consumption_type) %>% # agrupa por tres variaveis independentes
+  summarize(wtp = mean(wtp)) # obtem a media de wtp
+
+ggplot(data = powercc.long.summary, mapping = aes(x = audience, y = wtp, fill = power)) + 
+  facet_wrap(~ consumption_type) + # create a panel for each consumption type
+  geom_bar(stat = "identity", position = "dodge")
+\end{lstlisting}
+
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{bda_rmanova_graph-1.png}
+\end{center}
+
+Agora podemos testar formalmente a interação de três vias:
+
+\begin{lstlisting}[language=R]
+# Especifique os dados, a variavel dependente, o identificador (wid),
+# a variavel que representa a condicao dentro dos sujeitos e as variaveis que representam as condicoes entre os sujeitos.
+
+ezANOVA(data = powercc.long, dv = wtp, wid = subject, within = consumption_type, between = power*audience)
+
+## $ANOVA
+##                            Effect DFn DFd            F            p p<.05
+## 2                           power   1 139 1.867530e+00 1.739647e-01      
+## 3                        audience   1 139 2.977018e+00 8.667716e-02      
+## 5                consumption_type   1 139 6.303234e+02 1.687352e-53     *
+## 4                  power:audience   1 139 5.801046e-03 9.393977e-01      
+## 6          power:consumption_type   1 139 4.719313e-01 4.932445e-01      
+## 7       audience:consumption_type   1 139 2.700684e-02 8.697041e-01      
+## 8 power:audience:consumption_type   1 139 2.982598e+00 8.638552e-02      
+##            ges
+## 2 9.061619e-03
+## 3 1.436772e-02
+## 5 5.915501e-01
+## 4 2.840440e-05
+## 6 1.083172e-03
+## 7 6.204919e-05
+## 8 6.806406e-03
+
+\end{lstlisting}
+
+Vemos nesses resultados que a interação de três vias entre poder, público e tipo de consumo é marginalmente significativa. Você pode relatar o seguinte: "Uma ANOVA de medidas repetidas estabeleceu que a interação de três vias entre poder, público e tipo de consumo era marginalmente significativa (F (1, 139) = 2,98, p = 0,086).
+
+\newpage
+\section{Análise de componentes principais para mapas perceptivos (office dataset)}
+
+Neste capítulo, você aprenderá como realizar uma análise de componentes principais e visualizar os resultados em um mapa perceptivo.
+
+Digamos que tenhamos um conjunto de observações que diferem entre si em várias dimensões; por exemplo, temos várias marcas de uísque (observações) classificadas em vários atributos, como corpo, doçura, sabor, etc. (dimensões). Se algumas dessas dimensões estiverem fortemente correlacionadas, deve ser possível descrever as observações por um número menor (que o original) de dimensões sem perder muita informação. Por exemplo, doçura e frutificação podem ser altamente correlacionadas e, portanto, podem ser substituídas por uma variável. Essa redução de dimensionalidade é o objetivo da análise de componentes principais.
+
+\subsection{Dados}
+\subsubsection{Importação}
+
+Analisaremos os dados de uma pesquisa na qual os entrevistados foram solicitados a classificar quatro marcas de equipamentos de escritório em seis dimensões. Faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/perceptual_map_office.xlsx}{aqui} e importe-os para o \faRProject:
+
+
+\begin{lstlisting}[language=R]
+library(tidyverse)
+library(readxl)
+
+office <- read_excel("perceptual_map_office.xlsx","attributes") # nao esqueca de carregar o pacote readxl
+
+\end{lstlisting}
+
+\subsubsection{Manipulação}
+
+
+\begin{lstlisting}[language=R]
+office # visualiza os dados
+\end{lstlisting}
+
+O conjunto de dados consiste em um identificador, a marca do equipamento de escritório (brand) e a classificação média (entre os entrevistados) de cada marca em seis atributos: escolha grande (large\_choice), preços baixos (low\_prices), qualidade do serviço (service\_quality), qualidade do produto (product\_quality), conveniência (convenience) e pontuação da preferência (preference\_score). Vamos fatorar o identificador:
+
+
+\begin{lstlisting}[language=R]
+office <- office %>% 
+  mutate(brand = factor(brand))
+\end{lstlisting}
+
+
+\subsubsection{Recapitulação: importação e manipulação}
+
+Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o download dos dados aqui):
+
+\begin{lstlisting}[language=R]
+library(tidyverse)
+library(readxl)
+
+office <- read_excel("perceptual_map_office.xlsx","attributes") %>% # 
+  mutate(brand = factor(brand))
+\end{lstlisting}
+
+\newpage
+
+\subsection{Quantos fatores devemos considerar ?}
+
+O objetivo da análise de componentes principais é reduzir o número de dimensões que descrevem nossos dados, sem perder muitas informações. O primeiro passo na análise de componentes principais é decidir o número de componentes ou fatores principais que queremos manter. Para nos ajudar a decidir, usaremos a função PCA do pacote FactoMineR:
+
+\begin{lstlisting}[language=R]
+install.packages("FactoMineR")
+library(FactoMineR)
+\end{lstlisting}
+
+\newpage
+
+Para poder usar a função PCA, precisamos primeiro transformar o quadro de dados:
+
+\begin{lstlisting}[language=R]
+office.df <- office %>% 
+  select(- brand) %>% # A entrada para a analise de componentes principais deve ser apenas as dimensoes, nao o (s) identificador (es); portanto, vamos remover os identificadores.
+  as.data.frame() # altere o tipo do objeto para 'data.frame'. Isso eh necessario para a funcao PCA
+
+rownames(office.df) <- office$brand # Defina os nomes das linhas do data.frame para as marcas (isso eh importante mais tarde ao fazer um biplot)
+\end{lstlisting}
+Agora podemos prosseguir com a análise de componentes principais:
+
+\begin{lstlisting}[language=R]
+office.pca <- PCA(office.df, graph=FALSE) # Realizar a analise de componentes principais
+
+office.pca$eig # e veja a tabela com informacoes sobre variancia explicada
+
+##        eigenvalue percentage of variance cumulative percentage of variance
+## comp 1  4.2656310              71.093850                          71.09385
+## comp 2  1.6197932              26.996554                          98.09040
+## comp 3  0.1145758               1.909596                         100.00000
+\end{lstlisting}
+
+
+Se olharmos para esta tabela, veremos que dois componentes explicam 98,1\% da variância nas classificações. Isso já é bastante e sugere que podemos fazer com segurança duas dimensões para descrever nossos dados. Uma regra prática aqui é que a variação cumulativa explicada pelos componentes deve ser de pelo menos 70\%.
+
+\subsection{Análise de Componentes Principais}
+
+Vamos reter apenas dois componentes ou fatores:
+
+\begin{lstlisting}[language=R]
+office.pca.two <- PCA(office.df, ncp = 2, graph=FALSE) #Peca dois fatores preenchendo o argumento ncp.
+\end{lstlisting}
+
+\subsubsection{Cargas fatoriais}
+
+Agora podemos inspecionar a tabela com as cargas fatoriais:
+
+\begin{lstlisting}[language=R]
+office.pca.two$var$cor %>% #tabela com cargas fatoriais varimax 
+#, mas solicite uma rotacao varimax para melhorar a interpretacao
+
+## $loadings
+## 
+## Loadings:
+##                  Dim.1  Dim.2 
+## large_choice      0.516 -0.850
+## low_prices       -0.990       
+## service_quality   0.912 -0.410
+## product_quality   0.964       
+## convenience       0.175  0.978
+## preference_score  0.708 -0.706
+## 
+##                Dim.1 Dim.2
+## SS loadings    3.538 2.347
+## Proportion Var 0.590 0.391
+## Cumulative Var 0.590 0.981
+## 
+## $rotmat
+##           [,1]       [,2]
+## [1,] 0.8515627 -0.5242528
+## [2,] 0.5242528  0.8515627
+\end{lstlisting}
+
+
+Essas cargas são as correlações entre as dimensões originais  (large\_choice, low\_prices, etc.) e dois fatores são extraídos (Dim.1 and Dim.2). Nós vemos que low\_prices, service\_quality, e product\_quality pontuação alta no primeiro fator, enquanto large\_choice, convenience, e preference\_score pontuação alta no segundo fator. Poderíamos, portanto, dizer que o primeiro fator descreve o preço e a qualidade da marca e que o segundo fator descreve a conveniência das lojas da marca.
+
+Também queremos saber quanto cada uma das seis dimensões é explicada pelos fatores extraídos. Para isso, precisamos calcular a comunalidade e / ou seu complemento, a singularidade das dimensões:
+
+\begin{lstlisting}[language=R]
+loadings <- as_tibble(office.pca.two$var$cor) %>% # Precisamos capturar os carregamentos como um quadro de dados em um novo objeto. Use as_tibble(), caso contrario, nao podemos acessar os diferentes fatores
+
+  mutate(variable = rownames(office.pca.two$var$cor), # manter o controle dos nomes das linhas (eles sao removidos ao converter para tibble)
+         communality = Dim.1^2 + Dim.2^2, 
+         uniqueness = 1 - communality) # O operador ^ eleva um valor a uma determinada potencia. Para calcular a comunalidade, precisamos somar os quadrados das cargas em cada fator.
+         
+loadings
+## # A tibble: 6 x 5
+##    Dim.1  Dim.2 variable         communality uniqueness
+##    <dbl>  <dbl> <chr>                  <dbl>      <dbl>
+## 1  0.885 -0.453 large_choice           0.988   0.0116  
+## 2 -0.845 -0.516 low_prices             0.980   0.0198  
+## 3  0.991  0.128 service_quality        0.999   0.000669
+## 4  0.841  0.473 product_quality        0.930   0.0696  
+## 5 -0.364  0.925 convenience            0.988   0.0124  
+## 6  0.973 -0.230 preference_score       0.999   0.000524
+\end{lstlisting}
+
+A comunalidade de uma variável é a porcentagem da variação dessa variável que é explicada pelos fatores. Seu complemento é chamado de exclusividade. A exclusividade (unicidade) pode ser puro erro de medição ou pode representar algo que é medido de forma confiável por essa variável específica, mas não por nenhuma das outras variáveis. Quanto maior a exclusividade, maior a probabilidade de que seja mais do que apenas erro de medição. Uma exclusividade superior a 0,6 é geralmente considerada alta. Se a exclusividade for alta, a variável não será bem explicada pelos fatores. Vemos que, para todas as dimensões, a comunalidade é alta e, portanto, a singularidade é baixa; portanto, todas as dimensões são bem capturadas pelos fatores extraídos.
+
+\subsubsection{Plotando as cargas fatoriais}
+
+Também podemos plotar as cargas. Para isso, precisamos de outro pacote chamado factoextra:
+
+\begin{lstlisting}[language=R]
+install.packages("factoextra")
+library(factoextra)
+fviz_pca_var(office.pca.two, repel = TRUE) # o argumento repel = TRUE garante que o texto seja exibido corretamente no grafico
+\end{lstlisting}
+
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{perceptual_loading_plot-1.png}
+\end{center}
+
+Nós vimos que large\_choice, service\_quality, product\_quality e preference\_score têm pontuações altas no primeiro fator (o Dim1 do eixo X) e essa conveniência tem uma pontuação alta no segundo fator (o Dim2 do eixo Y). Também podemos adicionar as observações (as diferentes marcas) a esse gráfico:
+
+\newpage
+
+\begin{lstlisting}[language=R]
+fviz_pca_biplot(office.pca.two, repel = TRUE) # tracar as cargas e as marcas juntas em uma trama
+\end{lstlisting}
+
+
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{perceptual_biplot-1.png}
+\end{center}
+
+Isso também é chamado de biplot. Podemos ver, por exemplo, que o OfficeStar tem uma pontuação alta no primeiro fator.
+
+\newpage
+\section{Análise de componentes principais para mapas perceptivos (toothpaste dataset)}
+
+Neste capítulo, você aprenderá como realizar uma análise de componentes principais e visualizar os resultados em um mapa perceptivo.
+
+Digamos que tenhamos um conjunto de observações que diferem entre si em várias dimensões; por exemplo, temos várias marcas de uísque (observações) classificadas em vários atributos, como corpo, doçura, sabor, etc. (dimensões ) Se algumas dessas dimensões estiverem fortemente correlacionadas, deve ser possível descrever as observações por um número menor (que o original) de dimensões sem perder muita informação. Por exemplo, doçura e frutificação podem ser altamente correlacionadas e, portanto, podem ser substituídas por uma variável. Essa redução de dimensionalidade é o objetivo da análise de componentes principais.
+
+\subsection{Dados}
+\subsubsection{Importação}
+
+Analisaremos os dados de uma pesquisa na qual 60 consumidores foram convidados a responder a seis perguntas sobre pasta de dente. Esses dados foram coletados pelos criadores do Radiant, que é um pacote do \faRProject para análise de negócios que usaremos posteriormente. Faça o download dos dados aqui e importe-os para o \faRProject:
+
+\begin{lstlisting}[language=R]
+library(tidyverse)
+library(readxl)
+
+toothpaste <- read_excel("toothpaste.xlsx")
+
+\end{lstlisting}
+
+\subsubsection{Manipulação}
+
+\begin{lstlisting}[language=R]
+toothpaste # Visualiza os dados
+\end{lstlisting}
+
+O conjunto de dados consiste em um identificador, consumer, e as classificações do entrevistado sobre a importância de seis atributos de pasta de dente: prevents\_cavities, shiny\_teeth, strengthens\_gums, freshens\_breath, decay\_prevention\_unimportant, and attractive\_teeth. Nos também temos os respondentes age e gender.
+
+Vamos fatorar o identificador e o gender:
+\begin{lstlisting}[language=R]
+toothpaste <- toothpaste %>% 
+  mutate(consumer = factor(consumer),
+         gender = factor(gender))
+\end{lstlisting}
+
+\subsubsection{Recapitulação: importação e manipulação}
+
+Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/toothpaste.xlsx}{aqui}):
+
+\begin{lstlisting}[language=R]
+library(tidyverse)
+library(readxl)
+
+toothpaste <- read_excel("toothpaste.xlsx")
+  mutate(consumer = factor(consumer),
+         gender = factor(gender))
+\end{lstlisting}
+
+
+\subsection{Quantos fatores devemos considerar ?}
+
+O objetivo da análise de componentes principais é reduzir o número de dimensões que descrevem nossos dados, sem perder muitas informações. O primeiro passo na análise de componentes principais é decidir o número de componentes ou fatores principais que queremos manter. Para nos ajudar a decidir, usaremos a função pre\_factor do pacote radiant:
+
+\begin{lstlisting}[language=R]
+install.packages("radiant")
+library(radiant)
+
+# armazene os nomes das dimensoes em um vetor para que nao tenhamos que digita-las repetidamente
+
+dimensions <- c("prevents_cavities", "shiny_teeth", "strengthens_gums", "freshens_breath", "decay_prevention_unimportant", "attractive_teeth") 
+
+# dica: tambem poderiamos fazer o seguinte:
+
+# dimensions <- toothpaste %>% select(-consumer, -gender, -age) %>% names()
+
+summary(pre_factor(toothpaste, vars = dimensions))
+
+## Pre-factor analysis diagnostics
+## Data        : toothpaste 
+## Variables   : prevents_cavities, shiny_teeth, strengthens_gums, freshens_breath, decay_prevention_unimportant, attractive_teeth 
+## Observations: 60 
+## 
+## Bartlett test
+## Null hyp. : variables are not correlated
+## Alt. hyp. : variables are correlated
+## Chi-square: 238.93 df(15), p.value < .001
+## 
+## KMO test:  0.66 
+## 
+## Variable collinearity:
+##                               Rsq  KMO
+## prevents_cavities            0.86 0.62
+## shiny_teeth                  0.48 0.70
+## strengthens_gums             0.81 0.68
+## freshens_breath              0.54 0.64
+## decay_prevention_unimportant 0.76 0.77
+## attractive_teeth             0.59 0.56
+## 
+## Fit measures:
+##      Eigenvalues Variance % Cumulative %
+##  PC1        2.73       0.46         0.46
+##  PC2        2.22       0.37         0.82
+##  PC3        0.44       0.07         0.90
+##  PC4        0.34       0.06         0.96
+##  PC5        0.18       0.03         0.99
+##  PC6        0.09       0.01         1.00
+
+\end{lstlisting}
+
+
+Nas Fit measures, vemos que dois componentes explicam 82\% da variação nas classificações. Isso já é bastante e sugere que podemos reduzir com segurança o número de dimensões para dois componentes. Uma regra prática aqui é que a variação cumulativa explicada pelos componentes deve ser de pelo menos 70\%.
+
+\newpage
+\subsection{Análise de Componentes Principais}
+
+Vamos extrair somente dois componentes ou fatores:
+\begin{lstlisting}[language=R]
+
+summary(full_factor(toothpaste, dimensions, nr_fact = 2))
+# Peça dois fatores preenchendo o argumento nr_fact.
+
+## Factor analysis
+## Data        : toothpaste 
+## Variables   : prevents_cavities, shiny_teeth, strengthens_gums, freshens_breath, decay_prevention_unimportant, attractive_teeth 
+## Factors     : 2 
+## Method      : PCA 
+## Rotation    : varimax 
+## Observations: 60 
+## 
+## Factor loadings:
+##                                RC1   RC2
+## prevents_cavities             0.96 -0.03
+## shiny_teeth                  -0.05  0.85
+## strengthens_gums              0.93 -0.15
+## freshens_breath              -0.09  0.85
+## decay_prevention_unimportant -0.93 -0.08
+## attractive_teeth              0.09  0.88
+## 
+## Fit measures:
+##               RC1  RC2
+## Eigenvalues  2.69 2.26
+## Variance %   0.45 0.38
+## Cumulative % 0.45 0.82
+## 
+## Attribute communalities:                                   
+## prevents_cavities            92.59%
+## shiny_teeth                  72.27%
+## strengthens_gums             89.36%
+## freshens_breath              73.91%
+## decay_prevention_unimportant 87.78%
+## attractive_teeth             79.01%
+## 
+## Factor scores (max 10 shown):
+##    RC1   RC2
+##   1.15 -0.30
+##  -1.17 -0.34
+##   1.29 -0.86
+##   0.29  1.11
+##  -1.43 -1.49
+##   0.97 -0.31
+##   0.39 -0.94
+##   1.33 -0.03
+##  -1.02 -0.64
+##  -1.31  1.56
+\end{lstlisting}
+
+\newpage 
+\subsubsection{Cargas fatoriais}
+
+Veja a tabela abaixo do Factor loadings. Essas cargas são as correlações entre as dimensões originais (prevents\_cavities, shiny\_teeth, etc.) e os dois fatores que são retidos (RC1 e RC2). Nós vemos que prevents\_cavities, strengthens\_gums, e decay\_prevention\_unimportant pontuação alta no primeiro fator, enquanto shiny\_teeth, strengthens\_gums, e freshens\_breath pontuação alta no segundo fator. Poderíamos, portanto, dizer que o primeiro fator descreve preocupações relacionadas à saúde e que o segundo fator descreve preocupações relacionadas à aparência.
+
+Também queremos saber quanto cada uma das seis dimensões é explicada pelos fatores extraídos. Para isso, podemos observar a comunalidade das dimensões (cabeçalho: Attribute communalities). A comunalidade de uma variável é a porcentagem da variação dessa variável que é explicada pelos fatores. Seu complemento é chamado de exclusividade (= 1-comunalidade). A exclusividade pode ser puro erro de medição ou pode representar algo que é medido de forma confiável por essa variável específica, mas não por nenhuma das outras variáveis. Quanto maior a exclusividade, maior a probabilidade de que seja mais do que apenas erro de medição. Uma exclusividade superior a 0,6 é geralmente considerada alta. Se a exclusividade for alta, a variável não será bem explicada pelos fatores. Vemos que, para todas as dimensões, a comunalidade é alta e, portanto, a singularidade é baixa; portanto, todas as dimensões são bem capturadas pelos fatores extraídos.
+
+\subsubsection{Gráfico das cargas fatoriais}
+
+Também podemos traçar as cargas. Para isso, usaremos dois pacotes:
+
+\begin{lstlisting}[language=R]
+install.packages("FactoMiner")
+install.packages("factoextra")
+library(FactoMineR)
+library(factoextra)
+toothpaste %>% # take dataset
+  select(-consumer,-age,-gender) %>% # somente duas dimensoes
+  as.data.frame() %>% # converter em um objeto data.frame, caso contrário, o PCA não o aceitará
+  PCA(ncp = 2, graph = FALSE) %>% # faça uma análise de componentes principais e retenha 2 fatores
+  fviz_pca_var(repel = TRUE) # pegue essa análise e a transforme em uma visualização
+
+\end{lstlisting}
+
+
+
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{perceptual_tp_loading_plot-1.png}
+\end{center}
+
+
+Vemos que attractive\_teeth, shiny\_teeth, freshens\_breath, têm pontuações altas no segundo fator (o Dim2 do eixo X). prevents\_cavities e strengthens\_gums têm pontuações altas no segundo fator (o eixo Y Dim2) e decay\_prevention\_unimportant tem uma pontuação baixa nesse fator (essa variável mede a importância da prevenção da cárie).
+
+\newpage
+
+Também podemos adicionar as observações (os diferentes consumidores) a esse gráfico:
+
+\begin{lstlisting}[language=R]
+toothpaste %>% # pega os dados
+  select(-consumer,-age,-gender) %>% # obtem as dimensoes somente
+  as.data.frame() %>% # converte em data.frame object, caso contratio PCA nao aceita
+  PCA(ncp = 2, graph = FALSE) %>% # faz o pca e retem 2 fatores
+  fviz_pca_biplot(repel = TRUE) #faz o grafico
+\end{lstlisting}
+
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{perceptual_tp_biplot-1.png}
+\end{center}
+
+Isto também é conhecido como biplot.
+
+\newpage
+\section{Análise de cluster para segmentação}
+
+Neste capítulo, você aprenderá como realizar uma análise de cluster e uma análise discriminante linear.
+
+Uma análise de cluster trabalha em um grupo de observações que diferem entre si em várias dimensões. Ele encontrará clusters de observações no espaço n-dimensional, de modo que a semelhança de observações dentro de clusters seja a mais alta possível e a similaridade de observações entre clusters seja a mais baixa possível. Você sempre pode executar uma análise de cluster e pode solicitar qualquer número de clusters. O número máximo de clusters é o número total de observações. Nesse caso, cada observação será um cluster, mas isso não seria um cluster muito útil. O objetivo do agrupamento em cluster é encontrar um pequeno número de clusters que possam ser descritos de forma significativa por suas pontuações médias nas n dimensões. Em outras palavras, o objetivo é encontrar diferentes 'perfis' de observações.
+
+A análise discriminante linear tenta prever uma variável categórica com base em várias variáveis independentes contínuas ou categóricas. É semelhante à regressão logística. Nós o usaremos para prever a associação de cluster de uma observação (conforme estabelecido pela análise de cluster) com base em algumas variáveis de segmentação (ou seja, outras informações que temos sobre as observações que não serviram de entrada na análise de cluster).
+
+Analisaremos os dados de 40 entrevistados que avaliaram a importância de vários atributos da loja ao comprar equipamentos de escritório. Usaremos a análise de cluster para encontrar agrupamentos de observações, neste caso, agrupamentos de respondentes. Esses clusters terão perfis diferentes (por exemplo, um cluster pode atribuir importância à política de preços e devoluções, o outro pode atribuir importância à variedade de opções e qualidade de serviço). Em seguida, usaremos a análise discriminante linear para testar se podemos prever a associação ao cluster (ou seja, que tipo de comprador de equipamento de escritório alguém é) com base em várias características dos entrevistados (por exemplo, sua renda).
+
+
+\subsection{Dados}
+\subsubsectio{Importação}
+
+Analisaremos os dados de uma pesquisa na qual 40 entrevistados foram solicitados a avaliar a importância de vários atributos da loja ao comprar equipamentos. Faça o download dos dados aqui e importe-os para o \faRProject:
+
+\begin{lstlisting}[language=R]
+library(tidyverse) 
+library(readxl)
+
+equipment <- read_excel("segmentation_office.xlsx","SegmentationData") # Importa o arquivo Excel
+
+\end{lstlisting}
+
+
+\subsubsectio{Manipulação}
+\begin{lstlisting}[language=R]
+equipment
+
+## # A tibble: 40 x 10
+##    respondent_id variety_of_choi~ electronics furniture quality_of_serv~
+##            <dbl>            <dbl>       <dbl>     <dbl>            <dbl>
+##  1             1                8           6         6                3
+##  2             2                6           3         1                4
+##  3             3                6           1         2                4
+##  4             4                8           3         3                4
+##  5             5                4           6         3                9
+##  6             6                8           4         3                5
+##  7             7                7           2         2                2
+##  8             8                7           5         7                2
+##  9             9                7           7         5                1
+## 10            10                8           4         0                4
+## # ... with 30 more rows, and 5 more variables: low_prices <dbl>,
+## #   return_policy <dbl>, professional <dbl>, income <dbl>, age <dbl>
+ # Check out the data
+
+\end{lstlisting}
+
+Temos 10 colunas ou variáveis em nossos dados:
+\begin{itemize}
+    \item respondent\_id é um identificador para nossas observações
+    \item Os entrevistados classificaram a importância de cada um dos seguintes atributos em uma escala de 1 a 10: variety\_of\_choice, electronics, furniture, quality\_of\_service, low\_prices, return\_policy.
+    \item professional: 1 para profissionais, 0 para não profissionais
+    \item income: expresso em milhares de dólares
+    \item age
+\end{itemize}
+
+A análise de cluster tentará identificar clusters com padrões semelhantes de classificações. A análise discriminante linear preverá a associação do cluster com base nas variáveis de segmentação (professional, income, and age).
+
+Como sempre, vamos fatorar as variáveis que devem ser tratadas como categóricas:
+
+\begin{lstlisting}[language=R]
+equipment <- equipment %>% 
+  mutate(respondent_id = factor(respondent_id),
+         professional = factor(professional, labels = c("non-professional","professional")))
+\end{lstlisting}
+
+\subsubsection{Recapitulação: importação e manipulação}
+
+Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/segmentation_office.xlsx}{aqui}):
+
+\begin{lstlisting}[language=R]
+library(tidyverse) 
+library(readxl)
+
+equipment <- read_excel("segmentation_office.xlsx","SegmentationData") %>%
+  mutate(respondent_id = factor(respondent_id),
+         professional = factor(professional, labels = c("non-professional","professional")))
+\end{lstlisting}
+
+
+\subsection{Análise de Cluster}
+
+Primeiro, realizaremos uma análise hierárquica de cluster para encontrar o número ideal de clusters. Depois disso, realizaremos uma análise de cluster não hierárquica e solicitaremos o número de clusters considerados ideais pela análise de cluster hierárquica. As variáveis que servirão de entrada para a análise de cluster são as classificações de importância dos atributos da loja.
+
+\subsubsection{Padronizar ou não ?}
+A primeira etapa de uma análise de cluster é decidir se padronizará as variáveis de entrada. A padronização não é necessária quando as variáveis de entrada são medidas na mesma escala ou quando as variáveis de entrada são os coeficientes obtidos por uma análise conjunta. Em outros casos, a padronização é necessária.
+
+No nosso exemplo, todas as variáveis de entrada são medidas na mesma escala e, portanto, a padronização não é necessária. Se necessário, isso pode ser feito facilmente com mutate(newvar = scale(oldvar))).
+
+
+
+\subsubsection{Cluster hierárquico}
+Em seguida, criamos um novo conjunto de dados que inclui apenas as variáveis de entrada, ou seja, as classificações:
+
+\begin{lstlisting}[language=R]
+cluster.data <- equipment %>% 
+  select(variety_of_choice, electronics, furniture, quality_of_service, low_prices, return_policy) # Selecione no conjunto de dados do equipamento apenas as variaveis com classificacoes padronizadas
+\end{lstlisting}
+
+Agora, podemos prosseguir com o cluster hierárquico para determinar o número ideal de clusters:
+
+\begin{lstlisting}[language=R]
+# A funcao dist() cria uma matriz de dissimilaridade do nosso conjunto de dados e deve ser o primeiro argumento para a funcao hclust().
+# No argumento do metodo, voce pode especificar o metodo a ser usado para armazenamento em cluster.
+hierarchical.clustering <- hclust(dist(cluster.data), method = "ward.D") 
+\end{lstlisting}
+\newpage
+
+A análise de cluster é armazenada no objeto hierarchical.clustering e pode ser facilmente visualizada por um dendograma:
+
+\begin{lstlisting}[language=R]
+plot(hierarchical.clustering)
+\end{lstlisting}
+
+
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{segmentation_hclust_plot-1.png}
+\end{center}
+
+A partir desse dendograma, parece que podemos dividir as observações em dois, três ou seis grupos de observações. Vamos realizar um teste formal, a regra de parada de Duda-Hart, para ver quantos clusters devemos reter. Para isso, precisamos (instalar e) carregar o pacote NbClust:
+
+\begin{lstlisting}[language=R]
+install.packages("NbClust")
+library(NbClust)
+\end{lstlisting}
+
+A tabela de regras de parada de Duda-Hart pode ser obtida da seguinte maneira:
+
+\begin{lstlisting}[language=R]
+duda <- NbClust(cluster.data, distance = "euclidean", method = "ward.D2", max.nc = 9, index = "duda")
+pseudot2 <- NbClust(cluster.data, distance = "euclidean", method = "ward.D2", max.nc = 9, index = "pseudot2")
+
+duda$All.index
+
+##      2      3      4      5      6      7      8      9 
+## 0.3746 0.7277 0.7530 0.5062 0.4169 0.5948 0.7536 0.8615
+pseudot2$All.index
+##       2       3       4       5       6       7       8       9 
+## 33.3846  5.9872  3.9369  5.8519  5.5945  3.4055  3.2695  1.2865
+\end{lstlisting}
+
+
+A sabedoria convencional para decidir o número de grupos com base na regra de parada de Duda-Hart é encontrar um dos maiores valores de Duda que corresponda a um baixo valor de pseudo-$T^2$. No entanto, você também pode solicitar o número ideal de clusters, conforme sugerido pela regra de parada:
+
+\begin{lstlisting}[language=R]
+duda$Best.nc
+## Number_clusters     Value_Index 
+##          3.0000          0.7277
+\end{lstlisting}
+
+Nesse caso, o número ideal é três.
+
+\newpage
+
+\subsection{Cluster não-hierárquico}
+
+Agora, realizamos uma análise de cluster não hierárquica na qual solicitamos três clusters (conforme determinado pela análise de cluster hierárquica):
+
+\begin{lstlisting}[language=R]
+# existe um elemento aleatorio na analise de cluster
+# isso significa que voce nem sempre obtera a mesma saida toda vez que fizer uma analise de cluster
+# se voce deseja obter sempre a mesma saida, eh necessario corrigir o gerador de numeros aleatorios de R com o comando set.seed
+set.seed (1)
+
+# o argumento nstart deve ser incluido e definido como 25, mas sua explicacao esta fora do escopo deste tutorial
+kmeans.clustering <- kmeans(cluster.data, 3, nstart = 25)
+\end{lstlisting}
+
+Adicione ao conjunto de dados equipament uma variável que indique a qual cluster uma observação pertence:
+
+\begin{lstlisting}[language=R]
+equipment <- equipment %>% 
+  mutate(km.group = factor(kmeans.clustering$cluster, labels=c("cl1","cl2","cl3"))) # Fatore o indicador de cluster a partir do quadro de dados clustering k e adicione-o ao quadro de dados do equipamento.
+\end{lstlisting}
+
+Inspeciona os clusters:
+\begin{lstlisting}[language=R]
+equipment %>% 
+  group_by(km.group) %>% # agrupado por cluster (km.group)
+  summarise(count = n(), 
+            variety = mean(variety_of_choice), 
+            electronics = mean(electronics), 
+            furniture = mean(furniture), 
+            service = mean(quality_of_service), 
+            prices = mean(low_prices), 
+            return = mean(return_policy)) #Em seguida, pergunte pelo número de entrevistados e pelos meios das classificações.
+            
+## # A tibble: 3 x 8
+##   km.group count variety electronics furniture service prices return
+##   <fct>    <int>   <dbl>       <dbl>     <dbl>   <dbl>  <dbl>  <dbl>
+## 1 cl1          8    5           4.38      1.75    8.5    2.5    4.38
+## 2 cl2         18    9.11        6.06      5.78    2.39   3.67   3.17
+## 3 cl3         14    6.93        2.79      1.43    3.5    8.29   6.29
+\end{lstlisting}
+
+Vemos que:
+\begin{itemize}
+    \item o cluster 1 atribui mais importância (do que outros clusters) à qualidade do serviço
+    \item o cluster 2 atribui mais importância à variedade de opções
+    \item o cluster 3 atribui mais importância a preços baixos
+\end{itemize}
+
+Também podemos testar se há diferenças significativas entre os clusters, por exemplo, na variedade de opções. Para isso, usamos uma ANOVA unidirecional:
+
+\begin{lstlisting}[language=R]
+# remotes::install_github("samuelfranssens/type3anova") # para instalar o pacote type3anova.
+# Voce precisa do pacote de controles remotos para isso e o pacote para carro precisa ser instalado para que o pacote type3anova funcione
+
+library(type3anova)
+type3anova(lm(variety_of_choice ~ km.group, data=equipment))
+
+## # A tibble: 3 x 6
+##   term            ss   df1   df2      f    pvalue
+##   <chr>        <dbl> <dbl> <int>  <dbl>     <dbl>
+## 1 (Intercept) 1757.      1    37 1335.   1.24e-30
+## 2 km.group     101.      2    37   38.5  9.20e-10
+## 3 Residuals     48.7    37    37   NA   NA
+\end{lstlisting}
+
+Existem diferenças significativas entre os clusters em importância associadas à variedade de opções, e isso faz sentido porque o objetivo da análise de clusters é maximizar as diferenças entre os clusters. Vamos acompanhar isso com o HSD de Tukey para ver exatamente quais meios diferem um do outro:
+
+\newpage
+\begin{lstlisting}[language=R]
+TukeyHSD(aov(variety_of_choice ~ km.group, data=equipment), 
+         "km.group") # O primeiro argumento eh um objeto "aov", o segundo eh a nossa variavel independente.
+         
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = variety_of_choice ~ km.group, data = equipment)
+## 
+## $km.group
+##              diff        lwr       upr     p adj
+## cl2-cl1  4.111111  2.9208248  5.301397 0.0000000
+## cl3-cl1  1.928571  0.6870668  3.170076 0.0015154
+## cl3-cl2 -2.182540 -3.1807470 -1.184332 0.0000145
+
+\end{lstlisting}
+Vemos que em todos os meios, a diferença é significativa.
+
+\subsection{LDA Canônico}
+
+Na vida real, geralmente não sabemos o que os potenciais compradores consideram importante, mas temos uma ideia, por exemplo, de sua renda, idade e status profissional. Portanto, seria útil testar quão bem podemos prever a associação ao cluster (perfil de classificações de importância) com base nas características dos respondentes (renda, idade, profissional), que também são chamados de variáveis de segmentação. A fórmula preditiva poderia então ser usada para prever a associação ao cluster de novos compradores em potencial. Para encontrar a fórmula correta, usamos a análise discriminante linear (LDA). Mas primeiro vamos dar uma olhada nas médias de income, age, e professional por cluster:
+
+\begin{lstlisting}[language=R]
+
+equipment %>% 
+  group_by(km.group) %>% # Agrupar equipamentos por cluster.
+  summarize(income = mean(income), 
+            age = mean(age), 
+            professional = mean(as.numeric(professional)-1)) 
+            
+## # A tibble: 3 x 4
+##   km.group income   age professional
+##   <fct>     <dbl> <dbl>        <dbl>
+## 1 cl1        47.5  49          0.75 
+## 2 cl2        48.3  44.2        0.333
+## 3 cl3        32.1  30.9        0.5
+# Nao podemos assumir a media do profissional porque e uma variavel fator. 
+# Pedimos, portanto, que R o trate como uma variavel numerica.
+# acessado por $class, para os new_data com base na formula do LDA com base nos dados antigos (use o LDA onde CV = FALSE).
+
+#visualiza as predicoes
+
+new_data
+## # A tibble: 4 x 4
+##   income   age professional     prediction
+##    <dbl> <dbl> <chr>            <fct>     
+## 1     65    20 professional     cluster 3 
+## 2     65    35 non-professional cluster 2 
+## 3     35    45 non-professional cluster 2 
+## 4     35    60 professional     cluster 1
+\end{lstlisting}
+
+\newpage
+\section{Análise Conjunta}
+Neste capítulo, você aprenderá como realizar uma análise conjunta. A análise conjunta começa a partir de uma pesquisa na qual as pessoas avaliam ou escolhem entre produtos (por exemplo, carros) que diferem em vários atributos (por exemplo, segurança, eficiência de combustível, conforto etc.). A partir dessas classificações ou escolhas, a análise determina o valor que as pessoas atribuem aos diferentes atributos do produto (por exemplo, quanto peso as pessoas atribuem à segurança ao escolher entre carros). Essas informações podem ser usadas no desenvolvimento de produtos.
+
+
+\subsection{Dados}
+\subsubsection{Importação}
+
+Analisaremos os dados de uma pesquisa em que 15 consumidores foram convidados a avaliar dez sorvetes. Cada sorvete tinha um 'perfil' diferente, ou seja, uma combinação diferente de níveis de quatro atributos: sabor (framboesa, chocolate, morango, manga, baunilha), embalagem (waffle caseiro, casquinha, caneca), leve (com pouca gordura ou não) e orgânico (orgânico ou não). Todos os 15 entrevistados classificaram os dez perfis, fornecendo uma pontuação entre 1 e 10.
+
+Usamos os dados fornecidos pelo \href{https://bookdown.org/content/1340/www.xlstat.com}{www.xlstat.com}, descritos em seu \href{https://help.xlstat.com/customer/en/portal/articles/2062346-conjoint-analysis-in-excel-tutorial?b_id=9283}{tutorial} sobre como fazer análises conjuntas no Excel. Faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/icecream.xlsx}{aqui.}
+
+\begin{lstlisting}[language=R]
+library(tidyverse)
+library(readxl)
+
+icecream <- read_excel("icecream.xlsx") # Nao eh necessario incluir o argumento da planilha quando houver apenas uma planilha no arquivo do Excel
+\end{lstlisting}
+
+\subsubsection{Manipulação}
+
+\begin{lstlisting}[language=R]
+icecream
+
+## # A tibble: 10 x 20
+##    Observations Flavor Packaging Light Organic `Individual 1`
+##    <chr>        <chr>  <chr>     <chr> <chr>            <dbl>
+##  1 Profile 1    Raspb~ Homemade~ No l~ Not or~              1
+##  2 Profile 2    Choco~ Cone      No l~ Organic              4
+##  3 Profile 3    Raspb~ Pint      Low ~ Organic              2
+##  4 Profile 4    Straw~ Pint      No l~ Organic              7
+##  5 Profile 5    Straw~ Cone      Low ~ Not or~              9
+##  6 Profile 6    Choco~ Homemade~ No l~ Not or~              3
+##  7 Profile 7    Vanil~ Pint      Low ~ Not or~              5
+##  8 Profile 8    Mango  Homemade~ Low ~ Organic             10
+##  9 Profile 9    Mango  Pint      No l~ Not or~              6
+## 10 Profile 10   Vanil~ Homemade~ No l~ Organic              8
+## # ... with 14 more variables: `Individual 2` <dbl>, `Individual 3` <dbl>,
+## #   `Individual 4` <dbl>, `Individual 5` <dbl>, `Individual 6` <dbl>,
+## #   `Individual 7` <dbl>, `Individual 8` <dbl>, `Individual 9` <dbl>,
+## #   `Individual 10` <dbl>, `Individual 11` <dbl>, `Individual 12` <dbl>,
+## #   `Individual 13` <dbl>, `Individual 14` <dbl>, `Individual 15` <dbl>
+
+\end{lstlisting}
+
+
+Quando inspecionamos os dados, vemos que temos uma coluna para cada entrevistado. Essa é uma maneira incomum de armazenar dados (normalmente temos uma linha por respondente), então vamos reestruturar nosso conjunto de dados com a função de coleta (como fizemos \href{https://bookdown.org/content/1340/rmanova.html#rmanova}{anteriormente}):
+
+\begin{lstlisting}[language=R]
+icecream <- icecream %>% 
+  gather(respondent, rating, starts_with("Individual")) %>% # o entrevistado acompanha o respondente, a classificação armazena as classificações do entrevistado e queremos empilhar todas as variáveis que começam com Individual
+  rename("profile" = "Observations") %>% # renomeia Observations para profile
+  mutate(profile = factor(profile), respondent = factor(respondent),  # fatorar identificadores
+         Flavor = factor(Flavor), Packaging = factor(Packaging), Light = factor(Light), Organic = factor(Organic)) # fatorar os atributos do sorvete
+
+
+# Amplo conjunto de dados: uma linha por unidade de observacao (aqui: perfil) e varias colunas para as diferentes observacoes (aqui: respondentes)
+# Conjunto de dados longo: uma linha por observacao (aqui: combinacao de perfil x respondente)
+
+# Converter de grande para longo significa que estamos empilhando varias colunas umas sobre as outras. Para isso, precisamos de uma variavel extra para acompanhar qual coluna estamos lidando.
+# A funcao de coleta converte conjuntos de dados de amplos para longos.
+# O primeiro argumento (respondente) nos dira com qual coluna estamos lidando. Essa eh a variavel que armazenara os nomes das colunas que estamos empilhando.
+# O segundo argumento (classificacao) armazenara as colunas reais empilhadas umas sobre as outras.
+# Os argumentos a seguir (todas as variaveis com nomes que comecam com Individual) sao as colunas que queremos empilhar.
+
+icecream
+
+## # A tibble: 150 x 7
+##    profile   Flavor    Packaging     Light    Organic   respondent  rating
+##    <fct>     <fct>     <fct>         <fct>    <fct>     <fct>        <dbl>
+##  1 Profile 1 Raspberry Homemade waf~ No low ~ Not orga~ Individual~      1
+##  2 Profile 2 Chocolate Cone          No low ~ Organic   Individual~      4
+##  3 Profile 3 Raspberry Pint          Low fat  Organic   Individual~      2
+##  4 Profile 4 Strawber~ Pint          No low ~ Organic   Individual~      7
+##  5 Profile 5 Strawber~ Cone          Low fat  Not orga~ Individual~      9
+##  6 Profile 6 Chocolate Homemade waf~ No low ~ Not orga~ Individual~      3
+##  7 Profile 7 Vanilla   Pint          Low fat  Not orga~ Individual~      5
+##  8 Profile 8 Mango     Homemade waf~ Low fat  Organic   Individual~     10
+##  9 Profile 9 Mango     Pint          No low ~ Not orga~ Individual~      6
+## 10 Profile ~ Vanilla   Homemade waf~ No low ~ Organic   Individual~      8
+## # ... with 140 more rows
+\end{lstlisting}
+
+É melhor usar o Visualizador aqui (clique duas vezes no icecream objeto no painel Ambiente ou digite View(icecream)) para ver que existem dez linhas (10 perfis) por respondente agora.
+
+As demais variáveis são:
+
+\begin{itemize}
+    \item profile é um identificador para os diferentes sorvetes
+    \item Flavor, Packaging, Light, Organic são os quatro atributos que compõem o perfil de um sorvete
+\end{itemize}
+
+\subsubsection{Recapitulando: importação e manipulação}
+
+Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/icecream.xlsx}{aqui}:)
+\begin{lstlisting}[language=R]
+library(tidyverse)
+library(readxl)
+
+icecream <- read_excel("icecream.xlsx") %>% 
+  gather(respondent, rating, starts_with("Individual")) %>% # o entrevistado acompanha o respondente, a classificacao armazena as classificacoes do entrevistado e queremos empilhar todas as variaveis que comecam com Individual
+  rename("profile" = "Observations") %>% 
+  mutate(profile = factor(profile), respondent = factor(respondent),
+         Flavor = factor(Flavor), Packaging = factor(Packaging), Light = factor(Light), Organic = factor(Organic))
+\end{lstlisting}
+
+
+\subsection{Design de experimentos}
+
+Quando inspecionamos nosso conjunto de dados, vemos que o flavor possui 5 níveis (framboesa, chocolate, morango, manga, baunilha), packaging possui 3 níveis (waffle caseiro, cone, cerveja), a Light possui 2 níveis (baixo teor de gordura versus não), e Organic tem 2 níveis (orgânico vs. não). O objetivo de uma análise conjunta é estimar até que ponto cada nível de atributo afeta a classificação do sorvete. Para fazer isso, o fabricante de sorvete poderia criar 5×3×2x2 = 60 sorvetes diferentes e peça às pessoas para avaliarem tudo isso. Isso fornecerá ao fabricante uma boa estimativa da importância de cada atributo e de todas as possíveis interações. No entanto, classificar 60 sorvetes é difícil para os participantes e um estudo tão grande seria caro para o fabricante financiar. Na prática, os pesquisadores nessa situação solicitarão que as pessoas classifiquem um subconjunto desses 60 sorvetes. Nesta seção, discutiremos como selecionar um subconjunto (por exemplo, 10 sorvetes) de todas as combinações possíveis de nível de atributo (ou seja, 60 sorvetes) que ainda nos permitirão obter boas estimativas dos efeitos mais importantes.
+
+No conjunto de dados, já temos as classificações para dez perfis, portanto a decisão de quais sorvetes para teste já foi tomada. No entanto, vamos desconsiderar o fato de já termos os dados e considerar as decisões que precisam ser tomadas antes da coleta de dados. Em outras palavras, vamos discutir como passamos de um \textit{fatorial completo} (todas as 60 combinações) para um design \textit{fracionário} (menos de 60 combinações).
+
+A função doe (projeto de experimentos) do pacote radiant nos ajudará a decidir sobre os projetos de estudo. Radiant é um \href{https://radiant-rstats.github.io/docs/index.html}{pacote do \faRProject para business analytics.}
+
+A discussão a seguir da função doe é baseada na discussão da Radiant sobre essa função.
+
+\begin{lstlisting}[language=R]
+install.packages("radiant")
+library(radiant)
+\end{lstlisting}
+
+
+Para usar a doe, precisamos inserir as informações sobre nossos atributos e seus níveis de uma maneira específica:
+
+\begin{lstlisting}[language=R]
+# attribute1, attribute2, etc. sao vetores com um elemento no qual fornecemos primeiro o nome do atributo seguido por um ponto e virgula e depois fornecemos todos os niveis dos atributos separados por ponto e virgula
+attribute1 <- "Flavor; Raspberry; Chocolate; Strawberry; Mango; Vanilla"
+attribute2 <- "Package; Homemade waffle; Cone; Pint"
+attribute3 <- "Light; Low fat; No low fat"
+attribute4 <- "Organic; Organic; Not organic"
+
+# agora combine esses diferentes atributos em um vetor com c()
+attributes <- c(attribute1, attribute2, attribute3, attribute4)
+\end{lstlisting}
+
+Agora podemos pedir possíveis projetos experimentais:
+
+\begin{lstlisting}[language=R]
+summary(doe(attributes, seed = 123)) # Seed: fixa o gerador de numeros aleatorios
+
+## Experimental design
+## # trials for partial factorial: 60 
+## # trials for full factorial   : 60 
+## Random seed                   : 123 
+## 
+## Attributes and levels:
+## Flavor: Raspberry, Chocolate, Strawberry, Mango, Vanilla 
+## Package: Homemade_waffle, Cone, Pint 
+## Light: Low_fat, No_low_fat 
+## Organic: Organic, Not_organic 
+## 
+## Design efficiency:
+##  Trials D-efficiency Balanced
+##       9        0.105    FALSE
+##      10        0.389    FALSE
+##      11        0.411    FALSE
+##      12        0.614    FALSE
+##      13        0.542    FALSE
+##      14        0.479    FALSE
+##      15        0.762    FALSE
+##      16        0.738    FALSE
+##      17        0.748    FALSE
+##      18        0.756    FALSE
+##      19        0.644    FALSE
+##      20        0.895    FALSE
+##      21        0.848    FALSE
+##      22        0.833    FALSE
+##      23        0.790    FALSE
+##      24        0.827    FALSE
+##      25        0.787    FALSE
+##      26        0.768    FALSE
+##      27        0.759    FALSE
+##      28        0.736    FALSE
+##      29        0.702    FALSE
+##      30        0.984     TRUE
+##      31        0.952    FALSE
+##      32        0.933    FALSE
+##      33        0.928    FALSE
+##      34        0.900    FALSE
+##      35        0.871    FALSE
+##      36        0.893    FALSE
+##      37        0.866    FALSE
+##      38        0.843    FALSE
+##      39        0.836    FALSE
+##      40        0.922    FALSE
+##      41        0.899    FALSE
+##      42        0.904    FALSE
+##      43        0.882    FALSE
+##      44        0.861    FALSE
+##      45        0.949    FALSE
+##      46        0.919    FALSE
+##      47        0.912    FALSE
+##      48        0.911    FALSE
+##      49        0.891    FALSE
+##      50        0.959    FALSE
+##      51        0.939    FALSE
+##      52        0.944    FALSE
+##      53        0.925    FALSE
+##      54        0.924    FALSE
+##      55        0.906    FALSE
+##      56        0.902    FALSE
+##      57        0.884    FALSE
+##      58        0.872    FALSE
+##      59        0.855    FALSE
+##      60        1.000     TRUE
+## 
+## Partial factorial design correlations:
+##         Flavor Package Light Organic
+## Flavor       1       0     0       0
+## Package      0       1     0       0
+## Light        0       0     1       0
+## Organic      0       0     0       1
+## 
+## Partial factorial design:
+##  trial     Flavor         Package      Light     Organic
+##      1  Raspberry Homemade_waffle    Low_fat     Organic
+##      2  Raspberry Homemade_waffle    Low_fat Not_organic
+##      3  Raspberry Homemade_waffle No_low_fat     Organic
+##      4  Raspberry Homemade_waffle No_low_fat Not_organic
+##      5  Raspberry            Cone    Low_fat     Organic
+##      6  Raspberry            Cone    Low_fat Not_organic
+##      7  Raspberry            Cone No_low_fat     Organic
+##      8  Raspberry            Cone No_low_fat Not_organic
+##      9  Raspberry            Pint    Low_fat     Organic
+##     10  Raspberry            Pint    Low_fat Not_organic
+##     11  Raspberry            Pint No_low_fat     Organic
+##     12  Raspberry            Pint No_low_fat Not_organic
+##     13  Chocolate Homemade_waffle    Low_fat     Organic
+##     14  Chocolate Homemade_waffle    Low_fat Not_organic
+##     15  Chocolate Homemade_waffle No_low_fat     Organic
+##     16  Chocolate Homemade_waffle No_low_fat Not_organic
+##     17  Chocolate            Cone    Low_fat     Organic
+##     18  Chocolate            Cone    Low_fat Not_organic
+##     19  Chocolate            Cone No_low_fat     Organic
+##     20  Chocolate            Cone No_low_fat Not_organic
+##     21  Chocolate            Pint    Low_fat     Organic
+##     22  Chocolate            Pint    Low_fat Not_organic
+##     23  Chocolate            Pint No_low_fat     Organic
+##     24  Chocolate            Pint No_low_fat Not_organic
+##     25 Strawberry Homemade_waffle    Low_fat     Organic
+##     26 Strawberry Homemade_waffle    Low_fat Not_organic
+##     27 Strawberry Homemade_waffle No_low_fat     Organic
+##     28 Strawberry Homemade_waffle No_low_fat Not_organic
+##     29 Strawberry            Cone    Low_fat     Organic
+##     30 Strawberry            Cone    Low_fat Not_organic
+##     31 Strawberry            Cone No_low_fat     Organic
+##     32 Strawberry            Cone No_low_fat Not_organic
+##     33 Strawberry            Pint    Low_fat     Organic
+##     34 Strawberry            Pint    Low_fat Not_organic
+##     35 Strawberry            Pint No_low_fat     Organic
+##     36 Strawberry            Pint No_low_fat Not_organic
+##     37      Mango Homemade_waffle    Low_fat     Organic
+##     38      Mango Homemade_waffle    Low_fat Not_organic
+##     39      Mango Homemade_waffle No_low_fat     Organic
+##     40      Mango Homemade_waffle No_low_fat Not_organic
+##     41      Mango            Cone    Low_fat     Organic
+##     42      Mango            Cone    Low_fat Not_organic
+##     43      Mango            Cone No_low_fat     Organic
+##     44      Mango            Cone No_low_fat Not_organic
+##     45      Mango            Pint    Low_fat     Organic
+##     46      Mango            Pint    Low_fat Not_organic
+##     47      Mango            Pint No_low_fat     Organic
+##     48      Mango            Pint No_low_fat Not_organic
+##     49    Vanilla Homemade_waffle    Low_fat     Organic
+##     50    Vanilla Homemade_waffle    Low_fat Not_organic
+##     51    Vanilla Homemade_waffle No_low_fat     Organic
+##     52    Vanilla Homemade_waffle No_low_fat Not_organic
+##     53    Vanilla            Cone    Low_fat     Organic
+##     54    Vanilla            Cone    Low_fat Not_organic
+##     55    Vanilla            Cone No_low_fat     Organic
+##     56    Vanilla            Cone No_low_fat Not_organic
+##     57    Vanilla            Pint    Low_fat     Organic
+##     58    Vanilla            Pint    Low_fat Not_organic
+##     59    Vanilla            Pint No_low_fat     Organic
+##     60    Vanilla            Pint No_low_fat Not_organic
+## 
+## Full factorial design:
+##  trial     Flavor         Package      Light     Organic
+##      1  Raspberry Homemade_waffle    Low_fat     Organic
+##      2  Raspberry Homemade_waffle    Low_fat Not_organic
+##      3  Raspberry Homemade_waffle No_low_fat     Organic
+##      4  Raspberry Homemade_waffle No_low_fat Not_organic
+##      5  Raspberry            Cone    Low_fat     Organic
+##      6  Raspberry            Cone    Low_fat Not_organic
+##      7  Raspberry            Cone No_low_fat     Organic
+##      8  Raspberry            Cone No_low_fat Not_organic
+##      9  Raspberry            Pint    Low_fat     Organic
+##     10  Raspberry            Pint    Low_fat Not_organic
+##     11  Raspberry            Pint No_low_fat     Organic
+##     12  Raspberry            Pint No_low_fat Not_organic
+##     13  Chocolate Homemade_waffle    Low_fat     Organic
+##     14  Chocolate Homemade_waffle    Low_fat Not_organic
+##     15  Chocolate Homemade_waffle No_low_fat     Organic
+##     16  Chocolate Homemade_waffle No_low_fat Not_organic
+##     17  Chocolate            Cone    Low_fat     Organic
+##     18  Chocolate            Cone    Low_fat Not_organic
+##     19  Chocolate            Cone No_low_fat     Organic
+##     20  Chocolate            Cone No_low_fat Not_organic
+##     21  Chocolate            Pint    Low_fat     Organic
+##     22  Chocolate            Pint    Low_fat Not_organic
+##     23  Chocolate            Pint No_low_fat     Organic
+##     24  Chocolate            Pint No_low_fat Not_organic
+##     25 Strawberry Homemade_waffle    Low_fat     Organic
+##     26 Strawberry Homemade_waffle    Low_fat Not_organic
+##     27 Strawberry Homemade_waffle No_low_fat     Organic
+##     28 Strawberry Homemade_waffle No_low_fat Not_organic
+##     29 Strawberry            Cone    Low_fat     Organic
+##     30 Strawberry            Cone    Low_fat Not_organic
+##     31 Strawberry            Cone No_low_fat     Organic
+##     32 Strawberry            Cone No_low_fat Not_organic
+##     33 Strawberry            Pint    Low_fat     Organic
+##     34 Strawberry            Pint    Low_fat Not_organic
+##     35 Strawberry            Pint No_low_fat     Organic
+##     36 Strawberry            Pint No_low_fat Not_organic
+##     37      Mango Homemade_waffle    Low_fat     Organic
+##     38      Mango Homemade_waffle    Low_fat Not_organic
+##     39      Mango Homemade_waffle No_low_fat     Organic
+##     40      Mango Homemade_waffle No_low_fat Not_organic
+##     41      Mango            Cone    Low_fat     Organic
+##     42      Mango            Cone    Low_fat Not_organic
+##     43      Mango            Cone No_low_fat     Organic
+##     44      Mango            Cone No_low_fat Not_organic
+##     45      Mango            Pint    Low_fat     Organic
+##     46      Mango            Pint    Low_fat Not_organic
+##     47      Mango            Pint No_low_fat     Organic
+##     48      Mango            Pint No_low_fat Not_organic
+##     49    Vanilla Homemade_waffle    Low_fat     Organic
+##     50    Vanilla Homemade_waffle    Low_fat Not_organic
+##     51    Vanilla Homemade_waffle No_low_fat     Organic
+##     52    Vanilla Homemade_waffle No_low_fat Not_organic
+##     53    Vanilla            Cone    Low_fat     Organic
+##     54    Vanilla            Cone    Low_fat Not_organic
+##     55    Vanilla            Cone No_low_fat     Organic
+##     56    Vanilla            Cone No_low_fat Not_organic
+##     57    Vanilla            Pint    Low_fat     Organic
+##     58    Vanilla            Pint    Low_fat Not_organic
+##     59    Vanilla            Pint No_low_fat     Organic
+##     60    Vanilla            Pint No_low_fat Not_organic
+\end{lstlisting}
+
+Observe a saída no cabeçalho Design efficiency. Mostra 52 linhas. As linhas representam projetos experimentais com diferentes números de Trials ou diferentes números de sorvetes (ou seja, combinações de nível de atributo) que seriam testados. Uma palavra melhor para julgamento é perfil. Para cada projeto experimental, ele mostra a D-efficiency do projeto - uma medida de como poderemos estimar com clareza os efeitos do interesse após a execução do experimento (pontuações mais altas são melhores) - e se o projeto está ou não equilibrado - se cada nível está incluído no mesmo número de tentativas ou perfis. Idealmente, procuramos projetos balanceados com alta D-efficiency (acima de 0,80 é considerado razoável). Temos dois candidatos, um delineamento experimental com 60 perfis, que é apenas o delineamento fatorial completo ou um delineamento com 30 perfis. Vamos dar uma olhada no design com 30 perfis:
+
+\begin{lstlisting}[language=R]
+summary(doe(attributes, seed = 123, trials = 30))
+
+## Experimental design
+## # trials for partial factorial: 30 
+## # trials for full factorial   : 60 
+## Random seed                   : 123 
+## 
+## Attributes and levels:
+## Flavor: Raspberry, Chocolate, Strawberry, Mango, Vanilla 
+## Package: Homemade_waffle, Cone, Pint 
+## Light: Low_fat, No_low_fat 
+## Organic: Organic, Not_organic 
+## 
+## Design efficiency:
+##  Trials D-efficiency Balanced
+##      30        0.984     TRUE
+## 
+## Partial factorial design correlations:
+##         Flavor Package  Light Organic
+## Flavor       1       0  0.000   0.000
+## Package      0       1  0.000   0.000
+## Light        0       0  1.000  -0.105
+## Organic      0       0 -0.105   1.000
+## 
+## Partial factorial design:
+##  trial     Flavor         Package      Light     Organic
+##      1  Raspberry Homemade_waffle    Low_fat     Organic
+##      4  Raspberry Homemade_waffle No_low_fat Not_organic
+##      6  Raspberry            Cone    Low_fat Not_organic
+##      7  Raspberry            Cone No_low_fat     Organic
+##     10  Raspberry            Pint    Low_fat Not_organic
+##     11  Raspberry            Pint No_low_fat     Organic
+##     13  Chocolate Homemade_waffle    Low_fat     Organic
+##     14  Chocolate Homemade_waffle    Low_fat Not_organic
+##     19  Chocolate            Cone No_low_fat     Organic
+##     20  Chocolate            Cone No_low_fat Not_organic
+##     22  Chocolate            Pint    Low_fat Not_organic
+##     23  Chocolate            Pint No_low_fat     Organic
+##     26 Strawberry Homemade_waffle    Low_fat Not_organic
+##     28 Strawberry Homemade_waffle No_low_fat Not_organic
+##     29 Strawberry            Cone    Low_fat     Organic
+##     32 Strawberry            Cone No_low_fat Not_organic
+##     33 Strawberry            Pint    Low_fat     Organic
+##     35 Strawberry            Pint No_low_fat     Organic
+##     39      Mango Homemade_waffle No_low_fat     Organic
+##     40      Mango Homemade_waffle No_low_fat Not_organic
+##     41      Mango            Cone    Low_fat     Organic
+##     42      Mango            Cone    Low_fat Not_organic
+##     46      Mango            Pint    Low_fat Not_organic
+##     47      Mango            Pint No_low_fat     Organic
+##     49    Vanilla Homemade_waffle    Low_fat     Organic
+##     51    Vanilla Homemade_waffle No_low_fat     Organic
+##     53    Vanilla            Cone    Low_fat     Organic
+##     56    Vanilla            Cone No_low_fat Not_organic
+##     58    Vanilla            Pint    Low_fat Not_organic
+##     60    Vanilla            Pint No_low_fat Not_organic
+## 
+## Full factorial design:
+##  trial     Flavor         Package      Light     Organic
+##      1  Raspberry Homemade_waffle    Low_fat     Organic
+##      2  Raspberry Homemade_waffle    Low_fat Not_organic
+##      3  Raspberry Homemade_waffle No_low_fat     Organic
+##      4  Raspberry Homemade_waffle No_low_fat Not_organic
+##      5  Raspberry            Cone    Low_fat     Organic
+##      6  Raspberry            Cone    Low_fat Not_organic
+##      7  Raspberry            Cone No_low_fat     Organic
+##      8  Raspberry            Cone No_low_fat Not_organic
+##      9  Raspberry            Pint    Low_fat     Organic
+##     10  Raspberry            Pint    Low_fat Not_organic
+##     11  Raspberry            Pint No_low_fat     Organic
+##     12  Raspberry            Pint No_low_fat Not_organic
+##     13  Chocolate Homemade_waffle    Low_fat     Organic
+##     14  Chocolate Homemade_waffle    Low_fat Not_organic
+##     15  Chocolate Homemade_waffle No_low_fat     Organic
+##     16  Chocolate Homemade_waffle No_low_fat Not_organic
+##     17  Chocolate            Cone    Low_fat     Organic
+##     18  Chocolate            Cone    Low_fat Not_organic
+##     19  Chocolate            Cone No_low_fat     Organic
+##     20  Chocolate            Cone No_low_fat Not_organic
+##     21  Chocolate            Pint    Low_fat     Organic
+##     22  Chocolate            Pint    Low_fat Not_organic
+##     23  Chocolate            Pint No_low_fat     Organic
+##     24  Chocolate            Pint No_low_fat Not_organic
+##     25 Strawberry Homemade_waffle    Low_fat     Organic
+##     26 Strawberry Homemade_waffle    Low_fat Not_organic
+##     27 Strawberry Homemade_waffle No_low_fat     Organic
+##     28 Strawberry Homemade_waffle No_low_fat Not_organic
+##     29 Strawberry            Cone    Low_fat     Organic
+##     30 Strawberry            Cone    Low_fat Not_organic
+##     31 Strawberry            Cone No_low_fat     Organic
+##     32 Strawberry            Cone No_low_fat Not_organic
+##     33 Strawberry            Pint    Low_fat     Organic
+##     34 Strawberry            Pint    Low_fat Not_organic
+##     35 Strawberry            Pint No_low_fat     Organic
+##     36 Strawberry            Pint No_low_fat Not_organic
+##     37      Mango Homemade_waffle    Low_fat     Organic
+##     38      Mango Homemade_waffle    Low_fat Not_organic
+##     39      Mango Homemade_waffle No_low_fat     Organic
+##     40      Mango Homemade_waffle No_low_fat Not_organic
+##     41      Mango            Cone    Low_fat     Organic
+##     42      Mango            Cone    Low_fat Not_organic
+##     43      Mango            Cone No_low_fat     Organic
+##     44      Mango            Cone No_low_fat Not_organic
+##     45      Mango            Pint    Low_fat     Organic
+##     46      Mango            Pint    Low_fat Not_organic
+##     47      Mango            Pint No_low_fat     Organic
+##     48      Mango            Pint No_low_fat Not_organic
+##     49    Vanilla Homemade_waffle    Low_fat     Organic
+##     50    Vanilla Homemade_waffle    Low_fat Not_organic
+##     51    Vanilla Homemade_waffle No_low_fat     Organic
+##     52    Vanilla Homemade_waffle No_low_fat Not_organic
+##     53    Vanilla            Cone    Low_fat     Organic
+##     54    Vanilla            Cone    Low_fat Not_organic
+##     55    Vanilla            Cone No_low_fat     Organic
+##     56    Vanilla            Cone No_low_fat Not_organic
+##     57    Vanilla            Pint    Low_fat     Organic
+##     58    Vanilla            Pint    Low_fat Not_organic
+##     59    Vanilla            Pint No_low_fat     Organic
+##     60    Vanilla            Pint No_low_fat Not_organic
+\end{lstlisting}
+
+
+Em Projeto fatorial parcial (ou projeto fatorial fracionário), encontramos os perfis que poderíamos executar em um experimento com 30 em vez de 60 perfis. Sob correlações parciais do projeto fatorial, vemos que dois atributos estão correlacionados, a saber, Light e Organic ($r = -0,105$). Esse sempre será o caso em projetos fatoriais fracionários. Isso significa que algumas combinações de níveis de atributo serão mais prevalentes que outras. Somente em um planejamento fatorial completo todos os atributos serão não correlacionados ou ortogonais.
+
+Um design possível com apenas 10 perfis seria desequilibrado e teria a seguinte aparência:
+
+\begin{lstlisting}[language=R]
+summary(doe(attributes, seed = 123, trials = 10))
+
+## Experimental design
+## # trials for partial factorial: 10 
+## # trials for full factorial   : 60 
+## Random seed                   : 123 
+## 
+## Attributes and levels:
+## Flavor: Raspberry, Chocolate, Strawberry, Mango, Vanilla 
+## Package: Homemade_waffle, Cone, Pint 
+## Light: Low_fat, No_low_fat 
+## Organic: Organic, Not_organic 
+## 
+## Design efficiency:
+##  Trials D-efficiency Balanced
+##      10        0.389    FALSE
+## 
+## Partial factorial design correlations:
+##         Flavor Package Light Organic
+## Flavor   1.000   0.121 0.000   0.000
+## Package  0.121   1.000 0.000   0.000
+## Light    0.000   0.000 1.000   0.309
+## Organic  0.000   0.000 0.309   1.000
+## 
+## Partial factorial design:
+##  trial     Flavor         Package      Light     Organic
+##      4  Raspberry Homemade_waffle No_low_fat Not_organic
+##      5  Raspberry            Cone    Low_fat     Organic
+##     20  Chocolate            Cone No_low_fat Not_organic
+##     21  Chocolate            Pint    Low_fat     Organic
+##     25 Strawberry Homemade_waffle    Low_fat     Organic
+##     36 Strawberry            Pint No_low_fat Not_organic
+##     39      Mango Homemade_waffle No_low_fat     Organic
+##     46      Mango            Pint    Low_fat Not_organic
+##     50    Vanilla Homemade_waffle    Low_fat Not_organic
+##     59    Vanilla            Pint No_low_fat     Organic
+## 
+## Full factorial design:
+##  trial     Flavor         Package      Light     Organic
+##      1  Raspberry Homemade_waffle    Low_fat     Organic
+##      2  Raspberry Homemade_waffle    Low_fat Not_organic
+##      3  Raspberry Homemade_waffle No_low_fat     Organic
+##      4  Raspberry Homemade_waffle No_low_fat Not_organic
+##      5  Raspberry            Cone    Low_fat     Organic
+##      6  Raspberry            Cone    Low_fat Not_organic
+##      7  Raspberry            Cone No_low_fat     Organic
+##      8  Raspberry            Cone No_low_fat Not_organic
+##      9  Raspberry            Pint    Low_fat     Organic
+##     10  Raspberry            Pint    Low_fat Not_organic
+##     11  Raspberry            Pint No_low_fat     Organic
+##     12  Raspberry            Pint No_low_fat Not_organic
+##     13  Chocolate Homemade_waffle    Low_fat     Organic
+##     14  Chocolate Homemade_waffle    Low_fat Not_organic
+##     15  Chocolate Homemade_waffle No_low_fat     Organic
+##     16  Chocolate Homemade_waffle No_low_fat Not_organic
+##     17  Chocolate            Cone    Low_fat     Organic
+##     18  Chocolate            Cone    Low_fat Not_organic
+##     19  Chocolate            Cone No_low_fat     Organic
+##     20  Chocolate            Cone No_low_fat Not_organic
+##     21  Chocolate            Pint    Low_fat     Organic
+##     22  Chocolate            Pint    Low_fat Not_organic
+##     23  Chocolate            Pint No_low_fat     Organic
+##     24  Chocolate            Pint No_low_fat Not_organic
+##     25 Strawberry Homemade_waffle    Low_fat     Organic
+##     26 Strawberry Homemade_waffle    Low_fat Not_organic
+##     27 Strawberry Homemade_waffle No_low_fat     Organic
+##     28 Strawberry Homemade_waffle No_low_fat Not_organic
+##     29 Strawberry            Cone    Low_fat     Organic
+##     30 Strawberry            Cone    Low_fat Not_organic
+##     31 Strawberry            Cone No_low_fat     Organic
+##     32 Strawberry            Cone No_low_fat Not_organic
+##     33 Strawberry            Pint    Low_fat     Organic
+##     34 Strawberry            Pint    Low_fat Not_organic
+##     35 Strawberry            Pint No_low_fat     Organic
+##     36 Strawberry            Pint No_low_fat Not_organic
+##     37      Mango Homemade_waffle    Low_fat     Organic
+##     38      Mango Homemade_waffle    Low_fat Not_organic
+##     39      Mango Homemade_waffle No_low_fat     Organic
+##     40      Mango Homemade_waffle No_low_fat Not_organic
+##     41      Mango            Cone    Low_fat     Organic
+##     42      Mango            Cone    Low_fat Not_organic
+##     43      Mango            Cone No_low_fat     Organic
+##     44      Mango            Cone No_low_fat Not_organic
+##     45      Mango            Pint    Low_fat     Organic
+##     46      Mango            Pint    Low_fat Not_organic
+##     47      Mango            Pint No_low_fat     Organic
+##     48      Mango            Pint No_low_fat Not_organic
+##     49    Vanilla Homemade_waffle    Low_fat     Organic
+##     50    Vanilla Homemade_waffle    Low_fat Not_organic
+##     51    Vanilla Homemade_waffle No_low_fat     Organic
+##     52    Vanilla Homemade_waffle No_low_fat Not_organic
+##     53    Vanilla            Cone    Low_fat     Organic
+##     54    Vanilla            Cone    Low_fat Not_organic
+##     55    Vanilla            Cone No_low_fat     Organic
+##     56    Vanilla            Cone No_low_fat Not_organic
+##     57    Vanilla            Pint    Low_fat     Organic
+##     58    Vanilla            Pint    Low_fat Not_organic
+##     59    Vanilla            Pint No_low_fat     Organic
+##     60    Vanilla            Pint No_low_fat Not_organic
+\end{lstlisting}
+
+
+Comparado ao design com 30 perfis, agora existem mais e mais fortes correlações entre os atributos.
+
+Observe que os perfis não são exatamente iguais aos da experiência usada para coletar os dados do sorvete. Isso ocorre porque, para projetos desequilibrados, existe alguma aleatoriedade na definição das combinações reais de nível de atributo. É também por isso que definimos seed = 123. seed é usado para consertar o gerador de números aleatórios do \faRProject. Configurá-lo para um número fixo (123 ou 456 ou qualquer outra coisa) garantirá que o \faRProject gere sempre a mesma saída. Sem definir a seed, doe com trials = 10 não daria o mesmo design fracionário toda vez que você a executar.
+
+Observe também que o pacote radiant instala um suplemento que você pode acessar por meio de suplementos (encontre este botão à direita da linha abaixo de "Arquivo" etc.) -> Iniciar radiante (navegador). Isso abrirá um aplicativo no seu navegador que permitirá executar as etapas acima em uma interface visual intuitiva. Para obter ajuda, confira a discussão da Radiant sobre o módulo Design de experiências \href{https://radiant-rstats.github.io/docs/design/doe.html}{aqui}.
+
+
+\subsection{Um respondente}
+\subsubsection{Estimar valores de peça e pesos de importância}
+Embora alguns softwares exijam que você primeiro crie variáveis fictícias representando os níveis de atributo e execute uma regressão, o Radiant não exige que você faça isso. Você pode simplesmente usar os atributos (cada um com vários níveis) como variáveis. Primeiro, faremos uma análise conjunta dos dados de um respondente (indivíduo 1):
+
+\begin{lstlisting}[language=R]
+respondent1 <- icecream %>% filter(respondent == "Individual 1")
+
+# salve a analise conjunta em um objeto, porque a usaremos como entrada para summary(), plot(), and predict()
+
+conjoint_respondent1 <- conjoint(respondent1, rvar = "rating", evar = c("Flavor","Packaging","Light","Organic")) 
+
+summary(conjoint_respondent1)
+
+## Conjoint analysis
+## Data                 : respondent1 
+## Response variable    : rating 
+## Explanatory variables: Flavor, Packaging, Light, Organic 
+## 
+## Conjoint part-worths:
+##    Attributes          Levels     PW
+##  Flavor       Chocolate        0.000
+##  Flavor       Mango            5.000
+##  Flavor       Raspberry       -1.500
+##  Flavor       Strawberry       5.000
+##  Flavor       Vanilla          3.500
+##  Packaging    Cone             0.000
+##  Packaging    Homemade waffle  0.000
+##  Packaging    Pint            -2.000
+##  Light        Low fat          0.000
+##  Light        No low fat      -1.000
+##  Organic      Not organic      0.000
+##  Organic      Organic          1.400
+##  Base utility ~                3.800
+## 
+## Conjoint importance weights:
+##  Attributes    IW
+##   Flavor    0.596
+##   Packaging 0.183
+##   Light     0.092
+##   Organic   0.128
+## 
+## Conjoint regression results:
+## 
+##                            coefficient
+##  (Intercept)                     3.800
+##  Flavor|Mango                    5.000
+##  Flavor|Raspberry               -1.500
+##  Flavor|Strawberry               5.000
+##  Flavor|Vanilla                  3.500
+##  Packaging|Homemade waffle       0.000
+##  Packaging|Pint                 -2.000
+##  Light|No low fat               -1.000
+##  Organic|Organic                 1.400
+\end{lstlisting}
+
+
+A saída fornece valores de peça, pesos de importância e coeficientes de regressão. Os valores das partes e os coeficientes de regressão fornecem as mesmas informações: comparado ao nível de referência (o primeiro nível de um atributo; você verá que os valores das partes são sempre zero para este nível), quanto aumenta cada nível de atributo ou diminuir a classificação de um sorvete? Podemos traçar estes resultados:
+
+\begin{lstlisting}[language=R]
+plot(conjoint_respondent1)
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{conjoint_onerespondent_plot-1.png}
+\end{center}
+
+E então vemos facilmente que essa pessoa desfrutaria de um sorvete com baixo teor de gordura, orgânico, manga ou morango em um cone ou em um waffle caseiro.
+
+Observe que os resultados da regressão conjunta são simplesmente os resultados de uma \href{https://bookdown.org/content/1340/linear-regression.html#regression_without}{regressão linear múltipla:}
+
+\begin{lstlisting}[language=R]
+# Execute essa regressao se estiver interessado em aprender qual preditor eh significativo ou qual eh o R quadrado do modelo geral.
+
+summary(lm(rating ~ Flavor + Packaging + Light + Organic, data = respondent1))
+## 
+## Call:
+## lm(formula = rating ~ Flavor + Packaging + Light + Organic, data = respondent1)
+## 
+## Residuals:
+##    1    2    3    4    5    6    7    8    9   10 
+## -0.3 -0.2  0.3 -0.2  0.2  0.2 -0.3 -0.2  0.2  0.3 
+## 
+## Coefficients:
+##                            Estimate Std. Error t value Pr(>|t|)
+## (Intercept)               3.800e+00  8.426e-01   4.510    0.139
+## FlavorMango               5.000e+00  9.747e-01   5.130    0.123
+## FlavorRaspberry          -1.500e+00  9.747e-01  -1.539    0.367
+## FlavorStrawberry          5.000e+00  8.660e-01   5.774    0.109
+## FlavorVanilla             3.500e+00  9.747e-01   3.591    0.173
+## PackagingHomemade waffle  1.570e-15  8.944e-01   0.000    1.000
+## PackagingPint            -2.000e+00  8.660e-01  -2.309    0.260
+## LightNo low fat          -1.000e+00  5.916e-01  -1.690    0.340
+## OrganicOrganic            1.400e+00  4.899e-01   2.858    0.214
+## 
+## Residual standard error: 0.7746 on 1 degrees of freedom
+## Multiple R-squared:  0.9927, Adjusted R-squared:  0.9345 
+## F-statistic: 17.06 on 8 and 1 DF,  p-value: 0.1852
+\end{lstlisting}
+
+Finalmente, os pesos de importância nos dizem com que intensidade cada atributo determina a classificação de um sorvete. Para esse respondente, sabor é o atributo mais importante e luz é o atributo menos importante. A classificação deste respondente é determinada em 59,6\% por sabor e em 9,2\% por luz
+
+\subsubsection{Profiles: utilitários previstos}
+
+Prever as classificações (utilitários) dos diferentes sorvetes é muito fácil em \faRProject. Primeiro, verifique se temos um conjunto de dados com os diferentes perfis que foram testados:
+
+\begin{lstlisting}[language=R]
+profiles <- icecream %>% 
+  filter(respondent == "Individual 1") %>% 
+  select(Flavor,Packaging,Light,Organic)
+
+profiles
+## # A tibble: 10 x 4
+##    Flavor     Packaging       Light      Organic    
+##    <fct>      <fct>           <fct>      <fct>      
+##  1 Raspberry  Homemade waffle No low fat Not organic
+##  2 Chocolate  Cone            No low fat Organic    
+##  3 Raspberry  Pint            Low fat    Organic    
+##  4 Strawberry Pint            No low fat Organic    
+##  5 Strawberry Cone            Low fat    Not organic
+##  6 Chocolate  Homemade waffle No low fat Not organic
+##  7 Vanilla    Pint            Low fat    Not organic
+##  8 Mango      Homemade waffle Low fat    Organic    
+##  9 Mango      Pint            No low fat Not organic
+## 10 Vanilla    Homemade waffle No low fat Organic
+\end{lstlisting}
+
+Em seguida, pedimos à função predict para prever as classificações dos perfis com base na função de regressão:
+
+\begin{lstlisting}[language=R]
+predict(conjoint_respondent1, profiles) # prever as classificacoes para os perfis com base na analise conjunta
+
+## Conjoint Analysis
+## Data                 : respondent1 
+## Response variable    : rating 
+## Explanatory variables: Flavor, Packaging, Light, Organic 
+## Prediction dataset   : profiles 
+## 
+##      Flavor       Packaging      Light     Organic Prediction
+##   Raspberry Homemade waffle No low fat Not organic      1.300
+##   Chocolate            Cone No low fat     Organic      4.200
+##   Raspberry            Pint    Low fat     Organic      1.700
+##  Strawberry            Pint No low fat     Organic      7.200
+##  Strawberry            Cone    Low fat Not organic      8.800
+##   Chocolate Homemade waffle No low fat Not organic      2.800
+##     Vanilla            Pint    Low fat Not organic      5.300
+##       Mango Homemade waffle    Low fat     Organic     10.200
+##       Mango            Pint No low fat Not organic      5.800
+##     Vanilla Homemade waffle No low fat     Organic      7.700
+\end{lstlisting}
+
+A classificação prevista é mais alta para sorvetes orgânicos com pouca gordura e manga em um waffle caseiro. Mas essas são previsões para sorvetes que o entrevistado realmente classificou. Se quiséssemos saber qual sorvete o entrevistado mais gostava, poderíamos apenas olhar para as classificações observadas (em vez das previstas). É mais interessante obter previsões para sorvetes que o entrevistado não avaliou. Para isso, precisamos dos perfis para todos os sorvetes possíveis. Podemos criar esses perfis com a função expand.grid. A função expand.grid usa dois ou mais vetores e cria todas as combinações possíveis de elementos desses vetores:
+
+\begin{lstlisting}[language=R]
+Flavor <- c("Raspberry","Chocolate","Mango","Strawberry","Vanilla")
+Organic <- c("Organic","Not organic")
+
+expand.grid(Flavor, Organic)
+##          Var1        Var2
+## 1   Raspberry     Organic
+## 2   Chocolate     Organic
+## 3       Mango     Organic
+## 4  Strawberry     Organic
+## 5     Vanilla     Organic
+## 6   Raspberry Not organic
+## 7   Chocolate Not organic
+## 8       Mango Not organic
+## 9  Strawberry Not organic
+## 10    Vanilla Not organic
+\end{lstlisting}
+
+Vamos fazer isso para todos os nossos níveis de atributo:
+
+\begin{lstlisting}[language=R]
+# existe uma maneira mais facil de obter niveis de atributo do que criar os vetores manualmente:
+
+levels(icecream$Flavor) # certifique-se de que o sabor seja fatorado primeiro!
+
+## [1] "Chocolate"  "Mango"      "Raspberry"  "Strawberry" "Vanilla"
+# agora crie todos os profiles
+
+profiles.all <- expand.grid(levels(icecream$Flavor),levels(icecream$Packaging),levels(icecream$Light),levels(icecream$Organic)) %>% 
+  rename("Flavor" = "Var1", "Packaging" = "Var2", "Light" = "Var3", "Organic" = "Var4") # rename the variables created by expand.grid (don't forget this, otherwise predict won't know where to look for each attribute)
+
+# prever as classificações de todos os perfis
+
+predict(conjoint_respondent1, profiles.all) %>% 
+  arrange(desc(Prediction)) # mostrar os sorvetes com a classificação mais alta prevista no topo
+  
+##        Flavor       Packaging      Light     Organic Prediction
+## 1  Strawberry Homemade waffle    Low fat     Organic       10.2
+## 2  Strawberry            Cone    Low fat     Organic       10.2
+## 3       Mango Homemade waffle    Low fat     Organic       10.2
+## 4       Mango            Cone    Low fat     Organic       10.2
+## 5  Strawberry Homemade waffle No low fat     Organic        9.2
+## 6  Strawberry            Cone No low fat     Organic        9.2
+## 7       Mango Homemade waffle No low fat     Organic        9.2
+## 8       Mango            Cone No low fat     Organic        9.2
+## 9  Strawberry Homemade waffle    Low fat Not organic        8.8
+## 10 Strawberry            Cone    Low fat Not organic        8.8
+## 11      Mango Homemade waffle    Low fat Not organic        8.8
+## 12      Mango            Cone    Low fat Not organic        8.8
+## 13    Vanilla Homemade waffle    Low fat     Organic        8.7
+## 14    Vanilla            Cone    Low fat     Organic        8.7
+## 15 Strawberry            Pint    Low fat     Organic        8.2
+## 16      Mango            Pint    Low fat     Organic        8.2
+## 17 Strawberry Homemade waffle No low fat Not organic        7.8
+## 18 Strawberry            Cone No low fat Not organic        7.8
+## 19      Mango Homemade waffle No low fat Not organic        7.8
+## 20      Mango            Cone No low fat Not organic        7.8
+## 21    Vanilla Homemade waffle No low fat     Organic        7.7
+## 22    Vanilla            Cone No low fat     Organic        7.7
+## 23    Vanilla Homemade waffle    Low fat Not organic        7.3
+## 24    Vanilla            Cone    Low fat Not organic        7.3
+## 25 Strawberry            Pint No low fat     Organic        7.2
+## 26      Mango            Pint No low fat     Organic        7.2
+## 27 Strawberry            Pint    Low fat Not organic        6.8
+## 28      Mango            Pint    Low fat Not organic        6.8
+## 29    Vanilla            Pint    Low fat     Organic        6.7
+## 30    Vanilla Homemade waffle No low fat Not organic        6.3
+## 31    Vanilla            Cone No low fat Not organic        6.3
+## 32 Strawberry            Pint No low fat Not organic        5.8
+## 33      Mango            Pint No low fat Not organic        5.8
+## 34    Vanilla            Pint No low fat     Organic        5.7
+## 35    Vanilla            Pint    Low fat Not organic        5.3
+## 36  Chocolate Homemade waffle    Low fat     Organic        5.2
+## 37  Chocolate            Cone    Low fat     Organic        5.2
+## 38    Vanilla            Pint No low fat Not organic        4.3
+## 39  Chocolate Homemade waffle No low fat     Organic        4.2
+## 40  Chocolate            Cone No low fat     Organic        4.2
+## 41  Chocolate Homemade waffle    Low fat Not organic        3.8
+## 42  Chocolate            Cone    Low fat Not organic        3.8
+## 43  Raspberry Homemade waffle    Low fat     Organic        3.7
+## 44  Raspberry            Cone    Low fat     Organic        3.7
+## 45  Chocolate            Pint    Low fat     Organic        3.2
+## 46  Chocolate Homemade waffle No low fat Not organic        2.8
+## 47  Chocolate            Cone No low fat Not organic        2.8
+## 48  Raspberry Homemade waffle No low fat     Organic        2.7
+## 49  Raspberry            Cone No low fat     Organic        2.7
+## 50  Raspberry Homemade waffle    Low fat Not organic        2.3
+## 51  Raspberry            Cone    Low fat Not organic        2.3
+## 52  Chocolate            Pint No low fat     Organic        2.2
+## 53  Chocolate            Pint    Low fat Not organic        1.8
+## 54  Raspberry            Pint    Low fat     Organic        1.7
+## 55  Raspberry Homemade waffle No low fat Not organic        1.3
+## 56  Raspberry            Cone No low fat Not organic        1.3
+## 57  Chocolate            Pint No low fat Not organic        0.8
+## 58  Raspberry            Pint No low fat     Organic        0.7
+## 59  Raspberry            Pint    Low fat Not organic        0.3
+## 60  Raspberry            Pint No low fat Not organic       -0.7
+\end{lstlisting}
+
+
+
+Mesma conclusão que a da seção anterior: essa pessoa desfrutaria de um sorvete com baixo teor de gordura, orgânico, manga ou morango em um cone ou um waffle caseiro.
+
+\subsection{Muitos respondentes}
+\subsubsection{Estimar valores de peça e pesos de importância}
+
+Agora, vamos realizar a análise conjunta no conjunto de dados completo para ter uma idéia de quais sorvetes os 15 entrevistados, em média, gostaram mais e qual a importância de cada atributo:
+
+\begin{lstlisting}[language=R]
+conjoint_allrespondents <- conjoint(icecream, rvar = "rating", evar = c("Flavor","Packaging","Light","Organic")) # como antes, mas com um conjunto de dados diferente.
+
+summary(conjoint_allrespondents) 
+
+## Conjoint analysis
+## Data                 : icecream 
+## Response variable    : rating 
+## Explanatory variables: Flavor, Packaging, Light, Organic 
+## 
+## Conjoint part-worths:
+##    Attributes          Levels     PW
+##  Flavor       Chocolate        0.000
+##  Flavor       Mango            1.522
+##  Flavor       Raspberry        0.522
+##  Flavor       Strawberry       0.767
+##  Flavor       Vanilla          1.389
+##  Packaging    Cone             0.000
+##  Packaging    Homemade waffle -0.244
+##  Packaging    Pint            -0.100
+##  Light        Low fat          0.000
+##  Light        No low fat       0.478
+##  Organic      Not organic      0.000
+##  Organic      Organic          0.307
+##  Base utility ~                4.358
+## 
+## Conjoint importance weights:
+##  Attributes    IW
+##   Flavor    0.597
+##   Packaging 0.096
+##   Light     0.187
+##   Organic   0.120
+## 
+## Conjoint regression results:
+## 
+##                            coefficient
+##  (Intercept)                     4.358
+##  Flavor|Mango                    1.522
+##  Flavor|Raspberry                0.522
+##  Flavor|Strawberry               0.767
+##  Flavor|Vanilla                  1.389
+##  Packaging|Homemade waffle      -0.244
+##  Packaging|Pint                 -0.100
+##  Light|No low fat                0.478
+##  Organic|Organic                 0.307
+\end{lstlisting}
+
+O sabor é de longe o atributo mais importante. Vamos traçar estes resultados:
+
+\begin{lstlisting}[language=R]
+plot(conjoint_allrespondents)
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=12cm,height=8cm]{conjoint_manyrespondents_plot-1.png}
+\end{center}
+
+A partir disso, prevemos que, em média, as pessoas mais gostariam de um sorvete de manga orgânico, sem pouca gordura, em um cone.
+
+Os pesos de importância nos dizem com que intensidade cada atributo determina a classificação média de um sorvete. O sabor é o atributo mais importante e a embalagem é o atributo menos importante. A classificação deste respondente é determinada para 59,7\% por sabor e para 9,6\% por embalagem.
+
+\subsubsection{Profiles: utilitários previstos}
+
+Vamos prever as classificações de todos os sorvetes possíveis:
+
+\begin{lstlisting}[language=R]
+predict(conjoint_allrespondents, profiles.all) %>% # verifique as secoes anteriores para profiles.all
+
+  arrange(desc(Prediction)) # mostrar os sorvetes com a classificacao mais alta prevista no topo
+  
+##        Flavor       Packaging      Light     Organic Prediction
+## 1       Mango            Cone No low fat     Organic   6.664444
+## 2       Mango            Pint No low fat     Organic   6.564444
+## 3     Vanilla            Cone No low fat     Organic   6.531111
+## 4     Vanilla            Pint No low fat     Organic   6.431111
+## 5       Mango Homemade waffle No low fat     Organic   6.420000
+## 6       Mango            Cone No low fat Not organic   6.357778
+## 7     Vanilla Homemade waffle No low fat     Organic   6.286667
+## 8       Mango            Pint No low fat Not organic   6.257778
+## 9     Vanilla            Cone No low fat Not organic   6.224444
+## 10      Mango            Cone    Low fat     Organic   6.186667
+## 11    Vanilla            Pint No low fat Not organic   6.124444
+## 12      Mango Homemade waffle No low fat Not organic   6.113333
+## 13      Mango            Pint    Low fat     Organic   6.086667
+## 14    Vanilla            Cone    Low fat     Organic   6.053333
+## 15    Vanilla Homemade waffle No low fat Not organic   5.980000
+## 16    Vanilla            Pint    Low fat     Organic   5.953333
+## 17      Mango Homemade waffle    Low fat     Organic   5.942222
+## 18 Strawberry            Cone No low fat     Organic   5.908889
+## 19      Mango            Cone    Low fat Not organic   5.880000
+## 20    Vanilla Homemade waffle    Low fat     Organic   5.808889
+## 21 Strawberry            Pint No low fat     Organic   5.808889
+## 22      Mango            Pint    Low fat Not organic   5.780000
+## 23    Vanilla            Cone    Low fat Not organic   5.746667
+## 24  Raspberry            Cone No low fat     Organic   5.664444
+## 25 Strawberry Homemade waffle No low fat     Organic   5.664444
+## 26    Vanilla            Pint    Low fat Not organic   5.646667
+## 27      Mango Homemade waffle    Low fat Not organic   5.635556
+## 28 Strawberry            Cone No low fat Not organic   5.602222
+## 29  Raspberry            Pint No low fat     Organic   5.564444
+## 30    Vanilla Homemade waffle    Low fat Not organic   5.502222
+## 31 Strawberry            Pint No low fat Not organic   5.502222
+## 32 Strawberry            Cone    Low fat     Organic   5.431111
+## 33  Raspberry Homemade waffle No low fat     Organic   5.420000
+## 34  Raspberry            Cone No low fat Not organic   5.357778
+## 35 Strawberry Homemade waffle No low fat Not organic   5.357778
+## 36 Strawberry            Pint    Low fat     Organic   5.331111
+## 37  Raspberry            Pint No low fat Not organic   5.257778
+## 38  Raspberry            Cone    Low fat     Organic   5.186667
+## 39 Strawberry Homemade waffle    Low fat     Organic   5.186667
+## 40  Chocolate            Cone No low fat     Organic   5.142222
+## 41 Strawberry            Cone    Low fat Not organic   5.124444
+## 42  Raspberry Homemade waffle No low fat Not organic   5.113333
+## 43  Raspberry            Pint    Low fat     Organic   5.086667
+## 44  Chocolate            Pint No low fat     Organic   5.042222
+## 45 Strawberry            Pint    Low fat Not organic   5.024444
+## 46  Raspberry Homemade waffle    Low fat     Organic   4.942222
+## 47  Chocolate Homemade waffle No low fat     Organic   4.897778
+## 48  Raspberry            Cone    Low fat Not organic   4.880000
+## 49 Strawberry Homemade waffle    Low fat Not organic   4.880000
+## 50  Chocolate            Cone No low fat Not organic   4.835556
+## 51  Raspberry            Pint    Low fat Not organic   4.780000
+## 52  Chocolate            Pint No low fat Not organic   4.735556
+## 53  Chocolate            Cone    Low fat     Organic   4.664444
+## 54  Raspberry Homemade waffle    Low fat Not organic   4.635556
+## 55  Chocolate Homemade waffle No low fat Not organic   4.591111
+## 56  Chocolate            Pint    Low fat     Organic   4.564444
+## 57  Chocolate Homemade waffle    Low fat     Organic   4.420000
+## 58  Chocolate            Cone    Low fat Not organic   4.357778
+## 59  Chocolate            Pint    Low fat Not organic   4.257778
+## 60  Chocolate Homemade waffle    Low fat Not organic   4.113333
+\end{lstlisting}
+
+
+
+Mesmas conclusões de antes: prevemos que, em média, as pessoas mais gostariam de um sorvete de manga orgânico, sem pouca gordura, em um cone.
+
+\subsection{Simulação de Mercado}
+
+Digamos que criamos um pequeno número de sorvetes e queremos estimar a participação de mercado de cada um desses sorvetes. Digamos que selecionamos os quatro perfis a seguir:
+
+\begin{lstlisting}[language=R]
+# use slice() para selecionar as linhas 
+
+market_profiles <- profiles.all %>% 
+  slice(c(4, 16, 23, 38)) # de profiles.all, selecione as linhas 4, 16, 23, 38 como quatro profiles
+
+market_profiles
+
+##       Flavor       Packaging      Light     Organic
+## 1 Strawberry            Cone    Low fat Not organic
+## 2  Chocolate            Cone No low fat Not organic
+## 3  Raspberry Homemade waffle No low fat Not organic
+## 4  Raspberry Homemade waffle    Low fat     Organic
+#Já sabemos como estimar qual sorvete será mais apreciado:
+
+conjoint_allrespondents <- conjoint(icecream, rvar = "rating", evar = c("Flavor","Packaging","Light","Organic"))
+
+predict(conjoint_allrespondents, market_profiles) %>%
+  arrange(desc(Prediction))
+  
+##       Flavor       Packaging      Light     Organic Prediction
+## 1 Strawberry            Cone    Low fat Not organic   5.124444
+## 2  Raspberry Homemade waffle No low fat Not organic   5.113333
+## 3  Raspberry Homemade waffle    Low fat     Organic   4.942222
+## 4  Chocolate            Cone No low fat Not organic   4.835556
+\end{lstlisting}
+
+O sorvete de morango com baixo teor de gordura e não orgânico em um cone tem a classificação mais alta prevista entre todos os entrevistados. Mas isso não nos diz qual será a participação de mercado de cada um dos quatro perfis. Para isso, precisamos saber, para cada participante, qual perfil ele escolheria. Em outras palavras, precisamos prever as classificações para cada indivíduo separadamente:
+
+\begin{lstlisting}[language=R]
+# mesmo modelo de antes, mas agora adicione por = "respondent"
+conjoint_perrespondent <- conjoint(icecream, rvar = "rating", evar = c("Flavor","Packaging","Light","Organic"), by = "respondent")
+
+predict(conjoint_perrespondent, market_profiles) %>% 
+  arrange(respondent, desc(Prediction)) # classificar por respondente e depois por classificacao prevista
+  
+##       respondent     Flavor       Packaging      Light     Organic
+## 1   Individual 1 Strawberry            Cone    Low fat Not organic
+## 2   Individual 1  Raspberry Homemade waffle    Low fat     Organic
+## 3   Individual 1  Chocolate            Cone No low fat Not organic
+## 4   Individual 1  Raspberry Homemade waffle No low fat Not organic
+## 5  Individual 10  Raspberry Homemade waffle No low fat Not organic
+## 6  Individual 10  Raspberry Homemade waffle    Low fat     Organic
+## 7  Individual 10  Chocolate            Cone No low fat Not organic
+## 8  Individual 10 Strawberry            Cone    Low fat Not organic
+## 9  Individual 11 Strawberry            Cone    Low fat Not organic
+## 10 Individual 11  Raspberry Homemade waffle    Low fat     Organic
+## 11 Individual 11  Chocolate            Cone No low fat Not organic
+## 12 Individual 11  Raspberry Homemade waffle No low fat Not organic
+## 13 Individual 12  Raspberry Homemade waffle No low fat Not organic
+## 14 Individual 12  Raspberry Homemade waffle    Low fat     Organic
+## 15 Individual 12  Chocolate            Cone No low fat Not organic
+## 16 Individual 12 Strawberry            Cone    Low fat Not organic
+## 17 Individual 13  Raspberry Homemade waffle No low fat Not organic
+## 18 Individual 13  Raspberry Homemade waffle    Low fat     Organic
+## 19 Individual 13  Chocolate            Cone No low fat Not organic
+## 20 Individual 13 Strawberry            Cone    Low fat Not organic
+## 21 Individual 14  Raspberry Homemade waffle No low fat Not organic
+## 22 Individual 14  Raspberry Homemade waffle    Low fat     Organic
+## 23 Individual 14 Strawberry            Cone    Low fat Not organic
+## 24 Individual 14  Chocolate            Cone No low fat Not organic
+## 25 Individual 15 Strawberry            Cone    Low fat Not organic
+## 26 Individual 15  Chocolate            Cone No low fat Not organic
+## 27 Individual 15  Raspberry Homemade waffle No low fat Not organic
+## 28 Individual 15  Raspberry Homemade waffle    Low fat     Organic
+## 29  Individual 2 Strawberry            Cone    Low fat Not organic
+## 30  Individual 2  Chocolate            Cone No low fat Not organic
+## 31  Individual 2  Raspberry Homemade waffle    Low fat     Organic
+## 32  Individual 2  Raspberry Homemade waffle No low fat Not organic
+## 33  Individual 3  Chocolate            Cone No low fat Not organic
+## 34  Individual 3  Raspberry Homemade waffle    Low fat     Organic
+## 35  Individual 3  Raspberry Homemade waffle No low fat Not organic
+## 36  Individual 3 Strawberry            Cone    Low fat Not organic
+## 37  Individual 4  Raspberry Homemade waffle    Low fat     Organic
+## 38  Individual 4  Chocolate            Cone No low fat Not organic
+## 39  Individual 4 Strawberry            Cone    Low fat Not organic
+## 40  Individual 4  Raspberry Homemade waffle No low fat Not organic
+## 41  Individual 5 Strawberry            Cone    Low fat Not organic
+## 42  Individual 5  Chocolate            Cone No low fat Not organic
+## 43  Individual 5  Raspberry Homemade waffle No low fat Not organic
+## 44  Individual 5  Raspberry Homemade waffle    Low fat     Organic
+## 45  Individual 6  Raspberry Homemade waffle    Low fat     Organic
+## 46  Individual 6  Raspberry Homemade waffle No low fat Not organic
+## 47  Individual 6  Chocolate            Cone No low fat Not organic
+## 48  Individual 6 Strawberry            Cone    Low fat Not organic
+## 49  Individual 7 Strawberry            Cone    Low fat Not organic
+## 50  Individual 7  Raspberry Homemade waffle No low fat Not organic
+## 51  Individual 7  Raspberry Homemade waffle    Low fat     Organic
+## 52  Individual 7  Chocolate            Cone No low fat Not organic
+## 53  Individual 8  Chocolate            Cone No low fat Not organic
+## 54  Individual 8 Strawberry            Cone    Low fat Not organic
+## 55  Individual 8  Raspberry Homemade waffle No low fat Not organic
+## 56  Individual 8  Raspberry Homemade waffle    Low fat     Organic
+## 57  Individual 9 Strawberry            Cone    Low fat Not organic
+## 58  Individual 9  Chocolate            Cone No low fat Not organic
+## 59  Individual 9  Raspberry Homemade waffle    Low fat     Organic
+## 60  Individual 9  Raspberry Homemade waffle No low fat Not organic
+##    Prediction
+## 1   8.8000000
+## 2   3.7000000
+## 3   2.8000000
+## 4   1.3000000
+## 5   9.9500000
+## 6   8.9666667
+## 7   5.3666667
+## 8   2.0333333
+## 9   5.8000000
+## 10  5.2000000
+## 11  3.8000000
+## 12  2.8000000
+## 13  9.6000000
+## 14  7.7333333
+## 15  5.9333333
+## 16  3.2666667
+## 17  6.5500000
+## 18  6.2000000
+## 19  5.3000000
+## 20  1.3000000
+## 21  9.8000000
+## 22  6.8666667
+## 23  5.1333333
+## 24  3.4666667
+## 25  8.5333333
+## 26  6.8666667
+## 27  5.7000000
+## 28  1.9666667
+## 29  9.6333333
+## 30  5.9666667
+## 31  4.8666667
+## 32  3.5500000
+## 33  5.5666667
+## 34  4.7666667
+## 35  4.6500000
+## 36  2.2333333
+## 37  4.2000000
+## 38  3.3000000
+## 39  2.3000000
+## 40  2.0500000
+## 41  4.9333333
+## 42  4.2666667
+## 43  2.1000000
+## 44  2.0666667
+## 45  9.4000000
+## 46  7.6000000
+## 47  2.6000000
+## 48  1.6000000
+## 49  9.1666667
+## 50  6.7500000
+## 51  5.3333333
+## 52  4.8333333
+## 53  4.9333333
+## 54  4.2666667
+## 55  3.1000000
+## 56  0.7333333
+## 57  7.8666667
+## 58  7.5333333
+## 59  2.1333333
+## 60  1.2000000
+\end{lstlisting}
+
+Vamos reter para cada indivíduo apenas seu perfil mais bem classificado. Podemos fazer isso agrupando por entrevistado e adicionando uma variável denominada ranking que nos dirá o ranking de perfis, com base na classificação prevista, para cada entrevistado:
+
+\begin{lstlisting}[language=R]
+highest_rated <- predict(conjoint_perrespondent, market_profiles) %>% 
+  group_by(respondent) %>% 
+  mutate(ranking = rank(Prediction))
+
+# dando uma olhada
+highest_rated %>% 
+  arrange(respondent, ranking)
+  
+## # A tibble: 60 x 7
+## # Groups:   respondent [15]
+##    respondent   Flavor   Packaging    Light   Organic   Prediction ranking
+##    <chr>        <fct>    <fct>        <fct>   <fct>          <dbl>   <dbl>
+##  1 Individual 1 Raspber~ Homemade wa~ No low~ Not orga~       1.3        1
+##  2 Individual 1 Chocola~ Cone         No low~ Not orga~       2.80       2
+##  3 Individual 1 Raspber~ Homemade wa~ Low fat Organic         3.7        3
+##  4 Individual 1 Strawbe~ Cone         Low fat Not orga~       8.8        4
+##  5 Individual ~ Strawbe~ Cone         Low fat Not orga~       2.03       1
+##  6 Individual ~ Chocola~ Cone         No low~ Not orga~       5.37       2
+##  7 Individual ~ Raspber~ Homemade wa~ Low fat Organic         8.97       3
+##  8 Individual ~ Raspber~ Homemade wa~ No low~ Not orga~       9.95       4
+##  9 Individual ~ Raspber~ Homemade wa~ No low~ Not orga~       2.8        1
+## 10 Individual ~ Chocola~ Cone         No low~ Not orga~       3.80       2
+## # ... with 50 more rows
+# precisamos reter apenas o sorvete mais bem classificado
+
+highest_rated <- highest_rated %>% 
+  arrange(respondent, ranking) %>% 
+  filter(ranking == 4)
+
+highest_rated
+
+## # A tibble: 15 x 7
+## # Groups:   respondent [15]
+##    respondent   Flavor   Packaging    Light   Organic   Prediction ranking
+##    <chr>        <fct>    <fct>        <fct>   <fct>          <dbl>   <dbl>
+##  1 Individual 1 Strawbe~ Cone         Low fat Not orga~       8.8        4
+##  2 Individual ~ Raspber~ Homemade wa~ No low~ Not orga~       9.95       4
+##  3 Individual ~ Strawbe~ Cone         Low fat Not orga~       5.80       4
+##  4 Individual ~ Raspber~ Homemade wa~ No low~ Not orga~       9.60       4
+##  5 Individual ~ Raspber~ Homemade wa~ No low~ Not orga~       6.55       4
+##  6 Individual ~ Raspber~ Homemade wa~ No low~ Not orga~       9.8        4
+##  7 Individual ~ Strawbe~ Cone         Low fat Not orga~       8.53       4
+##  8 Individual 2 Strawbe~ Cone         Low fat Not orga~       9.63       4
+##  9 Individual 3 Chocola~ Cone         No low~ Not orga~       5.57       4
+## 10 Individual 4 Raspber~ Homemade wa~ Low fat Organic         4.2        4
+## 11 Individual 5 Strawbe~ Cone         Low fat Not orga~       4.93       4
+## 12 Individual 6 Raspber~ Homemade wa~ Low fat Organic         9.40       4
+## 13 Individual 7 Strawbe~ Cone         Low fat Not orga~       9.17       4
+## 14 Individual 8 Chocola~ Cone         No low~ Not orga~       4.93       4
+## 15 Individual 9 Strawbe~ Cone         Low fat Not orga~       7.87       4
+\end{lstlisting}
+
+
+
+Agora podemos estimar a participação de mercado:
+
+\begin{lstlisting}[language=R]
+market_share <- highest_rated %>% 
+  group_by(Flavor, Packaging, Light, Organic) %>% 
+  summarize(count = n()) %>% 
+  arrange(desc(count))
+
+market_share
+
+## # A tibble: 4 x 5
+## # Groups:   Flavor, Packaging, Light [4]
+##   Flavor     Packaging       Light      Organic     count
+##   <fct>      <fct>           <fct>      <fct>       <int>
+## 1 Strawberry Cone            Low fat    Not organic     7
+## 2 Raspberry  Homemade waffle No low fat Not organic     4
+## 3 Chocolate  Cone            No low fat Not organic     2
+## 4 Raspberry  Homemade waffle Low fat    Organic         2
+\end{lstlisting}
+
+
+Vimos que o sorvete de morango, cone, baixo teor de gordura e não orgânico é preferido por 7 em cada 15 participantes, o framboesa, waffle caseiro, sem baixo teor de gordura e sorvete não orgânico é favorecido por 4 em cada 15 participantes e assim por diante .
 
 
 
@@ -2423,14 +5180,7 @@ Observe o dobro $==$ ao testar a igualdade. Confira o livro \href{https://r4ds.h
 
 
 
-
-
-
-
-
-
-
-%=====================================================
+%======================================================
 \newpage
 %=====================================================
 
