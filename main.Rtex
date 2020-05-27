@@ -353,7 +353,7 @@ Quando você importa dados para o \faRProject, ele se torna um objeto chamado qu
 
 \faRProject funciona melhor com arquivos .csv (valores separados por vírgula). No entanto, os dados geralmente são armazenados como um arquivo do Excel (você pode baixar o conjunto de dados do Airbnb como um arquivo do Excel aqui). O \faRProject também pode lidar com isso, mas você precisará carregar primeiro um pacote chamado \fbox{readxl} (este pacote faz parte do pacote \fbox{tidyverse}, mas não é carregado com a biblioteca (\fbox{tidyverse}) porque não é um pacote \fbox{tidyverse} principal):
 
-\begin{lstlisting}
+\begin{lstlisting}[language=R]
 library (readxl) # carrega o pacote
 
 airbnb.excel <- read_excel (path = "tomslee_airbnb_belgium_1454_2017-07-14.xlsx", sheet = "Sheet1")
@@ -371,7 +371,7 @@ airbnb.excel <- read_excel (path = "tomslee_airbnb_belgium_1454_2017-07-14.xlsx"
 Nosso conjunto de dados contém informações sobre quartos na Bélgica listados no airbnb.com. Sabemos para cada sala (identificada por \fbox{room\_id}): quem é o hóspede (\fbox{host\_id}), que tipo de sala é (\fbox{room\_type}), onde está localizada (\fbox{country}, \fbox{city}, \fbox{neighborhood} e até a \fbox{latitude} e \fbox{longitude} exata), como muitas críticas que recebeu (\fbox{reviews}), como as pessoas estavam satisfeitas (\fbox{overall\_satisfaction}), preço (\fbox{price}) e características dos quartos (\fbox{accommodates}, \fbox{bedrooms}, \fbox{bathrooms}, \fbox{minstay}).
 
 Uma etapa realmente importante é verificar se seus dados foram importados corretamente. É uma boa prática sempre inspecionar seus dados. Você vê algum valor ausente, os números e os nomes fazem sentido? Se você começar imediatamente com a análise, corre o risco de ter que refazê-la porque os dados não foram lidos corretamente, ou pior, analisando dados errados sem perceber.
-\newpage
+
 
 \begin{lstlisting}[language=R]
 airbnb # Visualiza o conteudo do conjunto de dados da Airbnb
@@ -467,6 +467,8 @@ print (airbnb, n = 25, width = 100)
 ## # ... with 1.763e+04 more rows, and 5 more variables: name <chr>,
 ## #   last_modified <dttm>, latitude <dbl>, longitude <dbl>, location <chr>
 \end{lstlisting}
+
+\newpage
 
 \subsection{Manipulando dataframes}
 \subsubsection{Transformando variáveis}
@@ -694,7 +696,7 @@ Depois de criar novas variáveis com \fbox{mutate}, descartamos algumas variáve
 
 A escrita de código com o operador de pipe explora a estrutura semelhante de \fbox{mutate}, \fbox{select}, \fbox{rename}, \fbox{filter}, que são as funções mais importantes para manipulação de dados. O primeiro argumento para todas essas funções é o quadro de dados no qual ela deve operar. Agora, esse primeiro argumento pode ser deixado de fora, porque é fornecido pelo operador pipe. No restante deste tutorial, escreveremos código usando o operador de pipe, pois melhora consideravelmente a legibilidade do nosso código.
 
-
+\newpage
 \subsection{Agrupando e resumindo}
 
 Vamos trabalhar no conjunto de dados completo novamente. Até agora, seu script deve ficar assim:
@@ -740,7 +742,7 @@ airbnb%>%
 
 Dizemos ao \faRProject para pegar o objeto airbnb, agrupá-lo por cidade e resumi-lo (\fbox{summarise}). O resumo que queremos é o número de observações por grupo. Nesse caso, as cidades formam os grupos. Os grupos sempre serão a primeira coluna em nossa saída. Obtemos o número de observações por grupo com a função \fbox{n()}. Esses números são armazenados em uma nova coluna denominada \fbox{nr\_per\_city}.
 
-\newpage
+
 Como você pode ver, essas frequências são classificadas em ordem alfabética por cidade. Em vez disso, podemos classificá-los pelo número de quartos por cidade:
 
 \begin{lstlisting}[language=R]
@@ -948,7 +950,6 @@ airbnb.topten <- airbnb %>%
 
 Se você acabou de iniciar uma nova sessão \faRProject, também pode reler o arquivo .csv executando o código na seção da seção anterior.
 
-\newpage
 
 \subsubsection{Diagrama de dispersão (scatterplot)}
 
@@ -1391,7 +1392,7 @@ leveneTest(airbnb.cities$price, airbnb.cities$size)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{lstlisting}
 
-\newpage
+
 
 A hipótese nula de variâncias iguais é rejeitada ($p <0,001$), portanto, devemos continuar com um teste $t$ que pressupõe variâncias desiguais:
 
@@ -1459,6 +1460,8 @@ Não é de surpreender que casas ou apartamentos inteiros tenham preços mais al
 
 Uma ANOVA pode testar se há diferenças significativas nos preços médios por tipo de quarto. Porém, antes de executar uma ANOVA, precisamos verificar se as premissas da ANOVA são atendidas.
 
+\newpage
+
 \subsubsection{Suposição: normalidade de resíduos}
 
 A primeira suposição é que a variável dependente (\fbox{price}) é normalmente distribuída em cada nível da variável independente (\fbox{room\_type}). Primeiro, vamos inspecionar visualmente se essa suposição será válida:
@@ -1509,6 +1512,7 @@ shapiro.test(airbnb.private$price)
 
 Ocorreu um erro ao dizer que o tamanho da amostra é muito grande. Para contornar esse problema, podemos tentar o teste Anderson-Darling do pacote \fbox{nortest}:
 
+\newpage
 \begin{lstlisting}[language=R]
 install.packages("nortest")
 library(nortest)
@@ -1592,6 +1596,8 @@ leveneTest(airbnb$price, airbnb$room_type)
 \end{lstlisting}
 
 Como o valor p é extremamente pequeno, rejeitamos a hipótese nula de variâncias iguais. Assim como no pressuposto da normalidade, as violações do pressuposto de variâncias iguais podem, no entanto, ser frequentemente ignoradas e o faremos neste caso.
+
+\newpage
 
 \subsection{ANOVA}
 
@@ -1690,7 +1696,7 @@ ggplot(data = airbnb, mapping = aes(x = overall_satisfaction, y = log(price, bas
 
 Vemos que o preço tende a aumentar um pouco com maior satisfação. Para testar se a relação entre preço e satisfação é realmente significativa, podemos realizar uma regressão simples (simples refere-se ao fato de haver apenas um preditor):
 
-\newpage
+
 \begin{lstlisting}[language=R]
 linearmodel <- lm(price ~ overall_satisfaction, data = airbnb) # criamos um modelo linear. O primeiro argumento eh o modelo que assume a forma de variavel dependente - variavel (s) independente (s). O segundo argumento sao os dados que devemos considerar.
 
@@ -1734,7 +1740,7 @@ O modelo vem com um valor F de 43,9 com 1 grau de liberdade no numerador e 10585
 
 Por fim, observe também a estatística do R quadrado do modelo. Esta estatística é igual a 0,004. Essa estatística nos diz quanto da variação na variável dependente é explicada por nossos preditores. Quanto mais preditores você adicionar a um modelo, maior será o R quadrado.
 
-\newpage
+
 \subsection{Correlação}
 
 Observe que na regressão linear simples, a inclinação do preditor é uma função da correlação entre o preditor e a variável dependente. Podemos calcular a correlação da seguinte maneira:
@@ -2175,7 +2181,7 @@ Não podemos usar ANOVA ou regressão linear aqui porque a variável dependente 
 \vspace{.25cm}
 
 $$
-odds=\displaystyle\frac{P(Y=1)}{P(Y=0}=\displaystyle\frac{P(Y=1)}{1-P(Y=1)}
+probabilidades=\displaystyle\frac{P(Y=1)}{P(Y=0}=\displaystyle\frac{P(Y=1)}{1-P(Y=1)}
 $$
 
 \vspace{.25cm}
@@ -2267,19 +2273,19 @@ O coeficiente de regressão do preço é -0.0007185. Isso significa que um aumen
 
 \vspace{.25cm}
 
-\Leftrightarrow \textrm{ln(odds}(P(Y = 1 | \textrm{price} = 60 )) - \textrm{ln(odds}(P(Y &= 1 | \textrm{price} = 59 )) = -0.0007185\\
+\Leftrightarrow \textrm{ln(probabilidades}(P(Y = 1 | \textrm{price} = 60 )) - \textrm{ln(probabilidades}(P(Y &= 1 | \textrm{price} = 59 )) = -0.0007185\\
 
 \vspace{.25cm}
 
-\Leftrightarrow \textrm{ln}(\dfrac{ \textrm{odds}(P(Y = 1 | \textrm{price} &= 60 )}{\textrm{odds}(P(Y = 1 | \textrm{price} = 59 )}) = -0.0007185\\
+\Leftrightarrow \textrm{ln}(\dfrac{ \textrm{probabilidades}(P(Y = 1 | \textrm{price} &= 60 )}{\textrm{probabilidades}(P(Y = 1 | \textrm{price} = 59 )}) = -0.0007185\\
 
 \vspace{.25cm}
 
-\Leftrightarrow \dfrac{ \textrm{odds}(P(Y = 1 | \textrm{price} = 60 )}{\textrm{odds}(P(Y &= 1 | \textrm{price} = 59 )} = e^{-0.0007185}\\
+\Leftrightarrow \dfrac{ \textrm{probabilidades}(P(Y = 1 | \textrm{price} = 60 )}{\textrm{probabilidades}(P(Y &= 1 | \textrm{price} = 59 )} = e^{-0.0007185}\\
 
 \vspace{.25cm}
 
-\Leftrightarrow \textrm{odds}(P(Y &= 1 | \textrm{price} = 60 ) = e^{-0.0007185} * \textrm{odds}(P(Y &= 1 | \textrm{price} = 59 ))
+\Leftrightarrow \textrm{probabilidades}(P(Y &= 1 | \textrm{price} = 60 ) = e^{-0.0007185} * \textrm{probabilidades}(P(Y &= 1 | \textrm{price} = 59 ))
 \end{align}
 
 
@@ -2308,20 +2314,20 @@ Você vê o problema? As previsões são logits, ou seja, logaritmos de chances 
 
 \vspace{.5cm}
 \begin{center}
-    $\textrm{odds} = \dfrac{P(Y = 1)}{P(Y = 0)} = \dfrac{P(Y = 1)}{1 - P(Y = 1)})$\\
+    $\textrm{probabilidades} = \dfrac{P(Y = 1)}{P(Y = 0)} = \dfrac{P(Y = 1)}{1 - P(Y = 1)})$\\
  
 \vspace{.5cm}
 
-    $\Leftrightarrow \dfrac{odds}{1 + \dfrac{P(Y &= 1)}{1 - P(Y = 1)}} = \dfrac{\dfrac{P(Y = 1)}{1 - P(Y = 1)}}{1 + \dfrac{P(Y = 1)}{1 - P(Y = 1)}})$\\
+    $\Leftrightarrow \dfrac{probabilidades}{1 + \dfrac{P(Y &= 1)}{1 - P(Y = 1)}} = \dfrac{\dfrac{P(Y = 1)}{1 - P(Y = 1)}}{1 + \dfrac{P(Y = 1)}{1 - P(Y = 1)}})$\\
 
 \vspace{.5cm}    
-    $\Leftrightarrow \dfrac{odds}{1 + odds} = \dfrac{\dfrac{P(Y = 1)}{1 - P(Y = 1)}}{\dfrac{1 - P(Y = 1) + P(Y = 1)}{1 - P(Y = 1)}})$\\
+    $\Leftrightarrow \dfrac{probabilidades}{1 + probabilidades} = \dfrac{\dfrac{P(Y = 1)}{1 - P(Y = 1)}}{\dfrac{1 - P(Y = 1) + P(Y = 1)}{1 - P(Y = 1)}})$\\
     
 \vspace{.5cm}    
-    $\Leftrightarrow \dfrac{odds}{1 + odds} = \dfrac{P(Y = 1)}{1 - P(Y = 1) + P(Y = 1)})\\$
+    $\Leftrightarrow \dfrac{probabilidades}{1 + probabilidades} = \dfrac{P(Y = 1)}{1 - P(Y = 1) + P(Y = 1)})\\$
     
 \vspace{.5cm}    
-    $\Leftrightarrow \dfrac{odds}{1 + odds} = P(Y = 1))$
+    $\Leftrightarrow \dfrac{probabilidades}{1 + probabilidades} = P(Y = 1))$
 \end{center}
  
 
