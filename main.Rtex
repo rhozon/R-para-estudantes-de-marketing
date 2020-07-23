@@ -263,7 +263,7 @@ Ao escrever um script, é muito importante adicionar comentários para descrever
 
 As próximas linhas de código geralmente carregam os pacotes que você usará em sua análise ou visualização. 
 
-O \faRProject carrega automaticamente várias funções para executar operações básicas, mas os pacotes fornecem funcionalidade extra. Eles geralmente consistem em várias funções que podem lidar com tarefas específicas. Por exemplo, um pacote poderia fornecer funções para fazer análises de cluster ou para fazer biplots. Para instalar um pacote, digite install.packages ("nome do pacote") (e pressione enter ao trabalhar no console ou pressione Ctrl + Enter, Ctrl + R, Cmd + Enter ou o botão 'Executar' ao trabalhar em um script).
+O \faRProject carrega automaticamente várias funções para executar operações básicas, mas os pacotes fornecem funcionalidade extra. Eles geralmente consistem em várias funções que podem lidar com tarefas específicas. Por exemplo, um pacote poderia fornecer funções para fazer análises de \textit{cluster} ou para fazer biplots. Para instalar um pacote, digite install.packages ("nome do pacote") (e pressione enter ao trabalhar no console ou pressione Ctrl + Enter, Ctrl + R, Cmd + Enter ou o botão 'Executar' ao trabalhar em um script).
 
 Você só precisa instalar pacotes uma vez; depois, basta carregá-los usando a biblioteca (nome do pacote). Aqui, usaremos o popular pacote tidyverse que fornece muitas funções úteis e intuitivas
 
@@ -300,7 +300,7 @@ agnes(dist(data), metric = "euclidean", method = "ward")
 ## Error in agnes(dist(data), metric = "euclidean", method = "ward"): could not find function "agnes"
 \end{lstlisting}
 
-O \faRProject nos dirá que não pode encontrar a função solicitada (neste caso, agnes, uma função do pacote de cluster para análises de cluster). Geralmente, isso ocorre porque você ainda não carregou (ou instalou) o pacote ao qual a função pertence.
+O \faRProject nos dirá que não pode encontrar a função solicitada (neste caso, agnes, uma função do pacote de \textit{cluster} para análises de \textit{cluster}). Geralmente, isso ocorre porque você ainda não carregou (ou instalou) o pacote ao qual a função pertence.
 
 Após instalar e carregar o pacote tidyverse, você poderá usar as funções incluídas no pacote tidyverse. Como você usará o pacote tidyverse com tanta frequência, é melhor sempre carregá-lo no início do seu script.
 
@@ -507,11 +507,12 @@ print (airbnb, n = 25, width = 100)
 ## #   last_modified <dttm>, latitude <dbl>, longitude <dbl>, location <chr>
 \end{lstlisting}
 
-\newpage
 
+%===========================================================================
 \subsection{Manipulando dataframes}
 \subsubsection{Transformando variáveis}
 \subsubsubsection{\textbf{Fatoração}}
+%===========================================================================
 
 Vamos observar nosso dataset novamente:
 
@@ -735,8 +736,9 @@ Depois de criar novas variáveis com \hl{mutate}, descartamos algumas variáveis
 
 A escrita de código com o operador de pipe explora a estrutura semelhante de \hl{mutate}, \hl{select}, \hl{rename}, \hl{filter}, que são as funções mais importantes para manipulação de dados. O primeiro argumento para todas essas funções é o quadro de dados no qual ela deve operar. Agora, esse primeiro argumento pode ser deixado de fora, porque é fornecido pelo operador pipe. No restante deste tutorial, escreveremos código usando o operador de pipe, pois melhora consideravelmente a legibilidade do nosso código.
 
-\newpage
+%===========================================================================
 \subsection{Agrupando e resumindo}
+%===========================================================================
 
 Vamos trabalhar no conjunto de dados completo novamente. Até agora, seu script deve ficar assim:
 
@@ -1009,7 +1011,9 @@ Ao criar um gráfico, lembre-se de sempre adicionar um \hl{$+$} no final de cada
 
 O gráfico não é muito informativo porque muitos pontos são desenhados um sobre o outro.
 
+%===========================================================================
 \subsubsection{Jitter}
+%===========================================================================
 
 Vamos adicionar \hl{jitter} aos nossos pontos:
 
@@ -1050,8 +1054,9 @@ ggplot(data = airbnb.topten, mapping = aes(x = price)) + # Observe que nao temos
 
 De fato, existem alguns preços extremamente altos (em comparação com a maioria dos preços), portanto, os preços estão inclinados à direita. Nota: o \hl{stat\_bin()} usando compartimentos = 30. Escolha um valor melhor com o aviso de largura de caixa no console que possa ser ignorado com segurança.
 
-\newpage
+%===========================================================================
 \subsubsection{Transformação logarítmica}
+%===========================================================================
 
 Como a variável \hl{price} está inclinada à direita, podemos transformá-la em log para torná-la mais normal:
 
@@ -1301,7 +1306,7 @@ airbnb <- left_join(airbnb, population, by = c("city" = "place"))
 \end{lstlisting}
 
 
-\subsection{Amostras independentes: teste t}
+\subsection{Amostras independentes: teste $t$}
 
 Digamos que queremos testar se os preços diferem entre cidades grandes e pequenas. Para fazer isso, precisamos de uma variável que indique se um Airbnb está em uma cidade grande ou pequena. Na Bélgica, consideramos cidades com uma população de pelo menos cem mil como grande:
 
@@ -1551,7 +1556,7 @@ shapiro.test(airbnb.private$price)
 
 Ocorreu um erro ao dizer que o tamanho da amostra é muito grande. Para contornar esse problema, podemos tentar o teste Anderson-Darling do pacote \hl{nortest}:
 
-\newpage
+
 \begin{lstlisting}[language=R]
 install.packages("nortest")
 library(nortest)
@@ -1582,8 +1587,9 @@ ggplot(data=airbnb, mapping=aes(x=log(price, base = exp (1)))) + # Queremos o pr
 
 Como você pode ver, uma transformação de log normaliza uma distribuição inclinada à direita. Poderíamos então executar a ANOVA na variável dependente transformada em log. No entanto, na realidade, muitas vezes é seguro ignorar violações da suposição de normalidade (a menos que você esteja lidando com pequenas amostras, o que nós não somos). Vamos simplesmente continuar com o preço não transformado como variável dependente.
 
-
+%===========================================================================
 \subsubsection{Suposição: homogeneidade de variâncias}
+%===========================================================================
 
 Uma segunda suposição que precisamos verificar é se as variações de nosso preço variável dependente são iguais nas categorias de nossa variável independente \hl{room\_type}. Normalmente, um gráfico boxplot é informativo:
 
@@ -1636,7 +1642,6 @@ leveneTest(airbnb$price, airbnb$room_type)
 
 Como o valor p é extremamente pequeno, rejeitamos a hipótese nula de variâncias iguais. Assim como no pressuposto da normalidade, as violações do pressuposto de variâncias iguais podem, no entanto, ser frequentemente ignoradas e o faremos neste caso.
 
-\newpage
 
 \subsection{ANOVA}
 
@@ -1676,7 +1681,9 @@ type3anova(linearmodel)
 
 Nesse caso, o valor-p associado ao efeito de \hl{room\_type} é praticamente 0, o que significa que rejeitamos a hipótese nula de que o preço médio é igual para cada \hl{room\_type}. Você pode relatar o seguinte: “Houve diferenças significativas entre os preços médios das diferentes tipos de salas ($F (2, 17648) = 533,57, p <0,001$).”
 
+%==============================================================
 \subsection{Teste de Tuckey de diferença significativa verdadeira}
+%==============================================================
 
 Observe que a ANOVA testa a hipótese nula de que as médias em todos os nossos grupos são iguais. A rejeição desta hipótese nula significa que há uma diferença significativa em pelo menos um dos possíveis pares de médias (ou seja, em casa / apartamento inteiro vs. privado e / ou em casa / apartamento inteiro vs. compartilhado e / ou privado) vs. compartilhado). Para ter uma idéia de qual par de médias contém uma diferença significativa, podemos acompanhar o teste de Tukey, que nos dará todas as comparações pareadas.
 
@@ -1701,8 +1708,10 @@ TukeyHSD(aov(price ~ room_type, data=airbnb),
 
 Isso nos mostra que não há diferença significativa no preço médio de quartos compartilhados e privados, mas que quartos compartilhados e quartos particulares diferem significativamente de casas e apartamentos inteiros.
 
+%==============================================================
 \section{Regressão linear}
 \subsection{Regressão linear simples}
+%==============================================================
 
 Digamos que desejamos prever o preço com base em várias características do quarto. Vamos começar com um caso simples em que prevemos preço com base em um preditor: \hl{overal\_satisfaction} (satisfação geral). A satisfação geral é a classificação que uma listagem recebe no airbnb.com. Vamos fazer um gráfico de dispersão primeiro:
 
@@ -1779,8 +1788,9 @@ O modelo vem com um valor F de 43,9 com 1 grau de liberdade no numerador e 10585
 
 Por fim, observe também a estatística do R quadrado do modelo. Esta estatística é igual a 0,004. Essa estatística nos diz quanto da variação na variável dependente é explicada por nossos preditores. Quanto mais preditores você adicionar a um modelo, maior será o R quadrado.
 
-
+%==============================================================
 \subsection{Correlação}
+%==============================================================
 
 Observe que na regressão linear simples, a inclinação do preditor é uma função da correlação entre o preditor e a variável dependente. Podemos calcular a correlação da seguinte maneira:
 
@@ -1820,7 +1830,7 @@ cor(airbnb.corr) # obtenha a matriz de correlacao
 ## accommodates           1.0000000
 \end{lstlisting}
 
-\newpage
+
 
 Você pode visualizar facilmente essa matriz de correlação:
 
@@ -1853,9 +1863,10 @@ round(cor.mtest(airbnb.corr)$p, 5)
 ## [4,]    0 0.00000 0.00007 0e+00
 \end{lstlisting}
 
-\newpage
 
+%==============================================================
 \subsubsection{Regressão linear múltipla, com interação}
+%==============================================================
 
 Frequentemente, estamos interessados em interações entre preditores (por exemplo, \hl{overall\_satisfaction} e \hl{reviews}). Uma interação entre preditores nos diz que o efeito de um preditor depende do nível do outro preditor:
 
@@ -1994,11 +2005,15 @@ Também vemos que as listagens com muitas avaliações quase nunca têm uma clas
 
 Portanto, parece que nossos preditores estão correlacionados: quanto mais avaliações uma listagem tiver, maior será seu índice de satisfação. Isso potencialmente apresenta um problema que discutiremos em uma das próximas seções sobre \href{https://bookdown.org/content/1340/linear-regression.html#multicollinearity}{multicolinearidade.}
 
+%==============================================================
 \subsubsection{Premissas}
+%==============================================================
 
 Antes de tirar conclusões de uma análise de regressão, é preciso verificar várias suposições. Essas premissas devem ser atendidas independentemente do número de preditores no modelo, mas continuaremos com o caso de dois preditores.
 
+%==============================================================
 \subsubsubsection{Normalidade dos resíduos}
+%==============================================================
 
 Os resíduos (a diferença entre os valores observados e os estimados) devem ser normalmente distribuídos. Podemos inspecionar visualmente os resíduos:
 
@@ -2026,7 +2041,9 @@ ggplot(data = residuals, mapping = aes(x = value)) +
 
 \vspace{.25cm}
 
+%==============================================================
 \subsubsubsection{\textbf{Homocedasticidade dos resíduos}}
+%==============================================================
 
 \vspace{.25cm}
 
@@ -2049,9 +2066,10 @@ ggplot(data = residuals_predicted, mapping = aes(x = predicted, y = residuals)) 
 
 Essa suposição é violada porque, quanto maiores nossos valores previstos, maior a variação que vemos nos resíduos.
 
-\newpage
 
+%==============================================================
 \subsubsubsection{\textbf{Multicolinearidade}}
+%==============================================================
 
 \vspace{.25cm}
 
@@ -2212,7 +2230,9 @@ O valor da estatística qui é 74,35 e o valor p é praticamente 0, por isso rej
 
 Você pode relatar o seguinte: “Havia uma relação significativa entre o tamanho da cidade e se uma listagem era ou não uma jóia ($\chi^{2} (1, N = 15966) = 74,35, p <0,001$), de modo que as cidades grandes (8,05\%) tinham uma porcentagem maior de jóias (raridades) do que as cidades pequenas (4,1\%). 
 
+%==============================================================
 \subsection{Regressão logística (opcional)}
+%==============================================================
 
 Às vezes, queremos prever uma variável dependente binária, ou seja, uma variável que pode assumir apenas dois valores, com base em várias variáveis independentes contínuas ou categóricas. Por exemplo, digamos que estamos interessados em testar se uma listagem é ou não uma jóia depende do preço e do tipo de quarto da listagem.
 
@@ -2330,7 +2350,10 @@ O coeficiente de regressão do preço é -0.0007185. Isso significa que um aumen
 
 Assim, o coeficiente de regressão em uma regressão logística deve ser interpretado como o aumento relativo nas chances da variável dependente ser igual a 1, para cada aumento de unidade no preditor, controlando todos os outros fatores em nosso modelo. Nesse caso, as probabilidades de uma listagem ser uma gema devem ser multiplicadas por $ e ^ {0,0007185} = 0,999 $ ou diminuídas em 0,1\%, para cada aumento de preço unitário. Em outras palavras, listagens mais caras têm menos probabilidade de serem jóias. No exemplo específico acima, as chances de ser uma joia de uma listagem com preço de 60 são $e^{(-0.0007185×5)}= 0,996$ vezes a chance de ser uma jóia de uma listagem com preço de 59.
 
+%==============================================================
 \subsubsection{Medindo o ajuste de uma regressão logística: porcentagem classificada corretamente}
+%==============================================================
+
 
 Nosso modelo usa o preço e o tipo de quarto da listagem para prever se a listagem é uma joia ou não. Ao fazer previsões, é natural nos perguntarmos se nossas previsões são boas. Em outras palavras, usando preço e tipo de quarto, com que frequência prevemos corretamente se uma listagem é uma jóia ou não? Para ter uma idéia da qualidade de nossas previsões, podemos pegar o preço e o tipo de quarto das listagens em nosso conjunto de dados, prever se as listagens são gemas e comparar nossas previsões com o status real da gema das listagens. Vamos primeiro fazer as previsões:
 
@@ -2430,7 +2453,9 @@ table(airbnb$prediction,airbnb$gem)
 Podemos ver que, com esta regra de decisão (prever \hl{gems} sempre que a probabilidade prevista de \hl{gems} for superior a 7\%), obtivemos 11240 + 326 corretas e 5231 + 854 previsões erradas, que é uma taxa de acerto de (11240 + 326) / (11240 + 326 + 5231 + 854) = 65,5\%.
 
 \newpage
+%==============================================================
 \section{Análise básica de dados: experimentos}
+%==============================================================
 
 Neste capítulo, analisaremos os dados de um experimento que testou se o senso de poder das pessoas afeta sua disposição de pagar (\hl{WTP}) por produtos relacionados ao status (ou seja, por consumo conspícuo) e se essa relação é diferente quando a \hl{WTP} desses produtos é visível para os outros versus não.
 
@@ -2479,9 +2504,10 @@ Este experimento é descrito com mais detalhes em minha tese de doutorado (Frans
 \hspace{-.5cm}Rucker, D. D., & Galinsky, A. D. (2008). \textit{Desire to acquire: Powerlessness and compensatory consumption.} Journal of Consumer Research, 35(2), 257-267. https://doi.org/10.1086/588569
 
 \newpage
-
+%==============================================================
 \subsection{Dados}
 \subsubsection{Importação}
+%==============================================================
 
 Faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/power_conspicuous_consumption.xlsx}{aqui}. Como sempre, salve os dados em um diretório (de preferência um backup automático do software de compartilhamento de arquivos) e inicie seu script carregando o \hl{tidyverse} e definindo o diretório de trabalho no diretório em que você acabou de salvar seus dados:
 
@@ -2543,7 +2569,9 @@ Temos 39 colunas ou variáveis em nossos dados:
 \item \hl{agree}: uma questão exploratória que mede se as pessoas concordam que elas são mais adequadas ao papel de trabalhador ou gerente. Os participantes responderam em uma escala de 1: muito mais adequado para a função de trabalhador (gerente) a 7: muito mais adequado para a função de gerente (trabalhador). Números mais altos indicam concordância com a atribuição de função no experimento.
 \end{itemize}
 
+%==============================================================
 \subsubsection{Fatorar algumas variáveis}
+%==============================================================
 
 Após a inspeção dos dados, vemos que o tipo de \hl{subject} é duplo, o que significa que o \hl{subject} deve ser fatorado para que seus valores não sejam tratados como números. Também fatoraremos nossas condições experimentais:
 
@@ -2565,8 +2593,9 @@ powercc <- powercc %>% # nos ja criamos o objeto powercc anteriormente
 
 Observe o dobro $==$ ao testar a igualdade. Confira o livro \href{https://r4ds.had.co.nz/transform.html#filter-rows-with-filter}{R4 Data Science para outros operadores lógicos (role para baixo para chegar à Seção 5.2.2)}.
 
-
+%==============================================================
 \subsubsection{Calcular a consistência interna e a média de perguntas que medem o mesmo conceito}
+%==============================================================
 
 Gostaríamos de calcular a média das perguntas que medem a dominância para obter um único número indicando se o participante tem uma personalidade dominante ou não dominante. Antes de fazer isso, devemos ter uma idéia da consistência interna das perguntas que medem o domínio. Isso nos dirá se todas essas perguntas medem o mesmo conceito. Uma medida da consistência interna é o alfa de Cronbach. Para calcular, precisamos de um pacote chamado \hl{psych}:
 
@@ -2641,7 +2670,9 @@ powercc <- powercc %>%
 
 Também calculei a média das perguntas sobre consumo conspícuo e consumo discreto, mas não sobre as aspirações de status porque o alfa de Cronbach era muito baixo. Excluí as perguntas sobre aspirações de status do conjunto de dados. Deixo como um exercício verificar os alfa de Cronbach de cada um desses conceitos (faça isso antes de excluir as perguntas sobre as aspirações de status, é claro).
 
+%==============================================================
 \subsubsection{Recapitulando: importando e manipulando}
+%==============================================================
 
 Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o \href{http://users.telenet.be/samuelfranssens/tutorial_data/power_conspicuous_consumption.xlsx}{download dos dados aqui}):
 
@@ -2661,8 +2692,10 @@ powercc <- read_excel("power_conspicuous_consumption.xlsx","data")  %>%
   select(-starts_with("sa"))
 \end{lstlisting}
 
+%==============================================================
 \subsection{Teste $t$}
 \subsubsection{Teste $t$ para amostras independentes}
+%==============================================================
 
 Digamos que queremos testar se homens e mulheres diferem no grau em que são dominantes. Vamos criar um boxplot primeiro e depois verificar as médias e os desvios padrão:
 
@@ -2733,7 +2766,9 @@ t.test(powercc$dominance ~ powercc$gender, var.equal = TRUE)
 
 Você pode relatar o seguinte: “Homens (M = 0,65, DP = 0,3) e mulheres (M = 0,61, DP = 0,25) não diferiram no grau em que se classificaram como dominantes (t (141) = -0,69 , p = 0,49). "
 
-\subsubsection{Teste t para amostras dependentes}
+%==============================================================
+\subsubsection{Teste $t$ para amostras dependentes}
+%==============================================================
 
 Digamos que queremos testar se as pessoas estão mais dispostas a gastar em itens conspícuos do que em itens discretos. Vamos verificar os meios e os desvios padrão primeiro:
 
@@ -2769,9 +2804,12 @@ t.test(powercc$cc, powercc$icc, paired = TRUE) # Teste se as medias de cc e icc 
 
 Você pode relatar o seguinte: “As pessoas indicaram que estavam dispostas a pagar mais (t (142) = 25.064, $p <0,001$) por produtos conspícuos (M = 6,01, DP = 1,05) do que por produtos discretos (M = 3,6, DP = 0,99). ”
 
-\newpage
 
-\subsubsection{Teste t para amostra única}
+
+%==============================================================
+\subsubsection{Teste $t$ para amostra única}
+%==============================================================
+
 Digamos que queremos testar se a disposição média de pagar pelos itens visíveis foi significativamente maior que 5 (o ponto médio da escala):
 
 \begin{lstlisting}[language=R]
@@ -2792,7 +2830,9 @@ t.test(powercc$cc, mu = 5) # Indique a variavel cuja media queremos comparar com
 
 Na verdade, é significativamente maior que 5. Você pode relatar o seguinte: "A WTP média para produtos conspícuos (M = 6,01, DP = 1,05) estava significativamente acima de 5 (t (142) = 11,499, $p <0,001$)."
 
+%==============================================================
 \subsection{ANOVA bivariada}
+%==============================================================
 
 Quando você lê um artigo acadêmico que relata um experimento, a seção de resultados geralmente começa com uma discussão dos principais efeitos dos fatores experimentais e sua interação, conforme testado por uma Análise de variância ou ANOVA. Vamos nos concentrar primeiro na \hl{WTP} para produtos que melhoram o status. (Consideramos brevemente a \hl{WTP} para produtos com status neutro em nossa discussão sobre testes t de amostras dependentes e discutiremos mais detalhadamente na seção ANOVA de medidas repetidas.)
 
@@ -2843,7 +2883,7 @@ ggplot(data = powercc.summary, mapping = aes(x = audience, y = mean, fill = powe
 \includegraphics[width=12cm,height=8cm]{bda_barplot-1.png}
 \end{center}
 
-Para criar um gráfico de barras, informamos ao \hl{ggplot} as variáveis que devem estar no eixo X e no eixo Y e também usamos cores diferentes para diferentes níveis de potência com o comando \hl{fill}. Então pedimos um gráfico de barras com \hl{geom\_bar. stat = "identity"} e \hl{position = "dodge"} devem ser incluídos como argumentos para \hl{geom\_bar}, mas uma discussão sobre esses argumentos está além do escopo deste tutorial.
+Para criar um gráfico de barras, informamos ao \hl{ggplot} as variáveis que devem estar no eixo X e no eixo Y e também usamos cores diferentes para diferentes níveis de potência com o comando \hl{fill}. Então pedimos um gráfico de barras com geom\_bar. stat = "identity" e position = "dodge" devem ser incluídos como argumentos para \hl{geom\_bar}, mas uma discussão sobre esses argumentos está além do escopo deste tutorial.
 
 Antes de prosseguirmos com a ANOVA, devemos verificar se suas premissas são atendidas. Discutimos as suposições da ANOVA anteriormente, mas ignoramos aqui.
 
@@ -2883,7 +2923,9 @@ type3anova(linearmodel) # Em seguida, peça a saída no formato ANOVA. Isso forn
 
 Você pode relatar esses resultados da seguinte forma: “Nem o principal efeito do poder (F (1, 139) = 2,45, p = 0,12), nem o principal efeito do público (F (1, 139) = 2,3, p = 0,13), nem a interação entre poder e público (F (1, 139) = 1,03, p = 0,31) foi significativa. ”
 
+%==============================================================
 \subsubsection{Seguindo com contrastes}
+%==============================================================
 
 Ao realizar um experimento 2 x 2, geralmente fazemos a hipótese de uma interação. Uma interação significa que o efeito de uma variável independente é diferente dependendo dos níveis da outra variável independente. Na seção anterior, a ANOVA nos disse que a interação entre poder e público não era significativa. Isso significa que o efeito de alta versus baixa potência foi o mesmo na condição privada e pública e que o efeito de público versus privado foi o mesmo na condição de alta e baixa potência. Normalmente, a análise para com a não significância da interação. No entanto, faremos os testes de acompanhamento que um faria se a interação fosse significativa.
 
@@ -2953,7 +2995,7 @@ summary(linearmodel)
 
 \end{lstlisting}
 
-\newpage
+
 
 Temos 4 coeficientes de regressão:
 
@@ -3012,7 +3054,7 @@ $=\beta_1-1/3*(\beta_1+2\beta_2+\beta_3)$
 $=2/3 * \beta_1-2/3 * \beta_2-1/3 * \beta_3$
 \end{center}
 
-\newpage
+
 A especificação de contraste é a seguinte:
 
 \begin{lstlisting}[language=R]
@@ -3034,8 +3076,9 @@ contrast(linearmodel, contrast_specification)
 
 Verifique se a estimativa realmente corresponde à diferença entre a média de alta potência, privada e a média das médias nas outras células. Você pode relatar o seguinte: “A célula privada de alta potência tinha uma WTP significativamente menor do que as outras células experimentais em nosso projeto (est = -0,476, t (139) = -2,259, p = 0,025)”.
 
-
+%==============================================================
 \subsection{Análise de moderação: interação entre variáveis independentes contínuas e categóricas}
+%==============================================================
 
 Digamos que queremos testar se os resultados do experimento dependem do nível de domínio das pessoas. Em outras palavras, os efeitos do poder e da audiência são diferentes para participantes dominantes versus participantes não dominantes? Ainda em outras palavras, existe uma interação de três vias entre poder, audiência e domínio?
 
@@ -3201,15 +3244,16 @@ contrast(linearmodel, contrast_specification)
 
 A interação não é significativa, no entanto. Você pode relatar o seguinte: “Dentro da condição privada, não houve interação entre poder e dominância (t (135) = 1,352, p = 0,18).”
 
+%==============================================================
 \vspace{.25cm}
 \subsubsubsection{\textbf{Análise spotlight}}
 \vspace{.25cm}
-
+%==============================================================
 
 Em breve.
-
+%==============================================================
 \subsection{ANCOVA}
-
+%==============================================================
 Descobrimos que nossas condições experimentais não afetam significativamente o consumo conspícuo:
 
 \begin{lstlisting}[language=R]
@@ -3249,8 +3293,9 @@ Vemos que \hl{icc} está relacionado à variável dependente e, portanto, que a 
 
 Chamamos essa análise de ANCOVA porque icc é uma covariável (abrange ou está relacionada à nossa variável dependente).
 
-
+%==============================================================
 \subsection{Medidas repetidas ANOVA}
+%==============================================================
 
 Neste experimento, temos mais de uma medida por unidade de observação, ou seja, disposição para gastar em produtos conspícuos e disposição para gastar em produtos discretos. Uma ANOVA de medidas repetidas pode ser usada para testar se os efeitos das condições experimentais são diferentes para produtos conspícuos versus inconspícuos.
 
@@ -3312,7 +3357,6 @@ powercc %>%
 ##  9 9       low   public     5.8   4.2
 ## 10 10      high  public     6.8   3.4
 ## # ... with 133 more rows
-
 \end{lstlisting}
 
 
@@ -3374,14 +3418,18 @@ ezANOVA(data = powercc.long, dv = wtp, wid = subject, within = consumption_type,
 Vemos nesses resultados que a interação de três vias entre poder, público e tipo de consumo é marginalmente significativa. Você pode relatar o seguinte: "Uma ANOVA de medidas repetidas estabeleceu que a interação de três vias entre poder, público e tipo de consumo era marginalmente significativa (F (1, 139) = 2,98, p = 0,086).
 
 \newpage
+%==============================================================
 \section{Análise de componentes principais para mapas perceptivos (office dataset)}
+%==============================================================
 
 Neste capítulo, você aprenderá como realizar uma análise de componentes principais e visualizar os resultados em um mapa perceptivo.
 
 Digamos que tenhamos um conjunto de observações que diferem entre si em várias dimensões; por exemplo, temos várias marcas de uísque (observações) classificadas em vários atributos, como corpo, doçura, sabor, etc. (dimensões). Se algumas dessas dimensões estiverem fortemente correlacionadas, deve ser possível descrever as observações por um número menor (que o original) de dimensões sem perder muita informação. Por exemplo, doçura e frutificação podem ser altamente correlacionadas e, portanto, podem ser substituídas por uma variável. Essa redução de dimensionalidade é o objetivo da análise de componentes principais.
 
+%==============================================================
 \subsection{Dados}
 \subsubsection{Importação}
+%==============================================================
 
 Analisaremos os dados de uma pesquisa na qual os entrevistados foram solicitados a classificar quatro marcas de equipamentos de escritório em seis dimensões. Faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/perceptual_map_office.xlsx}{aqui} e importe-os para o \faRProject:
 
@@ -3409,8 +3457,9 @@ office <- office %>%
   mutate(brand = factor(brand))
 \end{lstlisting}
 
-
+%==============================================================
 \subsubsection{Recapitulação: importação e manipulação}
+%==============================================================
 
 Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas/pipe (faça o download dos dados aqui):
 
@@ -3423,8 +3472,9 @@ office <- read_excel("perceptual_map_office.xlsx","attributes") %>% #
 \end{lstlisting}
 
 
-
+%==============================================================
 \subsection{Quantos fatores devemos considerar ?}
+%==============================================================
 
 O objetivo da análise de componentes principais é reduzir o número de dimensões que descrevem nossos dados, sem perder muitas informações. O primeiro passo na análise de componentes principais é decidir o número de componentes ou fatores principais que queremos manter. Para nos ajudar a decidir, usaremos a função PCA do \hl{pacote FactoMineR}:
 
@@ -3433,7 +3483,7 @@ install.packages("FactoMineR")
 library(FactoMineR)
 \end{lstlisting}
 
-\newpage
+
 
 Para poder usar a \hl{função PCA}, precisamos primeiro transformar o quadro de dados:
 
@@ -3542,7 +3592,7 @@ fviz_pca_var(office.pca.two, repel = TRUE) # o argumento repel = TRUE garante qu
 
 Nós vimos que \hl{large\_choice}, \hl{service\_quality}, \hl{product\_quality} e \hl{preference\_score} têm pontuações altas no primeiro fator (o Dim1 do eixo X) e essa conveniência tem uma pontuação alta no segundo fator (o Dim2 do eixo Y). Também podemos adicionar as observações (as diferentes marcas) a esse gráfico:
 
-\newpage
+
 
 \begin{lstlisting}[language=R]
 fviz_pca_biplot(office.pca.two, repel = TRUE) # tracar as cargas e as marcas juntas em uma trama
@@ -3745,7 +3795,7 @@ toothpaste %>% # take dataset
 
 Vemos que \hl{attractive\_teeth}, \hl{shiny\_teeth}, \hl{freshens\_breath}, têm pontuações altas no segundo fator (o Dim2 do eixo X). \hl{prevents\_cavities} e \hl{strengthens\_gums} têm pontuações altas no segundo fator (o eixo Y Dim2) e \hl{decay\_prevention\_unimportant} tem uma pontuação baixa nesse fator (essa variável mede a importância da prevenção da cárie).
 
-\newpage
+
 
 Também podemos adicionar as observações (os diferentes consumidores) a esse gráfico:
 
@@ -3765,19 +3815,19 @@ toothpaste %>% # pega os dados
 Isto também é conhecido como biplot.
 
 \newpage
-\section{Análise de cluster para segmentação}
+\section{Análise de \textit{cluster} para segmentação}
 
-Neste capítulo, você aprenderá como realizar uma análise de cluster e uma análise discriminante linear.
+Neste capítulo, você aprenderá como realizar uma análise de \textit{cluster} e uma análise discriminante linear.
 
-Uma análise de cluster trabalha em um grupo de observações que diferem entre si em várias dimensões. Ele encontrará clusters de observações no espaço n-dimensional, de modo que a semelhança de observações dentro de clusters seja a mais alta possível e a similaridade de observações entre clusters seja a mais baixa possível. Você sempre pode executar uma análise de cluster e pode solicitar qualquer número de clusters. O número máximo de clusters é o número total de observações. Nesse caso, cada observação será um cluster, mas isso não seria um cluster muito útil. O objetivo do agrupamento em cluster é encontrar um pequeno número de clusters que possam ser descritos de forma significativa por suas pontuações médias nas n dimensões. Em outras palavras, o objetivo é encontrar diferentes 'perfis' de observações.
+Uma análise de \textit{cluster} trabalha em um grupo de observações que diferem entre si em várias dimensões. Ele encontrará \textit{cluster}s de observações no espaço n-dimensional, de modo que a semelhança de observações dentro de \textit{cluster}s seja a mais alta possível e a similaridade de observações entre \textit{cluster}s seja a mais baixa possível. Você sempre pode executar uma análise de \textit{cluster} e pode solicitar qualquer número de \textit{cluster}s. O número máximo de \textit{cluster}s é o número total de observações. Nesse caso, cada observação será um \textit{cluster}, mas isso não seria um \textit{cluster} muito útil. O objetivo do agrupamento em \textit{cluster} é encontrar um pequeno número de \textit{cluster}s que possam ser descritos de forma significativa por suas pontuações médias nas n dimensões. Em outras palavras, o objetivo é encontrar diferentes 'perfis' de observações.
 
-A análise discriminante linear tenta prever uma variável categórica com base em várias variáveis independentes contínuas ou categóricas. É semelhante à regressão logística. Nós o usaremos para prever a associação de cluster de uma observação (conforme estabelecido pela análise de cluster) com base em algumas variáveis de segmentação (ou seja, outras informações que temos sobre as observações que não serviram de entrada na análise de cluster).
+A análise discriminante linear tenta prever uma variável categórica com base em várias variáveis independentes contínuas ou categóricas. É semelhante à regressão logística. Nós o usaremos para prever a associação de \textit{cluster} de uma observação (conforme estabelecido pela análise de \textit{cluster}) com base em algumas variáveis de segmentação (ou seja, outras informações que temos sobre as observações que não serviram de entrada na análise de \textit{cluster}).
 
-Analisaremos os dados de 40 entrevistados que avaliaram a importância de vários atributos da loja ao comprar equipamentos de escritório. Usaremos a análise de cluster para encontrar agrupamentos de observações, neste caso, agrupamentos de respondentes. Esses clusters terão perfis diferentes (por exemplo, um cluster pode atribuir importância à política de preços e devoluções, o outro pode atribuir importância à variedade de opções e qualidade de serviço). Em seguida, usaremos a análise discriminante linear para testar se podemos prever a associação ao cluster (ou seja, que tipo de comprador de equipamento de escritório alguém é) com base em várias características dos entrevistados (por exemplo, sua renda).
+Analisaremos os dados de 40 entrevistados que avaliaram a importância de vários atributos da loja ao comprar equipamentos de escritório. Usaremos a análise de \textit{cluster} para encontrar agrupamentos de observações, neste caso, agrupamentos de respondentes. Esses \textit{cluster}s terão perfis diferentes (por exemplo, um \textit{cluster} pode atribuir importância à política de preços e devoluções, o outro pode atribuir importância à variedade de opções e qualidade de serviço). Em seguida, usaremos a análise discriminante linear para testar se podemos prever a associação ao \textit{cluster} (ou seja, que tipo de comprador de equipamento de escritório alguém é) com base em várias características dos entrevistados (por exemplo, sua renda).
 
 
 \subsection{Dados}
-\subsubsectio{Importação}
+\subsubsection{Importação}
 
 Analisaremos os dados de uma pesquisa na qual 40 entrevistados foram solicitados a avaliar a importância de vários atributos da loja ao comprar equipamentos. Faça o download dos dados aqui e importe-os para o \faRProject:
 
@@ -3786,11 +3836,10 @@ library(tidyverse)
 library(readxl)
 
 equipment <- read_excel("segmentation_office.xlsx","SegmentationData") # Importa o arquivo Excel
-
 \end{lstlisting}
 
 
-\subsubsectio{Manipulação}
+\subsubsection{Manipulação}
 \begin{lstlisting}[language=R]
 equipment
 
@@ -3822,7 +3871,7 @@ Temos 10 colunas ou variáveis em nossos dados:
     \item \hl{age}
 \end{itemize}
 
-A análise de cluster tentará identificar clusters com padrões semelhantes de classificações. A análise discriminante linear preverá a associação do cluster com base nas variáveis de segmentação (\hl{professional}, \hl{income}, e \hl{age}).
+A análise de \textit{cluster} tentará identificar \textit{cluster}s com padrões semelhantes de classificações. A análise discriminante linear preverá a associação do \textit{cluster} com base nas variáveis de segmentação (\hl{professional}, \hl{income}, e \hl{age}).
 
 Como sempre, vamos fatorar as variáveis que devem ser tratadas como categóricas:
 
@@ -3832,7 +3881,9 @@ equipment <- equipment %>%
          professional = factor(professional, labels = c("non-professional","professional")))
 \end{lstlisting}
 
+%===================================================================
 \subsubsection{Recapitulação: importação e manipulação}
+%===================================================================
 
 Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas/pipe (faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/segmentation_office.xlsx}{aqui}):
 
@@ -3845,20 +3896,25 @@ equipment <- read_excel("segmentation_office.xlsx","SegmentationData") %>%
          professional = factor(professional, labels = c("non-professional","professional")))
 \end{lstlisting}
 
+%===========================================================================
+\subsection{Análise de \textit{cluster}}
+%===========================================================================
 
-\subsection{Análise de Cluster}
+Primeiro, realizaremos uma análise hierárquica de \textit{cluster} para encontrar o número ideal de \textit{cluster}s. Depois disso, realizaremos uma análise de \textit{cluster} não hierárquica e solicitaremos o número de \textit{cluster}s considerados ideais pela análise de \textit{cluster} hierárquica. As variáveis que servirão de entrada para a análise de \textit{cluster} são as classificações de importância dos atributos da loja.
 
-Primeiro, realizaremos uma análise hierárquica de cluster para encontrar o número ideal de clusters. Depois disso, realizaremos uma análise de cluster não hierárquica e solicitaremos o número de clusters considerados ideais pela análise de cluster hierárquica. As variáveis que servirão de entrada para a análise de cluster são as classificações de importância dos atributos da loja.
-
+%===========================================================================
 \subsubsection{Padronizar ou não ?}
+%===========================================================================
 
-A primeira etapa de uma análise de cluster é decidir se padronizará as variáveis de entrada. A padronização não é necessária quando as variáveis de entrada são medidas na mesma escala ou quando as variáveis de entrada são os coeficientes obtidos por uma análise conjunta. Em outros casos, a padronização é necessária.
+A primeira etapa de uma análise de \textit{cluster} é decidir se padronizará as variáveis de entrada. A padronização não é necessária quando as variáveis de entrada são medidas na mesma escala ou quando as variáveis de entrada são os coeficientes obtidos por uma análise conjunta. Em outros casos, a padronização é necessária.
 
 No nosso exemplo, todas as variáveis de entrada são medidas na mesma escala e, portanto, a padronização não é necessária. Se necessário, isso pode ser feito facilmente com \hl{mutate(newvar = scale(oldvar)))}.
 
 
+%===========================================================================
+\subsubsection{\textit{cluster} hierárquico}
+%===========================================================================
 
-\subsubsection{Cluster hierárquico}
 Em seguida, criamos um novo conjunto de dados que inclui apenas as variáveis de entrada, ou seja, as classificações:
 
 \begin{lstlisting}[language=R]
@@ -3866,16 +3922,16 @@ cluster.data <- equipment %>%
   select(variety_of_choice, electronics, furniture, quality_of_service, low_prices, return_policy) # Selecione no conjunto de dados do equipamento apenas as variaveis com classificacoes padronizadas
 \end{lstlisting}
 
-Agora, podemos prosseguir com o cluster hierárquico para determinar o número ideal de clusters:
+Agora, podemos prosseguir com o \textit{cluster} hierárquico para determinar o número ideal de \textit{cluster}s:
 
 \begin{lstlisting}[language=R]
 # A funcao dist() cria uma matriz de dissimilaridade do nosso conjunto de dados e deve ser o primeiro argumento para a funcao hclust().
-# No argumento do metodo, voce pode especificar o metodo a ser usado para armazenamento em cluster.
+# No argumento do metodo, voce pode especificar o metodo a ser usado para armazenamento em \textit{cluster}.
 hierarchical.clustering <- hclust(dist(cluster.data), method = "ward.D") 
 \end{lstlisting}
-\newpage
 
-A análise de cluster é armazenada no \hl{objeto hierarchical.clustering} e pode ser facilmente visualizada por um dendograma:
+
+A análise de \textit{cluster} é armazenada no \hl{objeto hierarchical.\textit{cluster}ing} e pode ser facilmente visualizada por um dendograma:
 
 \begin{lstlisting}[language=R]
 plot(hierarchical.clustering)
@@ -3887,7 +3943,7 @@ plot(hierarchical.clustering)
 \includegraphics[width=12cm,height=8cm]{segmentation_hclust_plot-1.png}
 \end{center}
 
-A partir desse dendograma, parece que podemos dividir as observações em dois, três ou seis grupos de observações. Vamos realizar um teste formal, a regra de parada de Duda-Hart, para ver quantos clusters devemos reter. Para isso, precisamos (instalar e) carregar o \hl{pacote NbClust}:
+A partir desse dendograma, parece que podemos dividir as observações em dois, três ou seis grupos de observações. Vamos realizar um teste formal, a regra de parada de Duda-Hart, para ver quantos \textit{cluster}s devemos reter. Para isso, precisamos (instalar e) carregar o \hl{pacote NbClust}:
 
 \begin{lstlisting}[language=R]
 install.packages("NbClust")
@@ -3910,7 +3966,7 @@ pseudot2$All.index
 \end{lstlisting}
 
 
-A sabedoria convencional para decidir o número de grupos com base na regra de parada de Duda-Hart é encontrar um dos maiores valores de Duda que corresponda a um baixo valor de pseudo-$T^2$. No entanto, você também pode solicitar o número ideal de clusters, conforme sugerido pela regra de parada:
+A sabedoria convencional para decidir o número de grupos com base na regra de parada de Duda-Hart é encontrar um dos maiores valores de Duda que corresponda a um baixo valor de pseudo-$T^2$. No entanto, você também pode solicitar o número ideal de \textit{cluster}s, conforme sugerido pela regra de parada:
 
 \begin{lstlisting}[language=R]
 duda$Best.nc
@@ -3920,11 +3976,12 @@ duda$Best.nc
 
 Nesse caso, o número ideal é três.
 
-\newpage
 
-\subsection{Cluster não-hierárquico}
+%===========================================================================
+\subsection{\textit{cluster} não-hierárquico}
+%===========================================================================
 
-Agora, realizamos uma análise de cluster não hierárquica na qual solicitamos três clusters (conforme determinado pela análise de cluster hierárquica):
+Agora, realizamos uma análise de \textit{cluster} não hierárquica na qual solicitamos três \textit{cluster}s (conforme determinado pela análise de \textit{cluster} hierárquica):
 
 \begin{lstlisting}[language=R]
 # existe um elemento aleatorio na analise de cluster
@@ -3936,14 +3993,14 @@ set.seed (1)
 kmeans.clustering <- kmeans(cluster.data, 3, nstart = 25)
 \end{lstlisting}
 
-Adicione ao conjunto de \hl{dados equipament} uma variável que indique a qual cluster uma observação pertence:
+Adicione ao conjunto de \hl{dados equipament} uma variável que indique a qual \textit{cluster} uma observação pertence:
 
 \begin{lstlisting}[language=R]
 equipment <- equipment %>% 
   mutate(km.group = factor(kmeans.clustering$cluster, labels=c("cl1","cl2","cl3"))) # Fatore o indicador de cluster a partir do quadro de dados clustering k e adicione-o ao quadro de dados do equipamento.
 \end{lstlisting}
 
-Inspeciona os clusters:
+Inspeciona os \textit{cluster}s:
 \begin{lstlisting}[language=R]
 equipment %>% 
   group_by(km.group) %>% # agrupado por cluster (km.group)
@@ -3965,12 +4022,12 @@ equipment %>%
 
 Vemos que:
 \begin{itemize}
-    \item o cluster 1 atribui mais importância (do que outros clusters) à qualidade do serviço
-    \item o cluster 2 atribui mais importância à variedade de opções
-    \item o cluster 3 atribui mais importância a preços baixos
+    \item o \textit{cluster} 1 atribui mais importância (do que outros \textit{cluster}s) à qualidade do serviço
+    \item o \textit{cluster} 2 atribui mais importância à variedade de opções
+    \item o \textit{cluster} 3 atribui mais importância a preços baixos
 \end{itemize}
 
-Também podemos testar se há diferenças significativas entre os clusters, por exemplo, na variedade de opções. Para isso, usamos uma ANOVA unidirecional:
+Também podemos testar se há diferenças significativas entre os \textit{cluster}s, por exemplo, na variedade de opções. Para isso, usamos uma ANOVA unidirecional:
 
 \begin{lstlisting}[language=R]
 # remotes::install_github("samuelfranssens/type3anova") # para instalar o pacote type3anova.
@@ -3987,9 +4044,9 @@ type3anova(lm(variety_of_choice ~ km.group, data=equipment))
 ## 3 Residuals     48.7    37    37   NA   NA
 \end{lstlisting}
 
-Existem diferenças significativas entre os clusters em importância associadas à variedade de opções, e isso faz sentido porque o objetivo da análise de clusters é maximizar as diferenças entre os clusters. Vamos acompanhar isso com o HSD de Tukey para ver exatamente quais meios diferem um do outro:
+Existem diferenças significativas entre os \textit{cluster}s em importância associadas à variedade de opções, e isso faz sentido porque o objetivo da análise de \textit{cluster}s é maximizar as diferenças entre os \textit{cluster}s. Vamos acompanhar isso com o HSD de Tukey para ver exatamente quais meios diferem um do outro:
 
-\newpage
+
 \begin{lstlisting}[language=R]
 TukeyHSD(aov(variety_of_choice ~ km.group, data=equipment), 
          "km.group") # O primeiro argumento eh um objeto "aov", o segundo eh a nossa variavel independente.
@@ -4008,9 +4065,11 @@ TukeyHSD(aov(variety_of_choice ~ km.group, data=equipment),
 \end{lstlisting}
 Vemos que em todos os meios, a diferença é significativa.
 
+%===========================================================================
 \subsection{LDA Canônico}
+%===========================================================================
 
-Na vida real, geralmente não sabemos o que os potenciais compradores consideram importante, mas temos uma ideia, por exemplo, de sua renda, idade e status profissional. Portanto, seria útil testar quão bem podemos prever a associação ao cluster (perfil de classificações de importância) com base nas características dos respondentes (renda, idade, profissional), que também são chamados de variáveis de segmentação. A fórmula preditiva poderia então ser usada para prever a associação ao cluster de novos compradores em potencial. Para encontrar a fórmula correta, usamos a análise discriminante linear (LDA). Mas primeiro vamos dar uma olhada nas médias de income, age, e professional por cluster:
+Na vida real, geralmente não sabemos o que os potenciais compradores consideram importante, mas temos uma ideia, por exemplo, de sua renda, idade e status profissional. Portanto, seria útil testar quão bem podemos prever a associação ao \textit{cluster} (perfil de classificações de importância) com base nas características dos respondentes (renda, idade, profissional), que também são chamados de variáveis de segmentação. A fórmula preditiva poderia então ser usada para prever a associação ao \textit{cluster} de novos compradores em potencial. Para encontrar a fórmula correta, usamos a análise discriminante linear (LDA). Mas primeiro vamos dar uma olhada nas médias de income, age, e professional por \textit{cluster}:
 
 \begin{lstlisting}[language=R]
 
@@ -4044,13 +4103,16 @@ new_data
 
 \newpage
 
+%===========================================================================
 \section{Análise Conjunta}
+%===========================================================================
 
 Neste capítulo, você aprenderá como realizar uma análise conjunta. A análise conjunta começa a partir de uma pesquisa na qual as pessoas avaliam ou escolhem entre produtos (por exemplo, carros) que diferem em vários atributos (por exemplo, segurança, eficiência de combustível, conforto etc.). A partir dessas classificações ou escolhas, a análise determina o valor que as pessoas atribuem aos diferentes atributos do produto (por exemplo, quanto peso as pessoas atribuem à segurança ao escolher entre carros). Essas informações podem ser usadas no desenvolvimento de produtos.
 
-
+%===========================================================================
 \subsection{Dados}
 \subsubsection{Importação}
+%===========================================================================
 
 Analisaremos os dados de uma pesquisa em que 15 consumidores foram convidados a avaliar dez sorvetes. Cada sorvete tinha um 'perfil' diferente, ou seja, uma combinação diferente de níveis de quatro atributos: sabor (framboesa, chocolate, morango, manga, baunilha), embalagem (waffle caseiro, casquinha, caneca), leve (com pouca gordura ou não) e orgânico (orgânico ou não). Todos os 15 entrevistados classificaram os dez perfis, fornecendo uma pontuação entre 1 e 10.
 
@@ -4063,7 +4125,9 @@ library(readxl)
 icecream <- read_excel("icecream.xlsx") # Nao eh necessario incluir o argumento da planilha quando houver apenas uma planilha no arquivo do Excel
 \end{lstlisting}
 
+%===========================================================================
 \subsubsection{Manipulação}
+%===========================================================================
 
 \begin{lstlisting}[language=R]
 icecream
@@ -4136,7 +4200,10 @@ As demais variáveis são:
     \item \hl{Flavor}, \hl{Packaging}, \hl{Light}, \hl{Organic} são os quatro atributos que compõem o perfil de um sorvete
 \end{itemize}
 
+%===========================================================================
 \subsubsection{Recapitulando: importação e manipulação}
+%===========================================================================
+
 
 Aqui está o que fizemos até agora, em uma sequência ordenada de operações canalizadas (faça o download dos dados \href{http://users.telenet.be/samuelfranssens/tutorial_data/icecream.xlsx}{aqui}:)
 \begin{lstlisting}[language=R]
@@ -4150,8 +4217,9 @@ icecream <- read_excel("icecream.xlsx") %>%
          Flavor = factor(Flavor), Packaging = factor(Packaging), Light = factor(Light), Organic = factor(Organic))
 \end{lstlisting}
 
-
+%===========================================================================
 \subsection{Design de experimentos}
+%===========================================================================
 
 Quando inspecionamos nosso conjunto de dados, vemos que o \hl{flavor} possui 5 níveis (framboesa, chocolate, morango, manga, baunilha), \hl{packaging} possui 3 níveis (waffle caseiro, cone, cerveja), a \hl{Light} possui 2 níveis (baixo teor de gordura versus não), e \hl{Organic} tem 2 níveis (orgânico vs. não). O objetivo de uma análise conjunta é estimar até que ponto cada nível de atributo afeta a classificação do sorvete.
 
@@ -4625,9 +4693,10 @@ Observe que os perfis não são exatamente iguais aos da experiência usada para
 
 Observe também que o \hl{pacote radiant} instala um suplemento que você pode acessar por meio de suplementos (encontre este botão à direita da linha abaixo de "Arquivo" etc.) -> Iniciar radiant (navegador). Isso abrirá um aplicativo no seu navegador que permitirá executar as etapas acima em uma interface visual intuitiva. Para obter ajuda, confira a discussão da \hl{Radiant} sobre o módulo Design de experiências \href{https://radiant-rstats.github.io/docs/design/doe.html}{aqui}.
 
-
+%===========================================================================
 \subsection{Um respondente}
 \subsubsection{Estimar valores de peça e pesos de importância}
+%===========================================================================
 
 Embora alguns softwares exijam que você primeiro crie variáveis fictícias representando os níveis de atributo e execute uma regressão, o \hl{Radiant} não exige que você faça isso. Você pode simplesmente usar os atributos (cada um com vários níveis) como variáveis. Primeiro, faremos uma análise conjunta dos dados de um respondente (indivíduo 1):
 
@@ -4729,9 +4798,11 @@ summary(lm(rating ~ Flavor + Packaging + Light + Organic, data = respondent1))
 
 Finalmente, os pesos de importância nos dizem com que intensidade cada atributo determina a classificação de um sorvete. Para esse respondente, sabor é o atributo mais importante e luz é o atributo menos importante. A classificação deste respondente é determinada em 59,6\% por sabor e em 9,2\% por luz.
 
-\subsubsection{Profiles: utilitários previstos}
+%===========================================================================
+\subsubsection{Profiles: classificações previstoas}
+%===========================================================================
 
-Prever as classificações (utilitários) dos diferentes sorvetes é muito fácil em \faRProject. Primeiro, verifique se temos um conjunto de dados com os diferentes perfis que foram testados:
+Prever as classificações (utilidades) dos diferentes sorvetes é muito fácil em \faRProject. Primeiro, verifique se temos um conjunto de dados com os diferentes perfis que foram testados:
 
 \begin{lstlisting}[language=R]
 profiles <- icecream %>% 
@@ -4883,9 +4954,11 @@ predict(conjoint_respondent1, profiles.all) %>%
 
 Mesma conclusão que a da seção anterior: essa pessoa desfrutaria de um sorvete com baixo teor de gordura, orgânico, manga ou morango em um cone ou um waffle caseiro.
 
+%===========================================================================
 \subsection{Muitos respondentes}
 
 \subsubsection{Estimar valores de peça e pesos de importância}
+%===========================================================================
 
 Agora, vamos realizar a análise conjunta no conjunto de dados completo para ter uma idéia de quais sorvetes os 15 entrevistados, em média, gostaram mais e qual a importância de cada atributo:
 
@@ -4950,7 +5023,9 @@ A partir disso, prevemos que, em média, as pessoas mais gostariam de um sorvete
 
 Os pesos de importância nos dizem com que intensidade cada atributo determina a classificação média de um sorvete. O sabor é o atributo mais importante e a embalagem é o atributo menos importante. A classificação deste respondente é determinada para 59,7\% por sabor e para 9,6\% por embalagem.
 
-\subsubsection{Profiles: utilitários previstos}
+%===========================================================================
+\subsubsection{Profiles: classificações previstas}
+%===========================================================================
 
 Vamos prever as classificações de todos os sorvetes possíveis:
 
@@ -5025,7 +5100,9 @@ predict(conjoint_allrespondents, profiles.all) %>% # verifique as secoes anterio
 
 Mesmas conclusões de antes: prevemos que, em média, as pessoas mais gostariam de um sorvete de manga orgânico, sem pouca gordura, em um cone.
 
+%===========================================================================
 \subsection{Simulação de Mercado}
+%===========================================================================
 
 Digamos que criamos um pequeno número de sorvetes e queremos estimar a participação de mercado de cada um desses sorvetes. Digamos que selecionamos os quatro perfis a seguir:
 
